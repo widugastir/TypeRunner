@@ -6,10 +6,13 @@ namespace TypeRunner
 {
 	public class MapGeneration : MonoBehaviour
 	{
+		//------FIELDS
 		[SerializeField] private int _platformAmount = 10;
 		[SerializeField] private Platform _lastPlatform;
 		
 		[SerializeField, HideInInspector] private PlatformsHolder _prefabs;
+		[SerializeField] private GameObject LetterPrefab;
+		[SerializeField] private GameObject ManikinPrefab;
 		
 		//------METHODS
 		[Button]
@@ -37,6 +40,7 @@ namespace TypeRunner
 			if(_lastPlatform == null)
 				return;
 			Platform newPlatform = Instantiate(_prefabs.GetRandomPlatform(), _lastPlatform.ConnectionPoint.position, Quaternion.identity, transform);
+			newPlatform.Init(LetterPrefab, ManikinPrefab);
 			_lastPlatform = newPlatform;
 		}
 	}
