@@ -10,8 +10,7 @@ namespace TypeRunner
 		[SerializeField] private float _moveSpeed = 1f;
 		[SerializeField] private List<ManikinMovement> _manikins;
 		[SerializeField, HideInInspector] private ControlPanel _controlPanel;
-		private float _beginXPos;
-		private float _targetXPos;
+		private bool _canMove = true;
 		
 		public bool IsMovementEnabled { get; private set; } = true;
 	
@@ -27,6 +26,7 @@ namespace TypeRunner
 			_controlPanel.OnStartDrag += OnStartDrag;
 			_controlPanel.OnProcessDrag += OnProcessDrag;
 			_controlPanel.OnStopDrag += OnStopDrag;
+			ManikinMovement.OnBorderCollide += OnBorderCollide;
 		}
 		
 		private void OnDisable()
@@ -34,6 +34,7 @@ namespace TypeRunner
 			_controlPanel.OnStartDrag -= OnStartDrag;
 			_controlPanel.OnProcessDrag -= OnProcessDrag;
 			_controlPanel.OnStopDrag -= OnStopDrag;
+			ManikinMovement.OnBorderCollide -= OnBorderCollide;
 		}
 		
 		private void FixedUpdate()
@@ -43,17 +44,56 @@ namespace TypeRunner
 	    
 		private void OnStartDrag()
 		{
-			_beginXPos = _manikins[0].transform.position.x;
-		}
-		
-		private void OnStopDrag()
-		{
-			
+			_canMove = true;
+			foreach(var manikin in _manikins)
+			{
+				manikin.InitStrafe();
+			}
 		}
 		
 		private void OnProcessDrag(float delta)
 		{
-			
+			if(_canMove)
+				StrafeMankins(delta);
+		}
+		
+		private void OnStopDrag()
+		{
+			StopStrafeMankins();
+		}
+		
+		private void OnBorderCollide(Vector3 point)
+		{
+			StopStrafeMankins();
+			PushMankinsAway(point);
+		}
+		
+		private void PushMankinsAway(Vector3 point)
+		{
+			foreach(var manikin in _manikins)
+			{
+				manikin.PushAway(point, 0.1f);
+			}
+		}
+		
+		private void StopStrafeMankins()
+		{
+			_canMove = false;
+			foreach(var manikin in _manikins)
+			{
+				manikin.StopStrafe();
+			}
+		}
+		
+		private void StrafeMankins(float delta)
+		{
+			if(IsMovementEnabled == false)
+				return;
+		    	
+			foreach(var manikin in _manikins)
+			{
+				manikin.Strafe(delta);
+			}
 		}
 	    
 		private void MoveManikins()
