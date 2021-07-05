@@ -30,16 +30,23 @@ namespace TypeRunner
 		{
 			for(int i = 0; i < _platformAmount; i++)
 			{
-				SpawnPlatform();
+				SpawnPlatform(i % 2 == 0 ? true : false);
 				yield return null;
 			}
 		}
 		
-		private void SpawnPlatform()
+		private void SpawnPlatform(bool emptyPlatform)
 		{
 			if(_lastPlatform == null)
 				return;
-			Platform newPlatform = Instantiate(_prefabs.GetRandomPlatform(), _lastPlatform.ConnectionPoint.position, Quaternion.identity, transform);
+				
+			Platform prefab = null;
+			if(emptyPlatform)
+				prefab = _prefabs.GetEmptyPlatform();
+			else
+				prefab = _prefabs.GetObstaclePlatform();
+			
+			Platform newPlatform = Instantiate(prefab, _lastPlatform.ConnectionPoint.position, Quaternion.identity, transform);
 			newPlatform.Init(LetterPrefab, ManikinPrefab);
 			_lastPlatform = newPlatform;
 		}

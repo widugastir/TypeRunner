@@ -9,7 +9,7 @@ public class Singleton<T> : MonoBehaviour where T:Component
 		{ 
 			if(_instance == null)
 			{
-				LazyInit();
+				Init();
 			}
 			return _instance; 
 		}
@@ -20,30 +20,12 @@ public class Singleton<T> : MonoBehaviour where T:Component
 		}
 	}
 	
-	private static void LazyInit()
+	private static void Init()
 	{
 		_instance = FindObjectOfType<T>();
 		if(_instance == null)
 		{
-			GameObject instance_object = new GameObject($"{typeof(T)}_Singleton");
-			_instance = instance_object.AddComponent<T>();
+			Debug.LogError("NULL");
 		}
-	}
-	
-	private void Init()
-	{
-		if(_instance != null)
-		{
-			Destroy(gameObject);
-		}
-		else
-		{
-			_instance = this as T;
-		}
-	}
-	
-	protected virtual void Awake()
-	{
-		Init();
 	}
 }

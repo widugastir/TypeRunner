@@ -5,6 +5,7 @@ namespace TypeRunner
 {
 	public class ControlPanel : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 	{
+		//------FIELDS
 		private float _deltaMove;
 		private float _beginPos;
 		
@@ -12,6 +13,7 @@ namespace TypeRunner
 		public event System.Action<float> OnProcessDrag;
 		public event System.Action OnStopDrag;
 		
+		//------METHODS
 		public void OnBeginDrag(PointerEventData eventData)
 		{
 			_beginPos = eventData.position.x / Screen.width;

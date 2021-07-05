@@ -19,12 +19,18 @@ namespace TypeRunner
 			_renderer.sprite = _sprites[(int)LetterType];
 		}
 		
+		public void Init(E_LetterType type)
+		{
+			LetterType = type;
+			_renderer.sprite = _sprites[(int)LetterType];
+		}
+		
 		private void OnTriggerEnter(Collider other)
 		{
 			if(_isPickuped == false && other.TryGetComponent(out Mankin man))
 			{
 				_isPickuped = true;
-				LetterData.Instance.AddLetter(LetterType.ToString());
+				LetterData.Instance.AddLetter(LetterType);
 				Destroy(gameObject);
 			}
 		}

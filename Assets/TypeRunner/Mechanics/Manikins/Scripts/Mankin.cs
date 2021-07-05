@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 
 namespace TypeRunner
 {
@@ -6,11 +7,19 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		public bool IsNeutral = true;
-		public ManikinMovement Movement;
+		[HideInInspector] public ManikinMovement Movement;
+		[HideInInspector] public ManikinCommands Commands;
 		
 		public static event System.Action<Mankin, bool> OnChangeOwner;
 		
 		//------METHODS
+		[Button]
+		private void UpdateReferences()
+		{
+			Movement = gameObject.GetComponentInChildren<ManikinMovement>();
+			Commands = gameObject.GetComponentInChildren<ManikinCommands>();
+		}
+		
 		public void SetOwnerToPlayer()
 		{
 			IsNeutral = false;

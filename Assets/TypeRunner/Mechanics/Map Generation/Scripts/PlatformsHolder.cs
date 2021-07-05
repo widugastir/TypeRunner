@@ -4,12 +4,19 @@ namespace TypeRunner
 {
 	public class PlatformsHolder : MonoBehaviour
 	{
-		[SerializeField] private Platform[] _platforms;
+		[SerializeField] private Platform[] _emptyPlatforms;
+		[SerializeField] private Platform[] _obstaclePlatforms;
 		
-		public Platform GetRandomPlatform()
+		public Platform GetEmptyPlatform()
 		{
-			int index = Random.Range(0, _platforms.Length);
-			return _platforms[index];
+			int index = Random.Range(0, _emptyPlatforms.Length);
+			return _emptyPlatforms[index];
+		}
+		
+		public Platform GetObstaclePlatform()
+		{
+			int index = Random.Range(0, _obstaclePlatforms.Length);
+			return _obstaclePlatforms[index];
 		}
 	}
 }

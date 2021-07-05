@@ -1,30 +1,42 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using NaughtyAttributes;
+using UnityEngine;
 
 namespace TypeRunner
 {
 	public class LetterData : Singleton<LetterData>
 	{
 		//------FIELDS
-		[SerializeField] private string _letters = "";
+		[SerializeField] private int _maxLetters = 6;
+		[SerializeField, ReadOnly] private List<E_LetterType> _letters = new List<E_LetterType>();
+		
+		public event System.Action<E_LetterType> OnLetterAdd;
+		public event System.Action<E_LetterType> OnLetterRemove;
 		
 		//------METHODS
-		public void AddLetter(string letter)
+		public void AddLetter(E_LetterType letter)
 		{
-			_letters += letter;
+			if(_letters.Count >= _maxLetters)
+			{
+				OnLetterRemove?.Invoke(_letters[0]);
+				_letters.RemoveAt(0);
+			}
+			_letters.Add(letter);
+			OnLetterAdd?.Invoke(letter);
 		}
 		
-		public bool TryRemoveLetter(string letter)
+		public bool TryRemoveLetter(E_LetterType letter)
 		{
 			if(_letters.Contains(letter))
 			{
-				int index = _letters.IndexOf(letter);
-				_letters = _letters.Remove(index, letter.Length);
+				OnLetterRemove?.Invoke(letter);
+				_letters.Remove(letter);
 				return true;
 			}
 			return false;
 		}
 		
-		public bool Contain(string letter)
+		public bool Contain(E_LetterType letter)
 		{
 			if(_letters.Contains(letter))
 				return true;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7764331643567007254}
   - component: {fileID: 1968516755578011790}
   - component: {fileID: 5162348523026095943}
+  - component: {fileID: 2692411060807030495}
   - component: {fileID: 357506177}
   - component: {fileID: 357506176}
   m_Layer: 0
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsNeutral: 1
   Movement: {fileID: 5162348523026095943}
+  Commands: {fileID: 2692411060807030495}
 --- !u!114 &5162348523026095943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +66,20 @@ MonoBehaviour:
   _rigi: {fileID: 357506177}
   _strafeMultiplier: 18
   _strafeMaxSpeed: 15
+--- !u!114 &2692411060807030495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7764331643567007465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdbb679a517d3954b8b6d27de301ae23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _man: {fileID: 1968516755578011790}
+  _rigi: {fileID: 357506177}
 --- !u!54 &357506177
 Rigidbody:
   m_ObjectHideFlags: 0
