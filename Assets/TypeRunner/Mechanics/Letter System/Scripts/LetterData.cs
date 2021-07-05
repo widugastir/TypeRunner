@@ -12,14 +12,17 @@ namespace TypeRunner
 		
 		public event System.Action<E_LetterType> OnLetterAdd;
 		public event System.Action<E_LetterType> OnLetterRemove;
+		public event System.Action<E_LetterType, E_LetterType> OnLetterReplace;
 		
 		//------METHODS
 		public void AddLetter(E_LetterType letter)
 		{
 			if(_letters.Count >= _maxLetters)
 			{
-				OnLetterRemove?.Invoke(_letters[0]);
+				var l = _letters[0];
 				_letters.RemoveAt(0);
+				OnLetterRemove?.Invoke(l);
+				OnLetterReplace?.Invoke(l, letter);
 			}
 			_letters.Add(letter);
 			OnLetterAdd?.Invoke(letter);

@@ -23,6 +23,7 @@ namespace TypeRunner
 		
 		public void SetActiveSlots(int amount)
 		{
+			_lastSlot = 0;
 			for(int i = 0; i < _letterPositions.Count; i++)
 			{
 				if(amount > 0)

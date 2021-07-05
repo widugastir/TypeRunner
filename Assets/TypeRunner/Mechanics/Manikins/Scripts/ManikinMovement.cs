@@ -37,7 +37,7 @@ namespace TypeRunner
 				if(moveDirection.x < -_strafeMaxSpeed)
 					moveDirection.x = -_strafeMaxSpeed;
 			}
-			_rigi.MovePosition(transform.position + moveDirection * Time.deltaTime);
+			_rigi.MovePosition(transform.position + moveDirection * Time.fixedDeltaTime);
 		}
 	    
 		public void Strafe(float strafe)

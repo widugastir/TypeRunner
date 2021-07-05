@@ -7,14 +7,18 @@ namespace TypeRunner
 	public class LetterWriteSystem : MonoBehaviour
 	{
 		//------FIELDS
+		[SerializeField] private int _manikinsDieOnLose = 1;
 		[SerializeField] private float _timeScale = 0.2f;
+		[SerializeField] private PlayerController _playerController;
 		[SerializeField, HideInInspector] private LettersPanel _lettersPanel;
+		private bool _isReady = true;
 		
 		//------METHODS
 		[Button]
 		private void UpdateReferences()
 		{
 			_lettersPanel = gameObject.GetComponentInChildren<LettersPanel>();
+			_lettersPanel.SetLetterWriteSystem(this);
 		}
 		
 		private void OnEnable()
@@ -36,19 +40,28 @@ namespace TypeRunner
 		
 		private void PlayerExitZone(ObstacleZone zone)
 		{
-			DisableWordWritter(zone);
+			DisableWordWritter(false);
 		}
 		
 		private void EnableWordWritter(ObstacleZone zone, E_LetterType[] word)
 		{
+			_isReady = true;
 			Time.timeScale = _timeScale;
-			_lettersPanel.Activate();
+			_lettersPanel.Activate(word);
 		}
 		
-		private void DisableWordWritter(ObstacleZone zone)
+		public void DisableWordWritter(bool successful)
 		{
+			if(_isReady == false)
+				return;
+			_isReady = false;
+			if(successful == false)
+			{
+				//One manikin die =(
+				_playerController.BlockManikins(_manikinsDieOnLose);
+			}
 			Time.timeScale = 1f;
-			_lettersPanel.Disable();
+			_lettersPanel.DisableSelected();
 		}
 	}
 }

@@ -7,7 +7,6 @@ namespace TypeRunner
 		//------FIELDS
 		[SerializeField] private bool _isEnterZone = true;
 		[SerializeField] private ManikinCommands.E_Command _command;
-		[SerializeField] private bool _singleUseOnly = true;
 		[SerializeField] private E_LetterType[] _requiredLettersWrite;
 		private bool _isUsed = false;
 		
@@ -18,18 +17,16 @@ namespace TypeRunner
 		//------METHODS
 		private void OnTriggerEnter(Collider other)
 		{
-			if(_singleUseOnly == true && _isUsed == true)
-			{
-				return;
-			}
-			
 			if(other.TryGetComponent(out Mankin man))
 			{
-				_isUsed = true;
-				if(_isEnterZone)
-					OnPlayerEntered?.Invoke(this, _requiredLettersWrite);
-				else if(_isEnterZone == false)
-					OnPlayerExit?.Invoke(this);
+				if(_isUsed == false)
+				{
+					_isUsed = true;
+					if(_isEnterZone)
+						OnPlayerEntered?.Invoke(this, _requiredLettersWrite);
+					else if(_isEnterZone == false)
+						OnPlayerExit?.Invoke(this);
+				}
 				man.Commands.DoCommand(_command);
 			}
 		}

@@ -73,6 +73,14 @@ namespace TypeRunner
 			PushMankinsAway(point);
 		}
 		
+		public void BlockManikins(int amount)
+		{
+			for(int i = 0; i < amount && i < _manikins.Count; i++)
+			{
+				_manikins[i].Commands.BlockCommand();
+			}
+		}
+		
 		private void OnChangeOwner(Mankin manikin, bool isNeutral)
 		{
 			if(isNeutral)
