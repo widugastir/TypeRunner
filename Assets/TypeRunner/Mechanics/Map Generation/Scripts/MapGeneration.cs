@@ -11,7 +11,7 @@ namespace TypeRunner
 		[SerializeField] private Platform _lastPlatform;
 		
 		[SerializeField, HideInInspector] private PlatformsHolder _prefabs;
-		[SerializeField] private GameObject LetterPrefab;
+		[SerializeField] private LetterPickup LetterPrefab;
 		[SerializeField] private GameObject ManikinPrefab;
 		
 		//------METHODS

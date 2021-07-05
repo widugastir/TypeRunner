@@ -16,13 +16,13 @@ namespace TypeRunner
 		[SerializeField] private List<Transform> ManikinSpawnPos;
 		
 		//------METHODS
-		public void Init(GameObject letterPrefab, GameObject manikinPrefab)
+		public void Init(LetterPickup letterPrefab, GameObject manikinPrefab)
 		{
 			SpawnLetters(letterPrefab);
 			SpawnMankins(manikinPrefab);
 		}
 		
-		private void SpawnLetters(GameObject letterPrefab)
+		private void SpawnLetters(LetterPickup letterPrefab)
 		{
 			int index = 0;
 			for(int i = 0; i < LetterAmount; i++)
@@ -31,7 +31,9 @@ namespace TypeRunner
 					break;
 					
 				index = Random.Range(0, LetterSpawnPos.Count);
-				Instantiate(letterPrefab, LetterSpawnPos[index].position, Quaternion.identity);
+				var letter = Instantiate(letterPrefab, LetterSpawnPos[index].position, Quaternion.identity);
+				
+				letter.Init();
 				LetterSpawnPos.RemoveAt(index);
 			}
 		}
