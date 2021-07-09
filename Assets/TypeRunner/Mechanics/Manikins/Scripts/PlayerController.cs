@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using NaughtyAttributes;
+using SoundSteppe.RefSystem;
 using Cinemachine;
 using UnityEngine;
 
 namespace TypeRunner
 {
-	public class PlayerController : MonoBehaviour
+	public class PlayerController : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
 		[SerializeField] private float _moveSpeed = 1f;
@@ -17,8 +17,7 @@ namespace TypeRunner
 		public bool IsMovementEnabled { get; private set; } = true;
 	
 		//------METHODS
-		[Button]
-		private void UpdateReferences()
+		public void UpdateReferences()
 		{
 			_controlPanel = gameObject.GetComponentInChildren<ControlPanel>();
 			_cameraTargetGroup = gameObject.GetComponentInChildren<CinemachineTargetGroup>();

@@ -1,9 +1,9 @@
-﻿using NaughtyAttributes;
+﻿using SoundSteppe.RefSystem;
 using UnityEngine;
 
 namespace TypeRunner
 {
-	public class ManikinCommands : MonoBehaviour
+	public class ManikinCommands : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
 		[SerializeField, HideInInspector] private Mankin _man;
@@ -11,8 +11,7 @@ namespace TypeRunner
 		private bool _isBlocked = false;
 		
 		//------METHODS
-		[Button]
-		private void UpdateReferences()
+		public void UpdateReferences()
 		{
 			_man = gameObject.GetComponentInChildren<Mankin>();
 			_rigi = gameObject.GetComponentInChildren<Rigidbody>();

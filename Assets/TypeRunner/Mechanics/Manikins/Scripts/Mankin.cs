@@ -1,9 +1,9 @@
-﻿using NaughtyAttributes;
+﻿using SoundSteppe.RefSystem;
 using UnityEngine;
 
 namespace TypeRunner
 {
-	public class Mankin : MonoBehaviour
+	public class Mankin : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
 		public bool IsNeutral = true;
@@ -13,8 +13,7 @@ namespace TypeRunner
 		public static event System.Action<Mankin, bool> OnChangeOwner;
 		
 		//------METHODS
-		[Button]
-		private void UpdateReferences()
+		public void UpdateReferences()
 		{
 			Movement = gameObject.GetComponentInChildren<ManikinMovement>();
 			Commands = gameObject.GetComponentInChildren<ManikinCommands>();

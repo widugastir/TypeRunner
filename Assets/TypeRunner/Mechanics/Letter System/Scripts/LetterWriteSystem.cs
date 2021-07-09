@@ -1,10 +1,10 @@
-﻿using NaughtyAttributes;
+﻿using SoundSteppe.RefSystem;
 using UnityEngine.UI;
 using UnityEngine;
 
 namespace TypeRunner
 {
-	public class LetterWriteSystem : MonoBehaviour
+	public class LetterWriteSystem : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
 		[SerializeField] private int _manikinsDieOnLose = 1;
@@ -14,8 +14,7 @@ namespace TypeRunner
 		private bool _isReady = true;
 		
 		//------METHODS
-		[Button]
-		private void UpdateReferences()
+		public void UpdateReferences()
 		{
 			_lettersPanel = gameObject.GetComponentInChildren<LettersPanel>();
 			_lettersPanel.SetLetterWriteSystem(this);

@@ -1,10 +1,10 @@
 ﻿using System.Collections;
-using NaughtyAttributes;
+using SoundSteppe.RefSystem;
 using UnityEngine;
 
 namespace TypeRunner
 {
-	public class MapGeneration : MonoBehaviour
+	public class MapGeneration : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
 		[SerializeField] private int _platformAmount = 10;
@@ -15,8 +15,7 @@ namespace TypeRunner
 		[SerializeField] private GameObject ManikinPrefab;
 		
 		//------METHODS
-		[Button]
-		private void UpdateReferences()
+		public void UpdateReferences()
 		{
 			_prefabs = gameObject.GetComponentInChildren<PlatformsHolder>();
 		}
@@ -39,8 +38,6 @@ namespace TypeRunner
 		{
 			if(_lastPlatform == null)
 				return;
-				
-			print(emptyPlatform);
 				
 			Platform prefab = null;
 			if(emptyPlatform)

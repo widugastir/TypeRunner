@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using NaughtyAttributes;
+using SoundSteppe.RefSystem;
 using UnityEngine;
 
 namespace TypeRunner
 {
-	public class LettersPanel : MonoBehaviour
+	public class LettersPanel : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
 		[SerializeField] private Transform _ungroupParent;
@@ -16,8 +16,7 @@ namespace TypeRunner
 		private List<E_LetterType> _selectedWord;
 		
 		//------METHODS
-		[Button]
-		private void UpdateReferences()
+		public void UpdateReferences()
 		{
 			_buttons = GetComponentsInChildren<LetterButton>(true);
 		}

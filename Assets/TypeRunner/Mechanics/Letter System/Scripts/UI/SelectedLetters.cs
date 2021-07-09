@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
-using NaughtyAttributes;
+using SoundSteppe.RefSystem;
 using UnityEngine;
 
 namespace TypeRunner
 {
-	public class SelectedLetters : MonoBehaviour
+	public class SelectedLetters : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
 		[SerializeField, HideInInspector] private List<Transform> _letterPositions;
 		private int _lastSlot = 0;
 		
 		//------METHODS
-		[Button]
-		private void UpdateReferences()
+		public void UpdateReferences()
 		{
 			_letterPositions = new List<Transform>();
 			foreach(Transform child in transform)

@@ -1,4 +1,4 @@
-﻿using NaughtyAttributes;
+﻿using SoundSteppe.RefSystem;
 using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
@@ -6,7 +6,7 @@ using TMPro;
 
 namespace TypeRunner
 {
-	public class LetterButton : MonoBehaviour
+	public class LetterButton : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
 		[SerializeField, HideInInspector] private TMP_Text _text;
@@ -19,8 +19,7 @@ namespace TypeRunner
 		public static event System.Action<LetterButton> OnLetterSelect;
 		
 		//------METHODS
-		[Button]
-		private void UpdateReferences()
+		public void UpdateReferences()
 		{
 			_button = GetComponentInChildren<Button>(true);
 			_text = GetComponentInChildren<TMP_Text>(true);
@@ -62,7 +61,7 @@ namespace TypeRunner
 		
 		private void MoveTo(Vector3 position)
 		{
-			transform.DOLocalMove(position, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(OnAnimComplete);
+			transform.DOMove(position, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(OnAnimComplete);
 		}
 		
 		private void OnAnimComplete()
