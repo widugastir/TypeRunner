@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 
 namespace TypeRunner
 {
@@ -7,9 +8,8 @@ namespace TypeRunner
 		//------FIELDS
 		[SerializeField] private bool _isEnterZone = true;
 		[SerializeField] private ManikinCommands.E_Command _command;
-		[SerializeField] private E_LetterType[] _requiredLettersWrite;
+		[ShowIf("_isEnterZone"), SerializeField] private E_LetterType[] _requiredLettersWrite;
 		private bool _isUsed = false;
-		
 		
 		public static event System.Action<ObstacleZone, E_LetterType[]> OnPlayerEntered;
 		public static event System.Action<ObstacleZone> OnPlayerExit;

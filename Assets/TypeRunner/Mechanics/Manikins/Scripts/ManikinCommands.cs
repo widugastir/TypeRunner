@@ -43,26 +43,31 @@ namespace TypeRunner
 		
 		public void BlockCommand()
 		{
+			print("BlockCommand");
 			_isBlocked = true;
 		}
 		
 		private void Jump()
 		{
 			_man.Movement.Jump(10f);
+			print("Jump");
 		}
 		
 		private void Slide()
 		{
+			print("Slide");
 			
 		}
 		
 		private void Swim()
 		{
+			print("Swim");
 			
 		}
 		
 		private void Throw()
 		{
+			print("Throw");
 			
 		}
 		

@@ -40,6 +40,8 @@ namespace TypeRunner
 			if(_lastPlatform == null)
 				return;
 				
+			print(emptyPlatform);
+				
 			Platform prefab = null;
 			if(emptyPlatform)
 				prefab = _prefabs.GetEmptyPlatform();
