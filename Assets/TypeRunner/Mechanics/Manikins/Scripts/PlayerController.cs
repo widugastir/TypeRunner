@@ -80,6 +80,14 @@ namespace TypeRunner
 			}
 		}
 		
+		public void SendCommand(ManikinCommands.E_Command command)
+		{
+			for(int i = 0; i < _manikins.Count; i++)
+			{
+				_manikins[i].Commands.DoCommand(command);
+			}
+		}
+		
 		private void OnChangeOwner(Mankin manikin, bool isNeutral)
 		{
 			if(isNeutral)

@@ -61,7 +61,10 @@ namespace TypeRunner
 		
 		private void MoveTo(Vector3 position)
 		{
-			transform.DOMove(position, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(OnAnimComplete);
+			transform.DOMove(position, 0.3f)
+				.SetEase(Ease.Linear)
+				.SetUpdate(true)
+				.OnComplete(OnAnimComplete);
 		}
 		
 		private void OnAnimComplete()

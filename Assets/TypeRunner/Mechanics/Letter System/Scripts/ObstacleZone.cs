@@ -6,6 +6,7 @@ namespace TypeRunner
 	public class ObstacleZone : MonoBehaviour
 	{
 		//------FIELDS
+		[SerializeField] private bool _oneCommandOnly = false;
 		[SerializeField] private bool _isEnterZone = true;
 		[SerializeField] private ManikinCommands.E_Command _command;
 		[ShowIf("_isEnterZone"), SerializeField] private E_LetterType[] _requiredLettersWrite;
@@ -26,8 +27,13 @@ namespace TypeRunner
 						OnPlayerEntered?.Invoke(this, _requiredLettersWrite);
 					else if(_isEnterZone == false)
 						OnPlayerExit?.Invoke(this);
+					if(_oneCommandOnly)
+						man.Commands.DoCommand(_command);
 				}
-				man.Commands.DoCommand(_command);
+				if(_oneCommandOnly == false)
+				{
+					man.Commands.DoCommand(_command);
+				}
 			}
 		}
 	}

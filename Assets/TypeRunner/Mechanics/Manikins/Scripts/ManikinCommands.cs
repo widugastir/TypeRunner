@@ -12,6 +12,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private AnimationEvents _events;
 		[SerializeField, HideInInspector] private Animator _animator;
 		[SerializeField, HideInInspector] private StoneThrower _thrower;
+		[SerializeField, HideInInspector] private PlayerController _player;
 		private bool _isBlocked = false;
 		private float _baseHeight;
 		
@@ -24,6 +25,7 @@ namespace TypeRunner
 			_animator = gameObject.GetComponentInChildren<Animator>();
 			_events = gameObject.GetComponentInChildren<AnimationEvents>();
 			_thrower = gameObject.GetComponentInChildren<StoneThrower>();
+			_player = FindObjectOfType<PlayerController>(true);
 		}
 		
 		private void Start()
@@ -34,7 +36,10 @@ namespace TypeRunner
 		public void DoCommand(E_Command command)
 		{
 			if(_isBlocked)
+			{
 				return;
+			}
+			
 			switch(command)
 			{
 				case E_Command.Jump:
@@ -48,6 +53,9 @@ namespace TypeRunner
 					break;
 				case E_Command.Throw:
 					Throw();
+					break;
+				case E_Command.AllThrow:
+					_player.SendCommand(E_Command.Throw);
 					break;
 				case E_Command.Reset:
 					Reset();
@@ -114,7 +122,8 @@ namespace TypeRunner
 			Jump,
 			Slide,
 			Swim,
-			Throw
+			Throw,
+			AllThrow
 		}
 	}
 }
