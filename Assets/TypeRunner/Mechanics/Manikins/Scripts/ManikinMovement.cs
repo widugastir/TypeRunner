@@ -1,21 +1,31 @@
-﻿using UnityEngine;
+﻿using SoundSteppe.RefSystem;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using DG.Tweening;
 
 namespace TypeRunner
 {
-	public class ManikinMovement : MonoBehaviour
+	public class ManikinMovement : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
-		[SerializeField] private Rigidbody _rigi;
+		[SerializeField, HideInInspector] private Rigidbody _rigi;
+		[SerializeField, HideInInspector] private Animator _animator;
 		[SerializeField] private float _strafeMultiplier = 1f;
 		[SerializeField] private float _strafeMaxSpeed = 1f;
 		private float _beginPosX;
 		private float _targetStrafePos;
 		private bool _isJumped = false;
+		private bool _canMove = true;
 		
 		public static event System.Action<Vector3> OnBorderCollide;
 		
 		//------METHODS
+		public void UpdateReferences()
+		{
+			_rigi = gameObject.GetComponentInChildren<Rigidbody>();
+			_animator = gameObject.GetComponentInChildren<Animator>();
+		}
+		
 		private void OnCollisionEnter(Collision collisionInfo)
 		{
 			if(collisionInfo.gameObject.TryGetComponent(out Border border))
@@ -26,7 +36,7 @@ namespace TypeRunner
 		
 		public void Move(Vector3 force)
 		{
-			if(_isJumped == true)
+			if(_isJumped == true || _canMove == false)
 				return;
 			Vector3 moveDirection = force;
 			if(_targetStrafePos != 0f)
@@ -57,17 +67,18 @@ namespace TypeRunner
 			_rigi.velocity.Scale(MathfExtension.Vector3NotX);
 		}
 		
+		private void OnJumpEnd() => _isJumped = false;
 		public void Jump(float distance = 1f)
 		{
 			_isJumped = true;
 			_rigi.DOJump(transform.position + transform.forward * distance, 2f, 1, 1.5f)
 				.SetEase(Ease.Linear)
 				.OnComplete(OnJumpEnd);
-				
-			void OnJumpEnd()
-			{
-				_isJumped = false;
-			}
+		}
+		
+		public void SetCanMove(bool canMove)
+		{
+			_canMove = canMove;
 		}
 		
 		public void PushAway(Vector3 point, float distance = 0.03f)

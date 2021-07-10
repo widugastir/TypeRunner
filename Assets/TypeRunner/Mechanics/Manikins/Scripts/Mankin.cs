@@ -9,25 +9,20 @@ namespace TypeRunner
 		public bool IsNeutral = true;
 		[HideInInspector] public ManikinMovement Movement;
 		[HideInInspector] public ManikinCommands Commands;
+		public bool Immortal { get; set; } = false;
 		
 		public static event System.Action<Mankin, bool> OnChangeOwner;
 		
 		//------METHODS
-		public void UpdateReferences()
+		public void UpdateReferences()  
 		{
 			Movement = gameObject.GetComponentInChildren<ManikinMovement>();
 			Commands = gameObject.GetComponentInChildren<ManikinCommands>();
 		}
 		
-		public void SetOwnerToPlayer()
+		public void SetOwnerTo(bool neutral)
 		{
-			IsNeutral = false;
-			OnChangeOwner?.Invoke(this, IsNeutral);
-		}
-		
-		public void SetOwnerToNeutral()
-		{
-			IsNeutral = true;
+			IsNeutral = neutral;
 			OnChangeOwner?.Invoke(this, IsNeutral);
 		}
 		
@@ -36,18 +31,21 @@ namespace TypeRunner
 			if(collisionInfo.gameObject.TryGetComponent(out Mankin mankin))
 			{
 				if(this.IsNeutral == false && mankin.IsNeutral)
-					mankin.SetOwnerToPlayer();
+					mankin.SetOwnerTo(false);
 			}
 			
 			if(collisionInfo.gameObject.TryGetComponent(out Obstacle obstacle))
 			{
-				Destroy(gameObject);
+				Kill();
 			}
 		}
 		
-		private void OnDestroy()
+		public void Kill()
 		{
-			SetOwnerToNeutral();
+			if(Immortal)
+				return;
+			SetOwnerTo(true);
+			Destroy(gameObject);
 		}
 	}
 }
