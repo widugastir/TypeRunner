@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b2161231557fd49bf53b04793c29ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Destructable: 0
 --- !u!65 &8948645742959581141
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -167,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1825476026993294623, guid: be256fd7916c7ab4cb16f6a54f16259a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 21
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1825476026993294623, guid: be256fd7916c7ab4cb16f6a54f16259a, type: 3}
       propertyPath: m_LocalPosition.x

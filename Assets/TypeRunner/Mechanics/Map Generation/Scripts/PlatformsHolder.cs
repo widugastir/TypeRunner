@@ -4,6 +4,7 @@ namespace TypeRunner
 {
 	public class PlatformsHolder : MonoBehaviour
 	{
+		[SerializeField] private Platform _finishPrefab;
 		[SerializeField] private Platform[] _emptyPlatforms;
 		[SerializeField] private Platform[] _obstaclePlatforms;
 		
@@ -17,6 +18,11 @@ namespace TypeRunner
 		{
 			int index = Random.Range(0, _obstaclePlatforms.Length);
 			return _obstaclePlatforms[index];
+		}
+		
+		public Platform GetFinishPlatform()
+		{
+			return _finishPrefab;
 		}
 	}
 }

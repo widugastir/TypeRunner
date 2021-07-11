@@ -10,6 +10,8 @@ namespace TypeRunner
 		[HideInInspector] public ManikinMovement Movement;
 		[HideInInspector] public ManikinCommands Commands;
 		public bool Immortal { get; set; } = false;
+		public int RankPosition { get; set; } = 0;
+		public int Rank { get; set; } = 0;
 		
 		public static event System.Action<Mankin, bool> OnChangeOwner;
 		
