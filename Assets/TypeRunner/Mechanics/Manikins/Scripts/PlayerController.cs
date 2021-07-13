@@ -13,6 +13,9 @@ namespace TypeRunner
 		[SerializeField] private float _moveSpeed = 1f;
 		[SerializeField] private List<Mankin> _manikins;
 		[SerializeField, HideInInspector] private GroupCenter _groupCenter;
+		[SerializeField, HideInInspector] private MapGeneration _generator;
+		[SerializeField, HideInInspector] private PlayerStats _stats;
+		[SerializeField, HideInInspector] private LevelManager _levelManager;
 		[SerializeField, HideInInspector] private ControlPanel _controlPanel;
 		[SerializeField, HideInInspector] private CinemachineTargetGroup _cameraTargetGroup;
 		private bool _canMove = true;
@@ -22,9 +25,15 @@ namespace TypeRunner
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
 		{
-			_groupCenter = gameObject.GetComponentInChildren<GroupCenter>();
-			_controlPanel = gameObject.GetComponentInChildren<ControlPanel>();
-			_cameraTargetGroup = gameObject.GetComponentInChildren<CinemachineTargetGroup>();
+			if(sceneObject)
+			{
+				_levelManager = FindObjectOfType<LevelManager>();
+				_generator = FindObjectOfType<MapGeneration>();
+				_stats = FindObjectOfType<PlayerStats>();
+				_groupCenter = gameObject.GetComponentInChildren<GroupCenter>();
+				_controlPanel = gameObject.GetComponentInChildren<ControlPanel>();
+				_cameraTargetGroup = gameObject.GetComponentInChildren<CinemachineTargetGroup>();
+			}
 		}
 		
 		private void OnEnable()
@@ -34,6 +43,7 @@ namespace TypeRunner
 			_controlPanel.OnStopDrag += OnStopDrag;
 			ManikinMovement.OnBorderCollide += OnBorderCollide;
 			Mankin.OnChangeOwner += OnChangeOwner;
+			//SaveSystem.OnEndLoad += Init;
 		}
 		
 		private void OnDisable()
@@ -43,11 +53,29 @@ namespace TypeRunner
 			_controlPanel.OnStopDrag -= OnStopDrag;
 			ManikinMovement.OnBorderCollide -= OnBorderCollide;
 			Mankin.OnChangeOwner -= OnChangeOwner;
+			//SaveSystem.OnEndLoad -= Init;
 		}
 		
 		private void FixedUpdate()
 		{
 			MoveManikins();
+		}
+		
+		private void Start()
+		{
+			//Init();
+		}
+	    
+		public void Init()
+		{
+			Vector3 pos = transform.position;
+			for(int i = 0; i < _stats.StartUnitsLevel; i++)
+			{
+				pos = transform.position;
+				pos += Vector3.forward * Random.Range(-2f, 2f) + Vector3.right * Random.Range(-2f, 2f);
+				var man = _generator.SpawnManikin(pos);
+				man.SetOwnerTo(false);
+			}
 		}
 	    
 		private void OnStartDrag()
@@ -100,6 +128,10 @@ namespace TypeRunner
 				{
 					_manikins.Remove(manikin);
 					StopSpectateTo(manikin);
+					if(_manikins.Count == 0)
+					{
+						_levelManager.FinishLevel(false);
+					}
 				}
 			}
 			else
@@ -115,7 +147,14 @@ namespace TypeRunner
 		public void ManikinFinished(Mankin manikin)
 		{
 			manikin.Movement.SetCanMove(false);
-			manikin.SetOwnerTo(true);
+			manikin.SetFinished();
+			_manikins.Remove(manikin);
+			StopSpectateTo(manikin, false);
+			
+			if(_manikins.Count == 0)
+			{
+				_levelManager.FinishLevel(true, manikin.EarnedCoinsBonus);
+			}
 		}
 		
 		public void StopSpectateTo(Mankin manikin, bool minOne = true)
@@ -138,7 +177,8 @@ namespace TypeRunner
 			_canMove = false;
 			foreach(var manikin in _manikins)
 			{
-				manikin.Movement.StopStrafe();
+				if(manikin != null)
+					manikin.Movement.StopStrafe();
 			}
 		}
 		
@@ -160,7 +200,8 @@ namespace TypeRunner
 		    	
 			foreach(var manikin in _manikins)
 			{
-				manikin.Movement.Move(transform.forward * _moveSpeed);
+				if(manikin != null)
+					manikin.Movement.Move(transform.forward * _moveSpeed);
 			}
 		}
 		
@@ -205,6 +246,12 @@ namespace TypeRunner
 				// Sort by ranks
 				_manikins[i].Rank = rank - _manikins[i].Rank + 1;
 			}
+		}
+		
+		public void Reset()
+		{
+			_manikins.Clear();
+			//Init();
 		}
 	}
 }

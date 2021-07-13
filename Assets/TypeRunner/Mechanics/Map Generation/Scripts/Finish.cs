@@ -20,6 +20,11 @@ namespace TypeRunner
 			}
 		}
 		
+		private void Start()
+		{
+			UpdateReferences(true);
+		}
+		
 		private void OnTriggerEnter(Collider other)
 		{
 			if(other.TryGetComponent(out Mankin man))

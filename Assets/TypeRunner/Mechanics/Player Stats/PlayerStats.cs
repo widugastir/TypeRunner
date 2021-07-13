@@ -58,5 +58,7 @@ namespace TypeRunner
 		public static Action<int> OnLevelChange;
 		public static Action<int> OnStartUnitChange;
 		public static Action<int> OnIncomeLevelChange;
+		
+		public void Reset(){}
 	}
 }

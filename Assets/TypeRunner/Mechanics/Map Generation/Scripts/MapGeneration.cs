@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+using System.Collections;
 using SoundSteppe.RefSystem;
 using UnityEngine;
 
@@ -8,11 +9,15 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField] private int _platformAmount = 10;
-		[SerializeField] private Platform _lastPlatform;
+		[SerializeField] private Platform _basePlatform;
+		[SerializeField, HideInInspector] private Platform _lastPlatform;
 		
 		[SerializeField, HideInInspector] private PlatformsHolder _prefabs;
 		[SerializeField] private LetterPickup LetterPrefab;
-		[SerializeField] private GameObject ManikinPrefab;
+		[SerializeField] private Mankin ManikinPrefab;
+		private List<Platform> _mapPlatforms = new List<Platform>();
+		private List<Mankin> _mapManikins = new List<Mankin>();
+		private List<LetterPickup> _mapLetters = new List<LetterPickup>();
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -22,6 +27,7 @@ namespace TypeRunner
 		
 		private void Start()
 		{
+			_lastPlatform = _basePlatform;
 			StartCoroutine(Generate());
 		}
 		
@@ -41,8 +47,9 @@ namespace TypeRunner
 				return;
 			
 			Platform newPlatform = Instantiate(prefab, _lastPlatform.ConnectionPoint.position, Quaternion.identity, transform);
-			newPlatform.Init(LetterPrefab, ManikinPrefab);
+			newPlatform.Init(this);
 			_lastPlatform = newPlatform;
+			_mapPlatforms.Add(newPlatform);
 		}
 		
 		private void SpawnPlatform(bool emptyPlatform)
@@ -57,8 +64,44 @@ namespace TypeRunner
 				prefab = _prefabs.GetObstaclePlatform();
 			
 			Platform newPlatform = Instantiate(prefab, _lastPlatform.ConnectionPoint.position, Quaternion.identity, transform);
-			newPlatform.Init(LetterPrefab, ManikinPrefab);
+			newPlatform.Init(this);
 			_lastPlatform = newPlatform;
+			_mapPlatforms.Add(newPlatform);
+		}
+		
+		public Mankin SpawnManikin(Vector3 position)
+		{
+			var man = Instantiate(ManikinPrefab, position, Quaternion.identity);
+			_mapManikins.Add(man);
+			return man;
+		}
+		
+		public LetterPickup SpawnLetter(Vector3 position)
+		{
+			var letter = Instantiate(LetterPrefab, position, Quaternion.identity);
+			_mapLetters.Add(letter);
+			return letter;
+		}
+		
+		public void Reset()
+		{
+			foreach(var p in _mapPlatforms)
+				if(p != null)
+					Destroy(p.gameObject);
+			_mapPlatforms.Clear();
+			
+			foreach(var m in _mapManikins)
+				if(m != null)
+					Destroy(m.gameObject);
+			_mapManikins.Clear();
+			
+			foreach(var l in _mapLetters)
+				if(l != null)
+					Destroy(l.gameObject);
+			_mapLetters.Clear();
+			
+			_lastPlatform = _basePlatform;
+			StartCoroutine(Generate());
 		}
 	}
 }

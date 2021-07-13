@@ -6,48 +6,38 @@ namespace TypeRunner
 	public class LevelManager : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
-		[SerializeField] private GameObject _inGameUI;
-		//[SerializeField] private int _victoryBonus = 15;
-		//[SerializeField, HideInInspector] private GlassPlacer _wall;
-		//[SerializeField, HideInInspector] private Towers _towers;
-		//[SerializeField, HideInInspector] private PlayerStats _stats;
-		//[SerializeField, HideInInspector] private CoinManager _coins;
-		//public static event System.Action<bool> OnLevelEnd;
+		[SerializeField] private GameObject[] _disableOnFinish;
+		[SerializeField] private int _baseCoinsPerVictory = 10;
+		[SerializeField, HideInInspector] private PlayerStats _stats;
+		[SerializeField, HideInInspector] private CoinManager _coins;
+		[SerializeField, HideInInspector] private PlayerController _player;
+		[SerializeField, HideInInspector] private CameraResetter _cameraResetter;
+		[SerializeField, HideInInspector] private MapGeneration _map;
+		public static event System.Action<bool> OnLevelEnd;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
 		{
 			if(sceneObject == true)
 			{
-				//_wall = FindObjectOfType<GlassPlacer>(true);
-				//_towers = FindObjectOfType<Towers>(true);
-				//_stats = FindObjectOfType<PlayerStats>(true);
-				//_coins = FindObjectOfType<CoinManager>(true);
+				_stats = FindObjectOfType<PlayerStats>(true);
+				_coins = FindObjectOfType<CoinManager>(true);
+				_player = FindObjectOfType<PlayerController>(true);
+				_cameraResetter = FindObjectOfType<CameraResetter>(true);
+				_map = FindObjectOfType<MapGeneration>(true);
 			}
 		}
 		
-		private void OnEnable()
+		public void FinishLevel(bool victory, float coinsMultiplier = 1f)
 		{
-			//MainTower.OnDestroy += OnTowerDestroy;
+			if(victory)
+			{
+				_stats.CurrentLevel++;
+				_coins.AddEarnedCoins((int)((float)_baseCoinsPerVictory * coinsMultiplier));
+			}
+			LevelEnd();
+			OnLevelEnd?.Invoke(victory);
 		}
-		
-		private void OnDisable()
-		{
-			//MainTower.OnDestroy -= OnTowerDestroy;
-		}
-		
-		//private void OnTowerDestroy(MainTower tower)
-		//{
-		//	if(tower.Owner == E_Owner.player)
-		//		OnLevelEnd?.Invoke(false); // Lose
-		//	else
-		//	{
-		//		_stats.CurrentLevel++;
-		//		_coins.AddEarnedCoins(_victoryBonus);
-		//		OnLevelEnd?.Invoke(true); // Victory
-		//	}
-		//	LevelEnd();
-		//}
 		
 		private void LevelEnd()
 		{
@@ -57,9 +47,12 @@ namespace TypeRunner
 		
 		private void ResetLevel()
 		{
-			_inGameUI.SetActive(false);
-			//_wall.Reset();
-			//_towers.Reset();
+			foreach(var p in _disableOnFinish)
+				p.SetActive(false);
+			_map.Reset();
+			_player.Reset();
+			_stats.Reset();
+			_cameraResetter.Reset();
 		}
 	}
 }

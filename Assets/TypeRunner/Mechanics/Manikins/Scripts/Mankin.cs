@@ -10,8 +10,10 @@ namespace TypeRunner
 		[HideInInspector] public ManikinMovement Movement;
 		[HideInInspector] public ManikinCommands Commands;
 		public bool Immortal { get; set; } = false;
+		public bool IsFinished { get; set; } = false;
 		public int RankPosition { get; set; } = 0;
 		public int Rank { get; set; } = 0;
+		public float EarnedCoinsBonus { get; set; } = 0f;
 		
 		public static event System.Action<Mankin, bool> OnChangeOwner;
 		
@@ -26,6 +28,11 @@ namespace TypeRunner
 		{
 			IsNeutral = neutral;
 			OnChangeOwner?.Invoke(this, IsNeutral);
+		}
+		
+		public void SetFinished()
+		{
+			IsFinished = true;
 		}
 		
 		private void OnCollisionEnter(Collision collisionInfo)

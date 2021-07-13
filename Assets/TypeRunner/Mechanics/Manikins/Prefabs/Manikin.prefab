@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 1968516755578011790}
   - component: {fileID: 5162348523026095943}
   - component: {fileID: 2692411060807030495}
+  - component: {fileID: 1503799545274552744}
   - component: {fileID: 8964693713926586896}
   - component: {fileID: 357506177}
   - component: {fileID: 357506176}
@@ -99,6 +100,19 @@ MonoBehaviour:
   _animator: {fileID: 4227446113321931909}
   _thrower: {fileID: 8964693713926586896}
   _player: {fileID: 0}
+--- !u!114 &1503799545274552744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7764331643567007465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db0d76e5e961954da37b70941853d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 9034727853104477254}
 --- !u!114 &8964693713926586896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +266,11 @@ Transform:
 --- !u!95 &4227446113321931909 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 8ea3bef4cf162ed4281cb2a33cc11a8e, type: 3}
+  m_PrefabInstance: {fileID: 7764331644829853972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &9034727853104477254 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1630794972795428178, guid: 8ea3bef4cf162ed4281cb2a33cc11a8e, type: 3}
   m_PrefabInstance: {fileID: 7764331644829853972}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8247743157828294364 stripped

@@ -9,15 +9,15 @@ namespace TypeRunner
 		//------FIELDS
 		[SerializeField] private float _rotateSpeed = 1f;
 		[SerializeField] private Transform _arrow;
-		//[SerializeField, HideInInspector] private OwnerPool _ownerPool;
-		//[SerializeField, HideInInspector] private ColorPoint[] _points;
+		[SerializeField, HideInInspector] private ColorChanger _colorChanger;
+		[SerializeField, HideInInspector] private ColorPoint[] _points;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
 		{
-			//_points = gameObject.GetComponentsInChildren<ColorPoint>();
-			//if(sceneObject == true)
-			//	_ownerPool = FindObjectOfType<OwnerPool>(true);
+			_points = gameObject.GetComponentsInChildren<ColorPoint>();
+			if(sceneObject)
+				_colorChanger = FindObjectOfType<ColorChanger>(true);
 		}
 		
 		public void Spin()
@@ -37,24 +37,24 @@ namespace TypeRunner
 		
 		private void Complete()
 		{
-			//Color newColor = GetSelectedColor();
-			//_ownerPool.SetColorTo(E_Owner.player, newColor);
+			Color newColor = GetSelectedColor();
+			_colorChanger.SetPlayerColor(newColor);
 		}
 		
-		//private Color GetSelectedColor()
-		//{
-			//float minDistance = 99999f;
-			//ColorPoint closestPoint = null;
-			//foreach(var p in _points)
-			//{
-			//	float distance = Vector3.Distance(_arrow.position, p.transform.position);
-			//	if(closestPoint == null || distance < minDistance)
-			//	{
-			//		closestPoint = p;
-			//		minDistance = distance;
-			//	}
-			//}
-			//return closestPoint.ManikinColor;
-		//}
+		private Color GetSelectedColor()
+		{
+			float minDistance = 99999f;
+			ColorPoint closestPoint = null;
+			foreach(var p in _points)
+			{
+				float distance = Vector3.Distance(_arrow.position, p.transform.position);
+				if(closestPoint == null || distance < minDistance)
+				{
+					closestPoint = p;
+					minDistance = distance;
+				}
+			}
+			return closestPoint.ManikinColor;
+		}
 	}
 }

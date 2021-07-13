@@ -16,15 +16,17 @@ namespace TypeRunner
 		public Transform ConnectionPoint;
 		[SerializeField] private List<Transform> _letterSpawnPos;
 		[SerializeField] private List<Transform> _manikinSpawnPos;
+		private MapGeneration _generator;
 		
 		//------METHODS
-		public void Init(LetterPickup letterPrefab, GameObject manikinPrefab)
+		public void Init(MapGeneration generator)
 		{
-			SpawnLetters(letterPrefab);
-			SpawnMankins(manikinPrefab);
+			_generator = generator;
+			SpawnLetters();
+			SpawnMankins();
 		}
 		
-		private void SpawnLetters(LetterPickup letterPrefab)
+		private void SpawnLetters()
 		{
 			int index = 0;
 			for(int i = 0; i < _letterAmount; i++)
@@ -33,7 +35,7 @@ namespace TypeRunner
 					break;
 					
 				index = Random.Range(0, _letterSpawnPos.Count);
-				var letter = Instantiate(letterPrefab, _letterSpawnPos[index].position, Quaternion.identity);
+				var letter = _generator.SpawnLetter(_letterSpawnPos[index].position);
 				
 				if(_requiredLetters.Count > 0)
 				{
@@ -49,7 +51,7 @@ namespace TypeRunner
 			}
 		}
 		
-		private void SpawnMankins(GameObject manikinPrefab)
+		private void SpawnMankins()
 		{
 			int index = 0;
 			for(int i = 0; i < _manikinAmount; i++)
@@ -58,7 +60,7 @@ namespace TypeRunner
 					break;
 					
 				index = Random.Range(0, _manikinSpawnPos.Count);
-				Instantiate(manikinPrefab, _manikinSpawnPos[index].position, Quaternion.identity);
+				var man = _generator.SpawnManikin(_manikinSpawnPos[index].position);
 				_manikinSpawnPos.RemoveAt(index);
 			}
 		}

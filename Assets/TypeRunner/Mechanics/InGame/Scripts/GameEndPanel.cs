@@ -20,12 +20,12 @@ namespace TypeRunner
 		
 		private void OnEnable()
 		{
-			//LevelManager.OnLevelEnd += Enable;
+			LevelManager.OnLevelEnd += Enable;
 		}
 		
 		private void OnDisable()
 		{
-			//LevelManager.OnLevelEnd -= Enable;
+			LevelManager.OnLevelEnd -= Enable;
 		}
 		
 		public void Enable(bool victory)
