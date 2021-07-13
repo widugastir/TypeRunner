@@ -15,7 +15,7 @@ namespace TypeRunner
 		[SerializeField] private GameObject ManikinPrefab;
 		
 		//------METHODS
-		public void UpdateReferences()
+		public void UpdateReferences(bool sceneObject)
 		{
 			_prefabs = gameObject.GetComponentInChildren<PlatformsHolder>();
 		}

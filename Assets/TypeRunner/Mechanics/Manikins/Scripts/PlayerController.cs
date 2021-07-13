@@ -20,7 +20,7 @@ namespace TypeRunner
 		public bool IsMovementEnabled { get; private set; } = true;
 	
 		//------METHODS
-		public void UpdateReferences()
+		public void UpdateReferences(bool sceneObject)
 		{
 			_groupCenter = gameObject.GetComponentInChildren<GroupCenter>();
 			_controlPanel = gameObject.GetComponentInChildren<ControlPanel>();

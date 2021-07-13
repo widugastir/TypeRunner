@@ -12,12 +12,12 @@ namespace SoundSteppe.JsonSS
 {
 	public static class JsonSS
 	{
-		private static readonly string crypt_password = "l2Kfrql5o4m89545";
+		private static readonly string crypt_password = "laKfr4l5o45z9kj5";
 		
 		private static readonly byte[] crypt_iv = 
-		{ 0x12, 0x3, 0x9, 0x3, 0x16, 
+		{ 0x11, 0x3, 0x2, 0x3, 0x16, 
 			0x15, 0x6, 0x15, 0x14, 0x12, 
-			0x14, 0x15, 0x12, 0x15, 0x14, 0x8 
+			0x14, 0x15, 0x7, 0x15, 0x4, 0x8 
 		};
 		
 		#region Public methods
@@ -26,8 +26,7 @@ namespace SoundSteppe.JsonSS
 			string json = "{}";
 			
 			json = GetObjectJson(obj);
-			
-			string path = Application.dataPath + "/" + ID + ".data";
+			string path = Application.persistentDataPath + "/" + ID + ".data";
 			Encrypt(path, json);
 		} 
 		
@@ -87,13 +86,13 @@ namespace SoundSteppe.JsonSS
 				json += "*{" + GetObjectJson(e) + "}*";
 			}
 			
-			string path = Application.dataPath + "/" + ID + ".data";
+			string path = Application.persistentDataPath + "/" + ID + ".data";
 			Encrypt(path, json);
 		}
 		
 		public static List<string> LoadArray(string ID)
 		{
-			string path = Application.dataPath + "/" + ID + ".data";
+			string path = Application.persistentDataPath + "/" + ID + ".data";
 			string json = "";
 			
 			json = Decrypt(path);
@@ -120,7 +119,7 @@ namespace SoundSteppe.JsonSS
 		#region Private methods
 		private static string LoadObjectJson(string ID)
 		{
-			string path = Application.dataPath + "/" + ID + ".data";
+			string path = Application.persistentDataPath + "/" + ID + ".data";
 			string json = "";
 			
 			json = Decrypt(path);
@@ -182,6 +181,12 @@ namespace SoundSteppe.JsonSS
 					{
 						Vector3 v = (Vector3)field.GetValue(s);
 						node[field.Name] = v;
+					}
+					else if(field.FieldType == typeof(System.DateTime))
+					{
+						System.DateTime date = (System.DateTime)field.GetValue(s);
+						node[field.Name] = date.ToBinary().ToString();
+						//Debug.Log(node[field.Name] + "   " + date.ToBinary().ToString());
 					}
 					else if(field.FieldType.IsValueType == true && field.FieldType.IsPrimitive == false)
 					{
@@ -317,6 +322,13 @@ namespace SoundSteppe.JsonSS
 				else if(field.FieldType == typeof(string))
 				{
 					valueObj = node[field.Name].Value;
+				}
+				else if(field.FieldType == typeof(System.DateTime))
+				{
+					string j = node[field.Name].Value;
+					long b = long.Parse(j);
+					System.DateTime date = System.DateTime.FromBinary(b);
+					valueObj = date;
 				}
 				else if(field.FieldType.IsValueType == true && field.FieldType.IsPrimitive == false)
 				{

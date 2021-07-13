@@ -11,12 +11,15 @@ namespace TypeRunner
 		private int _lastSlot = 0;
 		
 		//------METHODS
-		public void UpdateReferences()
+		public void UpdateReferences(bool sceneObject)
 		{
-			_letterPositions = new List<Transform>();
-			foreach(Transform child in transform)
+			if(sceneObject)
 			{
-				_letterPositions.Add(child);
+				_letterPositions = new List<Transform>();
+				foreach(Transform child in transform)
+				{
+					_letterPositions.Add(child);
+				}
 			}
 		}
 		

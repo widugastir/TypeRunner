@@ -12,7 +12,7 @@ namespace TypeRunner
 		private Vector3 _direction;
 		
 		//------METHODS
-		public void UpdateReferences()  
+		public void UpdateReferences(bool sceneObject)  
 		{
 			_rigi = gameObject.GetComponentInChildren<Rigidbody>();
 		}

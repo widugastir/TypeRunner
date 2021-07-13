@@ -17,7 +17,7 @@ namespace TypeRunner
 		private float _baseHeight;
 		
 		//------METHODS
-		public void UpdateReferences()
+		public void UpdateReferences(bool sceneObject)
 		{
 			_man = gameObject.GetComponentInChildren<Mankin>();
 			_rigi = gameObject.GetComponentInChildren<Rigidbody>();
@@ -25,7 +25,8 @@ namespace TypeRunner
 			_animator = gameObject.GetComponentInChildren<Animator>();
 			_events = gameObject.GetComponentInChildren<AnimationEvents>();
 			_thrower = gameObject.GetComponentInChildren<StoneThrower>();
-			_player = FindObjectOfType<PlayerController>(true);
+			if(sceneObject)
+				_player = FindObjectOfType<PlayerController>(true);
 		}
 		
 		private void Start()

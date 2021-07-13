@@ -16,7 +16,7 @@ namespace TypeRunner
 		private List<E_LetterType> _selectedWord;
 		
 		//------METHODS
-		public void UpdateReferences()
+		public void UpdateReferences(bool sceneObject)
 		{
 			_buttons = GetComponentsInChildren<LetterButton>(true);
 		}

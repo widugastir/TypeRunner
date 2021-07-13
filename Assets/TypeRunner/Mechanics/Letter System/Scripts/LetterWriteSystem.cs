@@ -14,7 +14,7 @@ namespace TypeRunner
 		private bool _isReady = true;
 		
 		//------METHODS
-		public void UpdateReferences()
+		public void UpdateReferences(bool sceneObject)
 		{
 			_lettersPanel = gameObject.GetComponentInChildren<LettersPanel>();
 			_lettersPanel.SetLetterWriteSystem(this);

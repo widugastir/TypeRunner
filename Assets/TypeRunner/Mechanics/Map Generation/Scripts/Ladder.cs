@@ -11,9 +11,10 @@ namespace TypeRunner
 		public int Rank = 1;
 		
 		//------METHODS
-		public void UpdateReferences()
+		public void UpdateReferences(bool sceneObject)
 		{
-			_player = FindObjectOfType<PlayerController>(true);
+			if(sceneObject)
+				_player = FindObjectOfType<PlayerController>(true);
 		}
 		
 		private void OnTriggerEnter(Collider other)

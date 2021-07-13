@@ -19,7 +19,7 @@ namespace TypeRunner
 		public static event System.Action<LetterButton> OnLetterSelect;
 		
 		//------METHODS
-		public void UpdateReferences()
+		public void UpdateReferences(bool sceneObject)
 		{
 			_button = GetComponentInChildren<Button>(true);
 			_text = GetComponentInChildren<TMP_Text>(true);

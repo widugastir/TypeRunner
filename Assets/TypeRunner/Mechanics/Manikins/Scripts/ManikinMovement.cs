@@ -20,7 +20,7 @@ namespace TypeRunner
 		public static event System.Action<Vector3> OnBorderCollide;
 		
 		//------METHODS
-		public void UpdateReferences()
+		public void UpdateReferences(bool sceneObject)
 		{
 			_rigi = gameObject.GetComponentInChildren<Rigidbody>();
 			_animator = gameObject.GetComponentInChildren<Animator>();

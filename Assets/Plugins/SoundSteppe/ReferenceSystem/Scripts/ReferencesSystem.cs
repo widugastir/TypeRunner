@@ -1,7 +1,8 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Linq;
 
 #if UNITY_EDITOR
+using UnityEditor.SceneManagement;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEditor;
@@ -16,18 +17,31 @@ namespace SoundSteppe.RefSystem
 		[MenuItem("Tools/Update references")]
 		private static void UpdateReferences() 
 		{
-			var scripts = GameObject.FindObjectsOfType<Component>(true).OfType<INeedReference>();
-			foreach(var s in scripts)
-				s.UpdateReferences();
+			var scripts = GameObject.FindObjectsOfType<Component>(true);
+			UpdateScriptsRefs(scripts);
 				
-			var prefabs = Resources.FindObjectsOfTypeAll<Component>().OfType<INeedReference>();
-			foreach(var p in prefabs)
-				p.UpdateReferences();
-				
+			scripts = Resources.FindObjectsOfTypeAll<Component>();
+			UpdateScriptsRefs(scripts, false);
+			
+			AssetDatabase.Refresh();
+			EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
 			//Debug.Log("[ReferenceSystem] Scripts updated: " + scripts.Count());
 			//Debug.Log("[ReferenceSystem] Prefab scripts updated: " + prefabs.Count());
 		}
 		 
+		private static void UpdateScriptsRefs(Component[] scripts, bool sceneObject = true)
+		{
+			foreach(var s in scripts)
+			{
+				INeedReference inr = s as INeedReference;
+				if(inr != null)
+				{
+					inr.UpdateReferences(sceneObject);
+					if(sceneObject == false)
+						EditorUtility.SetDirty(s);
+				}
+			}
+		}
 		 
 		/// <summary>
 		/// Update references on script compiling
@@ -55,13 +69,13 @@ namespace SoundSteppe.RefSystem
 		public int callbackOrder { get { return 0; } }
 		public void OnPreprocessBuild(BuildReport report)
 		{
-			UpdateReferences();
+			//UpdateReferences();
 		}
 	}
 	#endif
 	
 	public interface INeedReference
 	{
-		void UpdateReferences();
+		void UpdateReferences(bool sceneObject);
 	}
 }

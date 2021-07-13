@@ -11,10 +11,13 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
 		
 		//------METHODS
-		public void UpdateReferences()
+		public void UpdateReferences(bool sceneObject)
 		{
-			_player = FindObjectOfType<PlayerController>(true);
-			_levelManager = FindObjectOfType<LevelManager>(true);
+			if(sceneObject)
+			{
+				_player = FindObjectOfType<PlayerController>(true);
+				_levelManager = FindObjectOfType<LevelManager>(true);
+			}
 		}
 		
 		private void OnTriggerEnter(Collider other)

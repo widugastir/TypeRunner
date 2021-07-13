@@ -16,7 +16,7 @@ namespace TypeRunner
 		public static event System.Action<Mankin, bool> OnChangeOwner;
 		
 		//------METHODS
-		public void UpdateReferences()  
+		public void UpdateReferences(bool sceneObject)  
 		{
 			Movement = gameObject.GetComponentInChildren<ManikinMovement>();
 			Commands = gameObject.GetComponentInChildren<ManikinCommands>();
