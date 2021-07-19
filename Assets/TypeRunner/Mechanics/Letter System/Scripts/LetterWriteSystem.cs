@@ -1,12 +1,15 @@
 ﻿using SoundSteppe.RefSystem;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 namespace TypeRunner
 {
 	public class LetterWriteSystem : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
+		[SerializeField] private TMP_Text _wordText;
+		[SerializeField] private GameObject _uiPanel;
 		[SerializeField] private int _manikinsDieOnLose = 1;
 		[SerializeField] private float _timeScale = 0.2f;
 		[SerializeField] private PlayerController _playerController;
@@ -44,6 +47,13 @@ namespace TypeRunner
 		
 		private void EnableWordWritter(ObstacleZone zone, E_LetterType[] word)
 		{
+			_wordText.gameObject.SetActive(true);
+			string req_word = "";
+			foreach(var ch in word)
+			{
+				req_word += ch.ToString();
+			}
+			_wordText.text = req_word.ToUpper();
 			_isReady = true;
 			Time.timeScale = _timeScale;
 			_lettersPanel.Activate(word);
@@ -53,6 +63,7 @@ namespace TypeRunner
 		{
 			if(_isReady == false)
 				return;
+			_wordText.gameObject.SetActive(false);
 			_isReady = false;
 			if(successful == false)
 			{
@@ -61,6 +72,12 @@ namespace TypeRunner
 			}
 			Time.timeScale = 1f;
 			_lettersPanel.DisableSelected();
+		}
+		
+		public void Reset()
+		{
+			_uiPanel.SetActive(true);
+			_lettersPanel.Reset();
 		}
 	}
 }

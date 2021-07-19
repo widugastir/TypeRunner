@@ -45,6 +45,15 @@ namespace TypeRunner
 				return true;
 			return false;
 		}
+		
+		public void Clear()
+		{
+			for(int i = 0; i < _letters.Count; i++)
+			{
+				OnLetterRemove?.Invoke(_letters[i]);
+			}
+			_letters.Clear();
+		}
 	}
 	
 	public enum E_LetterType

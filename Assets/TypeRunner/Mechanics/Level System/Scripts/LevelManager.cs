@@ -13,6 +13,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private CameraResetter _cameraResetter;
 		[SerializeField, HideInInspector] private MapGeneration _map;
+		[SerializeField, HideInInspector] private LetterWriteSystem _letterSystem;
 		public static event System.Action<bool> OnLevelEnd;
 		
 		//------METHODS
@@ -25,7 +26,13 @@ namespace TypeRunner
 				_player = FindObjectOfType<PlayerController>(true);
 				_cameraResetter = FindObjectOfType<CameraResetter>(true);
 				_map = FindObjectOfType<MapGeneration>(true);
+				_letterSystem = FindObjectOfType<LetterWriteSystem>(true);
 			}
+		}
+		
+		public void StartLevel()
+		{
+			_letterSystem.Reset();
 		}
 		
 		public void FinishLevel(bool victory, float coinsMultiplier = 1f)

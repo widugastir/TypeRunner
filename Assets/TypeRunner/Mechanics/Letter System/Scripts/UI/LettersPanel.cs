@@ -115,6 +115,21 @@ namespace TypeRunner
 			}
 		}
 		
+		public void Reset()
+		{
+			if(_selectedButtons != null)
+			{
+				DisableSelected();
+			}
+			
+			foreach(var button in _buttons)
+			{
+				button.Disable();
+				button.gameObject.SetActive(false);
+			}
+			LetterData.Instance.Clear();
+		}
+		
 		//private void OnLetterRemove(E_LetterType letter)
 		//{
 		//	for(int i = 0; i < _buttons.Length; i++)
