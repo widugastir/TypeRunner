@@ -15,6 +15,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private CameraResetter _cameraResetter;
 		[SerializeField, HideInInspector] private LetterWriteSystem _letterSystem;
 		[SerializeField, HideInInspector] private DailyChallenge _dailyChallenge;
+		[SerializeField, HideInInspector] private Income _income;
 		public static event System.Action<bool> OnLevelEnd;
 		private bool _isDailyLevel = false;
 		
@@ -30,6 +31,7 @@ namespace TypeRunner
 				_map = FindObjectOfType<MapGeneration>(true);
 				_letterSystem = FindObjectOfType<LetterWriteSystem>(true);
 				_dailyChallenge = FindObjectOfType<DailyChallenge>(true);
+				_income = FindObjectOfType<Income>(true);
 			}
 		}
 		
@@ -50,7 +52,7 @@ namespace TypeRunner
 			if(victory)
 			{
 				_stats.CurrentLevel++;
-				_coins.AddEarnedCoins((int)((float)_baseCoinsPerVictory * coinsMultiplier));
+				_coins.AddEarnedCoins((int)((float)_baseCoinsPerVictory * coinsMultiplier) + _income.GetBonusCoins());
 				
 				if(_isDailyLevel)
 				{

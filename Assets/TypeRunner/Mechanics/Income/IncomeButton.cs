@@ -9,7 +9,7 @@ namespace TypeRunner
 		//------FIELDS
 		[SerializeField] private TMP_Text _levelText;
 		[SerializeField] private TMP_Text _costText;
-		[SerializeField, HideInInspector] private OfflineIncome _income;
+		[SerializeField, HideInInspector] private Income _income;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		
 		//------METHODS
@@ -17,7 +17,7 @@ namespace TypeRunner
 		{
 			if(sceneObject == true)
 			{
-				_income = FindObjectOfType<OfflineIncome>(true);
+				_income = FindObjectOfType<Income>(true);
 				_stats = FindObjectOfType<PlayerStats>(true);
 			}
 		}
