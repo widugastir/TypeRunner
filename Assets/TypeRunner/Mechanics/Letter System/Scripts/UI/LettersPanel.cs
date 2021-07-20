@@ -12,7 +12,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private LetterButton[] _buttons;
 		[SerializeField, HideInInspector]private LetterWriteSystem _letterWriteSystem;
 		private E_LetterType[] _word;
-		[SerializeField] private List<LetterButton> _selectedButtons;
+		private List<LetterButton> _selectedButtons;
 		private List<E_LetterType> _selectedWord;
 		
 		//------METHODS

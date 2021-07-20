@@ -10,7 +10,7 @@ namespace TypeRunner
 		//------FIELDS
 		[SerializeField] private int _platformAmount = 10;
 		[SerializeField] private int _dailyPlatformAmount = 30;
-		[SerializeField] private int _dailyOneEmptyPerObstacle = 3;
+		[SerializeField] private int _dailyOneEmptyPerPlatform = 3;
 		[SerializeField] private Platform _basePlatform;
 		[SerializeField, HideInInspector] private Platform _lastPlatform;
 		
@@ -48,7 +48,7 @@ namespace TypeRunner
 		{
 			for(int i = 0; i < _dailyPlatformAmount; i++)
 			{
-				bool isEmptyPlatform = i % _dailyOneEmptyPerObstacle == 0 ? true : false;
+				bool isEmptyPlatform = i % _dailyOneEmptyPerPlatform == 0 ? true : false;
 				SpawnPlatform(isEmptyPlatform, true);
 				yield return null;
 			}
