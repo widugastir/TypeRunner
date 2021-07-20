@@ -24,6 +24,21 @@ namespace TypeRunner
 			}
 		}
 		
+		private void OnEnable() 
+		{ 
+			SaveSystem.OnBeginSave += OnBeginSave; 
+		}
+		
+		private void OnDisable() 
+		{ 
+			SaveSystem.OnBeginSave += OnBeginSave; 
+		}
+		
+		private void OnBeginSave()
+		{
+			_stats.LastLogin = DateTime.Now;
+		}
+		
 		public int GetBonusCoins() => (_stats.IncomeLevel - 1) * _bonusCoinsPerLevel;
 		public int GetUpgradeCost() => _baseCost + (int)((float)(_stats.IncomeLevel - 1) * _baseCost * _costMultiplier);
 		
