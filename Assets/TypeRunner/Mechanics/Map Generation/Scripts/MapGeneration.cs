@@ -9,6 +9,8 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField] private int _platformAmount = 10;
+		[SerializeField] private int _dailyPlatformAmount = 30;
+		[SerializeField] private int _dailyOneEmptyPerObstacle = 3;
 		[SerializeField] private Platform _basePlatform;
 		[SerializeField, HideInInspector] private Platform _lastPlatform;
 		
@@ -41,6 +43,17 @@ namespace TypeRunner
 			SpawnPlatform(_prefabs.GetFinishPlatform());
 		}
 		
+		private IEnumerator GenerateDaily()
+		{
+			for(int i = 0; i < _dailyPlatformAmount; i++)
+			{
+				bool isEmptyPlatform = i % _dailyOneEmptyPerObstacle == 0 ? true : false;
+				SpawnPlatform(isEmptyPlatform, true);
+				yield return null;
+			}
+			SpawnPlatform(_prefabs.GetFinishPlatform());
+		}
+		
 		private void SpawnPlatform(Platform prefab)
 		{
 			if(_lastPlatform == null)
@@ -52,7 +65,7 @@ namespace TypeRunner
 			_mapPlatforms.Add(newPlatform);
 		}
 		
-		private void SpawnPlatform(bool emptyPlatform)
+		private void SpawnPlatform(bool emptyPlatform, bool daily = false)
 		{
 			if(_lastPlatform == null)
 				return;
@@ -64,7 +77,7 @@ namespace TypeRunner
 				prefab = _prefabs.GetObstaclePlatform();
 			
 			Platform newPlatform = Instantiate(prefab, _lastPlatform.ConnectionPoint.position, Quaternion.identity, transform);
-			newPlatform.Init(this);
+			newPlatform.Init(this, daily);
 			_lastPlatform = newPlatform;
 			_mapPlatforms.Add(newPlatform);
 		}
@@ -81,6 +94,27 @@ namespace TypeRunner
 			var letter = Instantiate(LetterPrefab, position, Quaternion.identity);
 			_mapLetters.Add(letter);
 			return letter;
+		}
+		
+		public void ResetToDaily()
+		{
+			foreach(var p in _mapPlatforms)
+				if(p != null)
+					Destroy(p.gameObject);
+			_mapPlatforms.Clear();
+			
+			foreach(var m in _mapManikins)
+				if(m != null)
+					Destroy(m.gameObject);
+			_mapManikins.Clear();
+			
+			foreach(var l in _mapLetters)
+				if(l != null)
+					Destroy(l.gameObject);
+			_mapLetters.Clear();
+			
+			_lastPlatform = _basePlatform;
+			StartCoroutine(GenerateDaily());
 		}
 		
 		public void Reset()

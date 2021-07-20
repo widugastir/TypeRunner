@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 using System;
 
 namespace TypeRunner
@@ -46,18 +47,33 @@ namespace TypeRunner
 			}
 		}
 		
+		public float DailyProcentage
+		{
+			get { return _dailyProcentage; }
+			set 
+			{ 
+				_dailyProcentage = value;
+				OnDailyChange?.Invoke(_dailyProcentage);
+			}
+		}
+		
 		[Saveable] public int _coins = 0;
 		[Saveable] public int _currentLevel = 0;
 		[Saveable] public int _startUnitsLevel = 1;
 		[Saveable] public int _incomeLevel = 1;
+		[Saveable] public int _dailyAttempts = 3;
+		[Saveable] public int _dailyCategory = 0;
+		[Saveable] public float _dailyProcentage = 0f;
 		[HideInInspector] public int EarnedCoins {get; set;} = 0;
 		
+		[ReorderableList] [Saveable] public DailyReward[] _dailyRewards;
 		[Saveable] public DateTime LastLogin;
 		
 		public static Action<int> OnCoinChange;
 		public static Action<int> OnLevelChange;
 		public static Action<int> OnStartUnitChange;
 		public static Action<int> OnIncomeLevelChange;
+		public static Action<float> OnDailyChange;
 		
 		public void Reset(){}
 	}

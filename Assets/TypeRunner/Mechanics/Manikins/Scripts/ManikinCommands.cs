@@ -25,12 +25,11 @@ namespace TypeRunner
 			_animator = gameObject.GetComponentInChildren<Animator>();
 			_events = gameObject.GetComponentInChildren<AnimationEvents>();
 			_thrower = gameObject.GetComponentInChildren<StoneThrower>();
-			if(sceneObject)
-				_player = FindObjectOfType<PlayerController>(true);
 		}
 		
 		private void Start()
 		{
+			_player = FindObjectOfType<PlayerController>(true);
 			_baseHeight = _collider.height;
 		}
 		

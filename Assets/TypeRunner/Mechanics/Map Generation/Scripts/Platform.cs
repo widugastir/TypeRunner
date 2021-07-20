@@ -17,10 +17,13 @@ namespace TypeRunner
 		[SerializeField] private List<Transform> _letterSpawnPos;
 		[SerializeField] private List<Transform> _manikinSpawnPos;
 		private MapGeneration _generator;
+		private float _stickmanMultiplier = 1f;
 		
 		//------METHODS
-		public void Init(MapGeneration generator)
+		public void Init(MapGeneration generator, bool daily = false)
 		{
+			if(daily)
+				_stickmanMultiplier = 0.5f;
 			_generator = generator;
 			SpawnLetters();
 			SpawnMankins();
@@ -54,7 +57,7 @@ namespace TypeRunner
 		private void SpawnMankins()
 		{
 			int index = 0;
-			for(int i = 0; i < _manikinAmount; i++)
+			for(int i = 0; i < _manikinAmount * _stickmanMultiplier; i++)
 			{
 				if(_manikinSpawnPos.Count == 0)
 					break;

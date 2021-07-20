@@ -33,7 +33,7 @@ namespace TypeRunner
 				{
 					_isUsed = true;
 					//_levelManager.FinishLevel();
-					_player.MakeFormation();
+					_player.MakeFormationLine();
 				}
 			}
 		}

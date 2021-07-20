@@ -205,7 +205,28 @@ namespace TypeRunner
 			}
 		}
 		
-		public void MakeFormation()
+		public void MakeFormationLine()
+		{
+			float centerZ = _groupCenter.transform.position.z;
+			float centerX = _groupCenter.transform.position.x;
+			float offsetZ = 3f;
+			float offsetX = .5f;
+			
+			for(int i = 0; i < _manikins.Count; i++)
+			{
+				_manikins[i].gameObject.layer = LayerMask.NameToLayer(_ignoreSameMask);
+				_manikins[i].Rank = _manikins.Count - i;
+				
+				float x = centerX + offsetX * _manikins[i].Rank - (_manikins.Count - 1) * offsetX;
+				float z = centerZ + offsetZ * i;
+				Vector3 newPos = _manikins[i].transform.position;
+				newPos.z = z;
+				newPos.x = x;
+				_manikins[i].transform.position = newPos;
+			}
+		}
+		
+		public void MakeFormationTriangle()
 		{
 			int rank = 1;
 			int mans = 0;
@@ -215,12 +236,10 @@ namespace TypeRunner
 				mans++;
 				_manikins[i].Rank = rank;
 				_manikins[i].RankPosition = mans;
-				//print(_manikins[i].RankPosition);
 				if(mans == rank && i != _manikins.Count - 1)
 				{
 					rank++;
 					mans = 0;
-					//print(rank);
 				}
 			}
 			

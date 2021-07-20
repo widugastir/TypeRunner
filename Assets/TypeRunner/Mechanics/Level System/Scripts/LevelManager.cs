@@ -8,11 +8,11 @@ namespace TypeRunner
 		//------FIELDS
 		[SerializeField] private GameObject[] _disableOnFinish;
 		[SerializeField] private int _baseCoinsPerVictory = 10;
+		[SerializeField, HideInInspector] private MapGeneration _map;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private CoinManager _coins;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private CameraResetter _cameraResetter;
-		[SerializeField, HideInInspector] private MapGeneration _map;
 		[SerializeField, HideInInspector] private LetterWriteSystem _letterSystem;
 		public static event System.Action<bool> OnLevelEnd;
 		
@@ -28,6 +28,12 @@ namespace TypeRunner
 				_map = FindObjectOfType<MapGeneration>(true);
 				_letterSystem = FindObjectOfType<LetterWriteSystem>(true);
 			}
+		}
+		
+		public void StartDailyLevel()
+		{
+			_letterSystem.Reset();
+			_map.ResetToDaily();
 		}
 		
 		public void StartLevel()
