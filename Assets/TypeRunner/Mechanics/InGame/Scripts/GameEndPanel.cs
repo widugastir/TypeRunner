@@ -7,6 +7,7 @@ namespace TypeRunner
 	public class GameEndPanel : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
+		[SerializeField] private GameObject _previewCamera;
 		[SerializeField] private TMP_Text _labelText;
 		[SerializeField] private GameObject _panel;
 		[SerializeField, HideInInspector] private CoinManager _coins;
@@ -43,6 +44,7 @@ namespace TypeRunner
 		
 		public void Disable()
 		{
+			_previewCamera.SetActive(true);
 			_coins.EarnedToCurrent();
 			_panel.SetActive(false);
 		}

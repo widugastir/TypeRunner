@@ -6,6 +6,7 @@ namespace TypeRunner
 	public class GameStarter : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
+		[SerializeField] private GameObject _previewCamera;
 		[SerializeField, HideInInspector] private Canvas _canvas;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
@@ -28,6 +29,7 @@ namespace TypeRunner
 		
 		public void BeginPlay()
 		{
+			_previewCamera.SetActive(false);
 			_levelManager.StartLevel();
 			_player.Init();
 			_canvas.gameObject.SetActive(false);
