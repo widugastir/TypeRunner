@@ -12,7 +12,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private LetterButton[] _buttons;
 		[SerializeField, HideInInspector]private LetterWriteSystem _letterWriteSystem;
 		private E_LetterType[] _word;
-		private List<LetterButton> _selectedButtons;
+		[SerializeField] private List<LetterButton> _selectedButtons;
 		private List<E_LetterType> _selectedWord;
 		
 		//------METHODS
@@ -42,6 +42,7 @@ namespace TypeRunner
 		
 		private void OnLetterSelect(LetterButton letterButton)
 		{
+			//print("aaa");
 			E_LetterType letter = letterButton.Letter;
 			_selectedWord.Add(letter);
 			_selectedButtons.Add(letterButton);

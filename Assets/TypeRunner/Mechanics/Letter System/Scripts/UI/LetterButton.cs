@@ -47,8 +47,7 @@ namespace TypeRunner
 		{
 			_button.interactable = false;
 			transform.SetParent(_startParent);
-			//print(Letter + "_____" + _startParent + "    " + transform.parent);
-			//gameObject.SetActive(false);
+			transform.DOKill(false);
 		}
 		
 		public void OnPress()
@@ -61,7 +60,7 @@ namespace TypeRunner
 		
 		private void MoveTo(Vector3 position)
 		{
-			transform.DOMove(position, 0.3f)
+			transform.DOMove(position, 0.2f)
 				.SetEase(Ease.Linear)
 				.SetUpdate(true)
 				.OnComplete(OnAnimComplete);
