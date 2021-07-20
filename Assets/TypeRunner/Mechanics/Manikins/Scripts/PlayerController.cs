@@ -19,6 +19,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private ControlPanel _controlPanel;
 		[SerializeField, HideInInspector] private CinemachineTargetGroup _cameraTargetGroup;
 		private bool _canMove = true;
+		private int _manikinsCollected = 0;
 		
 		public bool IsMovementEnabled { get; private set; } = true;
 	
@@ -130,7 +131,7 @@ namespace TypeRunner
 					StopSpectateTo(manikin);
 					if(_manikins.Count == 0)
 					{
-						_levelManager.FinishLevel(false);
+						_levelManager.FinishLevel(false, _manikinsCollected);
 					}
 				}
 			}
@@ -151,9 +152,10 @@ namespace TypeRunner
 			_manikins.Remove(manikin);
 			StopSpectateTo(manikin, false);
 			
+			_manikinsCollected++;
 			if(_manikins.Count == 0)
 			{
-				_levelManager.FinishLevel(true, manikin.EarnedCoinsBonus);
+				_levelManager.FinishLevel(true, _manikinsCollected, manikin.EarnedCoinsBonus);
 			}
 		}
 		
@@ -270,6 +272,7 @@ namespace TypeRunner
 		public void Reset()
 		{
 			_manikins.Clear();
+			_manikinsCollected = 0;
 			//Init();
 		}
 	}

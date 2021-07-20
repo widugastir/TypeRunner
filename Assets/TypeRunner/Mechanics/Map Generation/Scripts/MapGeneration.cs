@@ -20,6 +20,7 @@ namespace TypeRunner
 		private List<Platform> _mapPlatforms = new List<Platform>();
 		private List<Mankin> _mapManikins = new List<Mankin>();
 		private List<LetterPickup> _mapLetters = new List<LetterPickup>();
+		public int ManikinsAmount {get {return _mapManikins.Count;}}
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)

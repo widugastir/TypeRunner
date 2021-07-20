@@ -1,5 +1,6 @@
 ﻿using SoundSteppe.RefSystem;
 using UnityEngine;
+using TMPro;
 
 namespace TypeRunner
 {
@@ -8,19 +9,24 @@ namespace TypeRunner
 		//------FIELDS
 		[SerializeField] private int _attemptsPerDay = 3;
 		[SerializeField] private int _dailyUpdateHour = 12;
-		//[SerializeField] private DailyReward[] _rewards;
+		[SerializeField] private GameObject _challengeCnavas;
+		[SerializeField] private TMP_Text _attemptsText;
 		[SerializeField, HideInInspector] private DailyLine[] _lines;
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
+		[SerializeField, HideInInspector] private GameStarter _starter;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
+		[SerializeField, HideInInspector] private CoinManager _coins;
 	    
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
 		{
 			if(sceneObject == true)
 			{
+				_starter = FindObjectOfType<GameStarter>(true);
 				_levelManager = FindObjectOfType<LevelManager>(true);
 				_stats = FindObjectOfType<PlayerStats>(true);
 				_lines = GetComponentsInChildren<DailyLine>(true);
+				_coins = FindObjectOfType<CoinManager>(true);
 			}
 		}
 		
@@ -34,6 +40,17 @@ namespace TypeRunner
 			SaveSystem.OnEndLoad -= TryUpdateAttempts;
 		}
 		
+		public void EnableCanvas()
+		{
+			UpdateUI();
+			_challengeCnavas.SetActive(true);
+		}
+		
+		private void UpdateUI()
+		{
+			_attemptsText.text = "Attempts: " + _stats._dailyAttempts.ToString();
+		}
+		
 		private void TryUpdateAttempts()
 		{
 			System.DateTime now = System.DateTime.Now;
@@ -43,9 +60,9 @@ namespace TypeRunner
 				&& now.Hour >= _dailyUpdateHour
 				|| _stats.LastLogin == default)
 			{
-				print(12344);
 				_stats._dailyAttempts = _attemptsPerDay;
 				_stats._dailyCategory = 0;
+				_stats._dailyProcentage = 0f;
 				
 				DailyReward[] rewards = _stats._dailyRewards;
 				for(int i = 0; i < rewards.Length; i++)
@@ -54,6 +71,7 @@ namespace TypeRunner
 				}
 			}
 			InitLines();
+			UpdateUI();
 		}
 		
 		private void InitLines()
@@ -61,6 +79,29 @@ namespace TypeRunner
 			for(int i = 0; i < _lines.Length && i < _stats._dailyRewards.Length; i++)
 			{
 				_lines[i].Init(_stats._dailyRewards[i]);
+			}
+		}
+		
+		public DailyReward GetCurrentReward()
+		{
+			for(int i = 0; i < _stats._dailyRewards.Length; i++)
+			{
+				if(_stats._dailyProcentage >= _stats._dailyRewards[i].Percentage
+					&&(i == _stats._dailyRewards.Length - 1
+					|| _stats._dailyProcentage < _stats._dailyRewards[i + 1].Percentage))
+				{
+					return _stats._dailyRewards[i];
+				}
+			}
+			return default;
+		}
+		
+		public void TryUpdateDailyProgress(float progress)
+		{
+			if(progress > _stats._dailyProcentage)
+			{
+				_stats._dailyProcentage = progress;
+				_coins.AddEarnedCoins(GetCurrentReward().Coins);
 			}
 		}
 		
@@ -72,7 +113,7 @@ namespace TypeRunner
 				{
 					if(reward.Equals(_stats._dailyRewards[i])
 						&&(i == _stats._dailyRewards.Length - 1
-						|| reward.Percentage <= _stats._dailyRewards[i + 1].Percentage))
+						|| reward.Percentage < _stats._dailyRewards[i + 1].Percentage))
 					{
 						return true;
 					}
@@ -87,6 +128,8 @@ namespace TypeRunner
 			{
 				_levelManager.StartDailyLevel();
 				_stats._dailyAttempts--;
+				_starter.BeginPlay();
+				_challengeCnavas.SetActive(false);
 			}
 		}
 	}

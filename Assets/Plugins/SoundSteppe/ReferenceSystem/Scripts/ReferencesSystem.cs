@@ -59,7 +59,7 @@ namespace SoundSteppe.RefSystem
 		{
 			if(state == PlayModeStateChange.ExitingEditMode)
 			{
-				UpdateReferences();
+				//UpdateReferences();
 			}
 		}
 		
