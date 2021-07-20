@@ -82,26 +82,40 @@ namespace TypeRunner
 			}
 		}
 		
-		public DailyReward GetCurrentReward()
+		public int GetCurrentReward(float prevProgress, float currentProgress)
 		{
+			int prevCoins = 0;
+			int coins = 0;
 			for(int i = 0; i < _stats._dailyRewards.Length; i++)
 			{
-				if(_stats._dailyProcentage >= _stats._dailyRewards[i].Percentage
+				if(prevProgress >= _stats._dailyRewards[i].Percentage
 					&&(i == _stats._dailyRewards.Length - 1
-					|| _stats._dailyProcentage < _stats._dailyRewards[i + 1].Percentage))
+					|| prevProgress < _stats._dailyRewards[i + 1].Percentage))
 				{
-					return _stats._dailyRewards[i];
+					prevCoins = _stats._dailyRewards[i].Coins;
+					break;
 				}
 			}
-			return default;
+			for(int i = 0; i < _stats._dailyRewards.Length; i++)
+			{
+				if(currentProgress >= _stats._dailyRewards[i].Percentage
+					&&(i == _stats._dailyRewards.Length - 1
+					|| currentProgress < _stats._dailyRewards[i + 1].Percentage))
+				{
+					coins = _stats._dailyRewards[i].Coins;
+					break;
+				}
+			}
+			return coins - prevCoins;
 		}
 		
 		public void TryUpdateDailyProgress(float progress)
 		{
 			if(progress > _stats._dailyProcentage)
 			{
+				float prevProgress = _stats._dailyProcentage;
 				_stats._dailyProcentage = progress;
-				_coins.AddEarnedCoins(GetCurrentReward().Coins);
+				_coins.AddEarnedCoins(GetCurrentReward(prevProgress, _stats._dailyProcentage));
 			}
 		}
 		

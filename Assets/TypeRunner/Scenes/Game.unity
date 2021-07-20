@@ -256,21 +256,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 870846217}
     m_Modifications:
     - target: {fileID: 496305620562113247, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 496305620562113247, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2593463164004201682}
-    - target: {fileID: 496305620562113247, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EnableCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 496305620562113247, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TypeRunner.DailyChallenge, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 690460581060855886, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
       propertyPath: _colorChanger
       value: 
@@ -278,10 +266,6 @@ PrefabInstance:
     - target: {fileID: 690460581469416353, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
       propertyPath: m_Name
       value: '[UI] Main Menu'
-      objectReference: {fileID: 0}
-    - target: {fileID: 690460581469416353, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 690460581469416382, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
       propertyPath: m_RootOrder
@@ -559,7 +543,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274200040}
-  m_LocalRotation: {x: -0.7005441, y: -0.02302068, z: -0.022622362, w: 0.7128789}
+  m_LocalRotation: {x: 0.07565583, y: -0.0321819, z: 0.002443027, w: 0.99661154}
   m_LocalPosition: {x: 1.09, y: 8.26, z: -32.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2565,7 +2549,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 103
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2590,7 +2574,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.7005441, y: -0.02302068, z: -0.022622362, w: 0.7128789}
+  m_LocalRotation: {x: 0.07565583, y: -0.0321819, z: 0.002443027, w: 0.99661154}
   m_LocalPosition: {x: 1.09, y: 8.26, z: -32.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
