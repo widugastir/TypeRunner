@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 905634040489031772}
   - component: {fileID: 7660522424091293629}
   - component: {fileID: 6791927790802764030}
-  - component: {fileID: 9190406082568493378}
   - component: {fileID: 3717060122246984746}
+  - component: {fileID: 1331225598672440655}
   m_Layer: 0
   m_Name: Obstacle-7.000
   m_TagString: Untagged
@@ -85,19 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9190406082568493378
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 372418232064487741}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7147713, y: 0.7371164, z: 0.7147716}
-  m_Center: {x: 0, y: 0.36855808, z: 0}
 --- !u!114 &3717060122246984746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +97,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b2161231557fd49bf53b04793c29ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Destructable: 0
+--- !u!136 &1331225598672440655
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372418232064487741}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.36855808, z: 0}
 --- !u!1 &605781918253512737
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,6 +123,7 @@ GameObject:
   - component: {fileID: 2175904161196373684}
   - component: {fileID: 3120315114816244587}
   - component: {fileID: 5277667061043373996}
+  - component: {fileID: 1186512553625949442}
   m_Layer: 0
   m_Name: Cylinder.034
   m_TagString: Untagged
@@ -135,13 +138,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605781918253512737}
-  m_LocalRotation: {x: 0, y: -0.09504033, z: -0, w: 0.99547344}
-  m_LocalPosition: {x: -0.94896257, y: -0.00039091706, z: -0.24462107}
+  m_LocalRotation: {x: 0.00000004449677, y: -0.0950401, z: -0.00000092384397, w: 0.99547344}
+  m_LocalPosition: {x: -0.94896245, y: -0.00039076805, z: -0.24462064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3220804217639736516}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: -10.907281, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -10.907, z: 0}
 --- !u!33 &3120315114816244587
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -191,6 +194,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &1186512553625949442
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605781918253512737}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.23
+  m_Center: {x: 0.000000029802326, y: 0.0000009536743, z: 0.00000039488083}
 --- !u!1 &1422668251789277803
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,6 +385,7 @@ GameObject:
   - component: {fileID: 3913812028939527405}
   - component: {fileID: 7283374292415171855}
   - component: {fileID: 8364090622604334638}
+  - component: {fileID: 5193879596627906757}
   m_Layer: 0
   m_Name: Cylinder.027
   m_TagString: Untagged
@@ -439,6 +456,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &5193879596627906757
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7061723060245428529}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.23
+  m_Center: {x: 0.00000012665987, y: -0.0000003874302, z: 0.00000039488083}
 --- !u!1 &7451659716307491169
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b2161231557fd49bf53b04793c29ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Destructable: 0
 --- !u!65 &9211252764655338566
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -491,8 +522,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7451659716307491169}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.32, y: 0.29271173, z: 0.36}
+  m_Size: {x: 2, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
