@@ -8,7 +8,7 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField] private int _attemptsPerDay = 3;
-		[SerializeField] private int _dailyUpdateHour = 12;
+		public int _dailyUpdateHour = 12;
 		[SerializeField] private GameObject _challengeCnavas;
 		[SerializeField] private TMP_Text _attemptsText;
 		[SerializeField, HideInInspector] private DailyLine[] _lines;

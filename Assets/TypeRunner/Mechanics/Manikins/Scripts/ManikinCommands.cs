@@ -79,7 +79,7 @@ namespace TypeRunner
 		private void Jump()
 		{
 			_animator.SetTrigger("Jump");
-			_man.Movement.Jump(10f);
+			_man.Movement.Jump(13f);
 		}
 		
 		private void Slide()
