@@ -211,8 +211,8 @@ namespace TypeRunner
 		{
 			float centerZ = _groupCenter.transform.position.z;
 			float centerX = _groupCenter.transform.position.x;
-			float offsetZ = 3f;
-			float offsetX = .5f;
+			float offsetZ = 1f;
+			float offsetX = 0f;
 			
 			for(int i = 0; i < _manikins.Count; i++)
 			{
