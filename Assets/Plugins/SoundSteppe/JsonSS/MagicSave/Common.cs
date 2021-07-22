@@ -1,0 +1,21 @@
+﻿using UnityEngine;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+    to make attribute in Editor readonly
+    Usage:
+    public class Something
+    {
+        [ReadOnly]
+        public int YouCannotChangeMeInInspector= 10;
+    }
+*/
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+namespace MagicSave
+{
+    public class ReadOnlyAttribute : PropertyAttribute { }
+}
+
+
+
+

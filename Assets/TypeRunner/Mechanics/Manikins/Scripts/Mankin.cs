@@ -16,18 +16,26 @@ namespace TypeRunner
 		public float EarnedCoinsBonus { get; set; } = 0f;
 		
 		public static event System.Action<Mankin, bool> OnChangeOwner;
+		[SerializeField, HideInInspector] public Animator _animator;
+		[SerializeField, HideInInspector] public SkinChanger _skinChanger;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)  
 		{
-			Movement = gameObject.GetComponentInChildren<ManikinMovement>();
-			Commands = gameObject.GetComponentInChildren<ManikinCommands>();
+			if(sceneObject == false)
+			{
+				Movement = gameObject.GetComponentInChildren<ManikinMovement>();
+				Commands = gameObject.GetComponentInChildren<ManikinCommands>();
+				_animator = gameObject.GetComponentInChildren<Animator>();
+				_skinChanger = gameObject.GetComponentInChildren<SkinChanger>();
+			}
 		}
 		
 		public void SetOwnerTo(bool neutral)
 		{
 			IsNeutral = neutral;
 			OnChangeOwner?.Invoke(this, IsNeutral);
+			_animator = _skinChanger._current.animator;
 		}
 		
 		public void SetFinished()

@@ -154,7 +154,8 @@ namespace SoundSteppe.JsonSS
 			{
 				if(field.GetCustomAttribute<Saveable>() != null)
 				{
-					if(field.FieldType.IsArray)
+					//if(field.FieldType.IsArray)
+					if(field.GetValue(s) is IList)
 					{
 						var jsonArray = node[field.Name].AsArray;
 						IEnumerable array = field.GetValue(s) as IEnumerable;
@@ -211,12 +212,15 @@ namespace SoundSteppe.JsonSS
 			{
 				if(field.GetCustomAttribute<Saveable>() != null)
 				{
-					if(field.FieldType.IsArray)
+					//if(field.FieldType.IsArray)
+					if(field.GetValue(s) is IList)
 					{
+						//Debug.Log("ARR " + field.FieldType);
 						SetArrayFieldValue(s, node, field);
 					}
 					else
 					{
+						//Debug.Log("OBJ " + field.FieldType);
 						SetFieldValue(s, node, field);
 					}
 				}
@@ -240,8 +244,13 @@ namespace SoundSteppe.JsonSS
 		
 		private static void SetArrayFieldValue(MonoBehaviour s, JSONNode node, FieldInfo field)
 		{
+			System.Type elementType;
 			var valueObj = node[field.Name].AsStringList;
-			System.Type elementType = field.FieldType.GetElementType();
+			
+			if(field.FieldType.IsGenericType)
+				elementType = field.FieldType.GetGenericArguments()[0];
+			else
+				elementType = field.FieldType.GetElementType();
 						
 			List<object> listObj = new List<object>();
 			if(elementType.IsValueType == true && elementType.IsPrimitive == false)
@@ -255,44 +264,59 @@ namespace SoundSteppe.JsonSS
 			{
 				for(int i = 0; i < valueObj.Count; i++)
 				{
-					object obj = System.Convert.ChangeType(valueObj[i], field.FieldType.GetElementType());
+					object obj = System.Convert.ChangeType(valueObj[i], elementType);
 					listObj.Add(obj);
 				}
 			}
 			
 			if(elementType == typeof(System.String))
 			{
-				field.SetValue(s, listObj);
+				if(field.FieldType.IsGenericType)
+					field.SetValue(s, listObj.Cast<System.String>().ToList());
+				else
+					field.SetValue(s, listObj.Cast<System.String>().ToArray());
 			}
 			else if(elementType == typeof(System.Int32))
 			{
-				var array = listObj.Cast<System.Int32>().ToArray();
-				field.SetValue(s, array);
+				if(field.FieldType.IsGenericType)
+					field.SetValue(s, listObj.Cast<System.Int32>().ToList());
+				else
+					field.SetValue(s, listObj.Cast<System.Int32>().ToArray());
 			}
 			else if(elementType == typeof(System.Boolean))
 			{
-				var array = listObj.Cast<System.Boolean>().ToArray();
-				field.SetValue(s, array);
+				if(field.FieldType.IsGenericType)
+					field.SetValue(s, listObj.Cast<System.Boolean>().ToList());
+				else
+					field.SetValue(s, listObj.Cast<System.Boolean>().ToArray());
 			}
 			else if(elementType == typeof(System.Single))
 			{
-				var array = listObj.Cast<System.Single>().ToArray();
-				field.SetValue(s, array);
+				if(field.FieldType.IsGenericType)
+					field.SetValue(s, listObj.Cast<System.Single>().ToList());
+				else
+					field.SetValue(s, listObj.Cast<System.Single>().ToArray());
 			}
 			else if(elementType == typeof(System.Double))
 			{
-				var array = listObj.Cast<System.Double>().ToArray();
-				field.SetValue(s, array); 
+				if(field.FieldType.IsGenericType)
+					field.SetValue(s, listObj.Cast<System.Double>().ToList());
+				else
+					field.SetValue(s, listObj.Cast<System.Double>().ToArray());
 			}
 			else if(elementType == typeof(System.Byte))
 			{
-				var array = listObj.Cast<System.Byte>().ToArray();
-				field.SetValue(s, array);
+				if(field.FieldType.IsGenericType)
+					field.SetValue(s, listObj.Cast<System.Byte>().ToList());
+				else
+					field.SetValue(s, listObj.Cast<System.Byte>().ToArray());
 			}
 			else if(elementType == typeof(System.Int64))
 			{
-				var array = listObj.Cast<System.Int64>().ToArray();
-				field.SetValue(s, array);
+				if(field.FieldType.IsGenericType)
+					field.SetValue(s, listObj.Cast<System.Int64>().ToList());
+				else
+					field.SetValue(s, listObj.Cast<System.Int64>().ToArray());
 			}
 			else if(elementType.IsValueType == true && elementType.IsPrimitive == false)
 			{
@@ -301,7 +325,19 @@ namespace SoundSteppe.JsonSS
 				{
 					arr.SetValue(JsonUtility.FromJson((string)listObj[i], elementType), i);
 				}
-				field.SetValue(s, arr);
+				
+				if(field.FieldType.IsGenericType)
+				{
+					System.Type generic = typeof(List<>).MakeGenericType(elementType);
+					IList lst = (IList)System.Activator.CreateInstance(generic);
+					foreach(var e in arr)
+					{
+						lst.Add(e);
+					}
+					field.SetValue(s, lst);
+				}
+				else
+					field.SetValue(s, arr);
 			}
 			else
 			{

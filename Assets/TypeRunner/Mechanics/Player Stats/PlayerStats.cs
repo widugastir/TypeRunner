@@ -1,4 +1,5 @@
-﻿using NaughtyAttributes;
+﻿using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using System;
 
@@ -66,6 +67,9 @@ namespace TypeRunner
 		[Saveable] public float _dailyProcentage = 0f;
 		[HideInInspector] public int EarnedCoins {get; set;} = 0;
 		
+		[Saveable] public SkinType _playerSkin = SkinType.S1;
+		[Saveable] public List<SkinType> PurchasedSkins;
+
 		[ReorderableList] [Saveable] public DailyReward[] _dailyRewards;
 		[Saveable] public DateTime LastLogin;
 		
@@ -76,5 +80,13 @@ namespace TypeRunner
 		public static Action<float> OnDailyChange;
 		
 		public void Reset(){}
+		
+		private void Start()
+		{
+			if(PurchasedSkins.Contains(SkinType.S1) == false)
+			{
+				PurchasedSkins.Add(SkinType.S1);
+			}
+		}
 	}
 }

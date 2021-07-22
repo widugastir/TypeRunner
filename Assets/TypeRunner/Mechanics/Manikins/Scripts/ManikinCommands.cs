@@ -10,10 +10,10 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private Rigidbody _rigi;
 		[SerializeField, HideInInspector] private CapsuleCollider _collider;
 		[SerializeField, HideInInspector] private AnimationEvents _events;
-		[SerializeField, HideInInspector] private Animator _animator;
 		[SerializeField, HideInInspector] private StoneThrower _thrower;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		private bool _isBlocked = false;
+		private Animator _animator;
 		private float _baseHeight;
 		
 		//------METHODS
@@ -22,13 +22,13 @@ namespace TypeRunner
 			_man = gameObject.GetComponentInChildren<Mankin>();
 			_rigi = gameObject.GetComponentInChildren<Rigidbody>();
 			_collider = gameObject.GetComponentInChildren<CapsuleCollider>();
-			_animator = gameObject.GetComponentInChildren<Animator>();
 			_events = gameObject.GetComponentInChildren<AnimationEvents>();
 			_thrower = gameObject.GetComponentInChildren<StoneThrower>();
 		}
 		
 		private void Start()
 		{
+			_animator = _man._animator;
 			_player = FindObjectOfType<PlayerController>(true);
 			_baseHeight = _collider.height;
 		}
@@ -39,6 +39,8 @@ namespace TypeRunner
 			{
 				return;
 			}
+			
+			_animator = _man._animator;
 			
 			switch(command)
 			{

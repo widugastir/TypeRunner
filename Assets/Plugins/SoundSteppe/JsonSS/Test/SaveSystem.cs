@@ -1,11 +1,12 @@
-﻿using SoundSteppe.JsonSS;
+﻿//using UnityEngine.InputSystem;
+using SoundSteppe.JsonSS;
 using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
 {
-	//public FabricGO entityFabric;
-	//public MonoBehaviour entity;
-	//public MonoBehaviour[] entities;
+	public FabricGO entityFabric;
+	public MonoBehaviour entity;
+	public MonoBehaviour[] entities;
 	
 	//private void Update()
 	//{

@@ -9,7 +9,6 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField, HideInInspector] private Rigidbody _rigi;
-		[SerializeField, HideInInspector] private Animator _animator;
 		[SerializeField] private float _strafeMultiplier = 1f;
 		[SerializeField] private float _strafeMaxSpeed = 1f;
 		private float _beginPosX;
@@ -23,7 +22,6 @@ namespace TypeRunner
 		public void UpdateReferences(bool sceneObject)
 		{
 			_rigi = gameObject.GetComponentInChildren<Rigidbody>();
-			_animator = gameObject.GetComponentInChildren<Animator>();
 		}
 		
 		private void OnCollisionEnter(Collision collisionInfo)
