@@ -8,6 +8,7 @@ namespace TypeRunner
 	public class LetterWriteSystem : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
+		[SerializeField] private LayoutGroup _layoutGroup;
 		[SerializeField] private TMP_Text _wordText;
 		[SerializeField] private GameObject _uiPanel;
 		[SerializeField] private int _manikinsDieOnLose = 1;
@@ -47,6 +48,7 @@ namespace TypeRunner
 		
 		private void EnableWordWritter(ObstacleZone zone, E_LetterType[] word)
 		{
+			_layoutGroup.enabled = false;
 			_wordText.gameObject.SetActive(true);
 			string req_word = "";
 			foreach(var ch in word)
@@ -63,6 +65,7 @@ namespace TypeRunner
 		{
 			if(_isReady == false)
 				return;
+			_layoutGroup.enabled = true;
 			_wordText.gameObject.SetActive(false);
 			_isReady = false;
 			if(successful == false)

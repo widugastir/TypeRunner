@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using SoundSteppe.RefSystem;
 using NaughtyAttributes;
 using Cinemachine;
@@ -9,6 +10,7 @@ namespace TypeRunner
 	public class PlayerController : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
+		[SerializeField] private float _finishDelay = 2f;
 		[SerializeField, Layer] private string _ignoreSameMask;
 		//[SerializeField] private float _moveSpeed = 1f;
 		[SerializeField] private List<Mankin> _manikins;
@@ -44,7 +46,6 @@ namespace TypeRunner
 			_controlPanel.OnStopDrag += OnStopDrag;
 			ManikinMovement.OnBorderCollide += OnBorderCollide;
 			Mankin.OnChangeOwner += OnChangeOwner;
-			//SaveSystem.OnEndLoad += Init;
 		}
 		
 		private void OnDisable()
@@ -54,7 +55,6 @@ namespace TypeRunner
 			_controlPanel.OnStopDrag -= OnStopDrag;
 			ManikinMovement.OnBorderCollide -= OnBorderCollide;
 			Mankin.OnChangeOwner -= OnChangeOwner;
-			//SaveSystem.OnEndLoad -= Init;
 		}
 		
 		private void Update()
@@ -70,7 +70,6 @@ namespace TypeRunner
 		private void Start()
 		{
 			Cursor.lockState = CursorLockMode.Confined;
-			//Init();
 		}
 	    
 		public void Init()
@@ -82,6 +81,14 @@ namespace TypeRunner
 				pos += Vector3.forward * Random.Range(-2f, 2f) + Vector3.right * Random.Range(-2f, 2f);
 				var man = _generator.SpawnManikin(pos);
 				man.SetOwnerTo(false);
+			}
+		}
+		
+		public void SetIndependentMove(bool independent)
+		{
+			for(int i = 0; i < _manikins.Count; i++)
+			{
+				_manikins[i].Movement.IsIndependetMovement = independent;
 			}
 		}
 		
@@ -110,7 +117,6 @@ namespace TypeRunner
 		{
 			if(_canMove)
 			{
-				//StrafeMankins(delta);
 				StrafeGroupCenter(delta);
 			}
 		}
@@ -176,8 +182,15 @@ namespace TypeRunner
 			_manikinsCollected++;
 			if(_manikins.Count == 0)
 			{
-				_levelManager.FinishLevel(true, _manikinsCollected, manikin.EarnedCoinsBonus);
+				_groupCenter.CanMove = false;
+				StartCoroutine(FinishLevel(manikin.EarnedCoinsBonus));
 			}
+		}
+		
+		private IEnumerator FinishLevel(float coinBonus)
+		{
+			yield return new WaitForSecondsRealtime(_finishDelay);
+			_levelManager.FinishLevel(true, _manikinsCollected, coinBonus);
 		}
 		
 		public void StopSpectateTo(Mankin manikin, bool minOne = true)

@@ -36,8 +36,12 @@ namespace TypeRunner
 				}
 				else
 				{
-					man.transform.position += Vector3.up * _stepHeight;
+					man.transform.position += Vector3.up * _stepHeight + Vector3.forward * 1f;
 				}
+			}
+			if(other.TryGetComponent(out GroupCenter center))
+			{
+				center.SetUpMovement();
 			}
 		}
 	}

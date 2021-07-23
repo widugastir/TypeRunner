@@ -43,10 +43,9 @@ namespace TypeRunner
 			{
 				if(obstacle.Destructable)
 				{
-					Destroy(obstacle.gameObject);
+					obstacle.Kill(transform.position);
 				}
 			}
-			
 			Destroy(gameObject);
 		}
 	}

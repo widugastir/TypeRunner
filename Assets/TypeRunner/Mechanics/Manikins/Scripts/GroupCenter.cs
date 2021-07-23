@@ -10,6 +10,8 @@ namespace TypeRunner
 		public Transform _groupCenter;
 		public Vector3 _startPosition;
 		private float _strafe = 0f;
+		private bool _upMove = false;
+		public bool CanMove { get; set; } = true;
 		
 		private void Start()
 		{
@@ -26,12 +28,26 @@ namespace TypeRunner
 		
 		public void Move()
 		{
-			transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+			if(CanMove == false)
+				return;
+			Vector3 direction = Vector3.forward * _speed;
+			if(_upMove)
+			{
+				direction = Vector3.forward * _speed / 4f + Vector3.up * _speed / 4f;
+			}
+			transform.Translate(direction * Time.deltaTime);
+		}
+		
+		public void SetUpMovement()
+		{
+			_upMove = true;
 		}
 		
 		public void Reset()
 		{
 			transform.position = _startPosition;
+			_upMove = false;
+			CanMove = true;
 		}
 	}
 }

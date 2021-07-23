@@ -10,12 +10,13 @@ namespace TypeRunner
 		//------FIELDS
 		[SerializeField, HideInInspector] private Rigidbody _rigi;
 		[SerializeField] private float _followSpeed = 120f;
-		[SerializeField] private float _strafeMultiplier = 1f;
-		[SerializeField] private float _strafeMaxSpeed = 1f;
+		//[SerializeField] private float _strafeMultiplier = 1f;
+		//[SerializeField] private float _strafeMaxSpeed = 1f;
 		private float _beginPosX;
 		private float _targetStrafePos;
 		private bool _isJumped = false;
 		private bool _canMove = true;
+		public bool IsIndependetMovement { get; set; } = false;
 		
 		public static event System.Action<Vector3> OnBorderCollide;
 		
@@ -35,43 +36,44 @@ namespace TypeRunner
 		
 		public void MoveToPoint(Vector3 point)
 		{
+			if(IsIndependetMovement)
+				return;
 			point.y = transform.position.y;
 			Vector3 direction = point - transform.position;
 			float distance = direction.magnitude;
 			_rigi.AddForce(direction * _followSpeed, ForceMode.Acceleration);
 		}
 		
-		public void Move(Vector3 force)
+		private void FixedUpdate()
 		{
-			if(_isJumped == true || _canMove == false)
-				return;
-			Vector3 moveDirection = force;
-			if(_targetStrafePos != 0f)
+			if(IsIndependetMovement)
 			{
-				moveDirection += ((transform.position + transform.right * _targetStrafePos) - transform.position);// transform.right * _targetPosX;
-				if(moveDirection.x > _strafeMaxSpeed)
-					moveDirection.x = _strafeMaxSpeed;
-				if(moveDirection.x < -_strafeMaxSpeed)
-					moveDirection.x = -_strafeMaxSpeed;
+				Move();
 			}
-			_rigi.MovePosition(transform.position + moveDirection * Time.deltaTime);
+		}
+		
+		public void Move()
+		{
+			//if(_isJumped == true || _canMove == false)
+			//	return;
+			_rigi.AddForce(Vector3.forward * _followSpeed * 2f, ForceMode.Acceleration);
 		}
 	    
 		public void Strafe(float strafe)
 		{
-			_targetStrafePos = (strafe * _strafeMultiplier);
+			//_targetStrafePos = (strafe * _strafeMultiplier);
 		}
 		 
 		public void InitStrafe()
 		{
-			_beginPosX = transform.position.x;
+			//_beginPosX = transform.position.x;
 		}
 		 
 		public void StopStrafe()
 		{
-			_beginPosX = transform.position.x;
-			_targetStrafePos = 0f;
-			_rigi.velocity.Scale(MathfExtension.Vector3NotX);
+			//_beginPosX = transform.position.x;
+			//_targetStrafePos = 0f;
+			//_rigi.velocity.Scale(MathfExtension.Vector3NotX);
 		}
 		
 		private void OnJumpEnd() { _isJumped = false; }

@@ -32,7 +32,7 @@ namespace TypeRunner
 				if(_isUsed == false)
 				{
 					_isUsed = true;
-					//_levelManager.FinishLevel();
+					_player.SetIndependentMove(true);
 					_player.MakeFormationLine();
 				}
 			}
