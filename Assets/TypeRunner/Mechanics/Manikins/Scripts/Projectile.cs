@@ -7,6 +7,7 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField, HideInInspector] private Rigidbody _rigi;
+		[SerializeField] private ParticleSystem _explosion;
 		[SerializeField] private float _lifetime = 2f;
 		private float _speed;
 		private Vector3 _direction;
@@ -46,6 +47,13 @@ namespace TypeRunner
 					obstacle.Kill(transform.position);
 				}
 			}
+			Kill();
+		}
+		
+		private void Kill()
+		{
+			_explosion.transform.SetParent(null);
+			_explosion.Play();
 			Destroy(gameObject);
 		}
 	}

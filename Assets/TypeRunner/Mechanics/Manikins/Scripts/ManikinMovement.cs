@@ -10,7 +10,7 @@ namespace TypeRunner
 		//------FIELDS
 		[SerializeField, HideInInspector] private Rigidbody _rigi;
 		[SerializeField] private float _followSpeed = 120f;
-		//[SerializeField] private float _strafeMultiplier = 1f;
+		[SerializeField] private float _strafeSpeed = 3f;
 		//[SerializeField] private float _strafeMaxSpeed = 1f;
 		private float _beginPosX;
 		private float _targetStrafePos;
@@ -38,10 +38,23 @@ namespace TypeRunner
 		{
 			if(IsIndependetMovement)
 				return;
+			bool strafeRight = point.x > transform.position.x ? true : false;
+			float distanceX = Mathf.Abs(point.x - transform.position.x);
 			point.y = transform.position.y;
+			point.x = transform.position.x;
 			Vector3 direction = point - transform.position;
 			float distance = direction.magnitude;
+			
+			//point.z = transform.position.z;
+			//point.x = transform.position.x;
+			//Vector3 distanceZ = point - transform.position;
+			
+			//print($"{distanceZ.magnitude}");
+			//Vector3 newDir = new Vector3(0f, 0f, distanceZ.magnitude * _followSpeed);
+			//_rigi.MovePosition(transform.position + newDir * Time.deltaTime);
 			_rigi.AddForce(direction * _followSpeed, ForceMode.Acceleration);
+			if(distanceX >= 0.5f)
+				_rigi.AddForce((strafeRight ? Vector3.right : Vector3.left) * distanceX * _strafeSpeed, ForceMode.Acceleration);
 		}
 		
 		private void FixedUpdate()
