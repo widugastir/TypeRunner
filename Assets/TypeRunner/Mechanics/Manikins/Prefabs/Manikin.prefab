@@ -298,6 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigi: {fileID: 357506177}
+  _followSpeed: 120
   _strafeMultiplier: 22
   _strafeMaxSpeed: 15
 --- !u!114 &2692411060807030495
@@ -368,7 +369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnPos: {fileID: 8220712519887363883}
   _prefab: {fileID: 3239260616445743905, guid: 3c951e46d377dfe43bc9f88d3ec7e352, type: 3}
-  _speed: 14
+  _speed: 40
 --- !u!54 &357506177
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -392,7 +393,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7764331643567007465}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: cd29065f3e79e9e4b8ffceb5fd5d22f7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5

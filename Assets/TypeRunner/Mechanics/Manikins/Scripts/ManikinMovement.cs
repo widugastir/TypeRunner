@@ -74,7 +74,7 @@ namespace TypeRunner
 			_rigi.velocity.Scale(MathfExtension.Vector3NotX);
 		}
 		
-		private void OnJumpEnd() => _isJumped = false;
+		private void OnJumpEnd() { _isJumped = false; }
 		public void Jump(float distance = 1f)
 		{
 			_isJumped = true;
