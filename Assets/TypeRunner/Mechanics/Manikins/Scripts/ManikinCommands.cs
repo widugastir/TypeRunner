@@ -98,7 +98,7 @@ namespace TypeRunner
 		
 		private void Throw()
 		{
-			_man.Movement.SetCanMove(false);
+			_player.IsMovementEnabled = false;
 			_animator.SetTrigger("Throw");
 			_events.OnThrow += OnThrow;
 			_events.OnAnimationEnd += OnAnimationEnd;
@@ -113,7 +113,7 @@ namespace TypeRunner
 		private void OnAnimationEnd()
 		{
 			_events.OnAnimationEnd -= OnAnimationEnd;
-			_man.Movement.SetCanMove(true);
+			_player.IsMovementEnabled = true;
 			_animator.SetTrigger("Running");
 		}
 		

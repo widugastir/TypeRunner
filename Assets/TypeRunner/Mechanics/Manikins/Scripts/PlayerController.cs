@@ -10,7 +10,7 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField, Layer] private string _ignoreSameMask;
-		[SerializeField] private float _moveSpeed = 1f;
+		//[SerializeField] private float _moveSpeed = 1f;
 		[SerializeField] private List<Mankin> _manikins;
 		[SerializeField, HideInInspector] private GroupCenter _groupCenter;
 		[SerializeField, HideInInspector] private MapGeneration _generator;
@@ -21,7 +21,7 @@ namespace TypeRunner
 		private bool _canMove = true;
 		private int _manikinsCollected = 0;
 		
-		public bool IsMovementEnabled { get; private set; } = true;
+		public bool IsMovementEnabled { get; set; } = true;
 	
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -57,6 +57,11 @@ namespace TypeRunner
 			//SaveSystem.OnEndLoad -= Init;
 		}
 		
+		private void Update()
+		{
+			MoveGroupCenter();
+		}
+		
 		private void FixedUpdate()
 		{
 			MoveManikins();
@@ -64,6 +69,7 @@ namespace TypeRunner
 		
 		private void Start()
 		{
+			Cursor.lockState = CursorLockMode.Confined;
 			//Init();
 		}
 	    
@@ -78,6 +84,18 @@ namespace TypeRunner
 				man.SetOwnerTo(false);
 			}
 		}
+		
+		private void MoveGroupCenter()
+		{
+			if(IsMovementEnabled == false)
+				return;
+			_groupCenter.Move();
+		}
+		
+		private void StrafeGroupCenter(float strafe)
+		{
+			_groupCenter.SetStrafePos(strafe);
+		}
 	    
 		private void OnStartDrag()
 		{
@@ -91,7 +109,10 @@ namespace TypeRunner
 		private void OnProcessDrag(float delta)
 		{
 			if(_canMove)
-				StrafeMankins(delta);
+			{
+				//StrafeMankins(delta);
+				StrafeGroupCenter(delta);
+			}
 		}
 		
 		private void OnStopDrag()
@@ -140,7 +161,7 @@ namespace TypeRunner
 				if(!_manikins.Contains(manikin))
 				{
 					_manikins.Add(manikin);
-					_cameraTargetGroup.AddMember(manikin.transform, 1f, 0f);
+					//_cameraTargetGroup.AddMember(manikin.transform, 1f, 0f);
 				}
 			}
 		}
@@ -163,7 +184,7 @@ namespace TypeRunner
 		{
 			if(minOne && _cameraTargetGroup.m_Targets.Length <= 1)
 				return;
-			_cameraTargetGroup.RemoveMember(manikin.transform);
+			//_cameraTargetGroup.RemoveMember(manikin.transform);
 		}
 		
 		private void PushMankinsAway(Vector3 point)
@@ -176,12 +197,12 @@ namespace TypeRunner
 		
 		private void StopStrafeMankins()
 		{
-			_canMove = false;
-			foreach(var manikin in _manikins)
-			{
-				if(manikin != null)
-					manikin.Movement.StopStrafe();
-			}
+			//_canMove = false;
+			//foreach(var manikin in _manikins)
+			//{
+			//	if(manikin != null)
+			//		manikin.Movement.StopStrafe();
+			//}
 		}
 		
 		private void StrafeMankins(float delta)
@@ -199,11 +220,14 @@ namespace TypeRunner
 		{
 			if(IsMovementEnabled == false)
 				return;
+				
+			
 		    	
 			foreach(var manikin in _manikins)
 			{
 				if(manikin != null)
-					manikin.Movement.Move(transform.forward * _moveSpeed);
+					manikin.Movement.MoveToPoint(_groupCenter._groupCenter.transform.position);
+				//manikin.Movement.Move(transform.forward * _moveSpeed);
 			}
 		}
 		
@@ -273,6 +297,7 @@ namespace TypeRunner
 		{
 			_manikins.Clear();
 			_manikinsCollected = 0;
+			_groupCenter.Reset();
 			//Init();
 		}
 	}

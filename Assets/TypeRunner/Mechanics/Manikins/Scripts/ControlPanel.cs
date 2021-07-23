@@ -22,7 +22,7 @@ namespace TypeRunner
 		
 		public void OnDrag(PointerEventData eventData)
 		{
-			_deltaMove = eventData.position.x / Screen.width - _beginPos;
+			_deltaMove = eventData.position.x / Screen.width - 0.5f;
 			OnProcessDrag?.Invoke(_deltaMove);
 		}
 		

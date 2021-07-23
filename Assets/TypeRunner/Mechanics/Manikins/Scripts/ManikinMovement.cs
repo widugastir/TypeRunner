@@ -9,6 +9,7 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField, HideInInspector] private Rigidbody _rigi;
+		[SerializeField] private float _followSpeed = 120f;
 		[SerializeField] private float _strafeMultiplier = 1f;
 		[SerializeField] private float _strafeMaxSpeed = 1f;
 		private float _beginPosX;
@@ -30,6 +31,14 @@ namespace TypeRunner
 			{
 				OnBorderCollide?.Invoke(collisionInfo.GetContact(0).point);
 			}
+		}
+		
+		public void MoveToPoint(Vector3 point)
+		{
+			point.y = transform.position.y;
+			Vector3 direction = point - transform.position;
+			float distance = direction.magnitude;
+			_rigi.AddForce(direction * _followSpeed, ForceMode.Acceleration);
 		}
 		
 		public void Move(Vector3 force)
