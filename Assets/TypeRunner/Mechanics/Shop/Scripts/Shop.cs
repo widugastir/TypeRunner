@@ -10,8 +10,8 @@ namespace TypeRunner
 	{
 		[SerializeField, HideInInspector] private CoinManager _coins;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
-		[SerializeField] private int _costPerSkin = 250;
-		[SerializeField] private int _unlockCost = 500;
+		[SerializeField] private int _costPerSkin = 1000;
+		[SerializeField] private int _unlockCost = 2000;
 		public int UnlockCost
 		{
 			get 
