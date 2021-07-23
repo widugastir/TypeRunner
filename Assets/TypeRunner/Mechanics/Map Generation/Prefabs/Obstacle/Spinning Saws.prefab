@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 3120315114816244587}
   - component: {fileID: 5277667061043373996}
   - component: {fileID: 1186512553625949442}
+  - component: {fileID: 5662209740809603336}
   m_Layer: 0
   m_Name: Cylinder.034
   m_TagString: Untagged
@@ -207,6 +208,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.23
   m_Center: {x: 0.000000029802326, y: 0.0000009536743, z: 0.00000039488083}
+--- !u!114 &5662209740809603336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605781918253512737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b2161231557fd49bf53b04793c29ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Destructable: 0
 --- !u!1 &1422668251789277803
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +400,7 @@ GameObject:
   - component: {fileID: 7283374292415171855}
   - component: {fileID: 8364090622604334638}
   - component: {fileID: 5193879596627906757}
+  - component: {fileID: 1954561664131929438}
   m_Layer: 0
   m_Name: Cylinder.027
   m_TagString: Untagged
@@ -469,6 +484,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.23
   m_Center: {x: 0.00000012665987, y: -0.0000003874302, z: 0.00000039488083}
+--- !u!114 &1954561664131929438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7061723060245428529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b2161231557fd49bf53b04793c29ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Destructable: 0
 --- !u!1 &7451659716307491169
 GameObject:
   m_ObjectHideFlags: 0
