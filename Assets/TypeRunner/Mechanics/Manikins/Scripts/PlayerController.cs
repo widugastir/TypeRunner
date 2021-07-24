@@ -10,6 +10,7 @@ namespace TypeRunner
 	public class PlayerController : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
+		[SerializeField] private Transform _manikinsParent;
 		[SerializeField] private float _finishDelay = 2f;
 		[SerializeField, Layer] private string _ignoreSameMask;
 		//[SerializeField] private float _moveSpeed = 1f;
@@ -41,8 +42,8 @@ namespace TypeRunner
 		
 		private void OnEnable()
 		{
-			_controlPanel.OnStartDrag += OnStartDrag;
-			_controlPanel.OnProcessDrag += OnProcessDrag;
+			//_controlPanel.OnStartDrag += OnStartDrag;
+			//_controlPanel.OnProcessDrag += OnProcessDrag;
 			_controlPanel.OnStopDrag += OnStopDrag;
 			ManikinMovement.OnBorderCollide += OnBorderCollide;
 			Mankin.OnChangeOwner += OnChangeOwner;
@@ -50,16 +51,26 @@ namespace TypeRunner
 		
 		private void OnDisable()
 		{
-			_controlPanel.OnStartDrag -= OnStartDrag;
-			_controlPanel.OnProcessDrag -= OnProcessDrag;
+			//_controlPanel.OnStartDrag -= OnStartDrag;
+			//_controlPanel.OnProcessDrag -= OnProcessDrag;
 			_controlPanel.OnStopDrag -= OnStopDrag;
 			ManikinMovement.OnBorderCollide -= OnBorderCollide;
 			Mankin.OnChangeOwner -= OnChangeOwner;
 		}
 		
+		protected void LateUpdate()
+		{
+			foreach(var manikin in _manikins)
+			{
+				manikin.Movement.StrafeToPoint(_groupCenter._groupCenter.transform.position);
+			}
+			MoveGroupCenter();
+		}
+		
 		private void Update()
 		{
-			MoveGroupCenter();
+			//MoveGroupCenter();
+			//MoveManikins();
 		}
 		
 		private void FixedUpdate()
@@ -69,7 +80,10 @@ namespace TypeRunner
 		
 		private void Start()
 		{
-			Cursor.lockState = CursorLockMode.Confined;
+			//Application.targetFrameRate = 40;
+			//QualitySettings.vSyncCount = 0;
+			//print("targetFrameRate = 40");
+			//Cursor.lockState = CursorLockMode.Confined;
 		}
 	    
 		public void Init()
@@ -102,22 +116,29 @@ namespace TypeRunner
 		private void StrafeGroupCenter(float strafe)
 		{
 			_groupCenter.SetStrafePos(strafe);
+			Vector3 newPos = _manikinsParent.position;
+			newPos.x = _groupCenter._groupCenter.position.x;
+			_manikinsParent.position = newPos;
 		}
 	    
-		private void OnStartDrag()
+		public void OnStartDrag()
 		{
 			_canMove = true;
 			foreach(var manikin in _manikins)
 			{
-				manikin.Movement.InitStrafe();
+				manikin.Movement.InitStrafeToPoint(_groupCenter.transform.position);
 			}
 		}
 		
-		private void OnProcessDrag(float delta)
+		public void OnProcessDrag(float delta)
 		{
 			if(_canMove)
 			{
 				StrafeGroupCenter(delta);
+				//foreach(var manikin in _manikins)
+				//{
+				//	manikin.Movement.StrafeToPoint(_groupCenter.transform.position);
+				//}
 			}
 		}
 		
@@ -166,8 +187,12 @@ namespace TypeRunner
 			{
 				if(!_manikins.Contains(manikin))
 				{
+					manikin.transform.SetParent(_manikinsParent);
 					_manikins.Add(manikin);
-					//_cameraTargetGroup.AddMember(manikin.transform, 1f, 0f);
+					manikin.Movement.InitStrafeToPoint(_groupCenter.transform.position);
+					//var joint = manikin.GetComponent<FixedJoint>();
+					//joint.connectedBody = _groupCenter.GetComponent<Rigidbody>();
+					_cameraTargetGroup.AddMember(manikin.transform, 1f, 0f);
 				}
 			}
 		}
@@ -197,7 +222,7 @@ namespace TypeRunner
 		{
 			if(minOne && _cameraTargetGroup.m_Targets.Length <= 1)
 				return;
-			//_cameraTargetGroup.RemoveMember(manikin.transform);
+			_cameraTargetGroup.RemoveMember(manikin.transform);
 		}
 		
 		private void PushMankinsAway(Vector3 point)
@@ -234,12 +259,11 @@ namespace TypeRunner
 			if(IsMovementEnabled == false)
 				return;
 				
-			
 		    	
 			foreach(var manikin in _manikins)
 			{
 				if(manikin != null)
-					manikin.Movement.MoveToPoint(_groupCenter._groupCenter.transform.position);
+					manikin.Movement.MoveToPoint(_groupCenter.transform.position);
 				//manikin.Movement.Move(transform.forward * _moveSpeed);
 			}
 		}

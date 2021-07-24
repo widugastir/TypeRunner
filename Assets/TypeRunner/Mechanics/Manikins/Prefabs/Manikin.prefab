@@ -298,8 +298,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigi: {fileID: 357506177}
-  _followSpeed: 120
-  _strafeSpeed: 250
+  _followSpeed: 80
+  _strafeSpeed: 10
+  _basePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &2692411060807030495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +379,7 @@ Rigidbody:
   m_GameObject: {fileID: 7764331643567007465}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 20
+  m_Drag: 5
   m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
