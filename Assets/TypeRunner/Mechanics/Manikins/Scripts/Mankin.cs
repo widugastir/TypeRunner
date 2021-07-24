@@ -57,6 +57,17 @@ namespace TypeRunner
 			}
 		}
 		
+		public void BlockStickman(string layer, bool moveForward = false)
+		{
+			gameObject.layer = LayerMask.NameToLayer(layer);
+			Movement.MoveToGroupCenter = false;
+			
+			if(moveForward)
+			{
+				Movement.SetCanMove2(true);
+			}
+		}
+		
 		public void Kill()
 		{
 			if(Immortal)

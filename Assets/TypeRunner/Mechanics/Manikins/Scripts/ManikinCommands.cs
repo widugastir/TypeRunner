@@ -12,7 +12,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private AnimationEvents _events;
 		[SerializeField, HideInInspector] private StoneThrower _thrower;
 		[SerializeField, HideInInspector] private PlayerController _player;
-		private bool _isBlocked = false;
+		public bool _isBlocked {get; private set;} = false;
 		private Animator _animator;
 		private float _baseHeight;
 		
@@ -35,13 +35,13 @@ namespace TypeRunner
 		
 		public void DoCommand(E_Command command)
 		{
+			//print(command.ToString() + "____" + _isBlocked);
 			if(_isBlocked)
 			{
 				return;
 			}
 			
 			_animator = _man._animator;
-			
 			switch(command)
 			{
 				case E_Command.Jump:
@@ -57,6 +57,7 @@ namespace TypeRunner
 					Throw();
 					break;
 				case E_Command.AllThrow:
+					_player.SetMove(false);
 					_player.SendCommand(E_Command.Throw);
 					break;
 				case E_Command.Reset:
@@ -67,13 +68,14 @@ namespace TypeRunner
 			}
 		}
 		
-		public void BlockCommand()
+		public void SetBlock(bool blocked)
 		{
-			_isBlocked = true;
+			_isBlocked = blocked;
 		}
 		
 		private void Reset()
 		{
+			_player.SetMove(true);
 			_collider.height = _baseHeight;
 			_man.Immortal = false;
 		}
@@ -81,7 +83,7 @@ namespace TypeRunner
 		private void Jump()
 		{
 			_animator.SetTrigger("Jump");
-			_man.Movement.Jump(13f);
+			_man.Movement.Jump(2f, 1f);
 		}
 		
 		private void Slide()
@@ -115,6 +117,7 @@ namespace TypeRunner
 			_events.OnAnimationEnd -= OnAnimationEnd;
 			_player.IsMovementEnabled = true;
 			_animator.SetTrigger("Running");
+			_player.SetMove(true);
 		}
 		
 		public enum E_Command

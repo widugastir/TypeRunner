@@ -3,6 +3,7 @@
 public class ObstacleChild : MonoBehaviour
 {
 	[SerializeField] private float _lifetime = 2f;
+	[SerializeField] private float _force = 100f;
 	private Rigidbody _rigi;
 	
 	protected void Start()
@@ -14,7 +15,7 @@ public class ObstacleChild : MonoBehaviour
 	{
 		transform.SetParent(null);
 		_rigi.isKinematic = false;
-		_rigi.AddForce((transform.position - forcePoint).normalized * 100, ForceMode.Impulse);
+		_rigi.AddForce((transform.position - forcePoint).normalized * _force + Vector3.up * _force, ForceMode.Impulse);
 		Destroy(gameObject, _lifetime);
     }
 }

@@ -9,14 +9,15 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField, HideInInspector] private Rigidbody _rigi;
-		[SerializeField] private float _followSpeed = 120f;
 		[SerializeField] private float _strafeSpeed = 3f;
-		//[SerializeField] private float _strafeMaxSpeed = 1f;
-		private float _beginPosX;
-		private float _targetStrafePos;
+		[SerializeField] private float _forwardSpeed = 3f;
 		private bool _isJumped = false;
 		private bool _canMove = true;
 		public bool IsIndependetMovement { get; set; } = false;
+		public bool MoveToGroupCenter { get; set; } = true;
+		private bool CanMoveForward{ get; set; } = false;
+		
+		private Transform _groupCenter;
 		
 		public static event System.Action<Vector3> OnBorderCollide;
 		
@@ -26,135 +27,49 @@ namespace TypeRunner
 			_rigi = gameObject.GetComponentInChildren<Rigidbody>();
 		}
 		
-		private void OnCollisionEnter(Collision collisionInfo)
+		public void Init(Transform groupCenter)
 		{
-			if(collisionInfo.gameObject.TryGetComponent(out Border border))
-			{
-				OnBorderCollide?.Invoke(collisionInfo.GetContact(0).point);
-			}
+			_groupCenter = groupCenter;
 		}
 		
-		public Vector3 _basePosition;
-		public void InitStrafeToPoint(Vector3 position)
+		public void SetCanMove2(bool b)
 		{
-			_basePosition = position;
+			CanMoveForward = b;
 		}
 		
-		public void MoveOffsetBy(Vector3 position)
+		private void MoveToPoint()
 		{
-			
-		}
-		
-		//Late update
-		public void StrafeToPoint(Vector3 point)
-		{
-			//print(point);
-			//Vector3 force = (point + _targetOffset) - transform.position;
-			//force *= _strafeSpeed * Time.deltaTime;
-			//transform.position = point + _targetOffset;
-			//_rigi.MovePosition( point + _targetOffset );
-			//transform.Translate(force);
-			
-			
-			Vector3 direction = point - transform.position;
-			direction *= _strafeSpeed * Time.deltaTime;
-			//_rigi.MovePosition(_rigi.position + direction);
-		}
-		
-		//Fixed update
-		public void MoveToPoint(Vector3 point)
-		{
-			if(IsIndependetMovement)
+			if(IsIndependetMovement || _groupCenter == null || MoveToGroupCenter == false)
 				return;
-			bool strafeRight = point.x > transform.position.x ? true : false;
-			float distanceX = Mathf.Abs(point.x - transform.position.x);
-			
-			//_rigi.AddForce((point - _rigi.position).normalized * _strafeSpeed, ForceMode.Acceleration);
-			
-			point.y = transform.position.y;
-			point.x = transform.position.x;
-			Vector3 direction = point - transform.position;
-			float distance = direction.magnitude;
-			float distanceZ = Mathf.Abs(point.z - transform.position.z);
-			
-			Vector3 targetPos = _rigi.position;
-			if(distanceZ >= 0.5f)
-				targetPos += Vector3.forward * _followSpeed * Time.deltaTime;
-			//if(distanceX >= 0.3f)
-			//	targetPos += (_targetOffset - _rigi.position) * _strafeSpeed * Time.deltaTime;
-			//if(distanceX >= 0.5f)
-				//targetPos += (strafeRight ? Vector3.right : Vector3.left) * _strafeSpeed * Time.deltaTime;
-			//_rigi.MovePosition(targetPos);
-			
-			
-			Vector3 force = Vector3.forward * _followSpeed;
-			
+			Vector3 force = (_groupCenter.position - _rigi.position).normalized * _strafeSpeed;
 			_rigi.AddForce(force, ForceMode.Acceleration);
-			
-			
-			
-			//if(distanceZ >= 0.5f)
-			//	_rigi.MovePosition(_rigi.position + Vector3.forward * _followSpeed * Time.deltaTime);
-			//if(distanceX >= 0.5f)
-			//	_rigi.MovePosition(_rigi.position + (strafeRight ? Vector3.right : Vector3.left) * _strafeSpeed * Time.deltaTime);
-			
-			//_rigi.AddForce(Vector3.forward * _followSpeed * 2f, ForceMode.Acceleration);
-			
-			//point.z = transform.position.z;
-			//point.x = transform.position.x;
-			//Vector3 distanceZ = point - transform.position;
-			
-			//print($"{distanceZ.magnitude}");
-			//Vector3 newDir = new Vector3(0f, 0f, distanceZ.magnitude * _followSpeed);
-			//_rigi.MovePosition(transform.position + newDir * Time.deltaTime);
-			//****
-			//_rigi.AddForce(direction * _followSpeed, ForceMode.Acceleration);
-			
-			//Vector3 strafe = (targetPos - transform.position).normalized;
-			//_rigi.MovePosition(transform.position + strafe * _strafeSpeed * Time.deltaTime);
-			
-			//if(distanceX >= 0.5f)
-			//	_rigi.AddForce((strafeRight ? Vector3.right : Vector3.left) * distanceX * _strafeSpeed, ForceMode.Acceleration);
-			//****
+		}
+		
+		private void MoveForward()
+		{
+			if(CanMoveForward == false)
+				return;
+			//print(123);
+			_rigi.AddForce(Vector3.forward * _forwardSpeed, ForceMode.Acceleration);
 		}
 		
 		private void FixedUpdate()
 		{
-			if(IsIndependetMovement)
-			{
-				Move();
-			}
+			MoveToPoint();
+			MoveForward();
 		}
 		
-		public void Move()
-		{
-			//if(_isJumped == true || _canMove == false)
-			//	return;
-			_rigi.AddForce(Vector3.forward * _followSpeed * 2f, ForceMode.Acceleration);
-		}
-	    
-		public void Strafe(float strafe)
-		{
-			//_targetStrafePos = (strafe * _strafeMultiplier);
-		}
-		 
-		public void InitStrafe()
-		{
-			//_beginPosX = transform.position.x;
-		}
-		 
-		public void StopStrafe()
-		{
-			//_beginPosX = transform.position.x;
-			//_targetStrafePos = 0f;
-			//_rigi.velocity.Scale(MathfExtension.Vector3NotX);
+		private void OnJumpEnd() 
+		{ 
+			_rigi.useGravity = true;
+			_isJumped = false; 
 		}
 		
-		private void OnJumpEnd() { _isJumped = false; }
-		public void Jump(float distance = 1f)
+		public void Jump(float height, float time)
 		{
+			_rigi.useGravity = false;
 			_isJumped = true;
-			_rigi.DOJump(transform.position + transform.forward * distance, 2f, 1, 1.5f)
+			_rigi.DOJump(transform.position, height, 1, time)
 				.SetEase(Ease.Linear)
 				.OnComplete(OnJumpEnd);
 		}

@@ -23,10 +23,8 @@ namespace TypeRunner
 		public void SetStrafePos(float strafe)
 		{
 			_strafe = strafe;
-			//Vector3 newPosition = transform.position;
 			Vector3 newPosition = _groupCenter.transform.position;
 			newPosition.x = strafe * _strafeMultiplier;
-			//transform.position = newPosition;
 			_groupCenter.transform.position = newPosition;
 		}
 		
@@ -34,18 +32,12 @@ namespace TypeRunner
 		{
 			if(CanMove == false)
 				return;
-			//Vector3 direction = Vector3.forward * _speed;
-			//if(_upMove)
-			//{
-			//	direction = Vector3.forward * _speed / 4f + Vector3.up * _speed / 4f;
-			//}
+				
 			Vector3 newPos = transform.position;
 			newPos.x = _gameplayCamera.position.x;
 			newPos.y = _target.position.y;
 			newPos.z = _target.position.z;
 			transform.position = newPos;
-			//transform.Translate(direction * Time.deltaTime);
-			//_rigi.AddForce(direction, ForceMode.Acceleration);
 		}
 		
 		public void SetUpMovement()

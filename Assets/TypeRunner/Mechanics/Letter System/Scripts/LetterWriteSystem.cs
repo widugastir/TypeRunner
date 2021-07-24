@@ -70,7 +70,6 @@ namespace TypeRunner
 			_isReady = false;
 			if(successful == false)
 			{
-				//One manikin die =(
 				_playerController.BlockManikins(_manikinsDieOnLose);
 			}
 			Time.timeScale = 1f;

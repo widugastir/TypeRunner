@@ -13,8 +13,8 @@ namespace TypeRunner
 		[SerializeField] private Transform _manikinsParent;
 		[SerializeField] private float _finishDelay = 2f;
 		[SerializeField, Layer] private string _ignoreSameMask;
-		//[SerializeField] private float _moveSpeed = 1f;
 		[SerializeField] private List<Mankin> _manikins;
+		[SerializeField, HideInInspector] private MapMovement _mapMovement;
 		[SerializeField, HideInInspector] private GroupCenter _groupCenter;
 		[SerializeField, HideInInspector] private MapGeneration _generator;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
@@ -31,6 +31,7 @@ namespace TypeRunner
 		{
 			if(sceneObject)
 			{
+				_mapMovement = FindObjectOfType<MapMovement>();
 				_levelManager = FindObjectOfType<LevelManager>();
 				_generator = FindObjectOfType<MapGeneration>();
 				_stats = FindObjectOfType<PlayerStats>();
@@ -42,40 +43,19 @@ namespace TypeRunner
 		
 		private void OnEnable()
 		{
-			//_controlPanel.OnStartDrag += OnStartDrag;
-			//_controlPanel.OnProcessDrag += OnProcessDrag;
-			_controlPanel.OnStopDrag += OnStopDrag;
 			ManikinMovement.OnBorderCollide += OnBorderCollide;
 			Mankin.OnChangeOwner += OnChangeOwner;
 		}
 		
 		private void OnDisable()
 		{
-			//_controlPanel.OnStartDrag -= OnStartDrag;
-			//_controlPanel.OnProcessDrag -= OnProcessDrag;
-			_controlPanel.OnStopDrag -= OnStopDrag;
 			ManikinMovement.OnBorderCollide -= OnBorderCollide;
 			Mankin.OnChangeOwner -= OnChangeOwner;
 		}
 		
 		protected void LateUpdate()
 		{
-			foreach(var manikin in _manikins)
-			{
-				manikin.Movement.StrafeToPoint(_groupCenter._groupCenter.transform.position);
-			}
 			MoveGroupCenter();
-		}
-		
-		private void Update()
-		{
-			//MoveGroupCenter();
-			//MoveManikins();
-		}
-		
-		private void FixedUpdate()
-		{
-			MoveManikins();
 		}
 		
 		private void Start()
@@ -84,6 +64,11 @@ namespace TypeRunner
 			//QualitySettings.vSyncCount = 0;
 			//print("targetFrameRate = 40");
 			//Cursor.lockState = CursorLockMode.Confined;
+		}
+		
+		public void SetMove(bool canMove)
+		{
+			_mapMovement.CanMove = canMove;
 		}
 	    
 		public void Init()
@@ -124,10 +109,6 @@ namespace TypeRunner
 		public void OnStartDrag()
 		{
 			_canMove = true;
-			foreach(var manikin in _manikins)
-			{
-				manikin.Movement.InitStrafeToPoint(_groupCenter.transform.position);
-			}
 		}
 		
 		public void OnProcessDrag(float delta)
@@ -142,22 +123,17 @@ namespace TypeRunner
 			}
 		}
 		
-		private void OnStopDrag()
-		{
-			StopStrafeMankins();
-		}
-		
 		private void OnBorderCollide(Vector3 point)
 		{
-			StopStrafeMankins();
-			PushMankinsAway(point);
 		}
 		
 		public void BlockManikins(int amount)
 		{
+			//return;
 			for(int i = 0; i < amount && i < _manikins.Count; i++)
 			{
-				_manikins[i].Commands.BlockCommand();
+				_manikins[i].Commands.SetBlock(true);
+				_manikins[i].BlockStickman(_ignoreSameMask, true);
 			}
 		}
 		
@@ -187,11 +163,9 @@ namespace TypeRunner
 			{
 				if(!_manikins.Contains(manikin))
 				{
+					manikin.Movement.Init(_groupCenter._groupCenter);
 					manikin.transform.SetParent(_manikinsParent);
 					_manikins.Add(manikin);
-					manikin.Movement.InitStrafeToPoint(_groupCenter.transform.position);
-					//var joint = manikin.GetComponent<FixedJoint>();
-					//joint.connectedBody = _groupCenter.GetComponent<Rigidbody>();
 					_cameraTargetGroup.AddMember(manikin.transform, 1f, 0f);
 				}
 			}
@@ -199,6 +173,10 @@ namespace TypeRunner
 		
 		public void ManikinFinished(Mankin manikin)
 		{
+			_mapMovement.SetUpMovement(5f);
+			
+			manikin.Movement.MoveToGroupCenter = false;
+			manikin.transform.SetParent(_mapMovement.transform);
 			manikin.Movement.SetCanMove(false);
 			manikin.SetFinished();
 			_manikins.Remove(manikin);
@@ -220,52 +198,10 @@ namespace TypeRunner
 		
 		public void StopSpectateTo(Mankin manikin, bool minOne = true)
 		{
+			print("Need spectate for 1 last stickman");
 			if(minOne && _cameraTargetGroup.m_Targets.Length <= 1)
 				return;
 			_cameraTargetGroup.RemoveMember(manikin.transform);
-		}
-		
-		private void PushMankinsAway(Vector3 point)
-		{
-			foreach(var manikin in _manikins)
-			{
-				manikin.Movement.PushAway(point, 0.1f);
-			}
-		}
-		
-		private void StopStrafeMankins()
-		{
-			//_canMove = false;
-			//foreach(var manikin in _manikins)
-			//{
-			//	if(manikin != null)
-			//		manikin.Movement.StopStrafe();
-			//}
-		}
-		
-		private void StrafeMankins(float delta)
-		{
-			if(IsMovementEnabled == false)
-				return;
-		    	
-			foreach(var manikin in _manikins)
-			{
-				manikin.Movement.Strafe(delta);
-			}
-		}
-	    
-		private void MoveManikins()
-		{
-			if(IsMovementEnabled == false)
-				return;
-				
-		    	
-			foreach(var manikin in _manikins)
-			{
-				if(manikin != null)
-					manikin.Movement.MoveToPoint(_groupCenter.transform.position);
-				//manikin.Movement.Move(transform.forward * _moveSpeed);
-			}
 		}
 		
 		public void MakeFormationLine()
@@ -335,6 +271,7 @@ namespace TypeRunner
 			_manikins.Clear();
 			_manikinsCollected = 0;
 			_groupCenter.Reset();
+			_mapMovement.Reset();
 			//Init();
 		}
 	}

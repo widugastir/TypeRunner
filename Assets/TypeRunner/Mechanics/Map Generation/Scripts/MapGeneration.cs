@@ -11,6 +11,7 @@ namespace TypeRunner
 		[SerializeField] private int _platformAmount = 10;
 		[SerializeField] private int _dailyPlatformAmount = 30;
 		[SerializeField] private int _dailyOneEmptyPerPlatform = 3;
+		[SerializeField] private Transform _mapParent;
 		[SerializeField] private Platform _basePlatform;
 		[SerializeField, HideInInspector] private Platform _lastPlatform;
 		
@@ -64,6 +65,7 @@ namespace TypeRunner
 			newPlatform.Init(this);
 			_lastPlatform = newPlatform;
 			_mapPlatforms.Add(newPlatform);
+			newPlatform.transform.SetParent(_mapParent);
 		}
 		
 		private void SpawnPlatform(bool emptyPlatform, bool daily = false)
@@ -81,12 +83,14 @@ namespace TypeRunner
 			newPlatform.Init(this, daily);
 			_lastPlatform = newPlatform;
 			_mapPlatforms.Add(newPlatform);
+			newPlatform.transform.SetParent(_mapParent);
 		}
 		
 		public Mankin SpawnManikin(Vector3 position)
 		{
 			var man = Instantiate(ManikinPrefab, position, Quaternion.identity);
 			_mapManikins.Add(man);
+			man.transform.SetParent(_mapParent);
 			return man;
 		}
 		
@@ -94,6 +98,7 @@ namespace TypeRunner
 		{
 			var letter = Instantiate(LetterPrefab, position, Quaternion.identity);
 			_mapLetters.Add(letter);
+			letter.transform.SetParent(_mapParent);
 			return letter;
 		}
 		
