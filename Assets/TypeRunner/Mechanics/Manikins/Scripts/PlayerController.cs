@@ -220,7 +220,7 @@ namespace TypeRunner
 				_mapMovement.CanMove = false;
 				_groupCenter.CanMove = false;
 				StartCoroutine(FinishLevel(manikin.EarnedCoinsBonus));
-				_lastLadder.PlayFinishParticles();
+				_lastLadder.PlayFinishParticles(manikin.transform.position);
 			}
 		}
 		

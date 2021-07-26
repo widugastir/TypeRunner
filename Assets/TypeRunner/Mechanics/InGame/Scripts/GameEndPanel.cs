@@ -1,6 +1,5 @@
 ﻿using SoundSteppe.RefSystem;
 using UnityEngine;
-using TMPro;
 
 namespace TypeRunner
 {
@@ -8,16 +7,20 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField] private GameObject _previewCamera;
-		[SerializeField] private TMP_Text _labelText;
-		[SerializeField] private GameObject _panel;
+		[SerializeField] private GameObject _victoryPanel;
+		[SerializeField] private GameObject _losePanel;
 		[SerializeField] private GameObject _bonusSkinProgress;
 		[SerializeField, HideInInspector] private CoinManager _coins;
+		[SerializeField, HideInInspector] private PlayerController _player;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
 		{
 			if(sceneObject == true)
+			{
 				_coins = FindObjectOfType<CoinManager>(true);
+				_player = FindObjectOfType<PlayerController>(true);
+			}
 		}
 		
 		private void OnEnable()
@@ -32,16 +35,15 @@ namespace TypeRunner
 		
 		public void Enable(bool victory)
 		{
-			_panel.SetActive(true);
 			if(victory)
 			{
-				_bonusSkinProgress.SetActive(true);
-				_labelText.text = "Victory!";
+				_victoryPanel.SetActive(true);
+				//_bonusSkinProgress.SetActive(true);
 			}
 			else
 			{
-				_bonusSkinProgress.SetActive(false);
-				_labelText.text = "Lose!";
+				_losePanel.SetActive(true);
+				//_bonusSkinProgress.SetActive(false);
 			}
 		}
 		
@@ -49,7 +51,9 @@ namespace TypeRunner
 		{
 			_previewCamera.SetActive(true);
 			_coins.EarnedToCurrent();
-			_panel.SetActive(false);
+			_losePanel.SetActive(false);
+			_victoryPanel.SetActive(false);
+			_player.Init();
 		}
 	}
 }

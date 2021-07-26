@@ -10,6 +10,7 @@ namespace TypeRunner
 	{
 		[SerializeField] private float _fillSpeed = 0.5f;
 		[SerializeField] private Image _filler;
+		[SerializeField] private bool _addBonus = false;
 		
 		[SerializeField] private TMP_Text _procentage;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
@@ -28,12 +29,20 @@ namespace TypeRunner
 		
 		private void OnEnable()
 		{
-			_procentage.text = $"{((int)(_stats.PrevSkinProgress * 100f)).ToString()}%";
-			_filler.fillAmount = _stats.PrevSkinProgress;
-			_filler.DOFillAmount(_stats.SkinBonusProgress, _fillSpeed)
+			if(_addBonus)
+			{
+				_procentage.text = $"{((int)(_stats.PrevSkinProgress * 100f)).ToString()}%";
+				_filler.fillAmount = _stats.PrevSkinProgress;
+				_filler.DOFillAmount(_stats.SkinBonusProgress, _fillSpeed)
 				.SetEase(Ease.Linear)
 				.SetUpdate(true)
 				.OnComplete(FillCompleted);
+			}
+			else
+			{
+				_procentage.text = $"{((int)(_stats.SkinBonusProgress * 100f)).ToString()}%";
+				_filler.fillAmount = _stats.SkinBonusProgress;
+			}
 		}
 		
 		private void FillCompleted()

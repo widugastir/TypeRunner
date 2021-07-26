@@ -50,10 +50,14 @@ namespace TypeRunner
 			}
 		}
 		
-		public void PlayFinishParticles()
+		public void PlayFinishParticles(Vector3 alignBy)
 		{
 			foreach(var p in _finishParticles)
 			{
+				Vector3 newPos = p.transform.position;
+				newPos.z = alignBy.z;
+				newPos.y = alignBy.y;
+				p.transform.position = newPos;
 				p.Play();
 			}
 		}

@@ -317,7 +317,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coinsBonusMultiplier: 1
   _stepHeight: 2
-  _finishParticles: []
+  _finishParticles:
+  - {fileID: 7204353449054856635}
+  - {fileID: 3651337191748002854}
   _player: {fileID: 0}
   Rank: 1
 --- !u!33 &2185092386728874844
@@ -411,8 +413,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4234760942220090, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4234760942220090, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4234760942220090, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4234760942220090, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.9
+      value: -3.67
       objectReference: {fileID: 0}
     - target: {fileID: 4234760942220090, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -464,7 +478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198344065909323040, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 15
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 198700972434663320, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: playOnAwake
@@ -480,7 +494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198700972434663320, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 15
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 198746279646555024, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: playOnAwake
@@ -496,7 +510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198746279646555024, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 15
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 199054649293260778, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: m_Materials.Array.size
@@ -517,6 +531,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4234760942220090, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
   m_PrefabInstance: {fileID: 3489321264984297734}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &3651337191748002854 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198344065909323040, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
+  m_PrefabInstance: {fileID: 3489321264984297734}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7006380193460949147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -533,8 +552,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4234760942220090, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4234760942220090, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4234760942220090, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4234760942220090, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.965
+      value: 3.43
       objectReference: {fileID: 0}
     - target: {fileID: 4234760942220090, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -586,7 +617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198344065909323040, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 15
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 198700972434663320, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: playOnAwake
@@ -602,7 +633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198700972434663320, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 15
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 198746279646555024, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: playOnAwake
@@ -618,7 +649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198746279646555024, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 15
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 199054649293260778, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
       propertyPath: m_Materials.Array.size
@@ -637,5 +668,10 @@ PrefabInstance:
 --- !u!4 &7004402352911934369 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4234760942220090, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
+  m_PrefabInstance: {fileID: 7006380193460949147}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7204353449054856635 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198344065909323040, guid: 08abdc5d49d191f4580bb4c00a82d6fb, type: 3}
   m_PrefabInstance: {fileID: 7006380193460949147}
   m_PrefabAsset: {fileID: 0}
