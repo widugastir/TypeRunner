@@ -23,7 +23,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private CinemachineTargetGroup _cameraTargetGroup;
 		private bool _canMove = true;
 		private int _manikinsCollected = 0;
-		
+		private Ladder _lastLadder;
 		public bool IsMovementEnabled { get; set; } = true;
 	
 		//------METHODS
@@ -202,8 +202,9 @@ namespace TypeRunner
 			}
 		}
 		
-		public void ManikinFinished(Mankin manikin)
+		public void ManikinFinished(Mankin manikin, Ladder ladder)
 		{
+			_lastLadder = ladder;
 			_mapMovement.SetUpMovement(5f);
 			
 			manikin.Movement.MoveToGroupCenter = false;
@@ -219,6 +220,7 @@ namespace TypeRunner
 				_mapMovement.CanMove = false;
 				_groupCenter.CanMove = false;
 				StartCoroutine(FinishLevel(manikin.EarnedCoinsBonus));
+				_lastLadder.PlayFinishParticles();
 			}
 		}
 		
@@ -226,6 +228,7 @@ namespace TypeRunner
 		{
 			yield return new WaitForSecondsRealtime(_finishDelay);
 			_levelManager.FinishLevel(true, _manikinsCollected, coinBonus);
+			_lastLadder.StopFinishParticles();
 		}
 		
 		public void StopSpectateTo(Mankin manikin, bool minOne = true)
