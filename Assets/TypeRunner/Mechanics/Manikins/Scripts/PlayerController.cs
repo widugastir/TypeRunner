@@ -58,6 +58,15 @@ namespace TypeRunner
 			MoveGroupCenter();
 		}
 		
+		protected void Update()
+		{
+			if(Input.GetKeyDown(KeyCode.K))
+				_levelManager.FinishLevel(true, _manikinsCollected, 2f);
+				
+			if(Input.GetKeyDown(KeyCode.L))
+				_levelManager.FinishLevel(false, _manikinsCollected);
+		}
+		
 		private void Start()
 		{
 			//Application.targetFrameRate = 40;
@@ -185,6 +194,7 @@ namespace TypeRunner
 			_manikinsCollected++;
 			if(_manikins.Count == 0)
 			{
+				_mapMovement.CanMove = false;
 				_groupCenter.CanMove = false;
 				StartCoroutine(FinishLevel(manikin.EarnedCoinsBonus));
 			}
@@ -198,10 +208,15 @@ namespace TypeRunner
 		
 		public void StopSpectateTo(Mankin manikin, bool minOne = true)
 		{
-			print("Need spectate for 1 last stickman");
 			if(minOne && _cameraTargetGroup.m_Targets.Length <= 1)
 				return;
 			_cameraTargetGroup.RemoveMember(manikin.transform);
+		}
+		
+		public void SpactateOnlyFor(Mankin manikin)
+		{
+			_cameraTargetGroup.m_Targets = null;
+			_cameraTargetGroup.AddMember(manikin.transform, 1f, 0f);
 		}
 		
 		public void MakeFormationLine()
@@ -222,6 +237,10 @@ namespace TypeRunner
 				newPos.z = z;
 				newPos.x = x;
 				_manikins[i].transform.position = newPos;
+				if(i == 0)
+				{
+					SpactateOnlyFor(_manikins[i]);
+				}
 			}
 		}
 		
@@ -272,7 +291,7 @@ namespace TypeRunner
 			_manikinsCollected = 0;
 			_groupCenter.Reset();
 			_mapMovement.Reset();
-			//Init();
+			_mapMovement.CanMove = true;
 		}
 	}
 }

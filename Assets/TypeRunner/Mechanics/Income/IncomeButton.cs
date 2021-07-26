@@ -1,4 +1,5 @@
 ﻿using SoundSteppe.RefSystem;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -11,6 +12,7 @@ namespace TypeRunner
 		[SerializeField] private TMP_Text _costText;
 		[SerializeField, HideInInspector] private Income _income;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
+		[SerializeField, HideInInspector] private Button _button;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -20,10 +22,24 @@ namespace TypeRunner
 				_income = FindObjectOfType<Income>(true);
 				_stats = FindObjectOfType<PlayerStats>(true);
 			}
+			else
+			{
+				_button = GetComponentInChildren<Button>(true);
+			}
 		}
 		
-		private void OnEnable() { SaveSystem.OnEndLoad += OnEndLoad; }
-		private void OnDisable() { SaveSystem.OnEndLoad += OnEndLoad; }
+		private void OnEnable() 
+		{ 
+			SaveSystem.OnEndLoad += OnEndLoad; 
+			PlayerStats.OnCoinChange += CoinChanged;
+			UpdateUI();
+		}
+		
+		private void OnDisable() 
+		{ 
+			SaveSystem.OnEndLoad -= OnEndLoad; 
+			PlayerStats.OnCoinChange -= CoinChanged;
+		}
 		
 		private void OnEndLoad()
 		{
@@ -36,8 +52,21 @@ namespace TypeRunner
 				UpdateUI();
 		}
 		
+		private void CoinChanged(int coins)
+		{
+			UpdateUI();
+		}
+		
 		private void UpdateUI()
 		{
+			if(_stats.Coins >= _income.GetUpgradeCost())
+			{
+				_button.interactable = true;
+			}
+			else
+			{
+				_button.interactable = false;
+			}
 			_levelText.text = _stats.IncomeLevel.ToString();
 			_costText.text = _income.GetUpgradeCost().ToString();
 		}

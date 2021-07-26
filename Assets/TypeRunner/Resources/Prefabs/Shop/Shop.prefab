@@ -19,7 +19,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -32,7 +32,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 725b8caff3303eb45a0e5b6b43b35d84, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -69,12 +69,12 @@ GameObject:
   - component: {fileID: 2593463164027186017}
   - component: {fileID: 2593463164027186016}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: '[D] Canvas'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2593463164027186019
 RectTransform:
   m_ObjectHideFlags: 0
@@ -516,8 +516,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: STORE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3c04b0528724f974ba12793dcb8f842d, type: 2}
+  m_sharedMaterial: {fileID: 4944963899283264478, guid: 3c04b0528724f974ba12793dcb8f842d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -547,7 +547,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 99
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -629,8 +629,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coins: {fileID: 0}
   _stats: {fileID: 0}
-  _costPerSkin: 250
-  _unlockCost: 500
+  _costPerSkin: 1000
+  _unlockCost: 2000
 --- !u!114 &2593463164480310617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -840,7 +840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.x
@@ -848,15 +848,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalPosition.x
@@ -888,11 +888,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 167.79169
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -134.11935
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -910,6 +910,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Skin'
       objectReference: {fileID: 0}
+    - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
+      propertyPath: _shop
+      value: 
+      objectReference: {fileID: 3017243317889916410}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
 --- !u!1 &8569533846551318660 stripped
@@ -951,7 +955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.x
@@ -959,15 +963,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalPosition.x
@@ -999,11 +1003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 452.7917
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -419.11935
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1021,6 +1025,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Skin (4)'
       objectReference: {fileID: 0}
+    - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
+      propertyPath: _shop
+      value: 
+      objectReference: {fileID: 3017243317889916410}
     - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: _skin
       value: 4
@@ -1066,7 +1074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1074,15 +1082,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1114,11 +1122,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 737.7917
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -704.1194
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1136,6 +1144,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Skin (8)'
       objectReference: {fileID: 0}
+    - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
+      propertyPath: _shop
+      value: 
+      objectReference: {fileID: 3017243317889916410}
     - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: _skin
       value: 8
@@ -1181,7 +1193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1189,15 +1201,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1229,11 +1241,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 167.79169
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -704.1194
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1251,6 +1263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Skin (6)'
       objectReference: {fileID: 0}
+    - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
+      propertyPath: _shop
+      value: 
+      objectReference: {fileID: 3017243317889916410}
     - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: _skin
       value: 6
@@ -1296,7 +1312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1304,15 +1320,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1344,11 +1360,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 737.7917
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -419.11935
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1366,6 +1382,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Skin (5)'
       objectReference: {fileID: 0}
+    - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
+      propertyPath: _shop
+      value: 
+      objectReference: {fileID: 3017243317889916410}
     - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: _skin
       value: 5
@@ -1411,7 +1431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1419,15 +1439,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1459,11 +1479,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 737.7917
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -134.11935
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1481,6 +1501,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Skin (2)'
       objectReference: {fileID: 0}
+    - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
+      propertyPath: _shop
+      value: 
+      objectReference: {fileID: 3017243317889916410}
     - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: _skin
       value: 2
@@ -1598,16 +1622,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1875009368251844222, guid: e02e427b8c651ef409818eea0c944bd6, type: 3}
       propertyPath: m_fontSize
-      value: 53.4
+      value: 49.75
       objectReference: {fileID: 0}
     - target: {fileID: 1875009368251844222, guid: e02e427b8c651ef409818eea0c944bd6, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      objectReference: {fileID: 11400000, guid: 3c04b0528724f974ba12793dcb8f842d, type: 2}
+    - target: {fileID: 1875009368251844222, guid: e02e427b8c651ef409818eea0c944bd6, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1875009368251844222, guid: e02e427b8c651ef409818eea0c944bd6, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      objectReference: {fileID: 4944963899283264478, guid: 3c04b0528724f974ba12793dcb8f842d, type: 2}
     - target: {fileID: 7405588940223457499, guid: e02e427b8c651ef409818eea0c944bd6, type: 3}
       propertyPath: _stats
       value: 
@@ -1648,7 +1676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1656,15 +1684,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1696,11 +1724,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 452.7917
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -704.1194
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1718,6 +1746,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Skin (7)'
       objectReference: {fileID: 0}
+    - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
+      propertyPath: _shop
+      value: 
+      objectReference: {fileID: 3017243317889916410}
     - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: _skin
       value: 7
@@ -1763,7 +1795,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1771,15 +1803,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1811,11 +1843,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 452.7917
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -134.11935
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1833,6 +1865,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Skin (1)'
       objectReference: {fileID: 0}
+    - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
+      propertyPath: _shop
+      value: 
+      objectReference: {fileID: 3017243317889916410}
     - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: _skin
       value: 1
@@ -1878,7 +1914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1886,15 +1922,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1926,11 +1962,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 167.79169
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -419.11935
       objectReference: {fileID: 0}
     - target: {fileID: 6319058751433004688, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1948,6 +1984,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] Skin (3)'
       objectReference: {fileID: 0}
+    - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
+      propertyPath: _shop
+      value: 
+      objectReference: {fileID: 3017243317889916410}
     - target: {fileID: 6706807914989858425, guid: a8068ee3ac2c6634496c5d1409ed7444, type: 3}
       propertyPath: _skin
       value: 3
@@ -1971,10 +2011,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2593463164027186019}
     m_Modifications:
+    - target: {fileID: 2933845327741423864, guid: 2510d7bbdf7e77948b59bd916219d125, type: 3}
+      propertyPath: m_fontSize
+      value: 50.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933845327741423864, guid: 2510d7bbdf7e77948b59bd916219d125, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c04b0528724f974ba12793dcb8f842d, type: 2}
+    - target: {fileID: 2933845327741423864, guid: 2510d7bbdf7e77948b59bd916219d125, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933845327741423864, guid: 2510d7bbdf7e77948b59bd916219d125, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4944963899283264478, guid: 3c04b0528724f974ba12793dcb8f842d, type: 2}
     - target: {fileID: 6629940300033785925, guid: 2510d7bbdf7e77948b59bd916219d125, type: 3}
       propertyPath: m_Name
       value: '[Button] Buy Coins'
       objectReference: {fileID: 0}
+    - target: {fileID: 7391203616556099778, guid: 2510d7bbdf7e77948b59bd916219d125, type: 3}
+      propertyPath: _shop
+      value: 
+      objectReference: {fileID: 3017243317889916410}
     - target: {fileID: 8415061555303046384, guid: 2510d7bbdf7e77948b59bd916219d125, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

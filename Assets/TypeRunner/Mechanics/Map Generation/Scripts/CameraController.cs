@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     {
 	    if(_moveUp)
 	    {
-	    	transform.Translate(Vector3.up * _speed * Time.deltaTime);
+	    	//transform.Translate(Vector3.up * _speed * Time.deltaTime);
 	    }
     }
     

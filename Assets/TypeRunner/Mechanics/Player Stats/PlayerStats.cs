@@ -58,15 +58,30 @@ namespace TypeRunner
 			}
 		}
 		
+		public float SkinBonusProgress
+		{
+			get { return _skinBonusProgress; }
+			set 
+			{ 
+				PrevSkinProgress = _skinBonusProgress;
+				_skinBonusProgress = value;
+				OnSkinProgressChange?.Invoke(_skinBonusProgress);
+			}
+		}
+		
 		[Saveable] public int _coins = 0;
 		[Saveable] public int _currentLevel = 0;
 		[Saveable] public int _startUnitsLevel = 1;
 		[Saveable] public int _incomeLevel = 1;
 		[Saveable] public int _dailyAttempts = 3;
+		[Saveable] public int _dailyUpdatesCount = 0;
 		[Saveable] public int _dailyCategory = 0;
 		[Saveable] public float _dailyProcentage = 0f;
+		[Saveable] public float _skinBonusProgress = 0f;
+
 		[HideInInspector] public int EarnedCoins {get; set;} = 0;
-		
+		[HideInInspector] public float PrevSkinProgress {get; set;} = 0f;
+
 		[Saveable] public SkinType _playerSkin = SkinType.S1;
 		[Saveable] public List<SkinType> PurchasedSkins;
 
@@ -78,7 +93,8 @@ namespace TypeRunner
 		public static Action<int> OnStartUnitChange;
 		public static Action<int> OnIncomeLevelChange;
 		public static Action<float> OnDailyChange;
-		
+		public static event Action<float> OnSkinProgressChange;
+
 		public void Reset(){}
 		
 		private void Start()

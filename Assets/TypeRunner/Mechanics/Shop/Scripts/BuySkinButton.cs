@@ -1,4 +1,5 @@
 ﻿using SoundSteppe.RefSystem;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -8,6 +9,8 @@ namespace TypeRunner
 	{
 		[SerializeField] private TMP_Text _costText;
 		[SerializeField, HideInInspector] private CoinManager _coins;
+		[SerializeField, HideInInspector] private PlayerStats _stats;
+		[SerializeField, HideInInspector] private Button _button;
 		[SerializeField, HideInInspector] private Shop _shop;
 		
 		//------METHODS
@@ -17,6 +20,8 @@ namespace TypeRunner
 			{
 				_coins = FindObjectOfType<CoinManager>(true);
 				_shop = FindObjectOfType<Shop>(true);
+				_stats = FindObjectOfType<PlayerStats>(true);
+				_button = GetComponentInChildren<Button>();
 			}
 		}
 		
@@ -30,10 +35,15 @@ namespace TypeRunner
 			if(_shop.IsAllSkinBoughted())
 			{
 				_costText.text = "All boughted!";
+				_button.interactable = false;
 			}
 			else
 			{
 				_costText.text = "OPEN:\n" + _shop.UnlockCost.ToString();
+				if(_stats.Coins >= _shop.UnlockCost)
+					_button.interactable = true;
+				else
+					_button.interactable = false;
 			}
 		}
 		

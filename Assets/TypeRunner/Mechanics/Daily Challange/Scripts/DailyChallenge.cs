@@ -1,4 +1,5 @@
 ﻿using SoundSteppe.RefSystem;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -8,7 +9,12 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField] private int _attemptsPerDay = 3;
+		[SerializeField] private int _updateCost = 50;
+		public int UpdateCost {get {return _updateCost * (_stats._dailyUpdatesCount + 1);}}
 		public int _dailyUpdateHour = 12;
+		[SerializeField] private Button _updateButton;
+		[SerializeField] private Button _continueButton;
+		[SerializeField] private TMP_Text _updateText;
 		[SerializeField] private GameObject _challengeCnavas;
 		[SerializeField] private TMP_Text _attemptsText;
 		[SerializeField, HideInInspector] private DailyLine[] _lines;
@@ -46,9 +52,39 @@ namespace TypeRunner
 			_challengeCnavas.SetActive(true);
 		}
 		
+		
 		private void UpdateUI()
 		{
 			_attemptsText.text = "Attempts: " + _stats._dailyAttempts.ToString();
+			if(_stats._dailyAttempts == 0)
+			{
+				_continueButton.gameObject.SetActive(false);
+				_updateButton.gameObject.SetActive(true);
+				_updateText.text = "UPDATE: " + UpdateCost.ToString();
+				if(_stats.Coins >= UpdateCost)
+				{
+					_updateButton.interactable = true;
+				}
+				else
+				{
+					_updateButton.interactable = false;
+				}
+			}
+			else
+			{
+				_continueButton.gameObject.SetActive(true);
+				_updateButton.gameObject.SetActive(false);
+			}
+		}
+		
+		public void TryBuyAttempts()
+		{
+			if(_coins.TrySpend(UpdateCost))
+			{
+				_stats._dailyUpdatesCount++;
+				_stats._dailyAttempts = _attemptsPerDay;
+			}
+			UpdateUI();
 		}
 		
 		private void TryUpdateAttempts()
@@ -63,6 +99,7 @@ namespace TypeRunner
 				_stats._dailyAttempts = _attemptsPerDay;
 				_stats._dailyCategory = 0;
 				_stats._dailyProcentage = 0f;
+				_stats._dailyUpdatesCount = 0;
 				
 				DailyReward[] rewards = _stats._dailyRewards;
 				for(int i = 0; i < rewards.Length; i++)

@@ -8,6 +8,7 @@ namespace TypeRunner
 		//------FIELDS
 		[SerializeField] private GameObject[] _disableOnFinish;
 		[SerializeField] private int _baseCoinsPerVictory = 10;
+		[SerializeField] private float _skinBonusPerVictory = 0.1f;
 		[SerializeField, HideInInspector] private MapGeneration _map;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private CoinManager _coins;
@@ -16,6 +17,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private LetterWriteSystem _letterSystem;
 		[SerializeField, HideInInspector] private DailyChallenge _dailyChallenge;
 		[SerializeField, HideInInspector] private Income _income;
+		[SerializeField, HideInInspector] private Shop _shop;
 		public static event System.Action<bool> OnLevelEnd;
 		private bool _isDailyLevel = false;
 		
@@ -24,6 +26,7 @@ namespace TypeRunner
 		{
 			if(sceneObject == true)
 			{
+				_shop = FindObjectOfType<Shop>(true);
 				_stats = FindObjectOfType<PlayerStats>(true);
 				_coins = FindObjectOfType<CoinManager>(true);
 				_player = FindObjectOfType<PlayerController>(true);
@@ -53,12 +56,18 @@ namespace TypeRunner
 			{
 				_stats.CurrentLevel++;
 				_coins.AddEarnedCoins((int)((float)_baseCoinsPerVictory * coinsMultiplier) + _income.GetBonusCoins());
+				_stats.SkinBonusProgress += _skinBonusPerVictory;
+				if(_stats.SkinBonusProgress > 1f)
+				{
+					_stats.SkinBonusProgress = 0f;
+					_shop.UnlockRandomSkin();
+				}
 				
 				if(_isDailyLevel)
 				{
 					float deilyProgress = (float)(manikinsCollected - 1) / (float)(_map.ManikinsAmount - 1) * 100f;
 					_dailyChallenge.TryUpdateDailyProgress(deilyProgress);
-					print("deilyProgress: " + (int)deilyProgress + "%");
+					//print("deilyProgress: " + (int)deilyProgress + "%");
 				}
 			}
 			LevelEnd();

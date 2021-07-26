@@ -40,6 +40,7 @@ namespace TypeRunner
 		
 		public void SetFinished()
 		{
+			_animator.SetTrigger("Dance");
 			IsFinished = true;
 		}
 		

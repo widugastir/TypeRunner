@@ -10,6 +10,7 @@ namespace TypeRunner
 		[SerializeField] private GameObject _previewCamera;
 		[SerializeField] private TMP_Text _labelText;
 		[SerializeField] private GameObject _panel;
+		[SerializeField] private GameObject _bonusSkinProgress;
 		[SerializeField, HideInInspector] private CoinManager _coins;
 		
 		//------METHODS
@@ -34,10 +35,12 @@ namespace TypeRunner
 			_panel.SetActive(true);
 			if(victory)
 			{
+				_bonusSkinProgress.SetActive(true);
 				_labelText.text = "Victory!";
 			}
 			else
 			{
+				_bonusSkinProgress.SetActive(false);
 				_labelText.text = "Lose!";
 			}
 		}
