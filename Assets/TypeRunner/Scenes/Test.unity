@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1458717021}
-  m_IndirectSpecularColor: {r: 0.372272, g: 0.6416999, b: 0.8780576, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.99999946, b: 0.99999946, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -533,14 +533,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355899812}
-  m_LocalRotation: {x: -0.18565626, y: 0.49003744, z: -0.10768529, w: -0.8448662}
-  m_LocalPosition: {x: 4.9969974, y: 3.8415117, z: 6.0134125}
+  m_LocalRotation: {x: -0.13476571, y: 0.043220818, z: -0.005884013, w: -0.989917}
+  m_LocalPosition: {x: 1.09, y: 7, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 86354871}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 20.834, y: -83.721, z: -0.002}
+  m_LocalEulerAnglesHint: {x: -195.505, y: 175, z: 180}
 --- !u!1 &384602102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,8 +1052,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bonusCoinsPerLevel: 2
   _maxLevel: 10
-  _baseCost: 200
-  _costMultiplier: 0.5
+  _baseCost: 80
+  _costMultiplier: 0.6
   _stats: {fileID: 596332918}
   _coins: {fileID: 596332917}
 --- !u!114 &596332914
@@ -1069,8 +1069,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxLevel: 10
-  _baseCost: 200
-  _costMultiplier: 0.5
+  _baseCost: 80
+  _costMultiplier: 0.6
   _stats: {fileID: 596332918}
   _coins: {fileID: 596332917}
 --- !u!114 &596332915
@@ -2207,8 +2207,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973246683}
-  m_LocalRotation: {x: -0.18565626, y: 0.49003744, z: -0.10768529, w: -0.8448662}
-  m_LocalPosition: {x: 4.9969974, y: 3.8415117, z: 6.0134125}
+  m_LocalRotation: {x: -0.13476571, y: 0.043220818, z: -0.005884013, w: -0.989917}
+  m_LocalPosition: {x: 1.09, y: 7, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2415,6 +2415,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 455652475}
     m_Modifications:
+    - target: {fileID: 496305620562113232, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 496305620562113247, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2487,10 +2491,38 @@ PrefabInstance:
       propertyPath: _previewCamera
       value: 
       objectReference: {fileID: 355899812}
+    - target: {fileID: 690460581723663017, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 690460582242618923, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 690460582267722068, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -51
+      objectReference: {fileID: 0}
+    - target: {fileID: 690460582267722068, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 133
+      objectReference: {fileID: 0}
+    - target: {fileID: 690460582939161042, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 690460583144874444, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1921665424}
+    - target: {fileID: 2830250168185872888, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2830250168185872888, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4642005328192305535, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
       propertyPath: _stats
       value: 
@@ -2507,6 +2539,14 @@ PrefabInstance:
       propertyPath: _income
       value: 
       objectReference: {fileID: 596332913}
+    - target: {fileID: 5056531551515075263, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 152
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187683803529592898, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5187683803529592909, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.b
       value: 1
@@ -2945,6 +2985,14 @@ PrefabInstance:
       propertyPath: _stats
       value: 
       objectReference: {fileID: 596332918}
+    - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
+      propertyPath: _unlockCost
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
+      propertyPath: _costPerSkin
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 4987801348790188964, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _stats
       value: 
