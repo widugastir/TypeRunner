@@ -45,12 +45,14 @@ namespace TypeRunner
 		{
 			ManikinMovement.OnBorderCollide += OnBorderCollide;
 			Mankin.OnChangeOwner += OnChangeOwner;
+			PlayerStats.OnStartUnitChange += OnStartUnitChange;
 		}
 		
 		private void OnDisable()
 		{
 			ManikinMovement.OnBorderCollide -= OnBorderCollide;
 			Mankin.OnChangeOwner -= OnChangeOwner;
+			PlayerStats.OnStartUnitChange -= OnStartUnitChange;
 		}
 		
 		protected void LateUpdate()
@@ -80,15 +82,35 @@ namespace TypeRunner
 			_mapMovement.CanMove = canMove;
 		}
 	    
+		private void OnStartUnitChange(int amount)
+		{
+			Init();
+		}
+	    
 		public void Init()
 		{
+			for(int i = 0; i < _manikins.Count; i++)
+			{
+				Destroy(_manikins[i].gameObject);
+			}
+			_manikins.Clear();
+			
 			Vector3 pos = transform.position;
 			for(int i = 0; i < _stats.StartUnitsLevel; i++)
 			{
 				pos = transform.position;
 				pos += Vector3.forward * Random.Range(-2f, 2f) + Vector3.right * Random.Range(-2f, 2f);
 				var man = _generator.SpawnManikin(pos);
+				man.SetIdle(true);
 				man.SetOwnerTo(false);
+			}
+		}
+		
+		public void InitMans()
+		{
+			for(int i = 0; i < _manikins.Count; i++)
+			{
+				_manikins[i].SetIdle(false);
 			}
 		}
 		

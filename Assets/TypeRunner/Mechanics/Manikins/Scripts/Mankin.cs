@@ -9,6 +9,7 @@ namespace TypeRunner
 		public bool IsNeutral = true;
 		[HideInInspector] public ManikinMovement Movement;
 		[HideInInspector] public ManikinCommands Commands;
+		private bool IsIdle { get; set; } = false;
 		public bool Immortal { get; set; } = false;
 		public bool IsFinished { get; set; } = false;
 		public int RankPosition { get; set; } = 0;
@@ -31,11 +32,44 @@ namespace TypeRunner
 			}
 		}
 		
+		private void OnEnable()
+		{
+			Shop.OnSkinSelect += OnSkinSelect;
+		}
+		
+		private void OnDisable()
+		{
+			Shop.OnSkinSelect -= OnSkinSelect;
+		}
+		
+		private void OnSkinSelect()
+		{
+			_animator = _skinChanger._current.animator;
+		}
+		
 		public void SetOwnerTo(bool neutral)
 		{
 			IsNeutral = neutral;
 			OnChangeOwner?.Invoke(this, IsNeutral);
 			_animator = _skinChanger._current.animator;
+			if(neutral == false && IsIdle == false)
+			{
+				_animator.SetTrigger("Running");
+			}
+		}
+		
+		public void SetIdle(bool idle)
+		{
+			_animator = _skinChanger._current.animator;
+			IsIdle = idle;
+			if(IsIdle)
+			{
+				//_animator.SetTrigger("Idle");
+			}
+			else
+			{
+				_animator.SetTrigger("Running");
+			}
 		}
 		
 		public void SetFinished()

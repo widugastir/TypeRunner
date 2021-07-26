@@ -6,11 +6,15 @@ namespace TypeRunner
 	public class MankinColor : MonoBehaviour, INeedReference
 	{
 		private ColorChanger _colorChanger;
-		[SerializeField, HideInInspector] private Renderer _renderer;
+		[SerializeField, HideInInspector] private SkinChanger _skins;
+		private Color mainColor;
 		
 		public void UpdateReferences(bool sceneObject)
 		{
-			_renderer = gameObject.GetComponentInChildren<Renderer>();
+			if(sceneObject == false)
+			{
+				_skins = GetComponentInChildren<SkinChanger>(true);
+			}
 		}
 		
 		private void OnEnable()
@@ -26,12 +30,29 @@ namespace TypeRunner
 		private void Start()
 		{
 			_colorChanger = FindObjectOfType<ColorChanger>();
-			SetColor(_colorChanger.PlayerColor);
+			UpdateColor();
 		}
 		
-		public void SetColor(Color color)
+		private void SetColor(Color color)
 		{
-			_renderer.material.color = color;
+			UpdateColor();
+		}
+		
+		public void UpdateColor()
+		{
+			Renderer renderer = _skins._current.renderer;
+			for(int i = 0; i < renderer.materials.Length; i++)
+			{
+				if(i == _skins._current.MainMaterialIndex)
+				{
+					renderer.materials[i].color = _colorChanger.PlayerColor;
+				}
+				else
+				{
+					renderer.materials[i].color = _colorChanger.PlayerColor * 0.5f;
+					
+				}
+			}
 		}
 	}
 }

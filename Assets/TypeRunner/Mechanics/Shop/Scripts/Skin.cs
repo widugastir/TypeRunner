@@ -7,14 +7,17 @@ namespace TypeRunner
 	{
 		public SkinType _type;
 		public GameObject _skinObject;
+		public int MainMaterialIndex = 0;
 		[SerializeField, HideInInspector] public Animator animator;
+		[SerializeField, HideInInspector] public Renderer renderer;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
 		{
 			if(sceneObject == false)
 			{
-				animator = gameObject.GetComponentInChildren<Animator>();
+				animator = GetComponentInChildren<Animator>(true);
+				renderer = GetComponentInChildren<Renderer>(true);
 			}
 		}
 	}

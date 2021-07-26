@@ -14,7 +14,7 @@ namespace TypeRunner
 		[SerializeField] private Transform _mapParent;
 		[SerializeField] private Platform _basePlatform;
 		[SerializeField, HideInInspector] private Platform _lastPlatform;
-		
+		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private PlatformsHolder _prefabs;
 		[SerializeField] private LetterPickup LetterPrefab;
 		[SerializeField] private Mankin ManikinPrefab;
@@ -26,12 +26,27 @@ namespace TypeRunner
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
 		{
-			_prefabs = gameObject.GetComponentInChildren<PlatformsHolder>();
+			if(sceneObject == true)
+			{
+				_prefabs = gameObject.GetComponentInChildren<PlatformsHolder>();
+				_player = FindObjectOfType<PlayerController>(true);
+			}
 		}
 		
-		private void Start()
+		private void OnEnable()
+		{
+			SaveSystem.OnEndLoad += OnEndLoad;
+		}
+		
+		private void OnDisable()
+		{
+			SaveSystem.OnEndLoad -= OnEndLoad;
+		}
+		
+		private void OnEndLoad()
 		{
 			_lastPlatform = _basePlatform;
+			_player.Init();
 			StartCoroutine(Generate());
 		}
 		
@@ -104,6 +119,7 @@ namespace TypeRunner
 		
 		public void ResetToDaily()
 		{
+			_player.Init();
 			foreach(var p in _mapPlatforms)
 				if(p != null)
 					Destroy(p.gameObject);
@@ -125,6 +141,7 @@ namespace TypeRunner
 		
 		public void Reset()
 		{
+			_player.Init();
 			foreach(var p in _mapPlatforms)
 				if(p != null)
 					Destroy(p.gameObject);

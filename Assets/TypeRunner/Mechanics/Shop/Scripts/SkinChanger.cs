@@ -6,6 +6,7 @@ namespace TypeRunner
 	{
 		[SerializeField] private Skin[] _skins;
 		[SerializeField] public Skin _current;
+		[SerializeField] public MankinColor _manColor;
 		private PlayerStats _stats;
 		private PlayerStats Stats 
 		{
@@ -48,6 +49,7 @@ namespace TypeRunner
 		public void SetSkin()
 		{
 			SetSkin(Stats._playerSkin);
+			_manColor.UpdateColor();
 		}
 		
 		public void SetSkin(SkinType type)

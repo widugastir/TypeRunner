@@ -367,6 +367,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Destructable: 0
+  _collider: {fileID: 0}
+  Childs: []
 --- !u!1 &4246005216853637080
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5692062600183096546}
   - component: {fileID: -4760559141306640773}
+  - component: {fileID: 7289018799836608504}
   m_Layer: 0
   m_Name: SLIDE_1
   m_TagString: Untagged
@@ -621,6 +624,19 @@ MonoBehaviour:
   - {fileID: 8216652319106943148}
   - {fileID: 564317321285938666}
   _manikinSpawnPos: []
+--- !u!65 &7289018799836608504
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692062600183096547}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5874132828589866382
 GameObject:
   m_ObjectHideFlags: 0
