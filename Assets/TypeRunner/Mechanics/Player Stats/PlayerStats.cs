@@ -69,6 +69,7 @@ namespace TypeRunner
 			}
 		}
 		
+		[Saveable] public int _reviveCost = 100;
 		[Saveable] public int _coins = 0;
 		[Saveable] public int _currentLevel = 0;
 		[Saveable] public int _startUnitsLevel = 1;

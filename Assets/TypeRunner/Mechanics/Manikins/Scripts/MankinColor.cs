@@ -7,6 +7,7 @@ namespace TypeRunner
 	{
 		private ColorChanger _colorChanger;
 		[SerializeField, HideInInspector] private SkinChanger _skins;
+		[SerializeField] private ParticleSystem[] _particles;
 		private Color mainColor;
 		
 		public void UpdateReferences(bool sceneObject)
@@ -40,16 +41,21 @@ namespace TypeRunner
 		
 		public void UpdateColor()
 		{
+			Color newColor = _colorChanger.PlayerColor;
+			foreach(var p in _particles)
+			{
+				p.startColor = newColor;
+			}
 			Renderer renderer = _skins._current.renderer;
 			for(int i = 0; i < renderer.materials.Length; i++)
 			{
 				if(i == _skins._current.MainMaterialIndex)
 				{
-					renderer.materials[i].color = _colorChanger.PlayerColor;
+					renderer.materials[i].color = newColor;
 				}
 				else
 				{
-					renderer.materials[i].color = _colorChanger.PlayerColor * 0.5f;
+					renderer.materials[i].color = newColor * 0.5f;
 					
 				}
 			}

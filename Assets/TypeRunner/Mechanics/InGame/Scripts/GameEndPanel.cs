@@ -12,6 +12,7 @@ namespace TypeRunner
 		[SerializeField] private GameObject _bonusSkinProgress;
 		[SerializeField, HideInInspector] private CoinManager _coins;
 		[SerializeField, HideInInspector] private PlayerController _player;
+		[SerializeField, HideInInspector] private LevelManager _levelManager;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -20,17 +21,8 @@ namespace TypeRunner
 			{
 				_coins = FindObjectOfType<CoinManager>(true);
 				_player = FindObjectOfType<PlayerController>(true);
+				_levelManager = FindObjectOfType<LevelManager>(true);
 			}
-		}
-		
-		private void OnEnable()
-		{
-			LevelManager.OnLevelEnd += Enable;
-		}
-		
-		private void OnDisable()
-		{
-			LevelManager.OnLevelEnd -= Enable;
 		}
 		
 		public void Enable(bool victory)
@@ -47,13 +39,26 @@ namespace TypeRunner
 			}
 		}
 		
-		public void Disable()
+		public void Disable(bool restartLevel = false)
 		{
-			_previewCamera.SetActive(true);
-			_coins.EarnedToCurrent();
-			_losePanel.SetActive(false);
-			_victoryPanel.SetActive(false);
-			_player.Init();
+			if(restartLevel)
+			{
+				//_previewCamera.SetActive(true);
+				//_coins.EarnedToCurrent();
+				_losePanel.SetActive(false);
+				_victoryPanel.SetActive(false);
+				//_levelManager.FinishLevel();
+				_player.Init(true, 1f);
+			}
+			else
+			{
+				_previewCamera.SetActive(true);
+				_coins.EarnedToCurrent();
+				_losePanel.SetActive(false);
+				_victoryPanel.SetActive(false);
+				_levelManager.FinishLevel();
+				_player.Init();
+			}
 		}
 	}
 }

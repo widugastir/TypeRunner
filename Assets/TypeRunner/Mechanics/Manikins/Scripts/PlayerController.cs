@@ -62,11 +62,11 @@ namespace TypeRunner
 		
 		protected void Update()
 		{
-			if(Input.GetKeyDown(KeyCode.K))
-				_levelManager.FinishLevel(true, _manikinsCollected, 2f);
+			//if(Input.GetKeyDown(KeyCode.K))
+			//	_levelManager.FinishLevel();
 				
-			if(Input.GetKeyDown(KeyCode.L))
-				_levelManager.FinishLevel(false, _manikinsCollected);
+			//if(Input.GetKeyDown(KeyCode.L))
+			//	_levelManager.FinishLevel();
 		}
 		
 		private void Start()
@@ -87,7 +87,7 @@ namespace TypeRunner
 			Init();
 		}
 	    
-		public void Init()
+		public void Init(bool makeImmortal = false, float immortalTime = 0f)
 		{
 			for(int i = 0; i < _manikins.Count; i++)
 			{
@@ -103,6 +103,10 @@ namespace TypeRunner
 				var man = _generator.SpawnManikin(pos);
 				man.SetIdle(true);
 				man.SetOwnerTo(false);
+				if(makeImmortal)
+				{
+					man.SetImmortal(true, immortalTime);
+				}
 			}
 		}
 		
@@ -112,6 +116,17 @@ namespace TypeRunner
 			{
 				_manikins[i].SetIdle(false);
 			}
+		}
+		
+		public void LateInitMans()
+		{
+			StartCoroutine(InitM());
+		}
+		
+		private IEnumerator InitM()
+		{
+			yield return null;
+			InitMans();
 		}
 		
 		public void SetIndependentMove(bool independent)
@@ -186,7 +201,8 @@ namespace TypeRunner
 					StopSpectateTo(manikin);
 					if(_manikins.Count == 0)
 					{
-						_levelManager.FinishLevel(false, _manikinsCollected);
+						_levelManager.PreFinishLevel(false, _manikinsCollected);
+						print("aaa  " + _manikinsCollected);
 					}
 				}
 			}
@@ -211,23 +227,23 @@ namespace TypeRunner
 			manikin.transform.SetParent(_mapMovement.transform);
 			manikin.Movement.SetCanMove(false);
 			manikin.SetFinished();
-			_manikins.Remove(manikin);
 			StopSpectateTo(manikin, false);
 			
 			_manikinsCollected++;
-			if(_manikins.Count == 0)
+			if(_manikins.Count == 1)
 			{
 				_mapMovement.CanMove = false;
 				_groupCenter.CanMove = false;
 				StartCoroutine(FinishLevel(manikin.EarnedCoinsBonus));
 				_lastLadder.PlayFinishParticles(manikin.transform.position);
 			}
+			_manikins.Remove(manikin);
 		}
 		
 		private IEnumerator FinishLevel(float coinBonus)
 		{
 			yield return new WaitForSecondsRealtime(_finishDelay);
-			_levelManager.FinishLevel(true, _manikinsCollected, coinBonus);
+			_levelManager.PreFinishLevel(true, _manikinsCollected, coinBonus);
 			_lastLadder.StopFinishParticles();
 		}
 		

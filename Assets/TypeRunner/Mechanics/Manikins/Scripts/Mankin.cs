@@ -15,6 +15,7 @@ namespace TypeRunner
 		public int RankPosition { get; set; } = 0;
 		public int Rank { get; set; } = 0;
 		public float EarnedCoinsBonus { get; set; } = 0f;
+		[SerializeField] private ParticleSystem[] _dieVfx;
 		
 		public static event System.Action<Mankin, bool> OnChangeOwner;
 		[SerializeField, HideInInspector] public Animator _animator;
@@ -45,6 +46,18 @@ namespace TypeRunner
 		private void OnSkinSelect()
 		{
 			_animator = _skinChanger._current.animator;
+		}
+		
+		public void SetImmortal(bool immortal, float immortalTime)
+		{
+			Immortal = immortal;
+			if(immortal == true)
+				Invoke(nameof(SetMortal), immortalTime);
+		}
+		
+		private void SetMortal()
+		{
+			Immortal = false;
 		}
 		
 		public void SetOwnerTo(bool neutral)
@@ -107,6 +120,11 @@ namespace TypeRunner
 		{
 			if(Immortal)
 				return;
+			foreach(var p in _dieVfx)
+			{
+				p.transform.SetParent(null);
+				p.Play();
+			}
 			SetOwnerTo(true);
 			Destroy(gameObject);
 		}

@@ -16,6 +16,7 @@ public class ObstacleChild : MonoBehaviour
 		transform.SetParent(null);
 		_rigi.isKinematic = false;
 		_rigi.AddForce((transform.position - forcePoint).normalized * _force + Vector3.up * _force, ForceMode.Impulse);
+		_rigi.AddTorque(Random.insideUnitSphere * 150f);
 		Destroy(gameObject, _lifetime);
     }
 }

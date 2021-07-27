@@ -16,16 +16,19 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private CameraResetter _cameraResetter;
 		[SerializeField, HideInInspector] private LetterWriteSystem _letterSystem;
 		[SerializeField, HideInInspector] private DailyChallenge _dailyChallenge;
+		[SerializeField, HideInInspector] private GameEndPanel _endPanel;
 		[SerializeField, HideInInspector] private Income _income;
 		[SerializeField, HideInInspector] private Shop _shop;
 		public static event System.Action<bool> OnLevelEnd;
 		private bool _isDailyLevel = false;
+		private bool _isVictory = false;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
 		{
 			if(sceneObject == true)
 			{
+				_endPanel = FindObjectOfType<GameEndPanel>(true);
 				_shop = FindObjectOfType<Shop>(true);
 				_stats = FindObjectOfType<PlayerStats>(true);
 				_coins = FindObjectOfType<CoinManager>(true);
@@ -50,8 +53,10 @@ namespace TypeRunner
 			_letterSystem.Reset();
 		}
 		
-		public void FinishLevel(bool victory, int manikinsCollected, float coinsMultiplier = 1f)
+		public void PreFinishLevel(bool victory, int manikinsCollected, float coinsMultiplier = 1f)
 		{
+			Time.timeScale = 0f;
+			_isVictory = victory;
 			if(victory)
 			{
 				_stats.CurrentLevel++;
@@ -67,21 +72,20 @@ namespace TypeRunner
 				{
 					float deilyProgress = (float)(manikinsCollected - 1) / (float)(_map.ManikinsAmount - 1) * 100f;
 					_dailyChallenge.TryUpdateDailyProgress(deilyProgress);
-					//print("deilyProgress: " + (int)deilyProgress + "%");
 				}
 			}
-			LevelEnd();
-			OnLevelEnd?.Invoke(victory);
+			_endPanel.Enable(victory);
 		}
 		
-		private void LevelEnd()
+		public void FinishLevel()
 		{
-			Time.timeScale = 0f;
+			OnLevelEnd?.Invoke(_isVictory);
 			ResetLevel();
 		}
 		
 		private void ResetLevel()
 		{
+			_isVictory = false;
 			_isDailyLevel = false;
 			foreach(var p in _disableOnFinish)
 				p.SetActive(false);

@@ -31,9 +31,9 @@ namespace TypeRunner
 		{
 			_previewCamera.SetActive(false);
 			_levelManager.StartLevel();
-			_player.InitMans();
 			_canvas.gameObject.SetActive(false);
 			Time.timeScale = 1f;
+			_player.LateInitMans();
 		}
 		
 	}
