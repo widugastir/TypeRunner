@@ -10,7 +10,19 @@ namespace TypeRunner
 		[HideInInspector] public ManikinMovement Movement;
 		[HideInInspector] public ManikinCommands Commands;
 		private bool IsIdle { get; set; } = false;
-		public bool Immortal { get; set; } = false;
+		private bool _immortal = false;
+		public bool Immortal 
+		{ 
+			get 
+			{
+				return _immortal; 
+			} 
+			set 
+			{
+				_immortal = value; 
+			} 
+		}
+		
 		public bool IsFinished { get; set; } = false;
 		public int RankPosition { get; set; } = 0;
 		public int Rank { get; set; } = 0;
@@ -41,6 +53,7 @@ namespace TypeRunner
 		private void OnDisable()
 		{
 			Shop.OnSkinSelect -= OnSkinSelect;
+			Immortal = false;
 		}
 		
 		private void OnSkinSelect()

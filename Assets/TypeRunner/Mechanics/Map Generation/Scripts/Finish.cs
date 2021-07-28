@@ -33,6 +33,7 @@ namespace TypeRunner
 				{
 					_isUsed = true;
 					_player.SetIndependentMove(true);
+					_player.SetControllable(false);
 					_player.MakeFormationLine();
 				}
 			}

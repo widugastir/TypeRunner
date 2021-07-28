@@ -22,6 +22,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private ControlPanel _controlPanel;
 		[SerializeField, HideInInspector] private CinemachineTargetGroup _cameraTargetGroup;
 		private bool _canMove = true;
+		private bool _controllable = true;
 		private int _manikinsCollected = 0;
 		private Ladder _lastLadder;
 		public bool IsMovementEnabled { get; set; } = true;
@@ -145,6 +146,8 @@ namespace TypeRunner
 		
 		private void StrafeGroupCenter(float strafe)
 		{
+			if(_controllable == false)
+				return;
 			_groupCenter.SetStrafePos(strafe);
 			Vector3 newPos = _manikinsParent.position;
 			newPos.x = _groupCenter._groupCenter.position.x;
@@ -258,6 +261,11 @@ namespace TypeRunner
 			_cameraTargetGroup.AddMember(manikin.transform, 1f, 0f);
 		}
 		
+		public void SetControllable(bool controllable)
+		{
+			_controllable = controllable;
+		}
+		
 		public void MakeFormationLine()
 		{
 			float centerZ = _groupCenter.transform.position.z;
@@ -275,7 +283,8 @@ namespace TypeRunner
 				Vector3 newPos = _manikins[i].transform.position;
 				newPos.z = z;
 				newPos.x = x;
-				_manikins[i].transform.position = newPos;
+				//_manikins[i].transform.position = newPos;
+				_manikins[i].Movement.GoTo(newPos, 0.7f);
 				if(i == 0)
 				{
 					SpactateOnlyFor(_manikins[i]);
@@ -331,6 +340,7 @@ namespace TypeRunner
 			_groupCenter.Reset();
 			_mapMovement.Reset();
 			_mapMovement.CanMove = true;
+			_controllable = true;
 		}
 	}
 }

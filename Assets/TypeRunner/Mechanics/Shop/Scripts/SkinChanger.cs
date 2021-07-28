@@ -76,7 +76,6 @@ namespace TypeRunner
 		
 		private void OnFlickerStop()
 		{
-			print(1);
 			Color color = _current.renderer.material.color;
 			color.a = 1f;
 			_current.renderer.material.color = color;

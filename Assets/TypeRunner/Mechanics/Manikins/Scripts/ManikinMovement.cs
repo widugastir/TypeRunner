@@ -16,7 +16,7 @@ namespace TypeRunner
 		public bool IsIndependetMovement { get; set; } = false;
 		public bool MoveToGroupCenter { get; set; } = true;
 		private bool CanMoveForward{ get; set; } = false;
-		
+		private Tween _goToTween;
 		private Transform _groupCenter;
 		
 		public static event System.Action<Vector3> OnBorderCollide;
@@ -35,6 +35,27 @@ namespace TypeRunner
 		public void SetCanMove2(bool b)
 		{
 			CanMoveForward = b;
+		}
+		
+		protected void OnDisable()
+		{
+			if(_goToTween != null)
+			{
+				_goToTween.Kill();
+				_goToTween = null;
+			}
+		}
+		
+		public void GoTo(Vector3 position, float duration)
+		{
+			if(_goToTween != null)
+			{
+				_goToTween.Kill();
+				_goToTween = null;
+			}
+			_goToTween = _rigi
+				.DOMove(position, duration)
+				.SetEase(Ease.Linear);
 		}
 		
 		private void MoveToPoint()
