@@ -7,11 +7,13 @@ public class MapMovement : MonoBehaviour
 	private float _baseSpeed;
 	public bool CanMove { get; set; } = true;
 	private Vector3 _basePosition;
+	private Vector3 _lastSavePoint;
 	
 	private void Start()
 	{
 		_basePosition = transform.position;
 		_baseSpeed = _moveSpeed;
+		_lastSavePoint = transform.position;
 	}
 	
 	public void SetUpMovement(float speed)
@@ -36,5 +38,6 @@ public class MapMovement : MonoBehaviour
 	{
 		transform.position = _basePosition;
 		_moveSpeed = _baseSpeed;
+		_lastSavePoint = transform.position;
 	}
 }

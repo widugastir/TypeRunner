@@ -74,7 +74,6 @@ namespace TypeRunner
 			//Application.targetFrameRate = 40;
 			//QualitySettings.vSyncCount = 0;
 			//print("targetFrameRate = 40");
-			//Cursor.lockState = CursorLockMode.Confined;
 		}
 		
 		public void SetMove(bool canMove)
@@ -202,7 +201,6 @@ namespace TypeRunner
 					if(_manikins.Count == 0)
 					{
 						_levelManager.PreFinishLevel(false, _manikinsCollected);
-						print("aaa  " + _manikinsCollected);
 					}
 				}
 			}

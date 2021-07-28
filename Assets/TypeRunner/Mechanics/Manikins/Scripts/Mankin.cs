@@ -52,12 +52,16 @@ namespace TypeRunner
 		{
 			Immortal = immortal;
 			if(immortal == true)
+			{
 				Invoke(nameof(SetMortal), immortalTime);
+				SetFlickering(true);
+			}
 		}
 		
 		private void SetMortal()
 		{
 			Immortal = false;
+			SetFlickering(false);
 		}
 		
 		public void SetOwnerTo(bool neutral)
@@ -113,6 +117,18 @@ namespace TypeRunner
 			if(moveForward)
 			{
 				Movement.SetCanMove2(true);
+			}
+		}
+		
+		public void SetFlickering(bool flicker)
+		{
+			if(flicker)
+			{
+				_skinChanger.StartFlickering();
+			}
+			else
+			{
+				_skinChanger.StopFlickering();
 			}
 		}
 		

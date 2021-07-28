@@ -48,7 +48,7 @@ namespace TypeRunner
 				_losePanel.SetActive(false);
 				_victoryPanel.SetActive(false);
 				//_levelManager.FinishLevel();
-				_player.Init(true, 1f);
+				_player.Init(true, 3f);
 			}
 			else
 			{

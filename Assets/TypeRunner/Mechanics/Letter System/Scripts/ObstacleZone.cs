@@ -20,7 +20,7 @@ namespace TypeRunner
 		{
 			if(other.TryGetComponent(out Mankin man))
 			{
-				if(man.Commands._isBlocked)
+				if(man.Commands._isBlocked || man.Immortal)
 					return;
 				if(_isUsed == false)
 				{

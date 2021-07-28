@@ -7,6 +7,7 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField] private GameObject[] _disableOnFinish;
+		[SerializeField] private GameObject _gameCanvas;
 		[SerializeField] private int _baseCoinsPerVictory = 10;
 		[SerializeField] private float _skinBonusPerVictory = 0.1f;
 		[SerializeField, HideInInspector] private MapGeneration _map;
@@ -50,12 +51,16 @@ namespace TypeRunner
 		
 		public void StartLevel()
 		{
+			_gameCanvas.SetActive(true);
 			_letterSystem.Reset();
 		}
 		
 		public void PreFinishLevel(bool victory, int manikinsCollected, float coinsMultiplier = 1f)
 		{
 			Time.timeScale = 0f;
+			
+			//disaaable ui game
+			
 			_isVictory = victory;
 			if(victory)
 			{
@@ -75,6 +80,7 @@ namespace TypeRunner
 				}
 			}
 			_endPanel.Enable(victory);
+			_gameCanvas.SetActive(false);
 		}
 		
 		public void FinishLevel()

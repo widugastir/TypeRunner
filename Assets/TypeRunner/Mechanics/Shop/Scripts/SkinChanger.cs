@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DG.Tweening;
 
 namespace TypeRunner
 {
@@ -7,6 +8,8 @@ namespace TypeRunner
 		[SerializeField] private Skin[] _skins;
 		[SerializeField] public Skin _current;
 		[SerializeField] public MankinColor _manColor;
+		private Tween _flickering = null;
+		
 		private PlayerStats _stats;
 		private PlayerStats Stats 
 		{
@@ -34,6 +37,7 @@ namespace TypeRunner
 		{
 			Shop.OnSkinSelect -= SetSkin;
 			SaveSystem.OnEndLoad -= UpdateSkin;
+			StopFlickering();
 		}
 		
 		private void Start()
@@ -50,6 +54,32 @@ namespace TypeRunner
 		{
 			SetSkin(Stats._playerSkin);
 			_manColor.UpdateColor();
+		}
+		
+		public void StartFlickering()
+		{
+			if(_flickering != null)
+				return;
+			_flickering = _current.renderer.material
+				.DOFade(0f, "_Color", 0.1f)
+				.SetEase(Ease.Linear)
+				.SetLoops(-1, LoopType.Yoyo)
+				.OnComplete(OnFlickerStop);
+		}
+		
+		public void StopFlickering()
+		{
+			if(_flickering == null)
+				return;
+			_flickering.Kill(true);
+		}
+		
+		private void OnFlickerStop()
+		{
+			print(1);
+			Color color = _current.renderer.material.color;
+			color.a = 1f;
+			_current.renderer.material.color = color;
 		}
 		
 		public void SetSkin(SkinType type)

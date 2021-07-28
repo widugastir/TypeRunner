@@ -22,6 +22,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private GameStarter _starter;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private CoinManager _coins;
+		[SerializeField, HideInInspector] private PlayerController _player;
 	    
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -30,6 +31,7 @@ namespace TypeRunner
 			{
 				_starter = FindObjectOfType<GameStarter>(true);
 				_levelManager = FindObjectOfType<LevelManager>(true);
+				_player = FindObjectOfType<PlayerController>(true);
 				_stats = FindObjectOfType<PlayerStats>(true);
 				_lines = GetComponentsInChildren<DailyLine>(true);
 				_coins = FindObjectOfType<CoinManager>(true);
@@ -179,6 +181,7 @@ namespace TypeRunner
 			{
 				_levelManager.StartDailyLevel();
 				_stats._dailyAttempts--;
+				_player.Init();
 				_starter.BeginPlay();
 				_challengeCnavas.SetActive(false);
 			}

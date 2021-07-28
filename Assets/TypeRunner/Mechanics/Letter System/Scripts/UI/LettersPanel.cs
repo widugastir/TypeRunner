@@ -84,6 +84,7 @@ namespace TypeRunner
 			{
 				button.Disable();
 			}
+			if(_selectedButtons != null)
 			foreach(var button in _selectedButtons)
 			{
 				LetterData.Instance.TryRemoveLetter(button.Letter);

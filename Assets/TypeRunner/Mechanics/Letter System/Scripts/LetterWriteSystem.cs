@@ -20,7 +20,7 @@ namespace TypeRunner
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
 		{
-			_lettersPanel = gameObject.GetComponentInChildren<LettersPanel>();
+			_lettersPanel = gameObject.GetComponentInChildren<LettersPanel>(true);
 			_lettersPanel.SetLetterWriteSystem(this);
 		}
 		
