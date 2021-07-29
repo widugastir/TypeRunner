@@ -37,7 +37,7 @@ namespace TypeRunner
 		
 		public void EarnedToCurrent()
 		{
-			AddCoins(_stats.EarnedCoins);
+			AddCoins((int)((float)_stats.EarnedCoins * _stats._coinsMultiplier));
 			_stats.EarnedCoins = 0;
 		}
 	}

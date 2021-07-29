@@ -42,6 +42,14 @@ namespace TypeRunner
 		public int GetBonusCoins() => (_stats.IncomeLevel - 1) * _bonusCoinsPerLevel;
 		public int GetUpgradeCost() => _baseCost + (int)((float)(_stats.IncomeLevel - 1) * _baseCost * _costMultiplier);
 		
+		public bool CanUpgrade()
+		{
+			if(_stats.IncomeLevel >= _maxLevel
+				|| _stats.Coins < GetUpgradeCost())
+				return false;
+			return true;
+		}
+		
 		public bool TryUpgrade()
 		{
 			if(_stats.IncomeLevel >= _maxLevel)

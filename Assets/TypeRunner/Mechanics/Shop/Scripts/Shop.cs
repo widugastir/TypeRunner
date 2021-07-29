@@ -10,18 +10,12 @@ namespace TypeRunner
 	{
 		[SerializeField, HideInInspector] private CoinManager _coins;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
-		[SerializeField] private int _costPerSkin = 1000;
-		[SerializeField] private int _unlockCost = 2000;
+		[SerializeField] private int[] _skinCost;
 		public int UnlockCost
 		{
 			get 
 			{
-				return _unlockCost + _costPerSkin * BoughtedSkins();
-			}
-			
-			private set
-			{
-				_unlockCost = value;
+				return _skinCost[Mathf.Max(0, BoughtedSkins() - 1)];
 			}
 		}
 		

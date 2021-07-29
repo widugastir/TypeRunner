@@ -59,7 +59,8 @@ namespace TypeRunner
 		
 		private void UpdateUI()
 		{
-			if(_stats.Coins >= _income.GetUpgradeCost())
+			if(_stats.Coins >= _income.GetUpgradeCost()
+				&& _income.CanUpgrade())
 			{
 				_button.interactable = true;
 			}

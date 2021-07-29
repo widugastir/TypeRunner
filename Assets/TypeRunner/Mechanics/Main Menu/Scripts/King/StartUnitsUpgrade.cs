@@ -25,6 +25,14 @@ namespace TypeRunner
 		
 		public int GetUpgradeCost() => _baseCost + (int)((float)(_stats.StartUnitsLevel - 1) * _baseCost * _costMultiplier);
 		
+		public bool CanUpgrade()
+		{
+			if(_stats.StartUnitsLevel >= _maxLevel
+				|| _stats.Coins < GetUpgradeCost())
+				return false;
+			return true;
+		}
+		
 		public bool TryUpgrade()
 		{
 			if(_stats.StartUnitsLevel >= _maxLevel)

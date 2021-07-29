@@ -9,12 +9,12 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private Mankin _man;
 		[SerializeField, HideInInspector] private Rigidbody _rigi;
 		[SerializeField, HideInInspector] private CapsuleCollider _collider;
-		[SerializeField, HideInInspector] private AnimationEvents _events;
 		[SerializeField, HideInInspector] private StoneThrower _thrower;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		public bool _isBlocked {get; private set;} = false;
 		private Animator _animator;
 		private float _baseHeight;
+		private float _basePosY;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -22,7 +22,6 @@ namespace TypeRunner
 			_man = gameObject.GetComponentInChildren<Mankin>();
 			_rigi = gameObject.GetComponentInChildren<Rigidbody>();
 			_collider = gameObject.GetComponentInChildren<CapsuleCollider>();
-			_events = gameObject.GetComponentInChildren<AnimationEvents>();
 			_thrower = gameObject.GetComponentInChildren<StoneThrower>();
 		}
 		
@@ -31,6 +30,7 @@ namespace TypeRunner
 			_animator = _man._animator;
 			_player = FindObjectOfType<PlayerController>(true);
 			_baseHeight = _collider.height;
+			_basePosY = _collider.center.y;
 		}
 		
 		public void DoCommand(E_Command command)
@@ -77,6 +77,9 @@ namespace TypeRunner
 		{
 			_player.SetMove(true);
 			_collider.height = _baseHeight;
+			Vector3 newPos = _collider.center;
+			newPos.y = _basePosY;
+			_collider.center = newPos;
 			_man.Immortal = false;
 		}
 		
@@ -88,7 +91,10 @@ namespace TypeRunner
 		
 		private void Slide()
 		{
-			_collider.height = 0.5f;
+			_collider.height = 1.4f;
+			Vector3 newPos = _collider.center;
+			newPos.y = 0.5f;
+			_collider.center = newPos;
 			_animator.SetTrigger("Slide");
 		}
 		
@@ -100,21 +106,23 @@ namespace TypeRunner
 		
 		private void Throw()
 		{
+			
+			
 			_player.IsMovementEnabled = false;
 			_animator.SetTrigger("Throw");
-			_events.OnThrow += OnThrow;
-			_events.OnAnimationEnd += OnAnimationEnd;
+			_man._skinChanger._current._events.OnThrow += OnThrow;
+			_man._skinChanger._current._events.OnThrow += OnAnimationEnd;
 		}
 		
 		private void OnThrow()
 		{
-			_events.OnThrow -= OnThrow;
+			_man._skinChanger._current._events.OnThrow -= OnThrow;
 			_thrower.Throw(transform.forward);
 		}
 		
 		private void OnAnimationEnd()
 		{
-			_events.OnAnimationEnd -= OnAnimationEnd;
+			_man._skinChanger._current._events.OnThrow -= OnAnimationEnd;
 			_player.IsMovementEnabled = true;
 			_animator.SetTrigger("Running");
 			_player.SetMove(true);

@@ -66,11 +66,15 @@ namespace TypeRunner
 			{
 				_stats.CurrentLevel++;
 				_coins.AddEarnedCoins((int)((float)_baseCoinsPerVictory * coinsMultiplier) + _income.GetBonusCoins());
-				_stats.SkinBonusProgress += _skinBonusPerVictory;
-				if(_stats.SkinBonusProgress > 1f)
+				
+				if(_isDailyLevel == false)
 				{
-					_stats.SkinBonusProgress = 0f;
-					_shop.UnlockRandomSkin();
+					_stats.SkinBonusProgress += _skinBonusPerVictory;
+					if(_stats.SkinBonusProgress > 1f)
+					{
+						_stats.SkinBonusProgress = 0f;
+						_shop.UnlockRandomSkin();
+					}
 				}
 				
 				if(_isDailyLevel)
@@ -78,8 +82,15 @@ namespace TypeRunner
 					float deilyProgress = (float)(manikinsCollected - 1) / (float)(_map.ManikinsAmount - 1) * 100f;
 					_dailyChallenge.TryUpdateDailyProgress(deilyProgress);
 				}
+				if(_isDailyLevel)
+					_endPanel.Enable(victory, false);
+				else
+					_endPanel.Enable(victory, true);
 			}
-			_endPanel.Enable(victory);
+			else
+			{
+				_endPanel.Enable(victory, false);
+			}
 			_gameCanvas.SetActive(false);
 		}
 		

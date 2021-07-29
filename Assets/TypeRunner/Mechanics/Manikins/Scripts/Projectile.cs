@@ -47,12 +47,12 @@ namespace TypeRunner
 					obstacle.Kill(transform.position);
 				}
 			}
-			Kill();
+			Kill(FindObjectOfType<MapMovement>().transform);
 		}
 		
-		private void Kill()
+		private void Kill(Transform parent)
 		{
-			_explosion.transform.SetParent(null);
+			_explosion.transform.SetParent(parent);
 			_explosion.Play();
 			Destroy(gameObject);
 		}

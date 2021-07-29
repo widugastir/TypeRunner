@@ -10,6 +10,8 @@ namespace TypeRunner
 		[SerializeField] private GameObject _victoryPanel;
 		[SerializeField] private GameObject _losePanel;
 		[SerializeField] private GameObject _bonusSkinProgress;
+		[SerializeField] private LevelRoulette _roulette;
+		[SerializeField] private GameObject _buttonContinue;
 		[SerializeField, HideInInspector] private CoinManager _coins;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
@@ -25,17 +27,24 @@ namespace TypeRunner
 			}
 		}
 		
-		public void Enable(bool victory)
+		public void Enable(bool victory, bool enableSkinProgress)
 		{
 			if(victory)
 			{
+				_buttonContinue.SetActive(true);
 				_victoryPanel.SetActive(true);
-				//_bonusSkinProgress.SetActive(true);
+				
+				if(_roulette.Enable())
+				{
+					_buttonContinue.SetActive(false);
+				}
+				
+				if(enableSkinProgress)	_bonusSkinProgress.SetActive(true);
+				else					_bonusSkinProgress.SetActive(false);
 			}
 			else
 			{
 				_losePanel.SetActive(true);
-				//_bonusSkinProgress.SetActive(false);
 			}
 		}
 		

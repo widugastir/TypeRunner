@@ -69,6 +69,8 @@ namespace TypeRunner
 			}
 		}
 		
+		[Saveable, HideInInspector] public float _rouletteRotate = -1f;
+		[Saveable, HideInInspector] public Color _playerColor;
 		[Saveable] public int _reviveCost = 100;
 		[Saveable] public int _coins = 0;
 		[Saveable] public int _currentLevel = 0;
@@ -78,7 +80,9 @@ namespace TypeRunner
 		[Saveable] public int _dailyUpdatesCount = 0;
 		[Saveable] public int _dailyCategory = 0;
 		[Saveable] public float _dailyProcentage = 0f;
+		[Saveable] public float _coinsMultiplier = 1f;
 		[Saveable] public float _skinBonusProgress = 0f;
+		[Saveable] public bool _freeColorRoulette = true;
 
 		[HideInInspector] public int EarnedCoins {get; set;} = 0;
 		[HideInInspector] public float PrevSkinProgress {get; set;} = 0f;

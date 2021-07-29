@@ -34,7 +34,7 @@ namespace TypeRunner
 		{
 			if(_shop.IsAllSkinBoughted())
 			{
-				_costText.text = "All boughted!";
+				_costText.text = "All bought!";
 				_button.interactable = false;
 			}
 			else

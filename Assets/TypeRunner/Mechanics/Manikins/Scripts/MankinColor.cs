@@ -30,7 +30,6 @@ namespace TypeRunner
 		
 		private void Start()
 		{
-			_colorChanger = FindObjectOfType<ColorChanger>();
 			UpdateColor();
 		}
 		
@@ -41,6 +40,8 @@ namespace TypeRunner
 		
 		public void UpdateColor()
 		{
+			if(_colorChanger == null)
+				_colorChanger = FindObjectOfType<ColorChanger>();
 			Color newColor = _colorChanger.PlayerColor;
 			foreach(var p in _particles)
 			{

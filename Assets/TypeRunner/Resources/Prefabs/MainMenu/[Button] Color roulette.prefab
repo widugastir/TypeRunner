@@ -60,9 +60,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2634545e22fe3468e300147bd66243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _updateCost: 50
   _rotateSpeed: 1
   _arrow: {fileID: 1398807519499624270}
+  _button: {fileID: 0}
+  _costIcon: {fileID: 0}
+  _textColor: {fileID: 0}
   _colorChanger: {fileID: 0}
+  _stats: {fileID: 0}
   _points:
   - {fileID: 4625466458563107259}
   - {fileID: 5412943628736559627}
@@ -74,6 +79,7 @@ MonoBehaviour:
   - {fileID: 5412943628944117465}
   - {fileID: 5412943629520769086}
   - {fileID: 5412943629871558224}
+  _coins: {fileID: 0}
 --- !u!114 &1398807519340178808
 MonoBehaviour:
   m_ObjectHideFlags: 0

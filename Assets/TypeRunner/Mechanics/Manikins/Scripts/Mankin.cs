@@ -154,8 +154,12 @@ namespace TypeRunner
 				p.transform.SetParent(null);
 				p.Play();
 			}
-			SetOwnerTo(true);
 			Destroy(gameObject);
+		}
+		
+		protected void OnDestroy()
+		{
+			SetOwnerTo(true);
 		}
 	}
 }
