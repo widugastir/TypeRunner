@@ -62,7 +62,7 @@ namespace TypeRunner
 			{
 				_continueButton.gameObject.SetActive(false);
 				_updateButton.gameObject.SetActive(true);
-				_updateText.text = "UPDATE: " + UpdateCost.ToString();
+				_updateText.text = "REFRESH: " + UpdateCost.ToString();
 				if(_stats.Coins >= UpdateCost)
 				{
 					_updateButton.interactable = true;

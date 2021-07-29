@@ -24,6 +24,9 @@ namespace TypeRunner
 		{
 			if(daily)
 				_stickmanMultiplier = 0.5f;
+			else
+				_stickmanMultiplier = 1f;
+				
 			_generator = generator;
 			SpawnLetters();
 			SpawnMankins();
