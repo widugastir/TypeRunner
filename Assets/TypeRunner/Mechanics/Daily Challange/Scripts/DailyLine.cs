@@ -50,7 +50,6 @@ namespace TypeRunner
 			{
 				_highlight.SetActive(true);
 			}
-			
 			else
 			{
 				_highlight.SetActive(false);

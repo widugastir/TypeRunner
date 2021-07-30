@@ -6,6 +6,8 @@ namespace TypeRunner
 	public class GameEndPanel : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
+		[SerializeField] private GameObject _menuPanel;
+		[SerializeField] private GameObject _dailyPanel;
 		[SerializeField] private GameObject _previewCamera;
 		[SerializeField] private GameObject _victoryPanel;
 		[SerializeField] private GameObject _losePanel;
@@ -15,6 +17,8 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private CoinManager _coins;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
+		[SerializeField, HideInInspector] private PlayerStats _stats;
+		[SerializeField, HideInInspector] private DailyChallenge _dailyChallange;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -24,6 +28,8 @@ namespace TypeRunner
 				_coins = FindObjectOfType<CoinManager>(true);
 				_player = FindObjectOfType<PlayerController>(true);
 				_levelManager = FindObjectOfType<LevelManager>(true);
+				_stats = FindObjectOfType<PlayerStats>(true);
+				_dailyChallange = FindObjectOfType<DailyChallenge>(true);
 			}
 		}
 		
@@ -34,7 +40,8 @@ namespace TypeRunner
 				_buttonContinue.SetActive(true);
 				_victoryPanel.SetActive(true);
 				
-				if(_roulette.Enable())
+				if(_levelManager._isDailyLevel == false 
+					&&_roulette.Enable())
 				{
 					_buttonContinue.SetActive(false);
 				}
@@ -50,17 +57,22 @@ namespace TypeRunner
 		
 		public void Disable(bool restartLevel = false)
 		{
+			if(_stats.SkinBonusProgress >= 1f)
+			{
+				_stats.SkinBonusProgress = 0f;
+			}
 			if(restartLevel)
 			{
-				//_previewCamera.SetActive(true);
-				//_coins.EarnedToCurrent();
 				_losePanel.SetActive(false);
 				_victoryPanel.SetActive(false);
-				//_levelManager.FinishLevel();
 				_player.Init(true, 3f);
 			}
 			else
 			{
+				if(_levelManager._isDailyLevel)
+					_dailyChallange.EnableCanvas();
+				else
+					_menuPanel.SetActive(true);
 				_previewCamera.SetActive(true);
 				_coins.EarnedToCurrent();
 				_losePanel.SetActive(false);

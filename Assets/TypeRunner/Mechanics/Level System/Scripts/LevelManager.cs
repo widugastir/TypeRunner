@@ -9,7 +9,7 @@ namespace TypeRunner
 		[SerializeField] private GameObject[] _disableOnFinish;
 		[SerializeField] private GameObject _gameCanvas;
 		[SerializeField] private int _baseCoinsPerVictory = 10;
-		[SerializeField] private float _skinBonusPerVictory = 0.1f;
+		[SerializeField] private int _bonusSkinPerLevel = 5;
 		[SerializeField, HideInInspector] private MapGeneration _map;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private CoinManager _coins;
@@ -21,7 +21,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private Income _income;
 		[SerializeField, HideInInspector] private Shop _shop;
 		public static event System.Action<bool> OnLevelEnd;
-		private bool _isDailyLevel = false;
+		[HideInInspector] public bool _isDailyLevel = false;
 		private bool _isVictory = false;
 		
 		//------METHODS
@@ -59,23 +59,21 @@ namespace TypeRunner
 		{
 			Time.timeScale = 0f;
 			
-			//disaaable ui game
-			
 			_isVictory = victory;
 			if(victory)
 			{
-				_stats.CurrentLevel++;
-				_coins.AddEarnedCoins((int)((float)_baseCoinsPerVictory * coinsMultiplier) + _income.GetBonusCoins());
-				
 				if(_isDailyLevel == false)
 				{
-					_stats.SkinBonusProgress += _skinBonusPerVictory;
-					if(_stats.SkinBonusProgress > 1f)
+					_stats.CurrentLevel++;
+					_stats.SkinBonusProgress += (float)(1f / (_bonusSkinPerLevel * (_stats._bonusSkinGained + 1)));
+					if(_stats.SkinBonusProgress >= 1f)
 					{
-						_stats.SkinBonusProgress = 0f;
+						_stats.SkinBonusProgress = 1f;
+						_stats._bonusSkinGained++;
 						_shop.UnlockRandomSkin();
 					}
 				}
+				_coins.AddEarnedCoins((int)((float)_baseCoinsPerVictory * coinsMultiplier) + _income.GetBonusCoins());
 				
 				if(_isDailyLevel)
 				{

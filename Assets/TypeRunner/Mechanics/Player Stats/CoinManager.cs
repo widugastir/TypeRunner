@@ -39,6 +39,7 @@ namespace TypeRunner
 		{
 			AddCoins((int)((float)_stats.EarnedCoins * _stats._coinsMultiplier));
 			_stats.EarnedCoins = 0;
+			_stats._coinsMultiplier = 1f;
 		}
 	}
 }

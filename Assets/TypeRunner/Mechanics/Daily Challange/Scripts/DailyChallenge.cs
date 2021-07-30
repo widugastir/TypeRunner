@@ -162,14 +162,18 @@ namespace TypeRunner
 		{
 			if(_stats.DailyProcentage >= reward.Percentage)
 			{
+				int currentIndex = -1;
 				for(int i = 0; i < _stats._dailyRewards.Length; i++)
 				{
-					if(reward.Equals(_stats._dailyRewards[i])
-						&&(i == _stats._dailyRewards.Length - 1
-						|| reward.Percentage < _stats._dailyRewards[i + 1].Percentage))
+					if(reward.Equals(_stats._dailyRewards[i]))
 					{
-						return true;
+						currentIndex = i;
 					}
+				}
+				
+				if(currentIndex == 0 || _stats.DailyProcentage < _stats._dailyRewards[currentIndex - 1].Percentage)
+				{
+					return true;
 				}
 			}
 			return false;

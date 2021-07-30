@@ -52,7 +52,7 @@ namespace TypeRunner
 			{
 				_procentage.text = $"100%";
 				_stats.SkinBonusProgress = 0f;
-				_shop.UnlockRandomSkin();
+				//_shop.UnlockRandomSkin();
 				OnSkinEarned?.Invoke();
 				_filler.fillAmount = 1f;
 			}
