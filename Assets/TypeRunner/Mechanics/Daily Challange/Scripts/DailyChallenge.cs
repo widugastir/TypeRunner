@@ -128,8 +128,7 @@ namespace TypeRunner
 			for(int i = 0; i < _stats._dailyRewards.Length; i++)
 			{
 				if(prevProgress >= _stats._dailyRewards[i].Percentage
-					&&(i == _stats._dailyRewards.Length - 1
-					|| prevProgress < _stats._dailyRewards[i + 1].Percentage))
+					|| i == _stats._dailyRewards.Length - 1)
 				{
 					prevCoins = _stats._dailyRewards[i].Coins;
 					break;
@@ -138,8 +137,7 @@ namespace TypeRunner
 			for(int i = 0; i < _stats._dailyRewards.Length; i++)
 			{
 				if(currentProgress >= _stats._dailyRewards[i].Percentage
-					&&(i == _stats._dailyRewards.Length - 1
-					|| currentProgress < _stats._dailyRewards[i + 1].Percentage))
+					|| i == _stats._dailyRewards.Length - 1)
 				{
 					coins = _stats._dailyRewards[i].Coins;
 					break;
@@ -154,6 +152,7 @@ namespace TypeRunner
 			{
 				float prevProgress = _stats._dailyProcentage;
 				_stats._dailyProcentage = progress;
+				print(prevProgress + "   " + _stats._dailyProcentage);
 				_coins.AddEarnedCoins(GetCurrentReward(prevProgress, _stats._dailyProcentage));
 			}
 		}

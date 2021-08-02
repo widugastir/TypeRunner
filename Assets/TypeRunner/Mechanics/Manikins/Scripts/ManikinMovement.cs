@@ -9,6 +9,7 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField, HideInInspector] private Rigidbody _rigi;
+		[SerializeField] private Vector2 _leftRightBorders;
 		[SerializeField] private float _strafeSpeed = 3f;
 		[SerializeField] private float _forwardSpeed = 3f;
 		private bool _isJumped = false;
@@ -72,12 +73,25 @@ namespace TypeRunner
 				return;
 			//print(123);
 			_rigi.AddForce(Vector3.forward * _forwardSpeed, ForceMode.Acceleration);
+		
 		}
 		
 		private void FixedUpdate()
 		{
 			MoveToPoint();
 			MoveForward();
+			Vector3 newPos = transform.position;
+			if(transform.position.x < _leftRightBorders.x)
+			{
+				newPos.x = _leftRightBorders.x;
+				transform.position = newPos;
+			}
+			newPos = transform.position;
+			if(transform.position.x > _leftRightBorders.y)
+			{
+				newPos.x = _leftRightBorders.y;
+				transform.position = newPos;
+			}
 		}
 		
 		private void OnJumpEnd() 

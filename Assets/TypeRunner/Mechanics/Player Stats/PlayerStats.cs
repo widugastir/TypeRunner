@@ -73,6 +73,7 @@ namespace TypeRunner
 		[Saveable, HideInInspector] public Color _playerColor;
 		public int _reviveCost = 100;
 		[Saveable] public int _coins = 0;
+		[Saveable] public int LevelPlayCount = 0;
 		[Saveable] public int _currentLevel = 0;
 		[Saveable] public int _startUnitsLevel = 1;
 		[Saveable] public int _incomeLevel = 1;
@@ -109,6 +110,11 @@ namespace TypeRunner
 			{
 				PurchasedSkins.Add(SkinType.S1);
 			}
+		}
+		
+		public void PermissionTest()
+		{
+			Handheld.Vibrate();
 		}
 	}
 }

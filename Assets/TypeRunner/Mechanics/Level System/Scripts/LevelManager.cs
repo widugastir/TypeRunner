@@ -1,4 +1,6 @@
-﻿using SoundSteppe.RefSystem;
+﻿using System.Collections.Generic;
+using System.Collections;
+using SoundSteppe.RefSystem;
 using UnityEngine;
 
 namespace TypeRunner
@@ -23,7 +25,9 @@ namespace TypeRunner
 		public static event System.Action<bool> OnLevelEnd;
 		[HideInInspector] public bool _isDailyLevel = false;
 		private bool _isVictory = false;
-		
+		private IEnumerator _timer;
+		private float _levelTimer = 0f;
+
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
 		{
@@ -42,21 +46,49 @@ namespace TypeRunner
 			}
 		}
 		
+		private void SendFinishLevelMetrics()
+		{
+			Dictionary<string, object > parameters = new Dictionary<string, object>();
+			parameters.Add("level_number", _stats.CurrentLevel);
+			parameters.Add("level_count", _stats.LevelPlayCount);
+			parameters.Add("result", _isVictory ? "win" : "lose");
+			parameters.Add("time", _levelTimer.ToString("0.00"));
+			AppMetrica.Instance.ReportEvent("level_finish", parameters);
+			AppMetrica.Instance.SendEventsBuffer();
+		}
+	
+		private void SendStartLevelMetrics()
+		{
+			Dictionary<string, object > parameters = new Dictionary<string, object>();
+			parameters.Add("level_number", _stats.CurrentLevel);
+			parameters.Add("level_count", _stats.LevelPlayCount);
+			AppMetrica.Instance.ReportEvent("level_start", parameters);
+			AppMetrica.Instance.SendEventsBuffer();
+		}
+		
 		public void StartDailyLevel()
 		{
+			_stats.LevelPlayCount++;
 			_isDailyLevel = true;
 			StartLevel();
 			_map.ResetToDaily();
+			StartCoroutine(_timer);
+			SendStartLevelMetrics();
 		}
 		
 		public void StartLevel()
 		{
+			_stats.LevelPlayCount++;
 			_gameCanvas.SetActive(true);
 			_letterSystem.Reset();
+			_timer = LevelTimer();
+			StartCoroutine(_timer);
+			SendStartLevelMetrics();
 		}
 		
 		public void PreFinishLevel(bool victory, int manikinsCollected, float coinsMultiplier = 1f)
 		{
+			
 			Time.timeScale = 0f;
 			
 			_isVictory = victory;
@@ -73,29 +105,52 @@ namespace TypeRunner
 						_shop.UnlockRandomSkin();
 					}
 				}
-				_coins.AddEarnedCoins((int)((float)_baseCoinsPerVictory * coinsMultiplier) + _income.GetBonusCoins());
+				
 				
 				if(_isDailyLevel)
 				{
 					float deilyProgress = (float)(manikinsCollected - 1) / (float)(_map.ManikinsAmount - 1) * 100f;
 					_dailyChallenge.TryUpdateDailyProgress(deilyProgress);
 				}
+				else
+				{
+					_coins.AddEarnedCoins((int)((float)_baseCoinsPerVictory * coinsMultiplier) + _income.GetBonusCoins());
+				}
+				
+				
 				if(_isDailyLevel)
 					_endPanel.Enable(victory, false);
 				else
 					_endPanel.Enable(victory, true);
+					
 			}
 			else
 			{
 				_endPanel.Enable(victory, false);
 			}
 			_gameCanvas.SetActive(false);
+			
+			SendFinishLevelMetrics();
+			if(_timer != null)
+			{
+				StopCoroutine(_timer);
+				_timer = null;
+			}
 		}
 		
 		public void FinishLevel()
 		{
 			OnLevelEnd?.Invoke(_isVictory);
 			ResetLevel();
+		}
+		
+		private IEnumerator LevelTimer()
+		{
+			while(true)
+			{
+				yield return new WaitForEndOfFrame();
+				_levelTimer += Time.deltaTime;
+			}
 		}
 		
 		private void ResetLevel()
