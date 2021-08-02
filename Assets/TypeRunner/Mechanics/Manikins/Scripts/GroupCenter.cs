@@ -11,21 +11,48 @@ namespace TypeRunner
 		public Transform _target;
 		public Transform _groupCenter;
 		[HideInInspector] public Vector3 _startPosition;
-		private float _strafe = 0f;
+		private float _targetStrafe = 0f;
 		private bool _upMove = false;
 		public bool CanMove { get; set; } = true;
+		
+		private float _currentStrafe = 0f;
+		private Vector3 _basePos;
 		
 		private void Start()
 		{
 			_startPosition = transform.position;
+			_basePos = _groupCenter.transform.position;
 		}
 		
 		public void SetStrafePos(float strafe)
 		{
-			_strafe = strafe;
+			_targetStrafe = strafe;
 			Vector3 newPosition = _groupCenter.transform.position;
 			newPosition.x = strafe * _strafeMultiplier;
 			_groupCenter.transform.position = newPosition;
+		}
+		
+		public void EndStrafe()
+		{
+			//print(123);
+			//_basePos = _groupCenter.transform.position;
+		}
+		
+		private void Update()
+		{
+			//SmoothStrafe();
+		}
+		
+		private void SmoothStrafe()
+		{
+			float _lerpSpeed = 1f;
+			float _strafe = Mathf.Lerp(_currentStrafe, _targetStrafe, Time.deltaTime * _lerpSpeed);
+			
+			Vector3 newPosition = _groupCenter.transform.position;
+			newPosition.x = _strafe * _strafeMultiplier;
+			_groupCenter.transform.position = newPosition;
+			
+			_currentStrafe = _strafe;
 		}
 		
 		public void Move()

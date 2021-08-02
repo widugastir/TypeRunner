@@ -70,13 +70,6 @@ namespace TypeRunner
 			//	_levelManager.FinishLevel();
 		}
 		
-		private void Start()
-		{
-			//Application.targetFrameRate = 40;
-			//QualitySettings.vSyncCount = 0;
-			//print("targetFrameRate = 40");
-		}
-		
 		public void SetMove(bool canMove)
 		{
 			_mapMovement.CanMove = canMove;
@@ -142,16 +135,26 @@ namespace TypeRunner
 			if(IsMovementEnabled == false)
 				return;
 			_groupCenter.Move();
+			
+			Vector3 newPos = _manikinsParent.position;
+			newPos.x = _groupCenter._groupCenter.position.x;
+			_manikinsParent.position 
+				= Vector3.SmoothDamp(_manikinsParent.position, 
+				newPos, 
+				ref velocity,
+				0.1f);
 		}
 		
+		private Vector3 velocity = Vector3.zero;
 		private void StrafeGroupCenter(float strafe)
 		{
 			if(_controllable == false)
 				return;
 			_groupCenter.SetStrafePos(strafe);
-			Vector3 newPos = _manikinsParent.position;
-			newPos.x = _groupCenter._groupCenter.position.x;
-			_manikinsParent.position = newPos;
+			
+			//Vector3 newPos = _manikinsParent.position;
+			//newPos.x = _groupCenter._groupCenter.position.x;
+			//_manikinsParent.position = newPos;
 		}
 	    
 		public void OnStartDrag()
@@ -169,6 +172,11 @@ namespace TypeRunner
 				//	manikin.Movement.StrafeToPoint(_groupCenter.transform.position);
 				//}
 			}
+		}
+		
+		public void OnEndDrag()
+		{
+			_groupCenter.EndStrafe();
 		}
 		
 		private void OnBorderCollide(Vector3 point)

@@ -41,6 +41,7 @@ namespace TypeRunner
 		public void OnEndDrag(PointerEventData eventData)
 		{
 			OnStopDrag?.Invoke();
+			_player.OnEndDrag();
 		}
 	}
 }

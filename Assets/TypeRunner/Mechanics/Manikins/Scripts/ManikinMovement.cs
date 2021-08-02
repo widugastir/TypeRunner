@@ -59,6 +59,20 @@ namespace TypeRunner
 				.SetEase(Ease.Linear);
 		}
 		
+		private void StrafeToCenter()
+		{
+			//if(IsIndependetMovement || _groupCenter == null || MoveToGroupCenter == false)
+			//	return;
+				
+			//Vector3 targetPos = _groupCenter.position;
+			//targetPos.y = transform.position.y;
+			//targetPos.z = transform.position.z;
+			
+			//Vector3 direction = (targetPos - transform.position) 
+			//	* 4f * Time.deltaTime;
+			//transform.position += direction;
+		}
+		
 		private void MoveToPoint()
 		{
 			if(IsIndependetMovement || _groupCenter == null || MoveToGroupCenter == false)
@@ -71,9 +85,13 @@ namespace TypeRunner
 		{
 			if(CanMoveForward == false)
 				return;
-			//print(123);
 			_rigi.AddForce(Vector3.forward * _forwardSpeed, ForceMode.Acceleration);
 		
+		}
+		
+		private void LateUpdate()
+		{
+			//StrafeToCenter();
 		}
 		
 		private void FixedUpdate()
