@@ -1162,9 +1162,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusCoinsPerLevel: 2
-  _maxLevel: 20
-  _baseCost: 40
-  _costMultiplier: 0.6
+  _maxLevel: 10
+  _baseCost: 100
+  _costMultiplier: 2.57
   _stats: {fileID: 596332918}
   _coins: {fileID: 596332917}
 --- !u!114 &596332914
@@ -1180,8 +1180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxLevel: 10
-  _baseCost: 40
-  _costMultiplier: 0.6
+  _baseCost: 100
+  _costMultiplier: 2.57
   _stats: {fileID: 596332918}
   _coins: {fileID: 596332917}
 --- !u!114 &596332915
@@ -2213,7 +2213,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.20047918}
   m_AnchorMax: {x: 0.5, y: 0.20047918}
   m_AnchoredPosition: {x: 0, y: 6}
-  m_SizeDelta: {x: 511.266, y: 63.90802}
+  m_SizeDelta: {x: 750, y: 63.90802}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &897749016 stripped
 GameObject:
@@ -2913,6 +2913,14 @@ PrefabInstance:
       propertyPath: _previewCamera
       value: 
       objectReference: {fileID: 355899812}
+    - target: {fileID: 690460581855467642, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 690460581855467642, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 690460583144874444, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -3447,39 +3455,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _skinCost.Array.data[0]
-      value: 100
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _skinCost.Array.data[1]
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
-      propertyPath: _skinCost.Array.data[2]
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
-      propertyPath: _skinCost.Array.data[3]
       value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
-      propertyPath: _skinCost.Array.data[4]
+      propertyPath: _skinCost.Array.data[2]
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
-      propertyPath: _skinCost.Array.data[5]
+      propertyPath: _skinCost.Array.data[3]
       value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
+      propertyPath: _skinCost.Array.data[4]
+      value: 4000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
+      propertyPath: _skinCost.Array.data[5]
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _skinCost.Array.data[6]
-      value: 3500
+      value: 12000
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _skinCost.Array.data[7]
-      value: 6000
+      value: 17000
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _skinCost.Array.data[8]
-      value: 10000
+      value: 25000
       objectReference: {fileID: 0}
     - target: {fileID: 4987801348790188964, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _stats
