@@ -74,7 +74,6 @@ namespace TypeRunner
 		private void Complete()
 		{
 			_stats._rouletteRotate = transform.rotation.eulerAngles.z;
-			print(_stats._rouletteRotate);
 			Color newColor = GetSelectedColor();
 			_colorChanger.SetPlayerColor(newColor);
 			_canRoll = true;
@@ -102,7 +101,6 @@ namespace TypeRunner
 			{
 				Vector3 rotation = transform.rotation.eulerAngles;
 				rotation.z = _stats._rouletteRotate;
-				print(rotation.z);
 				transform.rotation = Quaternion.Euler(rotation);
 			}
 			UpdateUI();

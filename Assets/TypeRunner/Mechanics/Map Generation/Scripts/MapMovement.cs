@@ -2,7 +2,7 @@
 
 public class MapMovement : MonoBehaviour
 {
-	[SerializeField] private float _moveSpeed = 1f;
+	[SerializeField] public float _moveSpeed = 1f;
 	[SerializeField] private CameraController _camera;
 	private float _baseSpeed;
 	public bool CanMove { get; set; } = true;
@@ -33,11 +33,16 @@ public class MapMovement : MonoBehaviour
 			return;
 	    transform.Translate(Vector3.back * _moveSpeed * Time.deltaTime);
 	}
+	
+	public void ResetSpeed()
+	{
+		_moveSpeed = _baseSpeed;
+	}
     
 	public void Reset()
 	{
 		transform.position = _basePosition;
-		_moveSpeed = _baseSpeed;
 		_lastSavePoint = transform.position;
+		ResetSpeed();
 	}
 }

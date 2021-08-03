@@ -494,6 +494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _oneCommandOnly: 0
   _isEnterZone: 1
+  _disableStrafe: 1
   _command: 0
   _requiredLettersWrite: 09000000080000000b00000002000000
 --- !u!1 &4158736569959016154
@@ -752,7 +753,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5528675288578745215}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.95, z: 48.76}
+  m_LocalPosition: {x: 0, y: 1.95, z: 51.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5692062600183096546}
@@ -785,6 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _oneCommandOnly: 0
   _isEnterZone: 0
+  _disableStrafe: 0
   _command: 1
   _requiredLettersWrite: 
 --- !u!1 &5692062599044723580
@@ -1343,6 +1345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _oneCommandOnly: 0
   _isEnterZone: 0
+  _disableStrafe: 1
   _command: 4
   _requiredLettersWrite: 
 --- !u!1 &8268723823457686849

@@ -47,6 +47,7 @@ namespace TypeRunner
 			ManikinMovement.OnBorderCollide += OnBorderCollide;
 			Mankin.OnChangeOwner += OnChangeOwner;
 			PlayerStats.OnStartUnitChange += OnStartUnitChange;
+			ObstacleZone.EnterZone += PlayerEnterZone;
 		}
 		
 		private void OnDisable()
@@ -54,6 +55,7 @@ namespace TypeRunner
 			ManikinMovement.OnBorderCollide -= OnBorderCollide;
 			Mankin.OnChangeOwner -= OnChangeOwner;
 			PlayerStats.OnStartUnitChange -= OnStartUnitChange;
+			ObstacleZone.EnterZone -= PlayerEnterZone;
 		}
 		
 		protected void LateUpdate()
@@ -68,6 +70,18 @@ namespace TypeRunner
 				
 			//if(Input.GetKeyDown(KeyCode.L))
 			//	_levelManager.FinishLevel();
+		}
+		
+		private void PlayerEnterZone(ObstacleZone zone)
+		{
+			if(zone._disableStrafe)
+			{
+				_controllable = false;
+			}
+			else
+			{
+				_controllable = true;
+			}
 		}
 		
 		public void SetMove(bool canMove)
@@ -98,8 +112,16 @@ namespace TypeRunner
 				man.SetOwnerTo(false);
 				if(makeImmortal)
 				{
-					man.SetImmortal(true, immortalTime);
+					man.SetImmortal(true, immortalTime, false);
 				}
+			}
+		}
+		
+		public void SetImmortal(float delay, bool affectZones)
+		{
+			for(int i = 0; i < _manikins.Count; i++)
+			{
+				_manikins[i].SetImmortal(true, delay, affectZones);
 			}
 		}
 		
@@ -136,6 +158,8 @@ namespace TypeRunner
 				return;
 			_groupCenter.Move();
 			
+			if(_controllable == false)
+				return;
 			Vector3 newPos = _manikinsParent.position;
 			newPos.x = _groupCenter._groupCenter.position.x;
 			_manikinsParent.position 

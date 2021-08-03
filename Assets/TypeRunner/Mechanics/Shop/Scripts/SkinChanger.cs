@@ -58,12 +58,14 @@ namespace TypeRunner
 		
 		public void StartFlickering()
 		{
+			StopFlickering();
 			if(_flickering != null)
 				return;
 			_flickering = _current.renderer.material
 				.DOFade(0f, "_Color", 0.1f)
 				.SetEase(Ease.Linear)
 				.SetLoops(-1, LoopType.Yoyo)
+				.SetUpdate(true)
 				.OnComplete(OnFlickerStop);
 		}
 		
@@ -72,6 +74,7 @@ namespace TypeRunner
 			if(_flickering == null)
 				return;
 			_flickering.Kill(true);
+			_flickering = null;
 		}
 		
 		private void OnFlickerStop()
@@ -79,6 +82,7 @@ namespace TypeRunner
 			Color color = _current.renderer.material.color;
 			color.a = 1f;
 			_current.renderer.material.color = color;
+			_flickering = null;
 		}
 		
 		public void SetSkin(SkinType type)

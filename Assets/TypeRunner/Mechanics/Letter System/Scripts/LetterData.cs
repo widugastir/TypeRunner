@@ -59,6 +59,7 @@ namespace TypeRunner
 	public enum E_LetterType
 	{
 		J, U, M, P, T, H, R,
-		O, W, S, L, I, D, E
+		O, W, S, L, I, D, E,
+		C, F, Y, B
 	}
 }

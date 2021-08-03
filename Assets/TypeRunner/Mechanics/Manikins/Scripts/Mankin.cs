@@ -1,4 +1,5 @@
 ﻿using SoundSteppe.RefSystem;
+using System.Collections;
 using UnityEngine;
 
 namespace TypeRunner
@@ -10,6 +11,7 @@ namespace TypeRunner
 		[HideInInspector] public ManikinMovement Movement;
 		[HideInInspector] public ManikinCommands Commands;
 		private bool IsIdle { get; set; } = false;
+		public bool AffectZones = true;
 		private bool _immortal = false;
 		public bool Immortal 
 		{ 
@@ -61,18 +63,22 @@ namespace TypeRunner
 			_animator = _skinChanger._current.animator;
 		}
 		
-		public void SetImmortal(bool immortal, float immortalTime)
+		public void SetImmortal(bool immortal, float immortalTime, bool affectZones)
 		{
+			SetMortal(0f);
+			AffectZones = affectZones;
 			Immortal = immortal;
 			if(immortal == true)
 			{
-				Invoke(nameof(SetMortal), immortalTime);
+				StartCoroutine(SetMortal(immortalTime));
 				SetFlickering(true);
 			}
 		}
 		
-		private void SetMortal()
+		private IEnumerator SetMortal(float immortalTime)
 		{
+			yield return new WaitForSecondsRealtime(immortalTime);
+			AffectZones = true;
 			Immortal = false;
 			SetFlickering(false);
 		}

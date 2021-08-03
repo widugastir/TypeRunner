@@ -19,7 +19,7 @@ namespace TypeRunner
 		
 		private void OnEnable()
 		{
-			_labelText.text = "+" + _stats.EarnedCoins.ToString();
+			_labelText.text = "+" + (_stats.EarnedCoins * _stats.SuccessfulMultiplier).ToString("0");
 		}
 	}
 }
