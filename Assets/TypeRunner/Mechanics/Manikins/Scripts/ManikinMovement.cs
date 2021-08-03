@@ -98,6 +98,7 @@ namespace TypeRunner
 		{
 			MoveToPoint();
 			MoveForward();
+			
 			Vector3 newPos = transform.position;
 			if(transform.position.x < _leftRightBorders.x)
 			{

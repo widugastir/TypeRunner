@@ -142,7 +142,7 @@ namespace TypeRunner
 				= Vector3.SmoothDamp(_manikinsParent.position, 
 				newPos, 
 				ref velocity,
-				0.1f);
+				0.06f);
 		}
 		
 		private Vector3 velocity = Vector3.zero;

@@ -45,14 +45,14 @@ namespace TypeRunner
 		
 		private void SmoothStrafe()
 		{
-			float _lerpSpeed = 1f;
-			float _strafe = Mathf.Lerp(_currentStrafe, _targetStrafe, Time.deltaTime * _lerpSpeed);
+			//float _lerpSpeed = 1f;
+			//float _strafe = Mathf.Lerp(_currentStrafe, _targetStrafe, Time.deltaTime * _lerpSpeed);
 			
-			Vector3 newPosition = _groupCenter.transform.position;
-			newPosition.x = _strafe * _strafeMultiplier;
-			_groupCenter.transform.position = newPosition;
+			//Vector3 newPosition = _groupCenter.transform.position;
+			//newPosition.x = _strafe * _strafeMultiplier;
+			//_groupCenter.transform.position = newPosition;
 			
-			_currentStrafe = _strafe;
+			//_currentStrafe = _strafe;
 		}
 		
 		public void Move()
