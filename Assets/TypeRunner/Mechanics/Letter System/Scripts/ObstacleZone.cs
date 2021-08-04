@@ -7,6 +7,8 @@ namespace TypeRunner
 	public class ObstacleZone : MonoBehaviour
 	{
 		//------FIELDS
+		[SerializeField] public float _fullTimer = -1f;
+		[SerializeField] public float _bonusTimer = -1f;
 		[SerializeField] public float _timeScale = 1f;
 		[SerializeField] public int _manikinsToBlock = 1;
 		[SerializeField] private bool _oneCommandOnly = false;

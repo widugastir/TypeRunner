@@ -50,13 +50,13 @@ namespace TypeRunner
 			{
 				LetterData.Instance.AddLetter(l);
 			}
-			StartCoroutine(LateEnableWriter(zone._requiredWord));
+			StartCoroutine(LateEnableWriter(zone));
 		}
 		
-		private IEnumerator LateEnableWriter(E_LetterType[] word)
+		private IEnumerator LateEnableWriter(FlyZone zone)
 		{
 			yield return null;
-			EnableWordWritter(word);
+			EnableWordWritter(zone, zone._requiredWord);
 		}
 		
 		private void PlayerEnterZone(ObstacleZone zone, E_LetterType[] word)
@@ -67,6 +67,24 @@ namespace TypeRunner
 		private void PlayerExitZone(ObstacleZone zone)
 		{
 			DisableWordWritter(false, false, zone);
+		}
+		
+		private void EnableWordWritter(FlyZone zone, E_LetterType[] word)
+		{
+			_playerController.SetMansSuccesfull(false);
+			_layoutGroup.enabled = false;
+			_wordText.gameObject.SetActive(true);
+			_boostObject.SetActive(true);
+			string req_word = "";
+			foreach(var ch in word)
+			{
+				req_word += ch.ToString();
+			}
+			_wordText.text = req_word.ToUpper();
+			_isReady = true;
+			_boost.EnableTimer(zone, DisableWordWritter);
+			Time.timeScale = zone._timeScale;
+			_lettersPanel.Activate(word);
 		}
 		
 		private void EnableWordWritter(ObstacleZone zone, E_LetterType[] word)
@@ -82,7 +100,7 @@ namespace TypeRunner
 			}
 			_wordText.text = req_word.ToUpper();
 			_isReady = true;
-			_boost.EnableTimer(DisableWordWritter);
+			_boost.EnableTimer(zone, DisableWordWritter);
 			Time.timeScale = zone._timeScale;
 			_lettersPanel.Activate(word);
 		}
@@ -109,7 +127,7 @@ namespace TypeRunner
 				}
 			}
 				
-			_successfulAmount.text = $"X{_stats.SuccessfulMultiplier.ToString()}";
+			UpdateUI();
 			
 			_playerController.SetMansSuccesfull(successful);
 			if(successful == false)
@@ -121,6 +139,11 @@ namespace TypeRunner
 			}
 			Time.timeScale = 1f;
 			_lettersPanel.DisableSelected();
+		}
+		
+		private void UpdateUI()
+		{
+			_successfulAmount.text = $"x{_stats.SuccessfulMultiplier.ToString()}";
 		}
 		
 		private void EnableWordWritter(E_LetterType[] word)
@@ -158,6 +181,7 @@ namespace TypeRunner
 		
 		public void Enable()
 		{
+			UpdateUI();
 			_uiPanel.SetActive(true);
 		}
 		
@@ -171,6 +195,8 @@ namespace TypeRunner
 			_uiPanel.SetActive(true);
 			_boostObject.SetActive(false);
 			_lettersPanel.Reset();
+			//_stats._successfulWord = 0;
+			UpdateUI();
 		}
 	}
 }

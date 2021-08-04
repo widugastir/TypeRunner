@@ -21,9 +21,23 @@ namespace TypeRunner
 		public BoostTimerResult Result => _result;
 		private IEnumerator _bonusCoroutine;
 		private IEnumerator _speedCoroutine;
+		private float _baseFullTimer;
+		private float _baseBonusTimer;
 		
 		// {1} - successful {2} - bonus
 		private System.Action<bool, bool, ObstacleZone> _endCallback;
+	    
+		private void Start()
+		{
+			_baseFullTimer = _fullTimer;
+			_baseBonusTimer = _bonusTimer;
+		}
+		
+		public void ResetTimer()
+		{
+			_fullTimer = _baseFullTimer;
+			_bonusTimer = _baseBonusTimer;
+		}
 	    
 		protected void OnDisable()
 		{
@@ -70,9 +84,46 @@ namespace TypeRunner
 			_mapMovement.ResetSpeed();
 			_bonusCoroutine = null;
 		}
+		
+		public void EnableTimer(FlyZone zone, System.Action<bool, bool, ObstacleZone> endCallback)
+		{
+			ResetTimer();
+			if(zone._fullTimer > 0f)
+			{
+				_fullTimer = zone._fullTimer;
+			}
+			if(zone._bonusTimer > 0f)
+			{
+				_bonusTimer = zone._bonusTimer;
+			}
+			_result = BoostTimerResult.unsuccessful;
+			_endCallback = endCallback;
+			_timer = _fullTimer;
+			_timeLine.fillAmount = 1f;
+			_bonusLine.fillAmount = _bonusTimer / _fullTimer;
+		}
+		
+		public void EnableTimer(ObstacleZone zone, System.Action<bool, bool, ObstacleZone> endCallback)
+		{
+			ResetTimer();
+			if(zone._fullTimer > 0f)
+			{
+				_fullTimer = zone._fullTimer;
+			}
+			if(zone._bonusTimer > 0f)
+			{
+				_bonusTimer = zone._bonusTimer;
+			}
+			_result = BoostTimerResult.unsuccessful;
+			_endCallback = endCallback;
+			_timer = _fullTimer;
+			_timeLine.fillAmount = 1f;
+			_bonusLine.fillAmount = _bonusTimer / _fullTimer;
+		}
 	    
 		public void EnableTimer(System.Action<bool, bool, ObstacleZone> endCallback)
 		{
+			ResetTimer();
 			_result = BoostTimerResult.unsuccessful;
 			_endCallback = endCallback;
 			_timer = _fullTimer;
