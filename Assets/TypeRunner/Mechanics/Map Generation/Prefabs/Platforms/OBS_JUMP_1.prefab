@@ -58,11 +58,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeScale: 0.2
+  _manikinsToBlock: 1
   _oneCommandOnly: 0
   _isEnterZone: 1
+  _onlySuccessful: 0
   _disableStrafe: 1
   _command: 0
   _requiredLettersWrite: 00000000010000000200000003000000
+  _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &76640133945146902
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,11 +573,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeScale: 1
+  _manikinsToBlock: 1
   _oneCommandOnly: 0
   _isEnterZone: 0
+  _onlySuccessful: 0
   _disableStrafe: 1
   _command: 2
   _requiredLettersWrite: 
+  _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5000691074976801408
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,6 +896,7 @@ MonoBehaviour:
   _generationLevel: 0
   _manikinAmount: 0
   _letterAmount: 5
+  _letterGenerators: []
   _requiredLetters: 00000000010000000200000003000000
   ConnectionPoint: {fileID: 5692062599939181616}
   _letterSpawnPos:
@@ -998,11 +1009,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeScale: 1
+  _manikinsToBlock: 1
   _oneCommandOnly: 0
   _isEnterZone: 0
+  _onlySuccessful: 0
   _disableStrafe: 0
   _command: 0
   _requiredLettersWrite: 
+  _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6120979616689109737
 GameObject:
   m_ObjectHideFlags: 0
