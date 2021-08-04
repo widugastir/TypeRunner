@@ -75,6 +75,9 @@ namespace TypeRunner
 				return;
 			_flickering.Kill(true);
 			_flickering = null;
+			Color color = _current.renderer.material.color;
+			color.a = 1f;
+			_current.renderer.material.color = color;
 		}
 		
 		private void OnFlickerStop()

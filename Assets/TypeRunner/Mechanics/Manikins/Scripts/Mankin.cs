@@ -21,9 +21,11 @@ namespace TypeRunner
 			} 
 			set 
 			{
-				_immortal = value; 
+				if(_blockImmortal == false)
+					_immortal = value; 
 			} 
 		}
+		private bool _blockImmortal = false;
 		
 		public bool IsFinished { get; set; } = false;
 		public bool IsWordSuccessful = false;
@@ -66,19 +68,21 @@ namespace TypeRunner
 		
 		public void SetImmortal(bool immortal, float immortalTime, bool affectZones)
 		{
-			SetMortal(0f);
+			//SetMortal(0f);
 			AffectZones = affectZones;
 			Immortal = immortal;
 			if(immortal == true)
 			{
 				StartCoroutine(SetMortal(immortalTime));
 				SetFlickering(true);
+				_blockImmortal = true;
 			}
 		}
 		
 		private IEnumerator SetMortal(float immortalTime)
 		{
 			yield return new WaitForSecondsRealtime(immortalTime);
+			_blockImmortal = false;
 			AffectZones = true;
 			Immortal = false;
 			SetFlickering(false);

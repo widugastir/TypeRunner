@@ -1,4 +1,5 @@
 ﻿using NaughtyAttributes;
+using UnityEngine.Events;
 using UnityEngine;
 
 namespace TypeRunner
@@ -15,6 +16,8 @@ namespace TypeRunner
 		[SerializeField] private ManikinCommands.E_Command _command;
 		[ShowIf("_isEnterZone"), SerializeField] private E_LetterType[] _requiredLettersWrite;
 		private bool _isUsed = false;
+		
+		public UnityEvent _onSuccessful;
 		
 		public static event System.Action<ObstacleZone, E_LetterType[]> OnPlayerEntered;
 		public static event System.Action<ObstacleZone> EnterZone;
@@ -50,6 +53,11 @@ namespace TypeRunner
 				if(_oneCommandOnly == false && successful)
 				{
 					man.Commands.DoCommand(_command);
+				}
+				
+				if(successful)
+				{
+					_onSuccessful?.Invoke();
 				}
 			}
 		}

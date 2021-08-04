@@ -59,6 +59,9 @@ namespace TypeRunner
 				case E_Command.Climb:
 					Climb();
 					break;
+				case E_Command.Push:
+					Push();
+					break;
 				case E_Command.Throw:
 					Throw();
 					break;
@@ -86,7 +89,7 @@ namespace TypeRunner
 			Vector3 newPos = _collider.center;
 			newPos.y = _basePosY;
 			_collider.center = newPos;
-			_man.Immortal = false;
+			_man.SetImmortal(false, 0f, true);
 			
 			//not sure about it
 			_player.IsMovementEnabled = true;
@@ -114,6 +117,12 @@ namespace TypeRunner
 			_animator.SetTrigger("Swim");
 		}
 		
+		private void Push()
+		{
+			_man.Immortal = true;
+			_animator.SetTrigger("Push");
+		}
+		
 		private void Fly()
 		{
 			_animator.SetTrigger("Fly");
@@ -127,8 +136,6 @@ namespace TypeRunner
 			_man.Movement.Climb();
 			_man.Immortal = true;
 			_player._mapMovement.SetSpeed(5f);
-			
-			//_player.IsMovementEnabled = true;
 		}
 		
 		private void OnFlyEnd()
@@ -168,7 +175,8 @@ namespace TypeRunner
 			Throw,
 			AllThrow,
 			Fly,
-			Climb
+			Climb,
+			Push
 		}
 	}
 }
