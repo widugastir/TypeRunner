@@ -117,11 +117,11 @@ namespace TypeRunner
 			}
 		}
 		
-		public void SetImmortal(float delay, bool affectZones)
+		public void SetImmortal(float duration, bool affectZones)
 		{
 			for(int i = 0; i < _manikins.Count; i++)
 			{
-				_manikins[i].SetImmortal(true, delay, affectZones);
+				_manikins[i].SetImmortal(true, duration, affectZones);
 			}
 		}
 		

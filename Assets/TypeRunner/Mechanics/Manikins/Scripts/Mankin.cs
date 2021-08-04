@@ -33,6 +33,7 @@ namespace TypeRunner
 		public int Rank { get; set; } = 0;
 		public float EarnedCoinsBonus { get; set; } = 0f;
 		[SerializeField] private ParticleSystem[] _dieVfx;
+		[SerializeField] private BlinkingMaterial _blinking;
 		
 		public static event System.Action<Mankin, bool> OnChangeOwner;
 		[SerializeField, HideInInspector] public Animator _animator;
@@ -74,7 +75,7 @@ namespace TypeRunner
 			if(immortal == true)
 			{
 				StartCoroutine(SetMortal(immortalTime));
-				SetFlickering(true);
+				SetFlickering(true, immortalTime);
 				_blockImmortal = true;
 			}
 		}
@@ -144,15 +145,19 @@ namespace TypeRunner
 			}
 		}
 		
-		public void SetFlickering(bool flicker)
+		public void SetFlickering(bool flicker, float duration = -1f)
 		{
 			if(flicker)
 			{
-				_skinChanger.StartFlickering();
+				if(duration > 0f)
+					_blinking.SetDuration(duration, 0.25f, 0.05f);
+				_blinking.Enable();
+				//_skinChanger.StartFlickering();
 			}
 			else
 			{
-				_skinChanger.StopFlickering();
+				_blinking.Disable();
+				//_skinChanger.StopFlickering();
 			}
 		}
 		

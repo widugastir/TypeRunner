@@ -8,7 +8,8 @@ namespace TypeRunner
 		[SerializeField] private Skin[] _skins;
 		[SerializeField] public Skin _current;
 		[SerializeField] public MankinColor _manColor;
-		private Tween _flickering = null;
+		//private Tween _flickering = null;
+		//private Sequence _flickering = null;
 		
 		private PlayerStats _stats;
 		private PlayerStats Stats 
@@ -37,7 +38,7 @@ namespace TypeRunner
 		{
 			Shop.OnSkinSelect -= SetSkin;
 			SaveSystem.OnEndLoad -= UpdateSkin;
-			StopFlickering();
+			//StopFlickering();
 		}
 		
 		private void Start()
@@ -56,37 +57,56 @@ namespace TypeRunner
 			_manColor.UpdateColor();
 		}
 		
-		public void StartFlickering()
-		{
-			StopFlickering();
-			if(_flickering != null)
-				return;
-			_flickering = _current.renderer.material
-				.DOFade(0f, "_Color", 0.1f)
-				.SetEase(Ease.Linear)
-				.SetLoops(-1, LoopType.Yoyo)
-				.SetUpdate(true)
-				.OnComplete(OnFlickerStop);
-		}
+		//public void StartFlickering()
+		//{
+		//	StopFlickering();
+			//if(_flickering != null)
+			//	return;
+				
+			//_flickering = _current.renderer.material
+			//	.DOFade(0f, "_Color", 0.1f)
+			//	.SetEase(Ease.Linear)
+			//	.SetLoops(-1, LoopType.Yoyo)
+			//	.SetUpdate(true)
+			//	.OnComplete(OnFlickerStop);
+			
+			//_flickering = DOTween.Sequence();
+			
+			//_flickering
+			//	.Append(_current.renderer.material
+			//		.DOFade(0f, "_Color", Stats.FLICKER_TIME_SPEED)
+			//		.SetEase(Ease.Linear))
+			//	.Append(_current.renderer.material
+			//		.DOFade(1f, "_Color", Stats.FLICKER_TIME_SPEED)
+			//		.SetEase(Ease.Linear))
+			//	//.SetLoops(-1)
+			//	.SetUpdate(true)
+			//	.OnComplete(RunFlickerAgain);
+		//}
 		
-		public void StopFlickering()
-		{
-			if(_flickering == null)
-				return;
-			_flickering.Kill(true);
-			_flickering = null;
-			Color color = _current.renderer.material.color;
-			color.a = 1f;
-			_current.renderer.material.color = color;
-		}
+		//private void RunFlickerAgain()
+		//{
+		//	_flickering.Restart();
+		//}
 		
-		private void OnFlickerStop()
-		{
-			Color color = _current.renderer.material.color;
-			color.a = 1f;
-			_current.renderer.material.color = color;
-			_flickering = null;
-		}
+		//public void StopFlickering()
+		//{
+		//	if(_flickering == null)
+		//		return;
+		//	_flickering.Kill();
+		//	_flickering = null;
+		//	Color color = _current.renderer.material.color;
+		//	color.a = 1f;
+		//	_current.renderer.material.color = color;
+		//}
+		
+		//private void OnFlickerStop()
+		//{
+			//Color color = _current.renderer.material.color;
+			//color.a = 1f;
+			//_current.renderer.material.color = color;
+			//_flickering = null;
+		//}
 		
 		public void SetSkin(SkinType type)
 		{
