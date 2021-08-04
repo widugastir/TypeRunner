@@ -12,6 +12,8 @@ namespace TypeRunner
 		[SerializeField] private Vector2 _leftRightBorders;
 		[SerializeField] private float _strafeSpeed = 3f;
 		[SerializeField] private float _forwardSpeed = 3f;
+		[SerializeField] private float _flyHeight = 3f;
+		[SerializeField] private float _climbHeight = 3f;
 		private bool _isJumped = false;
 		private bool _canMove = true;
 		public bool IsIndependetMovement { get; set; } = false;
@@ -126,6 +128,33 @@ namespace TypeRunner
 			_rigi.DOJump(transform.position, height, 1, time)
 				.SetEase(Ease.Linear)
 				.OnComplete(OnJumpEnd);
+		}
+		
+		public void Fly(TweenCallback flyEndCallback)
+		{
+			_rigi.useGravity = false;
+			_rigi.DOMoveY(transform.position.y + _flyHeight, 1f)
+				.SetEase(Ease.Linear)
+				.OnComplete(flyEndCallback)
+				.OnComplete(OnFlyEnd);
+		}
+		
+		private void OnFlyEnd()
+		{
+			_rigi.useGravity = true;
+		}
+		
+		public void Climb()
+		{
+			_rigi.useGravity = false;
+			_rigi.DOMoveY(transform.position.y + _climbHeight, 1f)
+				.SetEase(Ease.Linear)
+				.OnComplete(OnClimbEnd);
+		}
+		
+		private void OnClimbEnd()
+		{
+			_rigi.useGravity = true;
 		}
 		
 		public void SetCanMove(bool canMove)

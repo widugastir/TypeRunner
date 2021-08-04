@@ -14,7 +14,7 @@ namespace TypeRunner
 		[SerializeField] private float _finishDelay = 2f;
 		[SerializeField, Layer] private string _ignoreSameMask;
 		[SerializeField] private List<Mankin> _manikins;
-		[SerializeField, HideInInspector] private MapMovement _mapMovement;
+		[SerializeField, HideInInspector] public MapMovement _mapMovement;
 		[SerializeField, HideInInspector] private GroupCenter _groupCenter;
 		[SerializeField, HideInInspector] private MapGeneration _generator;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
@@ -144,6 +144,14 @@ namespace TypeRunner
 			InitMans();
 		}
 		
+		public void SetMansSuccesfull(bool successful)
+		{
+			for(int i = 0; i < _manikins.Count; i++)
+			{
+				_manikins[i].IsWordSuccessful = successful;
+			}
+		}
+		
 		public void SetIndependentMove(bool independent)
 		{
 			for(int i = 0; i < _manikins.Count; i++)
@@ -214,6 +222,7 @@ namespace TypeRunner
 			{
 				_manikins[i].Commands.SetBlock(true);
 				_manikins[i].BlockStickman(_ignoreSameMask, true);
+				_manikins[i].IsWordSuccessful = false;
 			}
 		}
 		

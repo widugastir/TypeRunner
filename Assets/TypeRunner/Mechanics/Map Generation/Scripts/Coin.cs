@@ -5,11 +5,11 @@ namespace TypeRunner
 	public class Coin : MonoBehaviour
 	{
 		[SerializeField] private int _amount = 1;
-		[SerializeField] private CoinManager _coinManager;
+		private CoinManager _coinManager;
 		
-		public void Init(CoinManager coinManager)
+		public void Start()
 		{
-			_coinManager = coinManager;
+			_coinManager = FindObjectOfType<CoinManager>();
 		}
 		
 		private void OnTriggerEnter(Collider other)

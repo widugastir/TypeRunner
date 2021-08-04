@@ -95,7 +95,19 @@ namespace TypeRunner
 			}
 		}
 
-		[HideInInspector] public int EarnedCoins {get; set;} = 0;
+		public int _earnedCoins = 0;
+		[HideInInspector] public int EarnedCoins 
+		{
+			get
+			{
+				return _earnedCoins;
+			}
+			set
+			{
+				_earnedCoins = value;
+				OnEarnedCoinsChange?.Invoke(_earnedCoins);
+			}
+		}
 		[HideInInspector] public float PrevSkinProgress {get; set;} = 0f;
 
 		[Saveable] public SkinType _playerSkin = SkinType.S1;
@@ -104,6 +116,7 @@ namespace TypeRunner
 		[ReorderableList] [Saveable] public DailyReward[] _dailyRewards;
 		[Saveable] public DateTime LastLogin;
 		
+		public static Action<int> OnEarnedCoinsChange;
 		public static Action<int> OnCoinChange;
 		public static Action<int> OnLevelChange;
 		public static Action<int> OnStartUnitChange;

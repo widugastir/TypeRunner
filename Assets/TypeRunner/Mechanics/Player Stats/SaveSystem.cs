@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using SoundSteppe.RefSystem;
 using SoundSteppe.JsonSS;
-using SoundSteppe.RefSystem;
+using System.Collections;
 using UnityEngine;
 
 namespace TypeRunner
@@ -28,7 +28,6 @@ namespace TypeRunner
 		
 		private IEnumerator Start()
 		{
-			//print(_stats + "\n" + _settings);
 			yield return null;
 			Load();
 		}

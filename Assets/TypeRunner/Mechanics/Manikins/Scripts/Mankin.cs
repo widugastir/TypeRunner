@@ -26,6 +26,7 @@ namespace TypeRunner
 		}
 		
 		public bool IsFinished { get; set; } = false;
+		public bool IsWordSuccessful = false;
 		public int RankPosition { get; set; } = 0;
 		public int Rank { get; set; } = 0;
 		public float EarnedCoinsBonus { get; set; } = 0f;

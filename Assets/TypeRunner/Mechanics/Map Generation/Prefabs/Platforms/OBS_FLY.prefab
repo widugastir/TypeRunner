@@ -203,7 +203,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _oneCommandOnly: 0
   _isEnterZone: 0
-  _command: 3
+  _disableStrafe: 0
+  _command: 7
   _requiredLettersWrite: 
 --- !u!1 &539198288190885193
 GameObject:
@@ -1638,8 +1639,6 @@ Transform:
   - {fileID: 8405811096207112224}
   - {fileID: 3804686829605557713}
   - {fileID: 635888250319026291}
-  - {fileID: 6718811087441084624}
-  - {fileID: 3540654190843663726}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1655,11 +1654,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29f4dac4893494b949ee5c2074f33a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canBeMirrored: 1
+  _canBeMirrored: 0
   _generationLevel: 0
   _manikinAmount: 0
   _letterAmount: 5
-  _requiredLetters: 010000000900000005000000
+  _requiredLetters: 0f0000000a00000010000000
   ConnectionPoint: {fileID: 5692062599939181616}
   _letterSpawnPos:
   - {fileID: 3490561652413940744}
@@ -1909,67 +1908,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.15, z: 0.15}
   m_Center: {x: 0.5861034, y: -0.000010624528, z: -0.3462253}
---- !u!1 &6354065139957266483
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3540654190843663726}
-  - component: {fileID: 2044587780853415833}
-  - component: {fileID: 2569956864664544344}
-  m_Layer: 0
-  m_Name: '[Zone] Reset Zone'
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3540654190843663726
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6354065139957266483}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.35, z: 55.97}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5692062600183096546}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2044587780853415833
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6354065139957266483}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8, y: 4, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2569956864664544344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6354065139957266483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _oneCommandOnly: 0
-  _isEnterZone: 0
-  _command: 1
-  _requiredLettersWrite: 
 --- !u!1 &6453304909844094930
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,66 +2208,6 @@ Transform:
   m_Father: {fileID: 5692062599044723579}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7216022307411446783
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6718811087441084624}
-  - component: {fileID: 6067000314651393006}
-  - component: {fileID: 7201580797865462906}
-  m_Layer: 0
-  m_Name: '[Zone] Kill Zone'
-  m_TagString: Untagged
-  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6718811087441084624
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7216022307411446783}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07, y: 2.5, z: 54}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5692062600183096546}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6067000314651393006
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7216022307411446783}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 1, z: 3}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7201580797865462906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7216022307411446783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6b2161231557fd49bf53b04793c29ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Destructable: 0
-  _collider: {fileID: 0}
-  Childs: []
 --- !u!1 &7366103517797324370
 GameObject:
   m_ObjectHideFlags: 0
@@ -2936,8 +2814,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _oneCommandOnly: 0
   _isEnterZone: 1
+  _disableStrafe: 0
   _command: 0
-  _requiredLettersWrite: 090000000a0000000b0000000c0000000d000000
+  _requiredLettersWrite: 0f0000000a00000010000000
 --- !u!1 &8729275361257044002
 GameObject:
   m_ObjectHideFlags: 0

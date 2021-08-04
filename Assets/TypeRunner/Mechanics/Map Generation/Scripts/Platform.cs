@@ -11,6 +11,7 @@ namespace TypeRunner
 		[SerializeField] private int _generationLevel;
 		[SerializeField] private int _manikinAmount;
 		[SerializeField] private int _letterAmount;
+		[SerializeField] private CustomLetterGenerator[] _letterGenerators;
 		[SerializeField] private List<E_LetterType> _requiredLetters;
 		
 		[Header("References")]
@@ -41,6 +42,10 @@ namespace TypeRunner
 			_generator = generator;
 			SpawnLetters();
 			SpawnMankins();
+			for(int i = 0; i < _letterGenerators.Length; i++)
+			{
+				_letterGenerators[i].Generate(_generator);
+			}
 		}
 		
 		private void SpawnLetters()

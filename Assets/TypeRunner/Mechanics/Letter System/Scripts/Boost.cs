@@ -23,7 +23,7 @@ namespace TypeRunner
 		private IEnumerator _speedCoroutine;
 		
 		// {1} - successful {2} - bonus
-		private System.Action<bool, bool> _endCallback;
+		private System.Action<bool, bool, ObstacleZone> _endCallback;
 	    
 		protected void OnDisable()
 		{
@@ -71,7 +71,7 @@ namespace TypeRunner
 			_bonusCoroutine = null;
 		}
 	    
-		public void EnableTimer(System.Action<bool, bool> endCallback)
+		public void EnableTimer(System.Action<bool, bool, ObstacleZone> endCallback)
 		{
 			_result = BoostTimerResult.unsuccessful;
 			_endCallback = endCallback;
@@ -107,7 +107,7 @@ namespace TypeRunner
 			else _result = BoostTimerResult.successful;
 			
 			_timer = 0f;
-			_endCallback?.Invoke(false, false);
+			_endCallback?.Invoke(false, false, null);
 		}
 		
 		private void UpdateUI()

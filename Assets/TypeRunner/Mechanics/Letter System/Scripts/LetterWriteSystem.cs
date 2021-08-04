@@ -1,6 +1,7 @@
 ﻿using SoundSteppe.RefSystem;
 using UnityEngine.UI;
 using UnityEngine;
+using System.Collections;
 using TMPro;
 
 namespace TypeRunner
@@ -12,8 +13,6 @@ namespace TypeRunner
 		[SerializeField] private TMP_Text _wordText;
 		[SerializeField] private TMP_Text _successfulAmount;
 		[SerializeField] private GameObject _uiPanel;
-		[SerializeField] private int _manikinsDieOnLose = 1;
-		[SerializeField] private float _timeScale = 0.2f;
 		[SerializeField] private PlayerStats _stats;
 		[SerializeField] private PlayerController _playerController;
 		
@@ -33,13 +32,31 @@ namespace TypeRunner
 		private void OnEnable()
 		{
 			ObstacleZone.OnPlayerEntered += PlayerEnterZone;
+			FlyZone.EnterFlyZone += EnterFlyZone;
 			ObstacleZone.OnPlayerExit += PlayerExitZone;
 		}
 		
 		private void OnDisable()
 		{
 			ObstacleZone.OnPlayerEntered -= PlayerEnterZone;
+			FlyZone.EnterFlyZone -= EnterFlyZone;
 			ObstacleZone.OnPlayerExit -= PlayerExitZone;
+		}
+		
+		private void EnterFlyZone(FlyZone zone)
+		{
+			_playerController.SetMansSuccesfull(false);
+			foreach(var l in zone._requiredWord)
+			{
+				LetterData.Instance.AddLetter(l);
+			}
+			StartCoroutine(LateEnableWriter(zone._requiredWord));
+		}
+		
+		private IEnumerator LateEnableWriter(E_LetterType[] word)
+		{
+			yield return null;
+			EnableWordWritter(word);
 		}
 		
 		private void PlayerEnterZone(ObstacleZone zone, E_LetterType[] word)
@@ -49,11 +66,12 @@ namespace TypeRunner
 		
 		private void PlayerExitZone(ObstacleZone zone)
 		{
-			DisableWordWritter(false);
+			DisableWordWritter(false, false, zone);
 		}
 		
 		private void EnableWordWritter(ObstacleZone zone, E_LetterType[] word)
 		{
+			_playerController.SetMansSuccesfull(false);
 			_layoutGroup.enabled = false;
 			_wordText.gameObject.SetActive(true);
 			_boostObject.SetActive(true);
@@ -65,11 +83,11 @@ namespace TypeRunner
 			_wordText.text = req_word.ToUpper();
 			_isReady = true;
 			_boost.EnableTimer(DisableWordWritter);
-			Time.timeScale = _timeScale;
+			Time.timeScale = zone._timeScale;
 			_lettersPanel.Activate(word);
 		}
 		
-		public void DisableWordWritter(bool successful, bool bonus = false)
+		public void DisableWordWritter(bool successful, bool bonus = false, ObstacleZone zone = null)
 		{
 			if(_isReady == false)
 				return;
@@ -93,12 +111,59 @@ namespace TypeRunner
 				
 			_successfulAmount.text = $"X{_stats.SuccessfulMultiplier.ToString()}";
 			
+			_playerController.SetMansSuccesfull(successful);
 			if(successful == false)
 			{	
-				_playerController.BlockManikins(_manikinsDieOnLose);
+				if(zone != null)
+					_playerController.BlockManikins(zone._manikinsToBlock);
+				else
+					_playerController.BlockManikins(1);
 			}
 			Time.timeScale = 1f;
 			_lettersPanel.DisableSelected();
+		}
+		
+		private void EnableWordWritter(E_LetterType[] word)
+		{
+			_playerController.SetMansSuccesfull(false);
+			_layoutGroup.enabled = false;
+			_wordText.gameObject.SetActive(true);
+			_boostObject.SetActive(true);
+			string req_word = "";
+			foreach(var ch in word)
+			{
+				req_word += ch.ToString();
+			}
+			_wordText.text = req_word.ToUpper();
+			_isReady = true;
+			_boost.EnableTimer(DisableWordWritter);
+			_lettersPanel.Activate(word);
+		}
+		
+		public void DisableWordWritter()
+		{
+			if(_isReady == false)
+				return;
+			_layoutGroup.enabled = true;
+			_lettersPanel.DisableSelected();
+			_layoutGroup.enabled = true;
+			_wordText.gameObject.SetActive(false);
+			_boostObject.SetActive(false);
+			_isReady = false;
+			Time.timeScale = 1f;
+			_lettersPanel.DisableSelected();
+			_layoutGroup.enabled = true;
+			//_lettersPanel.Reset();
+		}
+		
+		public void Enable()
+		{
+			_uiPanel.SetActive(true);
+		}
+		
+		public void Disable()
+		{
+			_uiPanel.SetActive(false);
 		}
 		
 		public void Reset()

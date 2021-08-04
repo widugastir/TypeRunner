@@ -303,6 +303,8 @@ MonoBehaviour:
   IsNeutral: 1
   Movement: {fileID: 5162348523026095943}
   Commands: {fileID: 2692411060807030495}
+  AffectZones: 1
+  IsWordSuccessful: 0
   _dieVfx:
   - {fileID: 5240603427060016727}
   - {fileID: 5240603427060016725}
@@ -324,6 +326,8 @@ MonoBehaviour:
   _leftRightBorders: {x: -4.6, y: 4.6}
   _strafeSpeed: 3
   _forwardSpeed: 55
+  _flyHeight: 8
+  _climbHeight: 3
 --- !u!114 &2692411060807030495
 MonoBehaviour:
   m_ObjectHideFlags: 0

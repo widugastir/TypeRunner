@@ -79,7 +79,6 @@ namespace TypeRunner
 		
 		public void DisableSelected()
 		{
-			_word = null;
 			foreach(var button in _buttons)
 			{
 				button.Disable();
@@ -87,9 +86,11 @@ namespace TypeRunner
 			if(_selectedButtons != null)
 			foreach(var button in _selectedButtons)
 			{
+				button.Disable();
 				LetterData.Instance.TryRemoveLetter(button.Letter);
 				button.gameObject.SetActive(false);
 			}
+			_word = null;
 		}
 		
 		private void OnLetterAdd(E_LetterType letter)
@@ -127,24 +128,9 @@ namespace TypeRunner
 			foreach(var button in _buttons)
 			{
 				button.Disable();
-				button.gameObject.SetActive(false);
+				//button.gameObject.SetActive(false);
 			}
 			LetterData.Instance.Clear();
 		}
-		
-		//private void OnLetterRemove(E_LetterType letter)
-		//{
-		//	for(int i = 0; i < _buttons.Length; i++)
-		//	{
-		//		if(_buttons[i].Letter == letter)
-		//		{
-		//			//LetterData.Instance.TryRemoveLetter(letter);
-		//			//print(letter);
-		//			_buttons[i].gameObject.SetActive(false);
-		//			//print("not remove..");
-		//			return;
-		//		}
-		//	}
-		//}
 	}
 }

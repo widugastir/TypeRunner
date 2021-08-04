@@ -46,8 +46,9 @@ namespace TypeRunner
 		public void Disable()
 		{
 			_button.interactable = false;
-			transform.SetParent(_startParent);
 			transform.DOKill(false);
+			transform.SetParent(_startParent);
+			//transform.transform.position = _startPos;
 		}
 		
 		public void OnPress()

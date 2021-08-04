@@ -7,6 +7,7 @@ namespace TypeRunner
 	public class EarnedCoinsDisplay : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
+		[SerializeField] private bool _writePlus = true;
 		[SerializeField] private TMP_Text _labelText;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		
@@ -19,7 +20,23 @@ namespace TypeRunner
 		
 		private void OnEnable()
 		{
-			_labelText.text = "+" + (_stats.EarnedCoins * _stats.SuccessfulMultiplier).ToString("0");
+			PlayerStats.OnEarnedCoinsChange += OnCoinChange;
+			UpdateUI();
+		}
+		
+		private void OnDisable()
+		{
+			PlayerStats.OnEarnedCoinsChange -= OnCoinChange;
+		}
+		
+		private void OnCoinChange(int earned)
+		{
+			UpdateUI();
+		}
+		
+		private void UpdateUI()
+		{
+			_labelText.text = (_writePlus? "+" : "") + (_stats.EarnedCoins * _stats.SuccessfulMultiplier).ToString("0");
 		}
 	}
 }

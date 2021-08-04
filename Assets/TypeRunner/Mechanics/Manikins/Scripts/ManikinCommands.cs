@@ -53,6 +53,12 @@ namespace TypeRunner
 				case E_Command.Swim:
 					Swim();
 					break;
+				case E_Command.Fly:
+					Fly();
+					break;
+				case E_Command.Climb:
+					Climb();
+					break;
 				case E_Command.Throw:
 					Throw();
 					break;
@@ -81,6 +87,10 @@ namespace TypeRunner
 			newPos.y = _basePosY;
 			_collider.center = newPos;
 			_man.Immortal = false;
+			
+			//not sure about it
+			_player.IsMovementEnabled = true;
+			_player._mapMovement.ResetSpeed();
 		}
 		
 		private void Jump()
@@ -104,10 +114,30 @@ namespace TypeRunner
 			_animator.SetTrigger("Swim");
 		}
 		
+		private void Fly()
+		{
+			_animator.SetTrigger("Fly");
+			_man.Movement.Fly(OnFlyEnd);
+			_player.IsMovementEnabled = false;
+		}
+		
+		private void Climb()
+		{
+			//_animator.SetTrigger("Climb");
+			_man.Movement.Climb();
+			_man.Immortal = true;
+			_player._mapMovement.SetSpeed(5f);
+			
+			//_player.IsMovementEnabled = true;
+		}
+		
+		private void OnFlyEnd()
+		{
+			_player.IsMovementEnabled = true;
+		}
+		
 		private void Throw()
 		{
-			
-			
 			_player.IsMovementEnabled = false;
 			_animator.SetTrigger("Throw");
 			_man._skinChanger._current._events.OnThrow += OnThrow;
@@ -136,7 +166,9 @@ namespace TypeRunner
 			Slide,
 			Swim,
 			Throw,
-			AllThrow
+			AllThrow,
+			Fly,
+			Climb
 		}
 	}
 }

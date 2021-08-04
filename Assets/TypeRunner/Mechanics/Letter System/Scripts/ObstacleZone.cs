@@ -6,8 +6,11 @@ namespace TypeRunner
 	public class ObstacleZone : MonoBehaviour
 	{
 		//------FIELDS
+		[SerializeField] public float _timeScale = 1f;
+		[SerializeField] public int _manikinsToBlock = 1;
 		[SerializeField] private bool _oneCommandOnly = false;
 		[SerializeField] private bool _isEnterZone = true;
+		[SerializeField] private bool _onlySuccessful = false;
 		[SerializeField] public bool _disableStrafe = false;
 		[SerializeField] private ManikinCommands.E_Command _command;
 		[ShowIf("_isEnterZone"), SerializeField] private E_LetterType[] _requiredLettersWrite;
@@ -22,9 +25,13 @@ namespace TypeRunner
 		{
 			if(other.TryGetComponent(out Mankin man))
 			{
+				
 				EnterZone?.Invoke(this);
 				if(man.Commands._isBlocked)
 					return;
+					
+				bool successful = (_onlySuccessful && man.IsWordSuccessful == true || _onlySuccessful == false);
+				
 				if(_isUsed == false && man.AffectZones == true)
 				{
 					_isUsed = true;
@@ -32,10 +39,15 @@ namespace TypeRunner
 						OnPlayerEntered?.Invoke(this, _requiredLettersWrite);
 					else if(_isEnterZone == false)
 						OnPlayerExit?.Invoke(this);
-					if(_oneCommandOnly)
+					
+					successful = (_onlySuccessful && man.IsWordSuccessful == true || _onlySuccessful == false);
+					if(_oneCommandOnly && successful)
+					{
 						man.Commands.DoCommand(_command);
+					}
 				}
-				if(_oneCommandOnly == false)
+				successful = (_onlySuccessful && man.IsWordSuccessful == true || _onlySuccessful == false);
+				if(_oneCommandOnly == false && successful)
 				{
 					man.Commands.DoCommand(_command);
 				}
