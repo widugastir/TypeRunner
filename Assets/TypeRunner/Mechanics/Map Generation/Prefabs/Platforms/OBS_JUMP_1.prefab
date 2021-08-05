@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66209341416886249}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: 24}
+  m_LocalPosition: {x: 0, y: 2.5, z: 17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5692062600183096546}
@@ -57,6 +57,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullTimer: -1
+  _bonusTimer: -1
   _timeScale: 0.2
   _manikinsToBlock: 1
   _oneCommandOnly: 0
@@ -335,7 +337,6 @@ Transform:
   - {fileID: 6632109855517214625}
   - {fileID: 8322859647593950846}
   - {fileID: 839300048439638179}
-  - {fileID: 8216652319106943148}
   m_Father: {fileID: 5692062600183096546}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -572,6 +573,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullTimer: -1
+  _bonusTimer: -1
   _timeScale: 1
   _manikinsToBlock: 1
   _oneCommandOnly: 0
@@ -643,36 +646,6 @@ MonoBehaviour:
   Destructable: 0
   _collider: {fileID: 0}
   Childs: []
---- !u!1 &5321503673136015416
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8216652319106943148}
-  m_Layer: 0
-  m_Name: '[SpawnPos] Letter (4)'
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8216652319106943148
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5321503673136015416}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15, y: 1.32, z: 4.215}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6597822433913394113}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5692062599044723580
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,7 +877,7 @@ MonoBehaviour:
   - {fileID: 6632109855517214625}
   - {fileID: 8322859647593950846}
   - {fileID: 839300048439638179}
-  - {fileID: 8216652319106943148}
+  - {fileID: 0}
   _manikinSpawnPos: []
 --- !u!65 &3925471192956831416
 BoxCollider:
@@ -1008,6 +981,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullTimer: -1
+  _bonusTimer: -1
   _timeScale: 1
   _manikinsToBlock: 1
   _oneCommandOnly: 0
