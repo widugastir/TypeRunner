@@ -7,6 +7,7 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField] private GameObject _previewCamera;
+		[SerializeField, HideInInspector] private GroupCenter _groupCenter;
 		[SerializeField, HideInInspector] private Canvas _canvas;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
@@ -19,6 +20,7 @@ namespace TypeRunner
 			{
 				_player = FindObjectOfType<PlayerController>();
 				_levelManager = FindObjectOfType<LevelManager>();
+				_groupCenter = FindObjectOfType<GroupCenter>(true);
 			}
 		}
 		
@@ -29,6 +31,8 @@ namespace TypeRunner
 		
 		public void BeginPlay()
 		{
+			//_groupCenter.Reset();
+			//_player.ResetMansParent();
 			_previewCamera.SetActive(false);
 			_levelManager.StartLevel();
 			_canvas.gameObject.SetActive(false);

@@ -159,8 +159,8 @@ namespace TypeRunner
 			_isDailyLevel = false;
 			foreach(var p in _disableOnFinish)
 				p.SetActive(false);
-			_map.Reset();
 			_player.Reset();
+			_map.Reset();
 			_stats.Reset();
 			_cameraResetter.Reset();
 		}

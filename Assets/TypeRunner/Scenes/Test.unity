@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1458717021}
-  m_IndirectSpecularColor: {r: 0, g: 0.99999946, b: 0.99999946, a: 1}
+  m_IndirectSpecularColor: {r: 0.372272, g: 0.6416999, b: 0.8780576, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -850,7 +850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 865.4234, y: -97.814026}
+  m_AnchoredPosition: {x: 863.99994, y: -97.813965}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &429693403
@@ -1243,7 +1243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 96.15816, y: -97.814026}
+  m_AnchoredPosition: {x: 95.99999, y: -97.813965}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &564415220
@@ -1416,6 +1416,7 @@ MonoBehaviour:
   _rouletteRotate: -1
   _playerColor: {r: 0, g: 0, b: 0, a: 0}
   _reviveCost: 25
+  ReviveCount: 0
   _coinsMultiplier: 1
   _coins: 0
   LevelPlayCount: 0
@@ -2931,13 +2932,15 @@ MonoBehaviour:
   - {fileID: -2704712160243418584, guid: 9a722f97067f76147b650a4b3a20e3a8, type: 3}
   _obstaclePlatforms:
   - {fileID: -3370677753161671782, guid: d02e7261358b8c04f814f6c965f0c19f, type: 3}
-  - {fileID: 1258933092926433309, guid: 25dcbee97a0487b44b2f112df9f31422, type: 3}
   - {fileID: 8688448537131505397, guid: 82119489db86dc14ba8612dfad340272, type: 3}
+  - {fileID: 5501625679250498018, guid: b6e147a279d3c6c4c9a3e84d5055a4d6, type: 3}
+  - {fileID: -3370677753161671782, guid: c0bd6a859b6d94a4db12460cc55205ef, type: 3}
   - {fileID: -4760559141306640773, guid: 8901d13a13c0b4245a7d1e8c85c8beb3, type: 3}
   - {fileID: -3370677753161671782, guid: 057d90cccf118fc499ffcbc4eba7176d, type: 3}
   - {fileID: -6176039183242989241, guid: e7c85f3a8469f6b4aa318d05c2ab836b, type: 3}
   - {fileID: 8610619685447950307, guid: 27ac158cfbf2c1442b05ea59f31f06c7, type: 3}
   - {fileID: -5415011480996527901, guid: 14a3e70968b56cf4ca40ea99edcd3619, type: 3}
+  - {fileID: 1258933092926433309, guid: 25dcbee97a0487b44b2f112df9f31422, type: 3}
 --- !u!4 &940102888
 Transform:
   m_ObjectHideFlags: 0
@@ -3695,6 +3698,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1390826032}
     - target: {fileID: 690460581469416383, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: _groupCenter
+      value: 
+      objectReference: {fileID: 504432732}
+    - target: {fileID: 690460581469416383, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
       propertyPath: _levelManager
       value: 
       objectReference: {fileID: 429693405}
@@ -4217,7 +4224,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 673.1071, y: -97.814026}
+  m_AnchoredPosition: {x: 671.99994, y: -97.813965}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1290520385
@@ -5525,7 +5532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1382852169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6243,10 +6250,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 564415221}
-        m_TargetAssemblyTypeName: TypeRunner.GameEndPanel, Assembly-CSharp
-        m_MethodName: Disable
-        m_Mode: 6
+      - m_Target: {fileID: 8291837727199214844}
+        m_TargetAssemblyTypeName: TypeRunner.LosePanel, Assembly-CSharp
+        m_MethodName: Revive
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6255,10 +6262,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 8291837727199214844}
-        m_TargetAssemblyTypeName: TypeRunner.LosePanel, Assembly-CSharp
-        m_MethodName: Revive
-        m_Mode: 1
+      - m_Target: {fileID: 564415221}
+        m_TargetAssemblyTypeName: TypeRunner.GameEndPanel, Assembly-CSharp
+        m_MethodName: Disable
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6552,7 +6559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 480.79077, y: -97.814026}
+  m_AnchoredPosition: {x: 479.99997, y: -97.813965}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1559666935
@@ -6971,7 +6978,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 288.4745, y: -97.814026}
+  m_AnchoredPosition: {x: 287.99997, y: -97.813965}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1661524852
@@ -8082,6 +8089,7 @@ GameObject:
   - component: {fileID: 2015848282}
   - component: {fileID: 2015848284}
   - component: {fileID: 2015848283}
+  - component: {fileID: 2015848285}
   m_Layer: 0
   m_Name: '[Text] Revive'
   m_TagString: Untagged
@@ -8205,6 +8213,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015848281}
   m_CullTransparentMesh: 1
+--- !u!114 &2015848285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015848281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad8af82f38554c479ca465ffa7adf98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 596332918}
+  _text: {fileID: 2015848283}
 --- !u!1 &2045317189 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5125851870044160055, guid: b424422e05fbfa745b90cdacaf1bec51, type: 3}
@@ -8956,6 +8978,7 @@ MonoBehaviour:
   _reviveButton: {fileID: 1451074637}
   _mainMenuButton: {fileID: 8291837728313779238}
   _startet: {fileID: 1200159551}
+  _groupCenter: {fileID: 504432732}
   _coins: {fileID: 596332917}
   _stats: {fileID: 596332918}
   _player: {fileID: 1390826032}

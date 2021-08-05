@@ -74,6 +74,7 @@ namespace TypeRunner
 		
 		public void Reset()
 		{
+			_groupCenter.transform.position = _basePos;
 			transform.position = _startPosition;
 			_upMove = false;
 			CanMove = true;

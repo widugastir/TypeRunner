@@ -71,7 +71,9 @@ namespace TypeRunner
 		
 		[Saveable, HideInInspector] public float _rouletteRotate = -1f;
 		[Saveable, HideInInspector] public Color _playerColor;
-		public int _reviveCost = 100;
+		[SerializeField] private int _reviveCost = 100;
+		public int ReviveCost => Mathf.Max(_reviveCost, (_reviveCost * ReviveCount) * 2);
+		public int ReviveCount = 0;
 		public float _coinsMultiplier = 1f;
 		[Saveable] public int _coins = 0;
 		[Saveable] public int LevelPlayCount = 0;
@@ -124,7 +126,10 @@ namespace TypeRunner
 		public static Action<float> OnDailyChange;
 		public static event Action<float> OnSkinProgressChange;
 
-		public void Reset(){}
+		public void Reset()
+		{
+			ReviveCount = 0;
+		}
 		
 		private void Start()
 		{

@@ -10,6 +10,7 @@ namespace TypeRunner
 		[SerializeField] private Button _reviveButton;
 		[SerializeField] private Button _mainMenuButton;
 		[SerializeField, HideInInspector] private GameStarter _startet;
+		[SerializeField, HideInInspector] private GroupCenter _groupCenter;
 		[SerializeField, HideInInspector] private CoinManager _coins;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private PlayerController _player;
@@ -24,6 +25,7 @@ namespace TypeRunner
 				_player = FindObjectOfType<PlayerController>(true);
 				_coins = FindObjectOfType<CoinManager>(true);
 				_stats = FindObjectOfType<PlayerStats>(true);
+				_groupCenter = FindObjectOfType<GroupCenter>(true);
 				_generator = FindObjectOfType<MapGeneration>(true);
 			}
 		}
@@ -35,7 +37,7 @@ namespace TypeRunner
 		
 		private void UpdateUI()
 		{
-			if(_stats.Coins >= _stats._reviveCost)
+			if(_stats.Coins >= _stats.ReviveCost)
 			{
 				_reviveButton.gameObject.SetActive(true);
 				_mainMenuButton.gameObject.SetActive(false);
@@ -49,8 +51,11 @@ namespace TypeRunner
 		
 		public void Revive()
 		{
-			if(_coins.TrySpend(_stats._reviveCost))
+			if(_coins.TrySpend(_stats.ReviveCost))
 			{
+				_stats.ReviveCount++;
+				_groupCenter.Reset();
+				_player.ResetMansParent();
 				_startet.BeginPlay();
 			}
 		}

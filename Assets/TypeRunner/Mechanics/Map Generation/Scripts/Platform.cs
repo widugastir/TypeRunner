@@ -24,15 +24,15 @@ namespace TypeRunner
 		//------METHODS
 		public void Init(MapGeneration generator, bool daily = false)
 		{
-			if(_canBeMirrored)
-			{
-				if(Random.value >= 0.5f)
-				{
-					Vector3 newScale = transform.localScale;
-					newScale.x *= -1f;
-					transform.localScale = newScale;
-				}
-			}
+			//if(_canBeMirrored)
+			//{
+			//	if(Random.value >= 0.5f)
+			//	{
+			//		Vector3 newScale = transform.localScale;
+			//		newScale.x *= -1f;
+			//		transform.localScale = newScale;
+			//	}
+			//}
 			
 			if(daily)
 				_stickmanMultiplier = 0.5f;

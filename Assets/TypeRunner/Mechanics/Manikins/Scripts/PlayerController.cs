@@ -25,6 +25,7 @@ namespace TypeRunner
 		private bool _controllable = true;
 		private int _manikinsCollected = 0;
 		private Ladder _lastLadder;
+		private Vector3 _baseParentPos;
 		public bool IsMovementEnabled { get; set; } = true;
 	
 		//------METHODS
@@ -82,6 +83,11 @@ namespace TypeRunner
 			{
 				_controllable = true;
 			}
+		}
+		
+		private void Start()
+		{
+			_baseParentPos = _manikinsParent.position;
 		}
 		
 		public void SetMove(bool canMove)
@@ -374,11 +380,17 @@ namespace TypeRunner
 			}
 		}
 		
+		public void ResetMansParent()
+		{
+			_manikinsParent.position = _baseParentPos;
+		}
+		
 		public void Reset()
 		{
+			ResetMansParent();
+			_groupCenter.Reset();
 			_manikins.Clear();
 			_manikinsCollected = 0;
-			_groupCenter.Reset();
 			_mapMovement.Reset();
 			_mapMovement.CanMove = true;
 			_controllable = true;
