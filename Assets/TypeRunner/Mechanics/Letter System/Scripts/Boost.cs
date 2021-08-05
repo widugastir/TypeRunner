@@ -84,6 +84,7 @@ namespace TypeRunner
 		private IEnumerator DisableBonus()
 		{
 			yield return new WaitForSecondsRealtime(_bonusDuration);
+			_letterSystem.DisableOutline();
 			_mapMovement.ResetSpeed();
 			_bonusCoroutine = null;
 		}
@@ -167,6 +168,7 @@ namespace TypeRunner
 			else _result = BoostTimerResult.successful;
 			
 			_timer = 0f;
+			_letterSystem.DisableOutline();
 			_endCallback?.Invoke(false, false, null);
 		}
 		
