@@ -155,6 +155,7 @@ namespace TypeRunner
 		
 		private void ResetLevel()
 		{
+			_letterSystem.Reset();
 			_isVictory = false;
 			_isDailyLevel = false;
 			foreach(var p in _disableOnFinish)

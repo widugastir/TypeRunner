@@ -53,7 +53,7 @@ namespace TypeRunner
 			int index = 0;
 			for(int i = 0; i < _letterAmount; i++)
 			{
-				if(_letterSpawnPos.Count == 0)
+				if(_letterSpawnPos == null || _letterSpawnPos.Count == 0)
 					break;
 					
 				index = Random.Range(0, _letterSpawnPos.Count);

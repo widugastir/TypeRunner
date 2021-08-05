@@ -118,7 +118,7 @@ namespace TypeRunner
 			}
 		}
 		
-		public void Reset()
+		public void Reset(bool setActiveFalse = false)
 		{
 			if(_selectedButtons != null)
 			{
@@ -128,7 +128,8 @@ namespace TypeRunner
 			foreach(var button in _buttons)
 			{
 				button.Disable();
-				//button.gameObject.SetActive(false);
+				if(setActiveFalse)
+					button.gameObject.SetActive(false);
 			}
 			LetterData.Instance.Clear();
 		}

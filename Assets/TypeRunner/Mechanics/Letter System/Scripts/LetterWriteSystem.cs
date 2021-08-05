@@ -188,13 +188,14 @@ namespace TypeRunner
 		public void Disable()
 		{
 			_uiPanel.SetActive(false);
+			Reset();
 		}
 		
 		public void Reset()
 		{
 			_uiPanel.SetActive(true);
 			_boostObject.SetActive(false);
-			_lettersPanel.Reset();
+			_lettersPanel.Reset(true);
 			//_stats._successfulWord = 0;
 			UpdateUI();
 		}
