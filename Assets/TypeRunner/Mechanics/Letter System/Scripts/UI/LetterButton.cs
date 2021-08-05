@@ -14,6 +14,7 @@ namespace TypeRunner
 		[HideInInspector] public E_LetterType Letter;
 		private SelectedLetters _selectedLetters;
 		private Transform _ungroupParent;
+		[SerializeField] private GameObject _outline;
 		[SerializeField] private Transform _startParent;
 		
 		public static event System.Action<LetterButton> OnLetterSelect;
@@ -70,6 +71,16 @@ namespace TypeRunner
 		private void OnAnimComplete()
 		{
 			OnLetterSelect?.Invoke(this);
+		}
+		
+		public void EnableOutline()
+		{
+			_outline.SetActive(true);
+		}
+		
+		public void DisableOutline()
+		{
+			_outline.SetActive(false);
 		}
 	}
 }

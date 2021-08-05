@@ -2275,10 +2275,6 @@ PrefabInstance:
       propertyPath: _startParent
       value: 
       objectReference: {fileID: 2046795881}
-    - target: {fileID: 657966078625898249, guid: a8267841bcfdffa4e89ce3a6a96006ba, type: 3}
-      propertyPath: _selectedLetters
-      value: 
-      objectReference: {fileID: 1305713769}
     - target: {fileID: 7676526485557021992, guid: a8267841bcfdffa4e89ce3a6a96006ba, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2345,7 +2341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7676526485557021992, guid: a8267841bcfdffa4e89ce3a6a96006ba, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 96.00001
+      value: 480
       objectReference: {fileID: 0}
     - target: {fileID: 7676526485557021992, guid: a8267841bcfdffa4e89ce3a6a96006ba, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2366,10 +2362,6 @@ PrefabInstance:
     - target: {fileID: 7676526485557021993, guid: a8267841bcfdffa4e89ce3a6a96006ba, type: 3}
       propertyPath: m_Name
       value: '[Button] Letter'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7676526485557021993, guid: a8267841bcfdffa4e89ce3a6a96006ba, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8267841bcfdffa4e89ce3a6a96006ba, type: 3}
@@ -5055,6 +5047,7 @@ GameObject:
   - component: {fileID: 1339874578}
   - component: {fileID: 1339874580}
   - component: {fileID: 1339874579}
+  - component: {fileID: 1339874581}
   m_Layer: 0
   m_Name: Bonus Line
   m_TagString: Untagged
@@ -5119,6 +5112,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339874577}
   m_CullTransparentMesh: 1
+--- !u!114 &1339874581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339874577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96f7e5638712f74e8bf32f4dc0abbfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _image: {fileID: 1339874579}
+  _colors:
+  - {r: 0.96933126, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.007843138, b: 0, a: 1}
+  - {r: 0.14971161, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0.9882353, a: 1}
+  _switchDuration: 0.3
 --- !u!1 &1365446666
 GameObject:
   m_ObjectHideFlags: 0
@@ -5994,6 +6006,7 @@ MonoBehaviour:
   _boostMultiplier: 1.15
   _fullTimer: 6
   _bonusTimer: 3
+  _letterSystem: {fileID: 612518298}
   _mapMovement: {fileID: 871075338}
   _playerController: {fileID: 1390826032}
 --- !u!1 &1414720283
@@ -6768,7 +6781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7676526485557021992, guid: a8267841bcfdffa4e89ce3a6a96006ba, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 288.00003
+      value: 480
       objectReference: {fileID: 0}
     - target: {fileID: 7676526485557021992, guid: a8267841bcfdffa4e89ce3a6a96006ba, type: 3}
       propertyPath: m_AnchoredPosition.y

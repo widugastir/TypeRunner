@@ -141,6 +141,16 @@ namespace TypeRunner
 			_lettersPanel.DisableSelected();
 		}
 		
+		public void EnableOutline()
+		{
+			_lettersPanel.EnableOutline();
+		}
+		
+		public void DisableOutline()
+		{
+			_lettersPanel.DisableOutline();
+		}
+		
 		private void UpdateUI()
 		{
 			_successfulAmount.text = $"x{_stats.SuccessfulMultiplier.ToString()}";

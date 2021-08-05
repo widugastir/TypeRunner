@@ -14,6 +14,7 @@ namespace TypeRunner
 		[SerializeField] private float _boostMultiplier = 1.5f;
 		[SerializeField] private float _fullTimer = 10f;
 		[SerializeField] private float _bonusTimer = 2f;
+		[SerializeField] private LetterWriteSystem _letterSystem;
 		[SerializeField] private MapMovement _mapMovement;
 		[SerializeField] private PlayerController _playerController;
 		private float _timer = 0f;
@@ -37,6 +38,8 @@ namespace TypeRunner
 		{
 			_fullTimer = _baseFullTimer;
 			_bonusTimer = _baseBonusTimer;
+			_oneUseTrigger = true;
+			_letterSystem.DisableOutline();
 		}
 	    
 		protected void OnDisable()
@@ -101,6 +104,8 @@ namespace TypeRunner
 			_timer = _fullTimer;
 			_timeLine.fillAmount = 1f;
 			_bonusLine.fillAmount = _bonusTimer / _fullTimer;
+			if(_bonusLine.fillAmount > 0f)
+				_letterSystem.EnableOutline();
 		}
 		
 		public void EnableTimer(ObstacleZone zone, System.Action<bool, bool, ObstacleZone> endCallback)
@@ -119,6 +124,8 @@ namespace TypeRunner
 			_timer = _fullTimer;
 			_timeLine.fillAmount = 1f;
 			_bonusLine.fillAmount = _bonusTimer / _fullTimer;
+			if(_bonusLine.fillAmount > 0f)
+				_letterSystem.EnableOutline();
 		}
 	    
 		public void EnableTimer(System.Action<bool, bool, ObstacleZone> endCallback)
@@ -129,6 +136,8 @@ namespace TypeRunner
 			_timer = _fullTimer;
 			_timeLine.fillAmount = 1f;
 			_bonusLine.fillAmount = _bonusTimer / _fullTimer;
+			if(_bonusLine.fillAmount > 0f)
+				_letterSystem.EnableOutline();
 		}
 		
 		private void Update()
@@ -164,7 +173,30 @@ namespace TypeRunner
 		private void UpdateUI()
 		{
 			_timeLine.fillAmount = _timer / _fullTimer;
+			if(_timer < (_fullTimer - _bonusTimer))
+			{
+				if(OneUseTrigger)
+				{
+					_letterSystem.DisableOutline();
+				}
+			}
 		}
+		
+		#region ONE USE ONLY TRIGGER
+		private bool _oneUseTrigger = true;
+		public bool OneUseTrigger
+		{
+			get
+			{
+				if(_oneUseTrigger == true)
+				{
+					_oneUseTrigger = false;
+					return true;
+				}
+				return false;
+			}
+		}
+		#endregion
 		
 		public enum BoostTimerResult
 		{

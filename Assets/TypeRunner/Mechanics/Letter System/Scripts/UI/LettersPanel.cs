@@ -10,7 +10,7 @@ namespace TypeRunner
 		[SerializeField] private Transform _ungroupParent;
 		[SerializeField] private SelectedLetters _selectedLetters;
 		[SerializeField, HideInInspector] private LetterButton[] _buttons;
-		[SerializeField, HideInInspector]private LetterWriteSystem _letterWriteSystem;
+		[SerializeField, HideInInspector] private LetterWriteSystem _letterWriteSystem;
 		private E_LetterType[] _word;
 		private List<LetterButton> _selectedButtons;
 		private List<E_LetterType> _selectedWord;
@@ -38,6 +38,22 @@ namespace TypeRunner
 			LetterData.Instance.OnLetterAdd -= OnLetterAdd;
 			LetterData.Instance.OnLetterReplace -= OnLetterReplace;
 			LetterButton.OnLetterSelect -= OnLetterSelect;
+		}
+		
+		public void EnableOutline()
+		{
+			foreach(var button in _buttons)
+			{
+				button.EnableOutline();
+			}
+		}
+		
+		public void DisableOutline()
+		{
+			foreach(var button in _buttons)
+			{
+				button.DisableOutline();
+			}
 		}
 		
 		private void OnLetterSelect(LetterButton letterButton)
