@@ -87,12 +87,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullTimer: -1
+  _bonusTimer: -1
   _timeScale: 1
+  _manikinsToBlock: 1
   _oneCommandOnly: 0
   _isEnterZone: 0
+  _onlySuccessful: 0
   _disableStrafe: 1
   _command: 3
   _requiredLettersWrite: 
+  _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &539198288190885193
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,12 +187,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullTimer: -1
+  _bonusTimer: -1
   _timeScale: 1
+  _manikinsToBlock: 1
   _oneCommandOnly: 0
   _isEnterZone: 0
+  _onlySuccessful: 0
   _disableStrafe: 0
   _command: 1
   _requiredLettersWrite: 
+  _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1776825939951192725
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3694713998837198240}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.55, z: 39}
+  m_LocalPosition: {x: 0, y: 2.55, z: 32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5692062600183096546}
@@ -309,12 +323,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullTimer: -1
+  _bonusTimer: -1
   _timeScale: 0.2
+  _manikinsToBlock: 1
   _oneCommandOnly: 0
   _isEnterZone: 1
+  _onlySuccessful: 0
   _disableStrafe: 1
   _command: 0
   _requiredLettersWrite: 090000000a0000000b0000000c0000000d000000
+  _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4014989930762292200
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,6 +642,7 @@ MonoBehaviour:
   _generationLevel: 0
   _manikinAmount: 0
   _letterAmount: 5
+  _letterGenerators: []
   _requiredLetters: 090000000a0000000b0000000c0000000d000000
   ConnectionPoint: {fileID: 5692062599939181616}
   _letterSpawnPos:

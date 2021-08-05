@@ -87,12 +87,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullTimer: -1
+  _bonusTimer: -1
   _timeScale: 1
+  _manikinsToBlock: 1
   _oneCommandOnly: 0
   _isEnterZone: 0
+  _onlySuccessful: 0
   _disableStrafe: 1
   _command: 3
   _requiredLettersWrite: 
+  _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &539198288190885193
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +162,6 @@ Transform:
   - {fileID: 8322859647593950846}
   - {fileID: 839300048439638179}
   - {fileID: 8216652319106943148}
-  - {fileID: 564317321285938666}
   m_Father: {fileID: 5692062600183096546}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -240,36 +246,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &3362552475863259987
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 564317321285938666}
-  m_Layer: 0
-  m_Name: '[SpawnPos] Letter (5)'
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &564317321285938666
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3362552475863259987}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15, y: 1.32, z: 6.715}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6597822433913394113}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3890100356627673758
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,6 +527,7 @@ MonoBehaviour:
   _generationLevel: 8
   _manikinAmount: 0
   _letterAmount: 5
+  _letterGenerators: []
   _requiredLetters: 090000000a0000000b0000000c0000000d000000
   ConnectionPoint: {fileID: 5692062599939181616}
   _letterSpawnPos:
@@ -559,7 +536,7 @@ MonoBehaviour:
   - {fileID: 8322859647593950846}
   - {fileID: 839300048439638179}
   - {fileID: 8216652319106943148}
-  - {fileID: 564317321285938666}
+  - {fileID: 0}
   _manikinSpawnPos: []
 --- !u!65 &7212237143000932175
 BoxCollider:
@@ -832,12 +809,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullTimer: -1
+  _bonusTimer: -1
   _timeScale: 1
+  _manikinsToBlock: 1
   _oneCommandOnly: 0
   _isEnterZone: 0
+  _onlySuccessful: 0
   _disableStrafe: 0
   _command: 1
   _requiredLettersWrite: 
+  _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6453304909844094930
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,7 +1221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8682926791907319138}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.54, z: 39}
+  m_LocalPosition: {x: 0, y: 2.54, z: 32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5692062600183096546}
@@ -1268,12 +1252,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullTimer: -1
+  _bonusTimer: -1
   _timeScale: 0.2
+  _manikinsToBlock: 1
   _oneCommandOnly: 0
   _isEnterZone: 1
+  _onlySuccessful: 0
   _disableStrafe: 1
   _command: 0
   _requiredLettersWrite: 090000000a0000000b0000000c0000000d000000
+  _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8996952379110194797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,7 +1619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3813055114230469508, guid: 0c66cde073680c648aa2dccc4d0f1f66, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 32.41768
+      value: 30.167679
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c66cde073680c648aa2dccc4d0f1f66, type: 3}
@@ -1784,7 +1775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3813055114230469508, guid: 0c66cde073680c648aa2dccc4d0f1f66, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22.167679
+      value: 17.667679
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c66cde073680c648aa2dccc4d0f1f66, type: 3}

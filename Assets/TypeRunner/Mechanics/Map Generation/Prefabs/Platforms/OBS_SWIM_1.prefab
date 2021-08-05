@@ -394,8 +394,8 @@ Transform:
   - {fileID: 3490561652413940744}
   - {fileID: 6632109855517214625}
   - {fileID: 8322859647593950846}
-  - {fileID: 839300048439638179}
   - {fileID: 8216652319106943148}
+  - {fileID: 5530525159779573811}
   m_Father: {fileID: 5692062600183096546}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -551,12 +551,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullTimer: -1
+  _bonusTimer: -1
   _timeScale: 1
+  _manikinsToBlock: 1
   _oneCommandOnly: 0
   _isEnterZone: 0
+  _onlySuccessful: 0
   _disableStrafe: 1
   _command: 4
   _requiredLettersWrite: 
+  _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5321503673136015416
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,7 +592,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6597822433913394113}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5692062599044723580
 GameObject:
@@ -805,13 +812,14 @@ MonoBehaviour:
   _generationLevel: 0
   _manikinAmount: 0
   _letterAmount: 5
+  _letterGenerators: []
   _requiredLetters: 09000000080000000b00000002000000
   ConnectionPoint: {fileID: 5692062599939181616}
   _letterSpawnPos:
   - {fileID: 3490561652413940744}
   - {fileID: 6632109855517214625}
   - {fileID: 8322859647593950846}
-  - {fileID: 839300048439638179}
+  - {fileID: 0}
   - {fileID: 8216652319106943148}
   _manikinSpawnPos: []
 --- !u!65 &-3864806159251634429
@@ -953,6 +961,36 @@ Transform:
   - {fileID: 294482934733729401}
   m_Father: {fileID: 5692062600183096546}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5984683066222222035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5530525159779573811}
+  m_Layer: 0
+  m_Name: '[SpawnPos] Letter (3)'
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5530525159779573811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5984683066222222035}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.15, y: 1.32, z: 3.24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6597822433913394113}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6254545421347419654
 GameObject:
@@ -1245,42 +1283,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullTimer: -1
+  _bonusTimer: -1
   _timeScale: 1
+  _manikinsToBlock: 1
   _oneCommandOnly: 0
   _isEnterZone: 0
+  _onlySuccessful: 0
   _disableStrafe: 0
   _command: 1
   _requiredLettersWrite: 
---- !u!1 &7757971046476671945
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 839300048439638179}
-  m_Layer: 0
-  m_Name: '[SpawnPos] Letter (3)'
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &839300048439638179
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7757971046476671945}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15, y: 1.32, z: 3.795}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6597822433913394113}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8231585766329723032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,7 +1322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8231585766329723032}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.56, z: 21}
+  m_LocalPosition: {x: 0, y: 2.56, z: 14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5692062600183096546}
@@ -1338,12 +1353,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5cd928c591d6e4daa76e7d0c97d08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fullTimer: -1
+  _bonusTimer: -1
   _timeScale: 0.2
+  _manikinsToBlock: 1
   _oneCommandOnly: 0
   _isEnterZone: 1
+  _onlySuccessful: 0
   _disableStrafe: 1
   _command: 0
   _requiredLettersWrite: 09000000080000000b00000002000000
+  _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8268723823457686849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,7 +1565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4693521141732573801, guid: 0d9b9129dd4b636449dcda163c769877, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.559999
+      value: 10.310001
       objectReference: {fileID: 0}
     - target: {fileID: 4693521141732573801, guid: 0d9b9129dd4b636449dcda163c769877, type: 3}
       propertyPath: m_LocalRotation.w
