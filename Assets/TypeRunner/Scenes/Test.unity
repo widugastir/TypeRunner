@@ -1339,8 +1339,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bonusCoinsPerLevel: 2
   _maxLevel: 10
-  _baseCost: 150
-  _costMultiplier: 2.57
+  _baseCost: 200
+  _costMultiplier: 2.75
   _stats: {fileID: 596332918}
   _coins: {fileID: 596332917}
 --- !u!114 &596332914
@@ -1356,8 +1356,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxLevel: 10
-  _baseCost: 150
-  _costMultiplier: 2.57
+  _baseCost: 200
+  _costMultiplier: 2.75
   _stats: {fileID: 596332918}
   _coins: {fileID: 596332917}
 --- !u!114 &596332915
@@ -4486,19 +4486,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _skinCost.Array.data[0]
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
-      propertyPath: _skinCost.Array.data[1]
       value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
-      propertyPath: _skinCost.Array.data[2]
+      propertyPath: _skinCost.Array.data[1]
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
+      propertyPath: _skinCost.Array.data[2]
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _skinCost.Array.data[3]
-      value: 2000
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _skinCost.Array.data[4]
@@ -4510,15 +4510,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _skinCost.Array.data[6]
-      value: 12000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _skinCost.Array.data[7]
-      value: 17000
+      value: 14000
       objectReference: {fileID: 0}
     - target: {fileID: 3017243317889916410, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _skinCost.Array.data[8]
-      value: 25000
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 4987801348790188964, guid: 08c8d9f97de04d8499fe59c5b19baeb5, type: 3}
       propertyPath: _stats
