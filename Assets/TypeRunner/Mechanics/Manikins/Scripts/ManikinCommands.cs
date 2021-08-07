@@ -126,7 +126,7 @@ namespace TypeRunner
 		private void Fly()
 		{
 			_animator.SetTrigger("Fly");
-			_man.Movement.Fly(OnFlyEnd);
+			_man.Movement.Flying(OnFlyEnd);
 			_player.IsMovementEnabled = false;
 		}
 		

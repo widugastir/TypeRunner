@@ -10,6 +10,7 @@ namespace TypeRunner
 	public class PlayerController : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
+		[SerializeField] private ImmortalTimer _immortalTimer;
 		[SerializeField] private Transform _manikinsParent;
 		[SerializeField] private float _finishDelay = 2f;
 		[SerializeField, Layer] private string _ignoreSameMask;
@@ -109,6 +110,10 @@ namespace TypeRunner
 			_manikins.Clear();
 			
 			Vector3 pos = transform.position;
+			
+			if(makeImmortal && immortalTime > 0f)
+				_immortalTimer.Enable(immortalTime);
+			
 			for(int i = 0; i < _stats.StartUnitsLevel; i++)
 			{
 				pos = transform.position;
@@ -125,6 +130,7 @@ namespace TypeRunner
 		
 		public void SetImmortal(float duration, bool affectZones)
 		{
+			_immortalTimer.Enable(duration);
 			for(int i = 0; i < _manikins.Count; i++)
 			{
 				_manikins[i].SetImmortal(true, duration, affectZones);

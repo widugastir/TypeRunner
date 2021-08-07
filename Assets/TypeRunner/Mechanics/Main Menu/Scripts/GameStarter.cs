@@ -31,8 +31,6 @@ namespace TypeRunner
 		
 		public void BeginPlay()
 		{
-			//_groupCenter.Reset();
-			//_player.ResetMansParent();
 			_previewCamera.SetActive(false);
 			_levelManager.StartLevel();
 			_canvas.gameObject.SetActive(false);

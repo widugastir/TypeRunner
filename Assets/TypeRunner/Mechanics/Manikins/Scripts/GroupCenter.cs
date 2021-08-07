@@ -21,7 +21,7 @@ namespace TypeRunner
 		private void Start()
 		{
 			_startPosition = transform.position;
-			_basePos = _groupCenter.transform.position;
+			_basePos = _groupCenter.transform.localPosition;
 		}
 		
 		public void SetStrafePos(float strafe)
@@ -74,7 +74,7 @@ namespace TypeRunner
 		
 		public void Reset()
 		{
-			_groupCenter.transform.position = _basePos;
+			_groupCenter.transform.localPosition = _basePos;
 			transform.position = _startPosition;
 			_upMove = false;
 			CanMove = true;

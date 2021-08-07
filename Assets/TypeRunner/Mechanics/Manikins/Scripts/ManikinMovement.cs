@@ -1,4 +1,5 @@
 ﻿using SoundSteppe.RefSystem;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
@@ -13,6 +14,7 @@ namespace TypeRunner
 		[SerializeField] private float _strafeSpeed = 3f;
 		[SerializeField] private float _forwardSpeed = 3f;
 		[SerializeField] private float _flyHeight = 3f;
+		[SerializeField] private float _flyDuration = 3f;
 		[SerializeField] private float _climbHeight = 3f;
 		private bool _isJumped = false;
 		private bool _canMove = true;
@@ -130,17 +132,23 @@ namespace TypeRunner
 				.OnComplete(OnJumpEnd);
 		}
 		
-		public void Fly(TweenCallback flyEndCallback)
+		public void Flying(TweenCallback flyEndCallback)
 		{
 			_rigi.useGravity = false;
 			_rigi.DOMoveY(transform.position.y + _flyHeight, 1f)
 				.SetEase(Ease.Linear)
 				.OnComplete(flyEndCallback)
-				.OnComplete(OnFlyEnd);
+				.OnComplete(Hovering);
 		}
 		
-		private void OnFlyEnd()
+		private void Hovering()
 		{
+			StartCoroutine(StopHovering());
+		}
+		
+		private IEnumerator StopHovering()
+		{
+			yield return new WaitForSecondsRealtime(_flyDuration);
 			_rigi.useGravity = true;
 		}
 		

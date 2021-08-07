@@ -9,8 +9,9 @@ namespace TypeRunner
 		[SerializeField] private float _bonusDuration = 3f;
 		
 		[SerializeField] private ParticleSystem _speedParticles;
-		[SerializeField] private Image _bonusLine;
-		[SerializeField] private Image _timeLine;
+		[SerializeField] private Slider _timerSlider;
+		[SerializeField] private RectTransform _mainLine;
+		[SerializeField] private RectTransform _bonusLine;
 		[SerializeField] private float _boostMultiplier = 1.5f;
 		[SerializeField] private float _fullTimer = 10f;
 		[SerializeField] private float _bonusTimer = 2f;
@@ -89,6 +90,18 @@ namespace TypeRunner
 			_bonusCoroutine = null;
 		}
 		
+		private void UpdateTimerUI()
+		{
+			_timerSlider.value = 1f;
+			float ratio = 1f - _bonusTimer / _fullTimer;
+			Vector2 newSize = _mainLine.offsetMax;
+			newSize.x = _bonusLine.sizeDelta.x * ratio;
+			_mainLine.offsetMax = newSize;
+			
+			if(_bonusTimer > 0f)
+				_letterSystem.EnableOutline();
+		}
+		
 		public void EnableTimer(FlyZone zone, System.Action<bool, bool, ObstacleZone> endCallback)
 		{
 			ResetTimer();
@@ -103,10 +116,7 @@ namespace TypeRunner
 			_result = BoostTimerResult.unsuccessful;
 			_endCallback = endCallback;
 			_timer = _fullTimer;
-			_timeLine.fillAmount = 1f;
-			_bonusLine.fillAmount = _bonusTimer / _fullTimer;
-			if(_bonusLine.fillAmount > 0f)
-				_letterSystem.EnableOutline();
+			UpdateTimerUI();
 		}
 		
 		public void EnableTimer(ObstacleZone zone, System.Action<bool, bool, ObstacleZone> endCallback)
@@ -123,10 +133,7 @@ namespace TypeRunner
 			_result = BoostTimerResult.unsuccessful;
 			_endCallback = endCallback;
 			_timer = _fullTimer;
-			_timeLine.fillAmount = 1f;
-			_bonusLine.fillAmount = _bonusTimer / _fullTimer;
-			if(_bonusLine.fillAmount > 0f)
-				_letterSystem.EnableOutline();
+			UpdateTimerUI();
 		}
 	    
 		public void EnableTimer(System.Action<bool, bool, ObstacleZone> endCallback)
@@ -135,10 +142,7 @@ namespace TypeRunner
 			_result = BoostTimerResult.unsuccessful;
 			_endCallback = endCallback;
 			_timer = _fullTimer;
-			_timeLine.fillAmount = 1f;
-			_bonusLine.fillAmount = _bonusTimer / _fullTimer;
-			if(_bonusLine.fillAmount > 0f)
-				_letterSystem.EnableOutline();
+			UpdateTimerUI();
 		}
 		
 		private void Update()
@@ -174,7 +178,7 @@ namespace TypeRunner
 		
 		private void UpdateUI()
 		{
-			_timeLine.fillAmount = _timer / _fullTimer;
+			_timerSlider.value = _timer / _fullTimer;
 			if(_timer < (_fullTimer - _bonusTimer))
 			{
 				if(OneUseTrigger)

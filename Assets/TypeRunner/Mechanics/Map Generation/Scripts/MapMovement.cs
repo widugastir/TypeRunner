@@ -3,7 +3,7 @@
 public class MapMovement : MonoBehaviour
 {
 	[SerializeField] public float _moveSpeed = 1f;
-	[SerializeField] private CameraController _camera;
+	//[SerializeField] private CameraController _camera;
 	private float _baseSpeed;
 	public bool CanMove { get; set; } = true;
 	private Vector3 _basePosition;
@@ -19,7 +19,7 @@ public class MapMovement : MonoBehaviour
 	public void SetUpMovement(float speed)
 	{
 		SetSpeed(speed);
-		_camera.SetUpMovement(1f);
+		//_camera.SetUpMovement(1f);
 	}
 	
 	public void SetSpeed(float speed)
