@@ -75,7 +75,7 @@ namespace TypeRunner
 			if(immortal == true)
 			{
 				StartCoroutine(SetMortal(immortalTime));
-				SetFlickering(true, immortalTime);
+				//SetFlickering(true, immortalTime);
 				_blockImmortal = true;
 			}
 		}
@@ -86,7 +86,7 @@ namespace TypeRunner
 			_blockImmortal = false;
 			AffectZones = true;
 			Immortal = false;
-			SetFlickering(false);
+			//SetFlickering(false);
 		}
 		
 		public void SetOwnerTo(bool neutral)
