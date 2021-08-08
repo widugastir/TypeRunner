@@ -26,6 +26,7 @@ namespace TypeRunner
 			} 
 		}
 		private bool _blockImmortal = false;
+		private Transform _map;
 		
 		public bool IsFinished { get; set; } = false;
 		public bool IsWordSuccessful = false;
@@ -50,6 +51,11 @@ namespace TypeRunner
 				_animator = gameObject.GetComponentInChildren<Animator>();
 				_skinChanger = gameObject.GetComponentInChildren<SkinChanger>();
 			}
+		}
+		
+		public void Init(Transform map)
+		{
+			_map = map;
 		}
 		
 		private void OnEnable()
@@ -171,7 +177,8 @@ namespace TypeRunner
 				p.transform.SetParent(null);
 				p.Play();
 			}
-			//Instantiate(_ragdollPrefab, transform.position, Quaternion.identity);
+			var ragdoll = Instantiate(_ragdollPrefab, transform.position, Quaternion.identity, _map);
+			Destroy(ragdoll, 2f);
 			Destroy(gameObject);
 		}
 		

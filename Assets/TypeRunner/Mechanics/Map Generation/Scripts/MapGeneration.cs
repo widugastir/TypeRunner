@@ -105,6 +105,7 @@ namespace TypeRunner
 		{
 			var man = Instantiate(ManikinPrefab, position, Quaternion.identity);
 			_mapManikins.Add(man);
+			man.Init(_mapParent);
 			man.transform.SetParent(_mapParent);
 			return man;
 		}
