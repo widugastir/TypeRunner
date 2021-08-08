@@ -15,6 +15,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private MapGeneration _generator;
+		[SerializeField, HideInInspector] private MapMovement _map;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -27,6 +28,7 @@ namespace TypeRunner
 				_stats = FindObjectOfType<PlayerStats>(true);
 				_groupCenter = FindObjectOfType<GroupCenter>(true);
 				_generator = FindObjectOfType<MapGeneration>(true);
+				_map = FindObjectOfType<MapMovement>(true);
 			}
 		}
 		
@@ -57,6 +59,7 @@ namespace TypeRunner
 				_groupCenter.Reset();
 				_player.ResetMansParent();
 				_startet.BeginPlay();
+				_map.PushBack();
 			}
 		}
 	}
