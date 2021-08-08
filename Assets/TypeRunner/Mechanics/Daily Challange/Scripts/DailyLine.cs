@@ -8,6 +8,7 @@ namespace TypeRunner
 	public class DailyLine : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
+		[SerializeField] private string _customPercentageText = "";
 		[SerializeField] private TMP_Text _percentageText;
 		[SerializeField] private TMP_Text _rewardText;
 		[SerializeField] private TMP_Text _humans;
@@ -42,7 +43,10 @@ namespace TypeRunner
 		
 		public void UpdateUI()
 		{
-			_percentageText.text = _reward.Percentage.ToString() + "%";
+			if(_customPercentageText == "")
+				_percentageText.text = _reward.Percentage.ToString() + "%";
+			else
+				_percentageText.text = _customPercentageText;
 			_rewardText.text = _reward.Coins.ToString();
 			_humans.text = _reward.Humans.ToString();
 			
