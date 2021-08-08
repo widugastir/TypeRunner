@@ -32,6 +32,7 @@ namespace TypeRunner
 		public int RankPosition { get; set; } = 0;
 		public int Rank { get; set; } = 0;
 		public float EarnedCoinsBonus { get; set; } = 0f;
+		[SerializeField] private GameObject _ragdollPrefab;
 		[SerializeField] private ParticleSystem[] _dieVfx;
 		[SerializeField] private BlinkingMaterial _blinking;
 		
@@ -170,6 +171,7 @@ namespace TypeRunner
 				p.transform.SetParent(null);
 				p.Play();
 			}
+			//Instantiate(_ragdollPrefab, transform.position, Quaternion.identity);
 			Destroy(gameObject);
 		}
 		
