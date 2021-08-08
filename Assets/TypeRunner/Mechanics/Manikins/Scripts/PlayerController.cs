@@ -123,7 +123,7 @@ namespace TypeRunner
 				man.SetOwnerTo(false);
 				if(makeImmortal)
 				{
-					man.SetImmortal(true, immortalTime, false);
+					man.SetImmortal(true, immortalTime, true);
 				}
 			}
 		}
