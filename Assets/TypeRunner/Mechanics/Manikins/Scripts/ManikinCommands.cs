@@ -125,9 +125,9 @@ namespace TypeRunner
 		
 		private void Fly()
 		{
-			_animator.SetTrigger("Fly");
-			_man.Movement.Flying(OnFlyEnd);
-			_player.IsMovementEnabled = false;
+			//_animator.SetTrigger("Fly");
+			_man.Movement.Flying(OnFlyEnd, OnHoverEnd);
+			_player._mapMovement.SetSpeed(12f);
 		}
 		
 		private void Climb()
@@ -141,6 +141,11 @@ namespace TypeRunner
 		private void OnFlyEnd()
 		{
 			_player.IsMovementEnabled = true;
+		}
+		
+		private void OnHoverEnd()
+		{
+			_player.IsMovementEnabled = false;
 		}
 		
 		private void Throw()

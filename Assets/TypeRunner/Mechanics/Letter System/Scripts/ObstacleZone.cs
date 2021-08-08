@@ -30,7 +30,6 @@ namespace TypeRunner
 		{
 			if(other.TryGetComponent(out Mankin man))
 			{
-				
 				EnterZone?.Invoke(this);
 				if(man.Commands._isBlocked)
 					return;

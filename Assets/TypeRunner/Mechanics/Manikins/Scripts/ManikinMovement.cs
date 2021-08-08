@@ -23,6 +23,7 @@ namespace TypeRunner
 		private bool CanMoveForward{ get; set; } = false;
 		private Tween _goToTween;
 		private Transform _groupCenter;
+		private TweenCallback _hoverEndCallback;
 		
 		public static event System.Action<Vector3> OnBorderCollide;
 		
@@ -132,10 +133,11 @@ namespace TypeRunner
 				.OnComplete(OnJumpEnd);
 		}
 		
-		public void Flying(TweenCallback flyEndCallback)
+		public void Flying(TweenCallback flyEndCallback, TweenCallback hoverEndCallback)
 		{
 			_rigi.useGravity = false;
-			_rigi.DOMoveY(transform.position.y + _flyHeight, 1f)
+			_hoverEndCallback = hoverEndCallback;
+			transform.DOMoveY(transform.position.y + _flyHeight, 1f)
 				.SetEase(Ease.Linear)
 				.OnComplete(flyEndCallback)
 				.OnComplete(Hovering);
@@ -150,6 +152,7 @@ namespace TypeRunner
 		{
 			yield return new WaitForSecondsRealtime(_flyDuration);
 			_rigi.useGravity = true;
+			_hoverEndCallback?.Invoke();
 		}
 		
 		public void Climb()
