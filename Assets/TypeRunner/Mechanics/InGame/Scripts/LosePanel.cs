@@ -60,6 +60,7 @@ namespace TypeRunner
 				_player.ResetMansParent();
 				_startet.BeginPlay();
 				_map.PushBack();
+				_generator.DestroyRagdolls();
 			}
 		}
 	}

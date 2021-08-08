@@ -13,11 +13,13 @@ namespace TypeRunner
 		[SerializeField] private int _dailyOneEmptyPerPlatform = 3;
 		[SerializeField] private Transform _mapParent;
 		[SerializeField] private Platform _basePlatform;
+		[SerializeField] private GameObject _ragdollPrefab;
 		[SerializeField, HideInInspector] private Platform _lastPlatform;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private PlatformsHolder _prefabs;
 		[SerializeField] private LetterPickup LetterPrefab;
 		[SerializeField] private Mankin ManikinPrefab;
+		private List<GameObject> _ragdolls = new List<GameObject>();
 		private List<Platform> _mapPlatforms = new List<Platform>();
 		private List<Mankin> _mapManikins = new List<Mankin>();
 		private List<LetterPickup> _mapLetters = new List<LetterPickup>();
@@ -105,9 +107,16 @@ namespace TypeRunner
 		{
 			var man = Instantiate(ManikinPrefab, position, Quaternion.identity);
 			_mapManikins.Add(man);
-			man.Init(_mapParent);
+			man.Init(this);
 			man.transform.SetParent(_mapParent);
 			return man;
+		}
+		
+		public void SpawnRagdoll(Vector3 position)
+		{
+			var ragdoll = Instantiate(_ragdollPrefab, position, Quaternion.identity, _mapParent);
+			Destroy(ragdoll, 2f);
+			_ragdolls.Add(ragdoll);
 		}
 		
 		public LetterPickup SpawnLetter(Vector3 position)
@@ -118,9 +127,18 @@ namespace TypeRunner
 			return letter;
 		}
 		
+		public void DestroyRagdolls()
+		{
+			foreach(var r in _ragdolls)
+				if(r != null)
+					Destroy(r);
+			_ragdolls.Clear();
+		}
+		
 		public void ResetToDaily()
 		{
 			_player.Init();
+			DestroyRagdolls();
 			foreach(var p in _mapPlatforms)
 				if(p != null)
 					Destroy(p.gameObject);
@@ -143,6 +161,7 @@ namespace TypeRunner
 		public void Reset()
 		{
 			_player.Init();
+			DestroyRagdolls();
 			foreach(var p in _mapPlatforms)
 				if(p != null)
 					Destroy(p.gameObject);

@@ -26,14 +26,13 @@ namespace TypeRunner
 			} 
 		}
 		private bool _blockImmortal = false;
-		private Transform _map;
+		private MapGeneration _map;
 		
 		public bool IsFinished { get; set; } = false;
 		public bool IsWordSuccessful = false;
 		public int RankPosition { get; set; } = 0;
 		public int Rank { get; set; } = 0;
 		public float EarnedCoinsBonus { get; set; } = 0f;
-		[SerializeField] private GameObject _ragdollPrefab;
 		[SerializeField] private ParticleSystem[] _dieVfx;
 		[SerializeField] private BlinkingMaterial _blinking;
 		
@@ -53,7 +52,7 @@ namespace TypeRunner
 			}
 		}
 		
-		public void Init(Transform map)
+		public void Init(MapGeneration map)
 		{
 			_map = map;
 		}
@@ -177,8 +176,7 @@ namespace TypeRunner
 				p.transform.SetParent(null);
 				p.Play();
 			}
-			var ragdoll = Instantiate(_ragdollPrefab, transform.position, Quaternion.identity, _map);
-			Destroy(ragdoll, 2f);
+			_map.SpawnRagdoll(transform.position);
 			Destroy(gameObject);
 		}
 		
