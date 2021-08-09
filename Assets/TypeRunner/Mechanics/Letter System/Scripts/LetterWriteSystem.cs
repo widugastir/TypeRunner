@@ -192,17 +192,20 @@ namespace TypeRunner
 		public void Enable()
 		{
 			UpdateUI();
+			_lettersPanel.gameObject.SetActive(true);
 			_uiPanel.SetActive(true);
 		}
 		
 		public void Disable()
 		{
+			_lettersPanel.gameObject.SetActive(false);
 			_uiPanel.SetActive(false);
 			Reset();
 		}
 		
 		public void Reset()
 		{
+			_lettersPanel.gameObject.SetActive(true);
 			_uiPanel.SetActive(true);
 			_boostObject.SetActive(false);
 			_lettersPanel.Reset(true);

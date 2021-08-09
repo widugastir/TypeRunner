@@ -9,6 +9,7 @@ namespace TypeRunner
 		private bool _isUsed = false;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
+		[SerializeField, HideInInspector] private LetterWriteSystem _letterWriteSystem;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -17,6 +18,7 @@ namespace TypeRunner
 			{
 				_player = FindObjectOfType<PlayerController>(true);
 				_levelManager = FindObjectOfType<LevelManager>(true);
+				_letterWriteSystem = FindObjectOfType<LetterWriteSystem>(true);
 			}
 		}
 		
@@ -32,6 +34,7 @@ namespace TypeRunner
 				if(_isUsed == false)
 				{
 					_isUsed = true;
+					_letterWriteSystem.Disable();
 					_player.SetIndependentMove(true);
 					_player.SetControllable(false);
 					_player.MakeFormationLine();
