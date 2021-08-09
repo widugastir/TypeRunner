@@ -194,6 +194,7 @@ namespace TypeRunner
 		{
 			if(_controllable == false)
 				return;
+				
 			_groupCenter.SetStrafePos(strafe);
 			
 			//Vector3 newPos = _manikinsParent.position;
