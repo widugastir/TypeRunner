@@ -27,6 +27,12 @@ namespace TypeRunner
 			}
 		}
 		
+		public void Disable()
+		{
+			_holder.SetActive(false);
+			IsRouletteActive = _holder.activeSelf;
+		}
+		
 		public bool Enable()
 		{
 			if((_stats.CurrentLevel - 1) % _activatePerLevel == 0)

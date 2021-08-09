@@ -152,7 +152,6 @@ namespace TypeRunner
 			{
 				float prevProgress = _stats._dailyProcentage;
 				_stats._dailyProcentage = progress;
-				print(prevProgress + "   " + _stats._dailyProcentage);
 				_coins.AddEarnedCoins(GetCurrentReward(prevProgress, _stats._dailyProcentage));
 			}
 		}

@@ -39,6 +39,7 @@ namespace TypeRunner
 			{
 				_buttonContinue.SetActive(true);
 				_victoryPanel.SetActive(true);
+				_roulette.Disable();
 				
 				if(_levelManager._isDailyLevel == false 
 					&&_roulette.Enable())

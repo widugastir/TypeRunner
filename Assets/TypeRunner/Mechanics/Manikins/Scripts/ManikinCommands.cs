@@ -90,6 +90,7 @@ namespace TypeRunner
 			newPos.y = _basePosY;
 			_collider.center = newPos;
 			_man.SetImmortal(false, 0f, true);
+			_animator.SetBool("Fly", false);
 			
 			//not sure about it
 			_player.IsMovementEnabled = true;
@@ -125,7 +126,7 @@ namespace TypeRunner
 		
 		private void Fly()
 		{
-			//_animator.SetTrigger("Fly");
+			_animator.SetBool("Fly", true);
 			_man.Movement.Flying(OnFlyEnd, OnHoverEnd);
 			_player._mapMovement.SetSpeed(12f);
 		}

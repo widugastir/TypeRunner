@@ -186,7 +186,7 @@ namespace TypeRunner
 				= Vector3.SmoothDamp(_manikinsParent.position, 
 				newPos, 
 				ref velocity,
-				0.06f);
+				0.03f);
 		}
 		
 		private Vector3 velocity = Vector3.zero;
@@ -208,7 +208,7 @@ namespace TypeRunner
 		
 		public void OnProcessDrag(float delta)
 		{
-			if(_canMove)
+			if(_canMove && IsMovementEnabled)
 			{
 				StrafeGroupCenter(delta);
 				//foreach(var manikin in _manikins)
