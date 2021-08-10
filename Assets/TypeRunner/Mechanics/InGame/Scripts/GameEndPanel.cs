@@ -14,6 +14,7 @@ namespace TypeRunner
 		[SerializeField] private GameObject _bonusSkinProgress;
 		[SerializeField] private LevelRoulette _roulette;
 		[SerializeField] private GameObject _buttonContinue;
+		[SerializeField, HideInInspector] private MapGenerationLevels _generator;
 		[SerializeField, HideInInspector] private CoinManager _coins;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
@@ -25,6 +26,7 @@ namespace TypeRunner
 		{
 			if(sceneObject == true)
 			{
+				_generator = FindObjectOfType<MapGenerationLevels>(true);
 				_coins = FindObjectOfType<CoinManager>(true);
 				_player = FindObjectOfType<PlayerController>(true);
 				_levelManager = FindObjectOfType<LevelManager>(true);
@@ -79,6 +81,7 @@ namespace TypeRunner
 				_losePanel.SetActive(false);
 				_victoryPanel.SetActive(false);
 				_levelManager.FinishLevel();
+				_generator.Generate();
 				_player.Init();
 			}
 		}

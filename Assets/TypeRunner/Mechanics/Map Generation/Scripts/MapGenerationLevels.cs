@@ -47,9 +47,8 @@ namespace TypeRunner
 			Generate();
 		}
 		
-		private void Generate()
+		public void Generate()
 		{
-			print("Generate");
 			int index = Random.Range(0, _levels.Length);
 			if(_level != null)
 			{
@@ -101,6 +100,11 @@ namespace TypeRunner
 		{
 			_player.Init();
 			DestroyRagdolls();
+			for(int i = 0; i < _mapManikins.Count; i++)
+			{
+				if(_mapManikins[i] != null)
+					Destroy(_mapManikins[i].gameObject);
+			}
 			_mapManikins.Clear();
 		}
 	}
