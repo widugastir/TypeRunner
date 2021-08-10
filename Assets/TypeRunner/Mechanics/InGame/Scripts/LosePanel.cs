@@ -14,7 +14,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private CoinManager _coins;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private PlayerController _player;
-		[SerializeField, HideInInspector] private MapGeneration _generator;
+		[SerializeField, HideInInspector] private MapGenerationLevels _generator;
 		[SerializeField, HideInInspector] private MapMovement _map;
 		
 		//------METHODS
@@ -27,7 +27,7 @@ namespace TypeRunner
 				_coins = FindObjectOfType<CoinManager>(true);
 				_stats = FindObjectOfType<PlayerStats>(true);
 				_groupCenter = FindObjectOfType<GroupCenter>(true);
-				_generator = FindObjectOfType<MapGeneration>(true);
+				_generator = FindObjectOfType<MapGenerationLevels>(true);
 				_map = FindObjectOfType<MapMovement>(true);
 			}
 		}

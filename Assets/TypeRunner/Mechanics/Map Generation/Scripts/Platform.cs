@@ -18,11 +18,11 @@ namespace TypeRunner
 		public Transform ConnectionPoint;
 		[SerializeField] private List<Transform> _letterSpawnPos;
 		[SerializeField] private List<Transform> _manikinSpawnPos;
-		private MapGeneration _generator;
+		private MapGenerationLevels _generator;
 		private float _stickmanMultiplier = 1f;
 		
 		//------METHODS
-		public void Init(MapGeneration generator, bool daily = false)
+		public void Init(MapGenerationLevels generator, Transform parent, bool daily = false)
 		{
 			//if(_canBeMirrored)
 			//{
@@ -33,6 +33,8 @@ namespace TypeRunner
 			//		transform.localScale = newScale;
 			//	}
 			//}
+			gameObject.SetActive(true);
+			transform.SetParent(parent);
 			
 			if(daily)
 				_stickmanMultiplier = 0.5f;

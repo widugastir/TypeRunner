@@ -2,12 +2,14 @@
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using System;
 
 namespace TypeRunner
 {
 	public class DailyChallenge : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
+		[SerializeField] private int _minutesToPlayerUpdate = 15;
 		[SerializeField] private int _attemptsPerDay = 3;
 		[SerializeField] private int _updateCost = 50;
 		public int UpdateCost {get {return _updateCost * (_stats._dailyUpdatesCount + 1);}}
@@ -41,11 +43,13 @@ namespace TypeRunner
 		private void OnEnable()
 		{
 			SaveSystem.OnEndLoad += TryUpdateAttempts;
+			SaveSystem.OnBeginSave += Save;
 		}
 		
 		private void OnDisable()
 		{
 			SaveSystem.OnEndLoad -= TryUpdateAttempts;
+			SaveSystem.OnBeginSave -= Save;
 		}
 		
 		public void EnableCanvas()
@@ -54,6 +58,15 @@ namespace TypeRunner
 			_challengeCnavas.SetActive(true);
 		}
 		
+		private void Save()
+		{
+			System.DateTime lastUpdate = _stats.LastDailyPlayersUpdate;
+			if(lastUpdate == default)
+			{
+				_stats.LastDailyPlayersUpdate = DateTime.Now;
+				print(_stats.LastDailyPlayersUpdate);
+			}
+		}
 		
 		private void UpdateUI()
 		{
@@ -89,6 +102,24 @@ namespace TypeRunner
 			UpdateUI();
 		}
 		
+		private void TryUpdateHumans()
+		{
+			System.DateTime now = System.DateTime.Now;
+			System.DateTime lastUpdate = _stats.LastDailyPlayersUpdate;
+			TimeSpan span = now - lastUpdate;
+			
+			if(lastUpdate == default
+				|| span.TotalMinutes >= _minutesToPlayerUpdate)
+			{
+				DailyReward[] rewards = _stats._dailyRewards;
+				for(int i = 0; i < rewards.Length; i++)
+				{
+					rewards[i].Humans = UnityEngine.Random.Range(rewards[i].MinMaxHumans.x, rewards[i].MinMaxHumans.y);;
+				}
+				_stats.LastDailyPlayersUpdate = DateTime.Now;
+			}
+		}
+		
 		private void TryUpdateAttempts()
 		{
 			System.DateTime now = System.DateTime.Now;
@@ -106,9 +137,10 @@ namespace TypeRunner
 				DailyReward[] rewards = _stats._dailyRewards;
 				for(int i = 0; i < rewards.Length; i++)
 				{
-					rewards[i].Humans = Random.Range(rewards[i].MinMaxHumans.x, rewards[i].MinMaxHumans.y);;
+					rewards[i].Humans = UnityEngine.Random.Range(rewards[i].MinMaxHumans.x, rewards[i].MinMaxHumans.y);;
 				}
 			}
+			TryUpdateHumans();
 			InitLines();
 			UpdateUI();
 		}
@@ -169,7 +201,8 @@ namespace TypeRunner
 					}
 				}
 				
-				if(currentIndex == 0 || _stats.DailyProcentage < _stats._dailyRewards[currentIndex - 1].Percentage)
+				if(currentIndex == 0 
+					|| _stats.DailyProcentage < _stats._dailyRewards[currentIndex - 1].Percentage)
 				{
 					return true;
 				}

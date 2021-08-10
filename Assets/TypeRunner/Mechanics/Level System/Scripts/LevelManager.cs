@@ -12,7 +12,7 @@ namespace TypeRunner
 		[SerializeField] private GameObject _gameCanvas;
 		[SerializeField] private int _baseCoinsPerVictory = 10;
 		[SerializeField] private int _bonusSkinPerLevel = 5;
-		[SerializeField, HideInInspector] private MapGeneration _map;
+		[SerializeField, HideInInspector] private MapGenerationLevels _map;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private CoinManager _coins;
 		[SerializeField, HideInInspector] private PlayerController _player;
@@ -39,7 +39,7 @@ namespace TypeRunner
 				_coins = FindObjectOfType<CoinManager>(true);
 				_player = FindObjectOfType<PlayerController>(true);
 				_cameraResetter = FindObjectOfType<CameraResetter>(true);
-				_map = FindObjectOfType<MapGeneration>(true);
+				_map = FindObjectOfType<MapGenerationLevels>(true);
 				_letterSystem = FindObjectOfType<LetterWriteSystem>(true);
 				_dailyChallenge = FindObjectOfType<DailyChallenge>(true);
 				_income = FindObjectOfType<Income>(true);

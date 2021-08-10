@@ -117,6 +117,7 @@ namespace TypeRunner
 
 		[ReorderableList] [Saveable] public DailyReward[] _dailyRewards;
 		[Saveable] public DateTime LastLogin;
+		[Saveable] public DateTime LastDailyPlayersUpdate;
 		
 		public static Action<int> OnEarnedCoinsChange;
 		public static Action<int> OnCoinChange;

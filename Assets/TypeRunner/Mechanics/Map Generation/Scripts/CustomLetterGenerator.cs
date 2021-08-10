@@ -9,7 +9,7 @@ namespace TypeRunner
 		[SerializeField] private List<Transform> _letterSpawnPos;
 		[SerializeField] private int _lettersAmount;
 		
-		public void Generate(MapGeneration generator)
+		public void Generate(MapGenerationLevels generator)
 		{
 			int index = 0;
 			for(int i = 0; i < _lettersAmount; i++)

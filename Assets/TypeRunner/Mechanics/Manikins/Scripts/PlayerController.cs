@@ -17,7 +17,7 @@ namespace TypeRunner
 		[SerializeField] private List<Mankin> _manikins;
 		[SerializeField, HideInInspector] public MapMovement _mapMovement;
 		[SerializeField, HideInInspector] private GroupCenter _groupCenter;
-		[SerializeField, HideInInspector] private MapGeneration _generator;
+		[SerializeField, HideInInspector] private MapGenerationLevels _generator;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
 		[SerializeField, HideInInspector] private ControlPanel _controlPanel;
@@ -36,7 +36,7 @@ namespace TypeRunner
 			{
 				_mapMovement = FindObjectOfType<MapMovement>();
 				_levelManager = FindObjectOfType<LevelManager>();
-				_generator = FindObjectOfType<MapGeneration>();
+				_generator = FindObjectOfType<MapGenerationLevels>();
 				_stats = FindObjectOfType<PlayerStats>();
 				_groupCenter = gameObject.GetComponentInChildren<GroupCenter>();
 				_controlPanel = gameObject.GetComponentInChildren<ControlPanel>();

@@ -26,7 +26,7 @@ namespace TypeRunner
 			} 
 		}
 		private bool _blockImmortal = false;
-		private MapGeneration _map;
+		private MapGenerationLevels _map;
 		
 		public bool IsFinished { get; set; } = false;
 		public bool IsWordSuccessful = false;
@@ -52,7 +52,7 @@ namespace TypeRunner
 			}
 		}
 		
-		public void Init(MapGeneration map)
+		public void Init(MapGenerationLevels map)
 		{
 			_map = map;
 		}
