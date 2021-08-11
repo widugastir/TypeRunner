@@ -21,6 +21,7 @@ namespace TypeRunner
 		
 		[SerializeField, HideInInspector] private LettersPanel _lettersPanel;
 		private bool _isReady = true;
+		private ObstacleZone _lastZone;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -61,6 +62,7 @@ namespace TypeRunner
 		
 		private void PlayerEnterZone(ObstacleZone zone, E_LetterType[] word)
 		{
+			_lastZone = zone;
 			EnableWordWritter(zone, word);
 		}
 		
@@ -132,9 +134,9 @@ namespace TypeRunner
 			_playerController.SetMansSuccesfull(successful);
 			if(successful == false)
 			{	
-				if(zone != null)
+				if(zone != null && zone._blockOnWrong == true)
 					_playerController.BlockManikins(zone._manikinsToBlock);
-				else
+				else if(zone == null && _lastZone != null && _lastZone._blockOnWrong == true)
 					_playerController.BlockManikins(1);
 			}
 			Time.timeScale = 1f;
@@ -205,6 +207,7 @@ namespace TypeRunner
 		
 		public void Reset()
 		{
+			_lastZone = null;
 			_lettersPanel.gameObject.SetActive(true);
 			_uiPanel.SetActive(true);
 			_boostObject.SetActive(false);

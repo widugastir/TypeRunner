@@ -59,7 +59,7 @@ namespace TypeRunner
 				_groupCenter.Reset();
 				_player.ResetMansParent();
 				_startet.BeginPlay();
-				_map.PushBack();
+				_map.MoveToRespawnPoint();
 				_generator.DestroyRagdolls();
 			}
 		}

@@ -167,6 +167,11 @@ namespace TypeRunner
 			}
 		}
 		
+		public void Double()
+		{
+			_map.SpawnManikin(transform.position + Vector3.forward * 1f);
+		}
+		
 		public void Kill()
 		{
 			if(Immortal)

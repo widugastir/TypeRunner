@@ -62,6 +62,9 @@ namespace TypeRunner
 				case E_Command.Push:
 					Push();
 					break;
+				case E_Command.Double:
+					Double();
+					break;
 				case E_Command.Throw:
 					Throw();
 					break;
@@ -101,6 +104,11 @@ namespace TypeRunner
 		{
 			_animator.SetTrigger("Jump");
 			_man.Movement.Jump(2f, .8f);
+		}
+		
+		private void Double()
+		{
+			_man.Double();
 		}
 		
 		private void Slide()
@@ -182,7 +190,8 @@ namespace TypeRunner
 			AllThrow,
 			Fly,
 			Climb,
-			Push
+			Push,
+			Double
 		}
 	}
 }

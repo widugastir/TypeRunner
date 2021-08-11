@@ -11,6 +11,7 @@ namespace TypeRunner
 		[SerializeField] private int _generationLevel;
 		[SerializeField] private int _manikinAmount;
 		[SerializeField] private int _letterAmount;
+		[SerializeField] private RespawnPoint _respawnPoint;
 		[SerializeField] private CustomLetterGenerator[] _letterGenerators;
 		[SerializeField] private List<E_LetterType> _requiredLetters;
 		

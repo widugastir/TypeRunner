@@ -894,7 +894,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5692062600183096546}
   - component: {fileID: 8688448537131505397}
-  - component: {fileID: 3925471192956831416}
   m_Layer: 0
   m_Name: OBS_JUMP_1
   m_TagString: Untagged
@@ -942,6 +941,7 @@ MonoBehaviour:
   _generationLevel: 0
   _manikinAmount: 0
   _letterAmount: 5
+  _respawnPoint: {fileID: 0}
   _letterGenerators: []
   _requiredLetters: 00000000010000000200000003000000
   ConnectionPoint: {fileID: 5692062599939181616}
@@ -952,19 +952,6 @@ MonoBehaviour:
   - {fileID: 839300048439638179}
   - {fileID: 839300048439638179}
   _manikinSpawnPos: []
---- !u!65 &3925471192956831416
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5692062600183096547}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5874132828589866382
 GameObject:
   m_ObjectHideFlags: 0

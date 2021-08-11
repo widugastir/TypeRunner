@@ -231,6 +231,7 @@ namespace TypeRunner
 		public void BlockManikins(int amount)
 		{
 			//return;
+			print(123);
 			for(int i = 0; i < amount && i < _manikins.Count; i++)
 			{
 				_manikins[i].Commands.SetBlock(true);

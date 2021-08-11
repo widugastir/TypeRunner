@@ -1029,7 +1029,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5692062600183096546}
   - component: {fileID: -6176039183242989241}
-  - component: {fileID: -3864806159251634429}
   m_Layer: 0
   m_Name: OBS_SWIM_1
   m_TagString: Untagged
@@ -1078,6 +1077,7 @@ MonoBehaviour:
   _generationLevel: 3
   _manikinAmount: 0
   _letterAmount: 5
+  _respawnPoint: {fileID: 0}
   _letterGenerators: []
   _requiredLetters: 09000000080000000b00000002000000
   ConnectionPoint: {fileID: 5692062599939181616}
@@ -1088,19 +1088,6 @@ MonoBehaviour:
   - {fileID: 8322859647593950846}
   - {fileID: 8322859647593950846}
   _manikinSpawnPos: []
---- !u!65 &-3864806159251634429
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5692062600183096547}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5695979293360797018
 GameObject:
   m_ObjectHideFlags: 0

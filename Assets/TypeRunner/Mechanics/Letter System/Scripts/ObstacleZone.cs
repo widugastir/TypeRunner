@@ -14,6 +14,7 @@ namespace TypeRunner
 		[SerializeField] private bool _oneCommandOnly = false;
 		[SerializeField] private bool _isEnterZone = true;
 		[SerializeField] private bool _onlySuccessful = false;
+		[SerializeField] public bool _blockOnWrong = true;
 		[SerializeField] public bool _disableStrafe = false;
 		[SerializeField] private ManikinCommands.E_Command _command;
 		[ShowIf("_isEnterZone"), SerializeField] private E_LetterType[] _requiredLettersWrite;
