@@ -292,7 +292,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c4f17e3d8b1494ac59ab4504ab7ebb9b, type: 2}
+  - {fileID: 2100000, guid: 030f27db76dad5e4eb19f5a35f280c13, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -601,7 +601,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c4f17e3d8b1494ac59ab4504ab7ebb9b, type: 2}
+  - {fileID: 2100000, guid: 030f27db76dad5e4eb19f5a35f280c13, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1312,6 +1312,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5692062599044723579}
     m_Modifications:
+    - target: {fileID: 874465095019855582, guid: 1139a20c3f036e6448ce456217b4c02b, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b5102cf34937b4c45bb3084490920905, type: 2}
     - target: {fileID: 1001606072286455000, guid: 1139a20c3f036e6448ce456217b4c02b, type: 3}
       propertyPath: _mirrorAnim
       value: 0
@@ -1392,6 +1396,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6781147336260589812, guid: 1139a20c3f036e6448ce456217b4c02b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b5102cf34937b4c45bb3084490920905, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1139a20c3f036e6448ce456217b4c02b, type: 3}
 --- !u!4 &5440995346428046901 stripped
@@ -3135,6 +3143,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5692062599044723579}
     m_Modifications:
+    - target: {fileID: 874465095019855582, guid: 1139a20c3f036e6448ce456217b4c02b, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b5102cf34937b4c45bb3084490920905, type: 2}
     - target: {fileID: 1001606072286455000, guid: 1139a20c3f036e6448ce456217b4c02b, type: 3}
       propertyPath: _mirrorAnim
       value: 1
@@ -3187,6 +3199,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6781147336260589812, guid: 1139a20c3f036e6448ce456217b4c02b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b5102cf34937b4c45bb3084490920905, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1139a20c3f036e6448ce456217b4c02b, type: 3}
 --- !u!4 &3953964713339755208 stripped
