@@ -14,6 +14,8 @@ namespace TypeRunner
 		[SerializeField] private LetterPickup LetterPrefab;
 		[SerializeField] private Mankin ManikinPrefab;
 		[SerializeField] private Level[] _levels;
+		[SerializeField] private DailyGenerator _dailyGenerator;
+		[HideInInspector] public Transform _levelParent;
 		private Level _level;
 		
 		[SerializeField, HideInInspector] private PlayerController _player;
@@ -49,14 +51,25 @@ namespace TypeRunner
 		
 		public void Generate()
 		{
+			ClearMap();
+			
 			int index = Random.Range(0, _levels.Length);
+			_level = Instantiate(_levels[index], _firstPlatform.ConnectionPoint.position, Quaternion.identity);
+			_level.Init(this);
+			_level.transform.SetParent(_levelParent);
+		}
+		
+		public void ClearMap()
+		{
 			if(_level != null)
 			{
 				Destroy(_level.gameObject);
 			}
-			_level = Instantiate(_levels[index], _firstPlatform.ConnectionPoint.position, Quaternion.identity);
-			_level.Init(this);
-			_level.transform.SetParent(_map);
+			
+			if(_levelParent != null)
+				Destroy(_levelParent.gameObject);
+			_levelParent = new GameObject().transform;
+			_levelParent.SetParent(_map);
 		}
 		
 		public Mankin SpawnManikin(Vector3 position)
@@ -64,7 +77,7 @@ namespace TypeRunner
 			var man = Instantiate(ManikinPrefab, position, Quaternion.identity);
 			_mapManikins.Add(man);
 			man.Init(this);
-			man.transform.SetParent(_map);
+			man.transform.SetParent(_levelParent);
 			return man;
 		}
 		
@@ -72,13 +85,14 @@ namespace TypeRunner
 		{
 			var letter = Instantiate(LetterPrefab, position, Quaternion.identity);
 			_mapLetters.Add(letter);
-			letter.transform.SetParent(_level.transform);
+			letter.transform.SetParent(_levelParent);
 			return letter;
 		}
 		
 		public void SpawnRagdoll(Vector3 position)
 		{
-			var ragdoll = Instantiate(_ragdollPrefab, position, Quaternion.identity, _level.transform);
+			var ragdoll = Instantiate(_ragdollPrefab, position, Quaternion.identity);
+			ragdoll.transform.SetParent(_levelParent);
 			Destroy(ragdoll, 2f);
 			_ragdolls.Add(ragdoll);
 		}
@@ -93,7 +107,9 @@ namespace TypeRunner
 		
 		public void ResetToDaily()
 		{
+			ClearMap();
 			Reset();
+			_dailyGenerator.StartGenerate(this);
 		}
 		
 		public void Reset()
