@@ -128,7 +128,7 @@ namespace TypeRunner
 		{
 			_rigi.useGravity = false;
 			_isJumped = true;
-			_rigi.DOJump(transform.position, height, 1, time)
+			transform.DOLocalJump(transform.position, height, 1, time)
 				.SetEase(Ease.Linear)
 				.OnComplete(OnJumpEnd);
 		}
