@@ -87,6 +87,7 @@ namespace TypeRunner
 		[Saveable] public float _skinBonusProgress = 0f;
 		[Saveable] public bool _freeColorRoulette = true;
 		[Saveable] public int _bonusSkinGained = 0;
+		[Saveable] public int _currentLevelIndex = 0;
 
 		public int _successfulWord = 0;
 		public float SuccessfulMultiplier

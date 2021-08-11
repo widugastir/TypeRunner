@@ -15,6 +15,7 @@ namespace TypeRunner
 		[SerializeField] private Mankin ManikinPrefab;
 		[SerializeField] private Level[] _levels;
 		[SerializeField] private DailyGenerator _dailyGenerator;
+		[SerializeField] private PlayerStats _stats;
 		[HideInInspector] public Transform _levelParent;
 		private Level _level;
 		
@@ -30,6 +31,7 @@ namespace TypeRunner
 			if(sceneObject == true)
 			{
 				_player = FindObjectOfType<PlayerController>(true);
+				_stats = FindObjectOfType<PlayerStats>(true);
 			}
 		}
 		
@@ -52,11 +54,13 @@ namespace TypeRunner
 		public void Generate()
 		{
 			ClearMap();
-			
-			int index = Random.Range(0, _levels.Length);
-			_level = Instantiate(_levels[index], _firstPlatform.ConnectionPoint.position, Quaternion.identity);
+			if(_stats._currentLevelIndex >= _levels.Length)
+				_stats._currentLevelIndex = 0;
+			_level = Instantiate(_levels[_stats._currentLevelIndex], _firstPlatform.ConnectionPoint.position, Quaternion.identity);
 			_level.Init(this);
 			_level.transform.SetParent(_levelParent);
+			
+			_stats._currentLevelIndex++;
 		}
 		
 		public void ClearMap()
