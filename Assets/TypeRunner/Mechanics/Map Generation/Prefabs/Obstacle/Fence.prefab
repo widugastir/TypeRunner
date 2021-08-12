@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b2161231557fd49bf53b04793c29ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Destructable: 0
+  Destructable: 1
+  _collider: {fileID: 0}
+  Childs: []
+  Destructed: {fileID: 4964515955027382431, guid: cc7ad0759a6ff2d4e88819e150164caa, type: 3}
 --- !u!65 &7071705198836652998
 BoxCollider:
   m_ObjectHideFlags: 0
