@@ -9,6 +9,7 @@ namespace TypeRunner
 		//------FIELDS
 		private float _deltaMove;
 		private float _beginPos;
+		private float _prevPos;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		
 		public event System.Action OnStartDrag;
@@ -26,15 +27,16 @@ namespace TypeRunner
 		
 		public void OnBeginDrag(PointerEventData eventData)
 		{
-			_beginPos = eventData.position.x / Screen.width;
-			_player.OnStartDrag();
+			_beginPos = eventData.position.x / Screen.width - 0.5f;
+			_player.OnStartDrag(_beginPos);
 			OnStartDrag?.Invoke();
 		}
 		
 		public void OnDrag(PointerEventData eventData)
 		{
+			_prevPos = _beginPos;
 			_deltaMove = eventData.position.x / Screen.width - 0.5f;
-			_player.OnProcessDrag(_deltaMove);
+			_player.OnProcessDrag(_prevPos, _deltaMove);
 			OnProcessDrag?.Invoke(_deltaMove);
 		}
 		

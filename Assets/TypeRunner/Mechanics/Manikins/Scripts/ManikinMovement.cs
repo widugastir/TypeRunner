@@ -24,6 +24,8 @@ namespace TypeRunner
 		private Tween _goToTween;
 		private Transform _groupCenter;
 		private TweenCallback _hoverEndCallback;
+		private Vector3 _targetDirection;
+		private readonly Vector3 _empty = Vector3.zero;
 		
 		public static event System.Action<Vector3> OnBorderCollide;
 		
@@ -36,6 +38,7 @@ namespace TypeRunner
 		public void Init(Transform groupCenter)
 		{
 			_groupCenter = groupCenter;
+			_targetDirection = transform.rotation.ToEuler();
 		}
 		
 		public void SetCanMove2(bool b)
@@ -103,6 +106,7 @@ namespace TypeRunner
 		{
 			MoveToPoint();
 			MoveForward();
+			UpdateDirection();
 			
 			Vector3 newPos = transform.position;
 			if(transform.position.x < _leftRightBorders.x)
@@ -116,6 +120,19 @@ namespace TypeRunner
 				newPos.x = _leftRightBorders.y;
 				transform.position = newPos;
 			}
+		}
+		
+		public void SerDirection(Vector3 direction)
+		{
+			_targetDirection = direction;
+		}
+		
+		private void UpdateDirection()
+		{
+			if(_targetDirection == _empty)
+				return;
+			Quaternion newRotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_targetDirection), Time.deltaTime * 8f);
+			transform.rotation = newRotation;
 		}
 		
 		private void OnJumpEnd() 

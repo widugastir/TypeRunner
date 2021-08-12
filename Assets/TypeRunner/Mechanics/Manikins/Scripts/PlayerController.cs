@@ -28,6 +28,8 @@ namespace TypeRunner
 		private Ladder _lastLadder;
 		private Vector3 _baseParentPos;
 		public bool IsMovementEnabled { get; set; } = true;
+		private readonly Vector3 _forward = Vector3.forward;
+		private readonly Vector3 _right = Vector3.right;
 	
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -214,26 +216,33 @@ namespace TypeRunner
 			//_manikinsParent.position = newPos;
 		}
 	    
-		public void OnStartDrag()
+		public void OnStartDrag(float startPos)
 		{
 			_canMove = true;
 		}
 		
-		public void OnProcessDrag(float delta)
+		public void OnProcessDrag(float _prevPos, float delta)
 		{
 			if(_canMove && IsMovementEnabled)
 			{
 				StrafeGroupCenter(delta);
-				//foreach(var manikin in _manikins)
-				//{
-				//	manikin.Movement.StrafeToPoint(_groupCenter.transform.position);
-				//}
+				foreach(var manikin in _manikins)
+				{
+					if(delta == _prevPos)
+						manikin.Movement.SerDirection(_forward);
+					else
+						manikin.Movement.SerDirection(_forward + _right * 0.5f * Mathf.Sign(delta - _prevPos));
+				}
 			}
 		}
 		
 		public void OnEndDrag()
 		{
 			_groupCenter.EndStrafe();
+			foreach(var manikin in _manikins)
+			{
+				manikin.Movement.SerDirection(_forward);
+			}
 		}
 		
 		private void OnBorderCollide(Vector3 point)
