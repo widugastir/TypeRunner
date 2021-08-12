@@ -38,7 +38,7 @@ namespace TypeRunner
 		private void OnRollEnd(float reward)
 		{
 			_stats._coinsMultiplier = reward;
-			_coins.text = "+" + Mathf.RoundToInt(_stats.EarnedCoins * _stats._coinsMultiplier * _stats.SuccessfulMultiplier).ToString();
+			_coins.text = "+" + Mathf.RoundToInt(_stats.EarnedCoins * _stats._coinsMultiplier).ToString();
 			StartCoroutine(CloseRoulette(reward));
 		}
 		

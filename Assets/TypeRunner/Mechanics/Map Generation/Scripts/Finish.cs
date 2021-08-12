@@ -7,6 +7,7 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		private bool _isUsed = false;
+		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
 		[SerializeField, HideInInspector] private LetterWriteSystem _letterWriteSystem;
@@ -16,6 +17,7 @@ namespace TypeRunner
 		{
 			if(sceneObject)
 			{
+				_stats = FindObjectOfType<PlayerStats>(true);
 				_player = FindObjectOfType<PlayerController>(true);
 				_levelManager = FindObjectOfType<LevelManager>(true);
 				_letterWriteSystem = FindObjectOfType<LetterWriteSystem>(true);
@@ -37,6 +39,7 @@ namespace TypeRunner
 					_letterWriteSystem.Disable();
 					_player.SetIndependentMove(true);
 					_player.SetControllable(false);
+					_player.MultiplyStikmans(_stats.SuccessfulMultiplier);
 					_player.MakeFormationLine();
 				}
 			}

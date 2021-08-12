@@ -37,7 +37,7 @@ namespace TypeRunner
 		
 		public void EarnedToCurrent()
 		{
-			AddCoins((int)((float)_stats.EarnedCoins * _stats._coinsMultiplier * _stats.SuccessfulMultiplier));
+			AddCoins((int)((float)_stats.EarnedCoins * _stats._coinsMultiplier));
 			_stats.EarnedCoins = 0;
 			_stats._coinsMultiplier = 1f;
 			_stats._successfulWord = 0;

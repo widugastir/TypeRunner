@@ -36,7 +36,7 @@ namespace TypeRunner
 		
 		private void UpdateUI()
 		{
-			_labelText.text = (_writePlus? "+" : "") + (_stats.EarnedCoins * _stats.SuccessfulMultiplier).ToString("0");
+			_labelText.text = (_writePlus? "+" : "") + (_stats.EarnedCoins).ToString("0");
 		}
 	}
 }

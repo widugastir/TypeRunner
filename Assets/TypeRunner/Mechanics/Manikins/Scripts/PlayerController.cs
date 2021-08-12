@@ -128,6 +128,18 @@ namespace TypeRunner
 			}
 		}
 		
+		public void MultiplyStikmans(float multiply = 2f)
+		{
+			int totalStickmans = Mathf.RoundToInt((float)_manikins.Count * multiply);
+			int stickmanToSplit = totalStickmans - _manikins.Count;
+			for(int i = 0; i < _manikins.Count; i++)
+			{
+				if(i >= stickmanToSplit)
+					break;
+				_manikins[i].Double();
+			}
+		}
+		
 		public void SetImmortal(float duration, bool affectZones)
 		{
 			_immortalTimer.Enable(duration);
