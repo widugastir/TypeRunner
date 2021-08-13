@@ -349,6 +349,8 @@ namespace TypeRunner
 			float offsetZ = 1f;
 			float offsetX = 0f;
 			
+			print(_manikins.Count);
+			
 			for(int i = 0; i < _manikins.Count; i++)
 			{
 				_manikins[i].gameObject.layer = LayerMask.NameToLayer(_ignoreSameMask);

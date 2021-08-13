@@ -48,7 +48,8 @@ namespace TypeRunner
 			{
 				foreach(var c in Childs)
 				{
-					c.Activate(forcePoint);
+					if(c != null)
+						c.Activate(forcePoint);
 				}
 			}
 			Destroy(gameObject);
