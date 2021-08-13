@@ -16,7 +16,7 @@ namespace TypeRunner
 		[SerializeField] private float _flyHeight = 3f;
 		[SerializeField] private float _flyDuration = 3f;
 		[SerializeField] private float _climbHeight = 3f;
-		private bool _isJumped = false;
+		//private bool _isJumped = false;
 		private bool _canMove = true;
 		public bool IsIndependetMovement { get; set; } = false;
 		public bool MoveToGroupCenter { get; set; } = true;
@@ -27,18 +27,18 @@ namespace TypeRunner
 		private Vector3 _targetDirection;
 		private readonly Vector3 _empty = Vector3.zero;
 		
-		public static event System.Action<Vector3> OnBorderCollide;
+		//public static event System.Action<Vector3> OnBorderCollide;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
 		{
 			_rigi = gameObject.GetComponentInChildren<Rigidbody>();
 		}
-		
+		 
 		public void Init(Transform groupCenter)
 		{
 			_groupCenter = groupCenter;
-			_targetDirection = transform.rotation.ToEuler();
+			_targetDirection = transform.rotation.eulerAngles;
 		}
 		
 		public void SetCanMove2(bool b)
@@ -129,7 +129,7 @@ namespace TypeRunner
 		
 		private void UpdateDirection()
 		{
-			if(_targetDirection == _empty)
+			if(MoveToGroupCenter == false || _targetDirection == _empty)
 				return;
 			Quaternion newRotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_targetDirection), Time.deltaTime * 8f);
 			transform.rotation = newRotation;
@@ -138,13 +138,13 @@ namespace TypeRunner
 		private void OnJumpEnd() 
 		{ 
 			_rigi.useGravity = true;
-			_isJumped = false; 
+			//_isJumped = false; 
 		}
 		
 		public void Jump(float height, float time)
 		{
 			_rigi.useGravity = false;
-			_isJumped = true;
+			//_isJumped = true;
 			transform.DOLocalJump(transform.position, height, 1, time)
 				.SetEase(Ease.Linear)
 				.OnComplete(OnJumpEnd);
@@ -194,6 +194,11 @@ namespace TypeRunner
 		{
 			Vector3 direction = transform.position - point;
 			transform.position += direction.normalized * distance;
+		}
+		
+		public void SetPhysics(bool gravity)
+		{
+			_rigi.useGravity = gravity;
 		}
 	}
 }

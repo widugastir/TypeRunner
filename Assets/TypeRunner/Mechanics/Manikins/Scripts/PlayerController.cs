@@ -4,6 +4,7 @@ using SoundSteppe.RefSystem;
 using NaughtyAttributes;
 using Cinemachine;
 using UnityEngine;
+using System.Linq;
 
 namespace TypeRunner
 {
@@ -13,6 +14,7 @@ namespace TypeRunner
 		[SerializeField] private ImmortalTimer _immortalTimer;
 		[SerializeField] private Transform _manikinsParent;
 		[SerializeField] private float _finishDelay = 2f;
+		[SerializeField, Layer] private string _stickmanMask;
 		[SerializeField, Layer] private string _ignoreSameMask;
 		[SerializeField] private List<Mankin> _manikins;
 		[SerializeField, HideInInspector] public MapMovement _mapMovement;
@@ -48,7 +50,7 @@ namespace TypeRunner
 		
 		private void OnEnable()
 		{
-			ManikinMovement.OnBorderCollide += OnBorderCollide;
+			//ManikinMovement.OnBorderCollide += OnBorderCollide;
 			Mankin.OnChangeOwner += OnChangeOwner;
 			PlayerStats.OnStartUnitChange += OnStartUnitChange;
 			ObstacleZone.EnterZone += PlayerEnterZone;
@@ -56,7 +58,7 @@ namespace TypeRunner
 		
 		private void OnDisable()
 		{
-			ManikinMovement.OnBorderCollide -= OnBorderCollide;
+			//ManikinMovement.OnBorderCollide -= OnBorderCollide;
 			Mankin.OnChangeOwner -= OnChangeOwner;
 			PlayerStats.OnStartUnitChange -= OnStartUnitChange;
 			ObstacleZone.EnterZone -= PlayerEnterZone;
@@ -190,7 +192,7 @@ namespace TypeRunner
 		{
 			if(IsMovementEnabled == false)
 				return;
-			_groupCenter.Move();
+			//_groupCenter.Move();
 			
 			if(_controllable == false)
 				return;
@@ -226,13 +228,16 @@ namespace TypeRunner
 			if(_canMove && IsMovementEnabled)
 			{
 				StrafeGroupCenter(delta);
-				foreach(var manikin in _manikins)
+				if(_controllable == true)
 				{
-					if(Mathf.Abs(delta - _prevPos) <= 0.01f)
-						manikin.Movement.SerDirection(_forward);
-					else
+					foreach(var manikin in _manikins)
 					{
-						manikin.Movement.SerDirection(_forward + _right * 1f * Mathf.Sign(delta - _prevPos));
+						if(Mathf.Abs(delta - _prevPos) <= 0.01f)
+							manikin.Movement.SerDirection(_forward);
+						else
+						{
+							manikin.Movement.SerDirection(_forward + _right * 1f * Mathf.Sign(delta - _prevPos));
+						}
 					}
 				}
 			}
@@ -349,8 +354,6 @@ namespace TypeRunner
 			float offsetZ = 1f;
 			float offsetX = 0f;
 			
-			print(_manikins.Count);
-			
 			for(int i = 0; i < _manikins.Count; i++)
 			{
 				_manikins[i].gameObject.layer = LayerMask.NameToLayer(_ignoreSameMask);
@@ -372,11 +375,56 @@ namespace TypeRunner
 		
 		public void MakeFormationTriangle()
 		{
+			StartCoroutine(FormationTriangle());
+			
+			//int rank = 1;
+			//int mans = 0;
+			
+			//for(int i = 0; i < _manikins.Count; i++)
+			//{
+			//	mans++;
+			//	_manikins[i].Rank = rank;
+			//	_manikins[i].RankPosition = mans;
+			//	if(mans == rank && i != _manikins.Count - 1)
+			//	{
+			//		rank++;
+			//		mans = 0;
+			//	}
+			//}
+			
+			//int centerRank = rank / 2;
+			//float centerZ = _groupCenter.transform.position.z;
+			//float centerX = _groupCenter.transform.position.x;
+			//float rankStepY = 3f;
+			//float rankStepX = 1f;
+			//float centerRankX = 0f;
+			
+			//for(int i = 0; i < _manikins.Count; i++)
+			//{
+			//	_manikins[i].gameObject.layer = LayerMask.NameToLayer(_ignoreSameMask);
+			//	centerRankX = (float)_manikins[i].Rank / 2f;
+				
+			//	float z = centerZ + ((float)_manikins[i].Rank - (float)centerRank) * rankStepY;
+			//	float x = centerX + ((float)_manikins[i].RankPosition - (float)centerRankX) * rankStepX;
+			//	Vector3 newPos = _manikins[i].transform.position;
+			//	newPos.z = z;
+			//	newPos.x = x;
+			//	_manikins[i].transform.position = newPos;
+				
+			//	// Sort by ranks
+			//	_manikins[i].Rank = rank - _manikins[i].Rank + 1;
+			//}
+		}
+		
+		private IEnumerator FormationTriangle()
+		{
 			int rank = 1;
 			int mans = 0;
 			
 			for(int i = 0; i < _manikins.Count; i++)
 			{
+				_manikins[i].gameObject.layer = LayerMask.NameToLayer(_ignoreSameMask);
+				_manikins[i].Movement.SerDirection(_forward);
 				mans++;
 				_manikins[i].Rank = rank;
 				_manikins[i].RankPosition = mans;
@@ -387,27 +435,43 @@ namespace TypeRunner
 				}
 			}
 			
-			int centerRank = rank / 2;
-			float centerZ = _groupCenter.transform.position.z;
 			float centerX = _groupCenter.transform.position.x;
-			float rankStepY = 3f;
-			float rankStepX = 1f;
+			float centerZ = _groupCenter.transform.position.z;
+			float rankStepX = 0.5f;
 			float centerRankX = 0f;
 			
+			SetStickmanPhysics(false);
+			List<Mankin> mansInRank = new List<Mankin>();
+			for(int i = rank; i >= 0; i--)
+			{
+				yield return new WaitForSecondsRealtime(0.1f);
+				mansInRank.Clear();
+				mansInRank.AddRange(_manikins.Where(m => (m.Rank == i)));
+				foreach(var man in mansInRank)
+				{
+					centerRankX = (float)man.Rank / 2f;
+					float x = centerX + ((float)man.RankPosition - (float)centerRankX) * rankStepX;
+					Vector3 newPos = man.transform.position;
+					newPos.x = x;
+					newPos.z = centerZ;
+					newPos.y += ((rank - i) * 2f);
+					man.transform.position = newPos;
+				}
+			}
+			
+			// Sort by ranks
 			for(int i = 0; i < _manikins.Count; i++)
 			{
-				_manikins[i].gameObject.layer = LayerMask.NameToLayer(_ignoreSameMask);
-				centerRankX = (float)_manikins[i].Rank / 2f;
-				
-				float z = centerZ + ((float)_manikins[i].Rank - (float)centerRank) * rankStepY;
-				float x = centerX + ((float)_manikins[i].RankPosition - (float)centerRankX) * rankStepX;
-				Vector3 newPos = _manikins[i].transform.position;
-				newPos.z = z;
-				newPos.x = x;
-				_manikins[i].transform.position = newPos;
-				
-				// Sort by ranks
 				_manikins[i].Rank = rank - _manikins[i].Rank + 1;
+			}
+		}
+		
+		private void SetStickmanPhysics(bool gravity)
+		{
+			for(int i = 0; i < _manikins.Count; i++)
+			{
+				if(_manikins[i] != null)
+					_manikins[i].Movement.SetPhysics(gravity);
 			}
 		}
 		

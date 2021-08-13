@@ -40,7 +40,8 @@ namespace TypeRunner
 					_player.SetIndependentMove(true);
 					_player.SetControllable(false);
 					_player.MultiplyStikmans(_stats.SuccessfulMultiplier);
-					_player.MakeFormationLine();
+					_player.MakeFormationTriangle();
+					//_player.MakeFormationLine();
 				}
 			}
 		}

@@ -47,7 +47,7 @@ namespace TypeRunner
 			{
 				p.startColor = newColor;
 			}
-			Renderer renderer = _skins._current.renderer;
+			Renderer renderer = _skins._current._renderer;
 			for(int i = 0; i < renderer.materials.Length; i++)
 			{
 				if(i == _skins._current.MainMaterialIndex)

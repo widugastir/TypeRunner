@@ -7,7 +7,7 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[Header("Settings")]
-		[SerializeField] private bool _canBeMirrored = true;
+		//[SerializeField] private bool _canBeMirrored = true;
 		[SerializeField] private int _generationLevel;
 		[SerializeField] private int _manikinAmount;
 		[SerializeField] private int _letterAmount;

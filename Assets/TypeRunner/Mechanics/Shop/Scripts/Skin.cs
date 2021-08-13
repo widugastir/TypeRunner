@@ -11,7 +11,7 @@ namespace TypeRunner
 		public int MainMaterialIndex = 0;
 		[SerializeField] public AnimationEvents _events;
 		[SerializeField, HideInInspector] public Animator animator;
-		[SerializeField, HideInInspector] public Renderer renderer;
+		[SerializeField, HideInInspector] public Renderer _renderer;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -19,7 +19,7 @@ namespace TypeRunner
 			if(sceneObject == false)
 			{
 				animator = GetComponentInChildren<Animator>(true);
-				renderer = GetComponentInChildren<Renderer>(true);
+				_renderer = GetComponentInChildren<Renderer>(true);
 			}
 		}
 	}

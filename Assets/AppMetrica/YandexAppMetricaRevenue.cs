@@ -12,7 +12,7 @@ using UnityEngine;
 [System.Serializable]
 public struct YandexAppMetricaRevenue
 {
-    [Obsolete("The field is deprecated. Use the PriceMicros field instead.")]
+    //[Obsolete("The field is deprecated. Use the PriceMicros field instead.")]
     public double? Price { get; private set; }
 
     public decimal? PriceDecimal { get; private set; }

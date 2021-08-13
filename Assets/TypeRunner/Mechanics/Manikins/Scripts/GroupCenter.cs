@@ -5,17 +5,17 @@ namespace TypeRunner
 {
 	public class GroupCenter : MonoBehaviour
 	{
-		[SerializeField] private float _speed = 1f;
+		//[SerializeField] private float _speed = 1f;
 		[SerializeField] private float _strafeMultiplier = 1f;
 		public Transform _gameplayCamera;
 		public Transform _target;
 		public Transform _groupCenter;
 		[HideInInspector] public Vector3 _startPosition;
 		private float _targetStrafe = 0f;
-		private bool _upMove = false;
+		//private bool _upMove = false;
 		public bool CanMove { get; set; } = true;
 		
-		private float _currentStrafe = 0f;
+		//private float _currentStrafe = 0f;
 		private Vector3 _basePos;
 		
 		private void Start()
@@ -69,14 +69,14 @@ namespace TypeRunner
 		
 		public void SetUpMovement()
 		{
-			_upMove = true;
+			//_upMove = true;
 		}
 		
 		public void Reset()
 		{
 			_groupCenter.transform.localPosition = _basePos;
 			transform.position = _startPosition;
-			_upMove = false;
+			//_upMove = false;
 			CanMove = true;
 		}
 	}
