@@ -37,9 +37,8 @@ namespace TypeRunner
 				{
 					_isUsed = true;
 					_letterWriteSystem.Disable();
-					_player.SetIndependentMove(true);
-					_player.SetControllable(false);
 					_player.MultiplyStikmans(_stats.SuccessfulMultiplier);
+					_player.SetIndependentMove(true);
 					_player.MakeFormationTriangle();
 					//_player.MakeFormationLine();
 				}

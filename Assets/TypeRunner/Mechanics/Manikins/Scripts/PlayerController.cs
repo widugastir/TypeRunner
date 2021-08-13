@@ -394,6 +394,7 @@ namespace TypeRunner
 		
 		public void MakeFormationTriangle()
 		{
+			SetControllable(false);
 			StartCoroutine(FormationTriangle());
 			
 			//int rank = 1;
