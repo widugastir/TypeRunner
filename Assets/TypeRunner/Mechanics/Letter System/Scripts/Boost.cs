@@ -37,6 +37,8 @@ namespace TypeRunner
 		
 		public void ResetTimer()
 		{
+			StopAllCoroutines();
+			_timer = 0f;
 			_fullTimer = _baseFullTimer;
 			_bonusTimer = _baseBonusTimer;
 			_oneUseTrigger = true;

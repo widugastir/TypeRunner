@@ -208,7 +208,10 @@ namespace TypeRunner
 		
 		public void Reset()
 		{
+			StopAllCoroutines();
+			_boost.ResetTimer();
 			_lastZone = null;
+			_requiredWordHolder.SetActive(false);
 			_lettersPanel.gameObject.SetActive(true);
 			_uiPanel.SetActive(true);
 			_boostObject.SetActive(false);

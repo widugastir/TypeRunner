@@ -48,5 +48,10 @@ namespace TypeRunner
 				}
 			}
 		}
+		
+		public void Reset()
+		{
+			Disable();
+		}
 	}
 }
