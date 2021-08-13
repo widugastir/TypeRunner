@@ -94,6 +94,7 @@ MonoBehaviour:
   _oneCommandOnly: 0
   _isEnterZone: 0
   _onlySuccessful: 0
+  _blockOnWrong: 1
   _disableStrafe: 0
   _command: 3
   _requiredLettersWrite: 
@@ -194,6 +195,7 @@ MonoBehaviour:
   _oneCommandOnly: 0
   _isEnterZone: 0
   _onlySuccessful: 0
+  _blockOnWrong: 1
   _disableStrafe: 0
   _command: 1
   _requiredLettersWrite: 
@@ -339,6 +341,7 @@ MonoBehaviour:
   _oneCommandOnly: 0
   _isEnterZone: 1
   _onlySuccessful: 0
+  _blockOnWrong: 1
   _disableStrafe: 0
   _command: 0
   _requiredLettersWrite: 090000000a0000000b0000000c0000000d000000
@@ -405,6 +408,7 @@ MonoBehaviour:
   Destructable: 0
   _collider: {fileID: 0}
   Childs: []
+  Destructed: {fileID: 0}
 --- !u!1 &4246005216853637080
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29f4dac4893494b949ee5c2074f33a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canBeMirrored: 1
   _generationLevel: 5
   _manikinAmount: 0
   _letterAmount: 5
@@ -754,7 +757,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 030f27db76dad5e4eb19f5a35f280c13, type: 2}
+  - {fileID: 2100000, guid: 9067e97009a345e4880977f0d686e530, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -835,7 +838,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 030f27db76dad5e4eb19f5a35f280c13, type: 2}
+  - {fileID: 2100000, guid: 9067e97009a345e4880977f0d686e530, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1735,10 +1738,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2.73
       objectReference: {fileID: 0}
+    - target: {fileID: 7998347311712125534, guid: 2910e7bf223f37a4ba26ee552e2d7f9c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 76ae6304fcd82a148a722183ec753348, type: 2}
     - target: {fileID: 9176205335834804447, guid: 2910e7bf223f37a4ba26ee552e2d7f9c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 030f27db76dad5e4eb19f5a35f280c13, type: 2}
+      objectReference: {fileID: 2100000, guid: 76ae6304fcd82a148a722183ec753348, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2910e7bf223f37a4ba26ee552e2d7f9c, type: 3}
 --- !u!4 &5501915816435313606 stripped
@@ -1887,10 +1894,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2.73
       objectReference: {fileID: 0}
+    - target: {fileID: 7998347311712125534, guid: 2910e7bf223f37a4ba26ee552e2d7f9c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 76ae6304fcd82a148a722183ec753348, type: 2}
     - target: {fileID: 9176205335834804447, guid: 2910e7bf223f37a4ba26ee552e2d7f9c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 030f27db76dad5e4eb19f5a35f280c13, type: 2}
+      objectReference: {fileID: 2100000, guid: 76ae6304fcd82a148a722183ec753348, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2910e7bf223f37a4ba26ee552e2d7f9c, type: 3}
 --- !u!4 &5033340595491727626 stripped
