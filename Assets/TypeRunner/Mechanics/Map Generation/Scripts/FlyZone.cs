@@ -11,6 +11,7 @@ namespace TypeRunner
 		[SerializeField] public E_LetterType[] _requiredWord;
 		private bool _isUsed = false;
 		public static event System.Action<FlyZone> EnterFlyZone;
+		[SerializeField] private float _resetTimer = 0.8f;
 		
 		//------METHODS
 		private void OnTriggerEnter(Collider other)
@@ -26,8 +27,14 @@ namespace TypeRunner
 			if(_isUsed == false)
 			{
 				_isUsed = true;
+				Invoke(nameof(ResetUsed), _resetTimer);
 				EnterFlyZone?.Invoke(this);
 			}
+		}
+		
+		private void ResetUsed()
+		{
+			_isUsed = false;
 		}
 	}
 }

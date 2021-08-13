@@ -19,6 +19,7 @@ namespace TypeRunner
 		[SerializeField] private ManikinCommands.E_Command _command;
 		[ShowIf("_isEnterZone"), SerializeField] private E_LetterType[] _requiredLettersWrite;
 		private bool _isUsed = false;
+		[SerializeField] private float _resetTimer = 0.8f;
 		
 		public UnityEvent _onSuccessful;
 		
@@ -40,6 +41,8 @@ namespace TypeRunner
 				if(_isUsed == false && man.AffectZones == true)
 				{
 					_isUsed = true;
+					CancelInvoke(nameof(ResetUsed));
+					Invoke(nameof(ResetUsed), _resetTimer);
 					if(_isEnterZone)
 						OnPlayerEntered?.Invoke(this, _requiredLettersWrite);
 					else if(_isEnterZone == false)
@@ -62,6 +65,11 @@ namespace TypeRunner
 					_onSuccessful?.Invoke();
 				}
 			}
+		}
+		
+		private void ResetUsed()
+		{
+			_isUsed = false;
 		}
 	}
 }

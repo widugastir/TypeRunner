@@ -7,6 +7,7 @@ namespace TypeRunner
 		//------FIELDS
 		[HideInInspector] public E_LetterType LetterType { get; private set; }
 		[SerializeField] private Sprite[] _sprites;
+		[SerializeField] private float _resetTimer = 0.5f;
 		private bool _isPickuped = false;
 		
 		//------METHODS
@@ -28,8 +29,15 @@ namespace TypeRunner
 			{
 				_isPickuped = true;
 				LetterData.Instance.AddLetter(LetterType);
-				Destroy(gameObject);
+				CancelInvoke(nameof(ResetPickuped));
+				Invoke(nameof(ResetPickuped), _resetTimer);
+				//Destroy(gameObject);
 			}
+		}
+		
+		private void ResetPickuped()
+		{
+			_isPickuped = false;
 		}
 	}
 }

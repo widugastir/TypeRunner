@@ -192,6 +192,18 @@ namespace TypeRunner
 			//_lettersPanel.Reset();
 		}
 		
+		public void DisableWordWritterST()
+		{
+			_layoutGroup.enabled = true;
+			_lettersPanel.DisableSelected();
+			_layoutGroup.enabled = true;
+			_requiredWordHolder.gameObject.SetActive(false);
+			_boostObject.SetActive(false);
+			Time.timeScale = 0f;
+			_lettersPanel.DisableSelected();
+			_layoutGroup.enabled = true;
+		}
+		
 		public void Enable()
 		{
 			UpdateUI();
@@ -209,6 +221,7 @@ namespace TypeRunner
 		public void Reset()
 		{
 			StopAllCoroutines();
+			DisableWordWritterST();
 			_boost.ResetTimer();
 			_lastZone = null;
 			_requiredWordHolder.SetActive(false);
