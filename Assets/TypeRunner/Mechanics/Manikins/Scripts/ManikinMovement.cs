@@ -163,6 +163,7 @@ namespace TypeRunner
 		private void Hovering()
 		{
 			StartCoroutine(StopHovering());
+			_rigi.useGravity = false;
 		}
 		
 		private IEnumerator StopHovering()
