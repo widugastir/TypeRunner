@@ -107,7 +107,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5964292755310262011}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.5790312, y: 0.5, z: 23.338894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -127,10 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b2161231557fd49bf53b04793c29ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Destructable: 0
+  Destructable: 1
   _collider: {fileID: 0}
   Childs: []
-  Destructed: {fileID: 0}
+  DestroyThis: {fileID: 5964292755310262011}
+  Destructed: {fileID: 8871532731162938282, guid: eb0c709265b51ed42806a403b108a523, type: 3}
 --- !u!65 &6649923245269401263
 BoxCollider:
   m_ObjectHideFlags: 0

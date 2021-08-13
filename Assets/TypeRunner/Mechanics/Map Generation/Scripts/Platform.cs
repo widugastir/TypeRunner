@@ -20,6 +20,7 @@ namespace TypeRunner
 		[SerializeField] private List<Transform> _letterSpawnPos;
 		[SerializeField] private List<Transform> _manikinSpawnPos;
 		private MapGenerationLevels _generator;
+		[SerializeField] private float _dailyStickmanMultiplier = 0.5f;
 		private float _stickmanMultiplier = 1f;
 		
 		//------METHODS
@@ -38,7 +39,7 @@ namespace TypeRunner
 			transform.SetParent(parent);
 			
 			if(daily)
-				_stickmanMultiplier = 0.5f;
+				_stickmanMultiplier = _dailyStickmanMultiplier;
 			else
 				_stickmanMultiplier = 1f;
 				

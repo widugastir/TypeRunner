@@ -7,7 +7,9 @@ namespace TypeRunner
 		public bool Destructable = false;
 		[SerializeField] private Collider _collider;
 		public ObstacleChild[] Childs;
+		public GameObject DestroyThis;
 		public GameObject Destructed;
+		private bool _isDestructed = false;
 		
 		private void OnTriggerEnter(Collider other)
 		{
@@ -16,27 +18,40 @@ namespace TypeRunner
 				
 			if(other.TryGetComponent(out Mankin man))
 			{
-				Destroy(gameObject);
+				if(DestroyThis != null)
+					Destroy(DestroyThis);
+				else
+					Destroy(gameObject);
 			}
 		}
 		
 		protected void OnCollisionEnter(Collision collisionInfo)
 		{
-			if(Destructable == false)
+			if(Destructable == false || _isDestructed == true)
 				return;
-				
+			_isDestructed = true;
 			if(collisionInfo.gameObject.TryGetComponent(out Mankin man))
 			{
 				if(Destructed != null)
 				{
 					var d = Instantiate(Destructed, transform.position, transform.rotation);
-					if(transform.parent != null)
+					if(DestroyThis != null)
+					{
+						d.transform.position = DestroyThis.transform.position;
+						d.transform.rotation = DestroyThis.transform.rotation;
+					}
+					if(DestroyThis != null && DestroyThis.transform.parent != null)
+						d.transform.SetParent(DestroyThis.transform.parent);
+					else if(transform.parent != null)
 					{
 						d.transform.SetParent(transform.parent);
 					}
 					Destroy(d, 2f);
 				}
-				Destroy(gameObject);
+				if(DestroyThis != null)
+					Destroy(DestroyThis);
+				else
+					Destroy(gameObject);
 			}
 		}
 		
@@ -52,7 +67,10 @@ namespace TypeRunner
 						c.Activate(forcePoint);
 				}
 			}
-			Destroy(gameObject);
+			if(DestroyThis != null)
+				Destroy(DestroyThis);
+			else
+				Destroy(gameObject);
 		}
 	}
 }
