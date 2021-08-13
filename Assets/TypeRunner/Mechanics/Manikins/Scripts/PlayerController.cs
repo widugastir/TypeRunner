@@ -510,6 +510,8 @@ namespace TypeRunner
 			_mapMovement.Reset();
 			_mapMovement.CanMove = true;
 			_controllable = true;
+			_canMove = true;
+			IsMovementEnabled = true;
 		}
 	}
 }
