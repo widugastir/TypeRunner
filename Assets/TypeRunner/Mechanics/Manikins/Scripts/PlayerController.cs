@@ -228,10 +228,12 @@ namespace TypeRunner
 				StrafeGroupCenter(delta);
 				foreach(var manikin in _manikins)
 				{
-					if(delta == _prevPos)
+					if(Mathf.Abs(delta - _prevPos) <= 0.01f)
 						manikin.Movement.SerDirection(_forward);
 					else
-						manikin.Movement.SerDirection(_forward + _right * 0.5f * Mathf.Sign(delta - _prevPos));
+					{
+						manikin.Movement.SerDirection(_forward + _right * 1f * Mathf.Sign(delta - _prevPos));
+					}
 				}
 			}
 		}

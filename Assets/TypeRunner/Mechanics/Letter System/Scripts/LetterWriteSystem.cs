@@ -10,6 +10,7 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		[SerializeField] private LayoutGroup _layoutGroup;
+		[SerializeField] private GameObject _requiredWordHolder;
 		[SerializeField] private TMP_Text _wordText;
 		[SerializeField] private TMP_Text _successfulAmount;
 		[SerializeField] private GameObject _uiPanel;
@@ -75,7 +76,7 @@ namespace TypeRunner
 		{
 			_playerController.SetMansSuccesfull(false);
 			_layoutGroup.enabled = false;
-			_wordText.gameObject.SetActive(true);
+			_requiredWordHolder.SetActive(true);
 			_boostObject.SetActive(true);
 			string req_word = "";
 			foreach(var ch in word)
@@ -93,7 +94,7 @@ namespace TypeRunner
 		{
 			_playerController.SetMansSuccesfull(false);
 			_layoutGroup.enabled = false;
-			_wordText.gameObject.SetActive(true);
+			_requiredWordHolder.gameObject.SetActive(true);
 			_boostObject.SetActive(true);
 			string req_word = "";
 			foreach(var ch in word)
@@ -112,7 +113,7 @@ namespace TypeRunner
 			if(_isReady == false)
 				return;
 			_layoutGroup.enabled = true;
-			_wordText.gameObject.SetActive(false);
+			_requiredWordHolder.gameObject.SetActive(false);
 			_boostObject.SetActive(false);
 			_isReady = false;
 			
@@ -162,7 +163,7 @@ namespace TypeRunner
 		{
 			_playerController.SetMansSuccesfull(false);
 			_layoutGroup.enabled = false;
-			_wordText.gameObject.SetActive(true);
+			_requiredWordHolder.gameObject.SetActive(true);
 			_boostObject.SetActive(true);
 			string req_word = "";
 			foreach(var ch in word)
@@ -182,7 +183,7 @@ namespace TypeRunner
 			_layoutGroup.enabled = true;
 			_lettersPanel.DisableSelected();
 			_layoutGroup.enabled = true;
-			_wordText.gameObject.SetActive(false);
+			_requiredWordHolder.gameObject.SetActive(false);
 			_boostObject.SetActive(false);
 			_isReady = false;
 			Time.timeScale = 1f;
