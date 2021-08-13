@@ -266,11 +266,30 @@ namespace TypeRunner
 			}
 		}
 		
-		public void SendCommand(ManikinCommands.E_Command command)
+		public void SetRunningAnimation()
 		{
 			for(int i = 0; i < _manikins.Count; i++)
 			{
-				_manikins[i].Commands.DoCommand(command);
+				_manikins[i]._animator.SetTrigger("Running");
+			}
+		}
+		
+		public void SendCommand(ManikinCommands.E_Command command, int stickmans = -1)
+		{
+			int amount = _manikins.Count;
+			if(stickmans > 0)
+				amount = stickmans;
+			
+			for(int i = 0; i < _manikins.Count; i++)
+			{
+				if(i < amount)
+				{
+					_manikins[i].Commands.DoCommand(command);
+				}
+				else
+				{
+					_manikins[i]._animator.SetTrigger("Idle");
+				}
 			}
 		}
 		

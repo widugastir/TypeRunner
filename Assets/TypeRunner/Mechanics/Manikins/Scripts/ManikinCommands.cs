@@ -70,7 +70,7 @@ namespace TypeRunner
 					break;
 				case E_Command.AllThrow:
 					_player.SetMove(false);
-					_player.SendCommand(E_Command.Throw);
+					_player.SendCommand(E_Command.Throw, 3);
 					break;
 				case E_Command.Reset:
 					Reset();
@@ -175,7 +175,7 @@ namespace TypeRunner
 		{
 			_man._skinChanger._current._events.OnThrow -= OnAnimationEnd;
 			_player.IsMovementEnabled = true;
-			_animator.SetTrigger("Running");
+			_player.SetRunningAnimation();
 			_player.SetMove(true);
 		}
 		
