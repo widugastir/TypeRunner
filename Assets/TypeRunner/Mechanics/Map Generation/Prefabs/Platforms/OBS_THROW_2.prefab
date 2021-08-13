@@ -163,6 +163,7 @@ MonoBehaviour:
   _disableStrafe: 1
   _command: 6
   _requiredLettersWrite: 
+  _resetTimer: 3
   _onSuccessful:
     m_PersistentCalls:
       m_Calls: []
@@ -585,6 +586,7 @@ MonoBehaviour:
   - {fileID: 839300048439638179}
   - {fileID: 8216652319106943148}
   _manikinSpawnPos: []
+  _dailyStickmanMultiplier: 0.5
 --- !u!1 &5874132828589866382
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +687,7 @@ MonoBehaviour:
   _disableStrafe: 0
   _command: 0
   _requiredLettersWrite: 
+  _resetTimer: 0.8
   _onSuccessful:
     m_PersistentCalls:
       m_Calls: []
@@ -756,6 +759,7 @@ MonoBehaviour:
   _disableStrafe: 0
   _command: 0
   _requiredLettersWrite: 0400000005000000060000000700000008000000
+  _resetTimer: 3
   _onSuccessful:
     m_PersistentCalls:
       m_Calls: []

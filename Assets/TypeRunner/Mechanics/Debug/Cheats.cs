@@ -18,6 +18,8 @@ namespace TypeRunner
 				_levelManager.PreFinishLevel(true, 2, 1f);
 			if(Input.GetKeyDown(KeyCode.F))
 				_player.SetImmortal(3f, true);
+			if(Input.GetKeyDown(KeyCode.T))
+				print(Time.deltaTime);
 	    }
 	}
 }
