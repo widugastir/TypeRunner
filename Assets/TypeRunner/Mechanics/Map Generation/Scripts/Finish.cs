@@ -36,7 +36,7 @@ namespace TypeRunner
 				if(_isUsed == false)
 				{
 					_isUsed = true;
-					_letterWriteSystem.Disable();
+					_letterWriteSystem.DisableAfterFinish();
 					_player.MultiplyStikmans(_stats.SuccessfulMultiplier);
 					_player.SetIndependentMove(true);
 					_player.MakeFormationTriangle();

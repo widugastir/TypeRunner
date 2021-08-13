@@ -204,6 +204,18 @@ namespace TypeRunner
 			_layoutGroup.enabled = true;
 		}
 		
+		public void DisableWordWritterNST()
+		{
+			_layoutGroup.enabled = true;
+			_lettersPanel.DisableSelected();
+			_layoutGroup.enabled = true;
+			_requiredWordHolder.gameObject.SetActive(false);
+			_boostObject.SetActive(false);
+			Time.timeScale = 1f;
+			_lettersPanel.DisableSelected();
+			_layoutGroup.enabled = true;
+		}
+		
 		public void Enable()
 		{
 			UpdateUI();
@@ -211,17 +223,27 @@ namespace TypeRunner
 			_uiPanel.SetActive(true);
 		}
 		
+		public void DisableAfterFinish()
+		{
+			_lettersPanel.gameObject.SetActive(false);
+			_uiPanel.SetActive(false);
+			Reset(false);
+		}
+		
 		public void Disable()
 		{
 			_lettersPanel.gameObject.SetActive(false);
 			_uiPanel.SetActive(false);
-			Reset();
+			Reset(true);
 		}
 		
-		public void Reset()
+		public void Reset(bool stopTime=true)
 		{
 			StopAllCoroutines();
-			DisableWordWritterST();
+			if(stopTime)
+				DisableWordWritterST();
+			else
+				DisableWordWritterNST();
 			_boost.ResetTimer();
 			_lastZone = null;
 			_requiredWordHolder.SetActive(false);
