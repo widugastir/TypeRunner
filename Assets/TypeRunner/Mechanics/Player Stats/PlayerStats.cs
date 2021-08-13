@@ -94,8 +94,8 @@ namespace TypeRunner
 		{
 			get 
 			{
-				//return (float)System.Math.Round((double)Mathf.Pow(1.072f, _successfulWord), 2);
-				return (float)System.Math.Round((double)_successfulWord * 0.5D, 2);
+				return (float)System.Math.Round((double)Mathf.Pow(1.3f, _successfulWord), 2);
+				//return (float)System.Math.Round((double)_successfulWord * 0.5D, 2);
 			}
 		}
 
