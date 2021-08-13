@@ -466,9 +466,10 @@ namespace TypeRunner
 				yield return new WaitForSecondsRealtime(0.1f);
 				mansInRank.Clear();
 				mansInRank.AddRange(_manikins.Where(m => (m.Rank == i)));
+				int rankCount = mansInRank.Count;
 				foreach(var man in mansInRank)
 				{
-					centerRankX = (float)man.Rank / 2f;
+					centerRankX = (float)rankCount / 2f;
 					float x = centerX + ((float)man.RankPosition - (float)centerRankX) * rankStepX;
 					Vector3 newPos = man.transform.position;
 					newPos.x = x;
