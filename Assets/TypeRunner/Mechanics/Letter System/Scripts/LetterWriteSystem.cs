@@ -226,7 +226,7 @@ namespace TypeRunner
 		public void DisableAfterFinish()
 		{
 			_lettersPanel.gameObject.SetActive(false);
-			_uiPanel.SetActive(false);
+			//_uiPanel.SetActive(false);
 			Reset(false);
 		}
 		
