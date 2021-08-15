@@ -36,7 +36,7 @@ namespace TypeRunner
 		[SerializeField] private ParticleSystem[] _dieVfx;
 		[SerializeField] private BlinkingMaterial _blinking;
 		
-		public static event System.Action<Mankin, bool> OnChangeOwner;
+		public static event System.Action<Mankin, bool, bool> OnChangeOwner;
 		[SerializeField, HideInInspector] public Animator _animator;
 		[SerializeField, HideInInspector] public SkinChanger _skinChanger;
 		
@@ -95,10 +95,10 @@ namespace TypeRunner
 			//SetFlickering(false);
 		}
 		
-		public void SetOwnerTo(bool neutral)
+		public void SetOwnerTo(bool neutral, bool instaKilled = false)
 		{
 			IsNeutral = neutral;
-			OnChangeOwner?.Invoke(this, IsNeutral);
+			OnChangeOwner?.Invoke(this, IsNeutral, instaKilled);
 			_animator = _skinChanger._current.animator;
 			if(neutral == false && IsIdle == false)
 			{
@@ -180,22 +180,25 @@ namespace TypeRunner
 			m.SetOwnerTo(false);
 		}
 		
-		public void Kill()
+		public void Kill(bool instaKill = false)
 		{
-			if(Immortal)
+			if(Immortal && instaKill == false)
 				return;
-			foreach(var p in _dieVfx)
+			if(instaKill == false)
 			{
-				p.transform.SetParent(null);
-				p.Play();
+				foreach(var p in _dieVfx)
+				{
+					p.transform.SetParent(null);
+					p.Play();
+				}
+				_map.SpawnRagdoll(transform.position);
 			}
-			_map.SpawnRagdoll(transform.position);
 			Destroy(gameObject);
 		}
 		
 		protected void OnDestroy()
 		{
-			SetOwnerTo(true);
+			SetOwnerTo(true, true);
 		}
 	}
 }

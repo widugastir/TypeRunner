@@ -293,7 +293,7 @@ namespace TypeRunner
 			}
 		}
 		
-		private void OnChangeOwner(Mankin manikin, bool isNeutral)
+		private void OnChangeOwner(Mankin manikin, bool isNeutral, bool instaKilled = false)
 		{
 			if(isNeutral)
 			{
@@ -467,6 +467,18 @@ namespace TypeRunner
 				yield return new WaitForSecondsRealtime(0.1f);
 				mansInRank.Clear();
 				mansInRank.AddRange(_manikins.Where(m => (m.Rank == i)));
+				
+				if(mansInRank.Count != i)
+				{
+					//print(i + "  ЛИШНИЙ РЯД " + mansInRank.Count);
+					foreach(var man in mansInRank)
+					{
+						man.Kill(true);
+					}
+					rank--;
+					continue;
+				}
+				
 				int rankCount = mansInRank.Count;
 				foreach(var man in mansInRank)
 				{
@@ -480,7 +492,7 @@ namespace TypeRunner
 				}
 			}
 			
-			// Sort by ranks
+			// Invert ranks
 			for(int i = 0; i < _manikins.Count; i++)
 			{
 				_manikins[i].Rank = rank - _manikins[i].Rank + 1;
