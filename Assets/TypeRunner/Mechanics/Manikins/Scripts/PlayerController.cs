@@ -16,7 +16,7 @@ namespace TypeRunner
 		[SerializeField] private float _finishDelay = 2f;
 		[SerializeField, Layer] private string _stickmanMask;
 		[SerializeField, Layer] private string _ignoreSameMask;
-		[SerializeField] private List<Mankin> _manikins;
+		[SerializeField] public List<Mankin> _manikins;
 		[SerializeField, HideInInspector] public MapMovement _mapMovement;
 		[SerializeField, HideInInspector] private GroupCenter _groupCenter;
 		[SerializeField, HideInInspector] private MapGenerationLevels _generator;
@@ -123,11 +123,14 @@ namespace TypeRunner
 				pos = transform.position;
 				pos += Vector3.forward * Random.Range(-2f, 2f) + Vector3.right * Random.Range(-2f, 2f);
 				var man = _generator.SpawnManikin(pos);
-				man.SetIdle(true);
-				man.SetOwnerTo(false);
-				if(makeImmortal)
+				if(man != null)
 				{
-					man.SetImmortal(true, immortalTime, true);
+					man.SetIdle(true);
+					man.SetOwnerTo(false);
+					if(makeImmortal)
+					{
+						man.SetImmortal(true, immortalTime, true);
+					}
 				}
 			}
 		}

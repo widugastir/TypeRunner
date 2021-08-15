@@ -170,8 +170,11 @@ namespace TypeRunner
 		public void Double()
 		{
 			Mankin m = _map.SpawnManikin(transform.position + Vector3.forward * 1f);
-			m.SetOwnerTo(false);
-			StartCoroutine(LateSetOwner(m));
+			if(m != null)
+			{
+				m.SetOwnerTo(false);
+				StartCoroutine(LateSetOwner(m));
+			}
 		}
 		
 		private IEnumerator LateSetOwner(Mankin m)

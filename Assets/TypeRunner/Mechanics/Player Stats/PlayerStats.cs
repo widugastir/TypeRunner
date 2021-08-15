@@ -74,6 +74,7 @@ namespace TypeRunner
 		[SerializeField] private int _reviveCost = 100;
 		public int ReviveCost => Mathf.Max(_reviveCost, (_reviveCost * ReviveCount) * 2);
 		public int ReviveCount = 0;
+		public int MaxStickmans = 136;
 		public float _coinsMultiplier = 1f;
 		[Saveable] public int _coins = 0;
 		[Saveable] public int LevelPlayCount = 0;
@@ -94,6 +95,7 @@ namespace TypeRunner
 		{
 			get 
 			{
+				//return (float)System.Math.Round(1f + 0.3f * (float)(_successfulWord - 1), 1);
 				return (float)System.Math.Round((double)Mathf.Pow(1.2f, _successfulWord), 1);
 				//return (float)System.Math.Round((double)_successfulWord * 0.5D, 2);
 			}

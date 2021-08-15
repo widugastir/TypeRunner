@@ -78,6 +78,8 @@ namespace TypeRunner
 		
 		public Mankin SpawnManikin(Vector3 position)
 		{
+			if(_player._manikins.Count >= _stats.MaxStickmans)
+				return null;
 			var man = Instantiate(ManikinPrefab, position, Quaternion.identity);
 			_mapManikins.Add(man);
 			man.Init(this);
