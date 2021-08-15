@@ -144,12 +144,12 @@ namespace TypeRunner
 			}
 		}
 		
-		public void MultiplyStikmans(float multiply = 2f, float duration = 1f)
+		public void MultiplyStikmans(float multiply = 2f, float duration = 1f, System.Action onMultiplyEnd = null)
 		{
-			StartCoroutine(MultiplyCoroutine(multiply, duration));
+			StartCoroutine(MultiplyCoroutine(multiply, duration, onMultiplyEnd));
 		}
 		
-		private IEnumerator MultiplyCoroutine(float multiply = 2f, float duration = 1f)
+		private IEnumerator MultiplyCoroutine(float multiply = 2f, float duration = 1f, System.Action onMultiplyEnd = null)
 		{
 			int totalStickmans = Mathf.RoundToInt((float)_manikins.Count * multiply);
 			int stickmanToSplit = totalStickmans - _manikins.Count;
@@ -160,6 +160,7 @@ namespace TypeRunner
 				_manikins[i].Double();
 				yield return new WaitForSecondsRealtime(duration / (float)stickmanToSplit);
 			}
+			onMultiplyEnd?.Invoke();
 		}
 		
 		public void SetImmortal(float duration, bool affectZones)
@@ -477,12 +478,13 @@ namespace TypeRunner
 			float centerZ = _groupCenter.transform.position.z;
 			float rankStepX = 0.5f;
 			float centerRankX = 0f;
+			int erasedRank = 0;
 			
 			SetStickmanPhysics(false);
 			List<Mankin> mansInRank = new List<Mankin>();
-			for(int i = rank; i >= 0; i--)
+			for(int i = rank; i > 0; i--)
 			{
-				yield return new WaitForSecondsRealtime(0.1f);
+				yield return new WaitForSecondsRealtime(0.05f);
 				mansInRank.Clear();
 				mansInRank.AddRange(_manikins.Where(m => (m.Rank == i)));
 				
@@ -493,7 +495,8 @@ namespace TypeRunner
 					{
 						man.Kill(true);
 					}
-					rank--;
+					//rank--;
+					erasedRank++;
 					continue;
 				}
 				
@@ -505,7 +508,7 @@ namespace TypeRunner
 					Vector3 newPos = man.transform.position;
 					newPos.x = x;
 					newPos.z = centerZ;
-					newPos.y += ((rank - i) * 2f);
+					newPos.y += ((rank - i - erasedRank) * 2f);
 					man.transform.position = newPos;
 				}
 			}
@@ -513,7 +516,7 @@ namespace TypeRunner
 			// Invert ranks
 			for(int i = 0; i < _manikins.Count; i++)
 			{
-				_manikins[i].Rank = rank - _manikins[i].Rank + 1;
+				_manikins[i].Rank = rank - _manikins[i].Rank + 1 - erasedRank;
 			}
 		}
 		

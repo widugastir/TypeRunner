@@ -20,6 +20,8 @@ namespace TypeRunner
 				_player.SetImmortal(3f, true);
 			if(Input.GetKeyDown(KeyCode.T))
 				print(Time.deltaTime);
+			if(Input.GetKeyDown(KeyCode.X))
+				_stats._successfulWord += 3;
 	    }
 	}
 }

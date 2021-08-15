@@ -30,6 +30,7 @@ namespace TypeRunner
 		{
 			if(other.TryGetComponent(out Mankin man))
 			{
+				//print(man.Rank + " == " + Rank);
 				if(man.Rank == Rank)
 				{
 					man.EarnedCoinsBonus = _coinsBonusMultiplier;
