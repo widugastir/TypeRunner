@@ -144,6 +144,24 @@ namespace TypeRunner
 			}
 		}
 		
+		public void MultiplyStikmans(float multiply = 2f, float duration = 1f)
+		{
+			StartCoroutine(MultiplyCoroutine(multiply, duration));
+		}
+		
+		private IEnumerator MultiplyCoroutine(float multiply = 2f, float duration = 1f)
+		{
+			int totalStickmans = Mathf.RoundToInt((float)_manikins.Count * multiply);
+			int stickmanToSplit = totalStickmans - _manikins.Count;
+			for(int i = 0; i < _manikins.Count; i++)
+			{
+				if(i >= stickmanToSplit)
+					break;
+				_manikins[i].Double();
+				yield return new WaitForSecondsRealtime(duration / (float)stickmanToSplit);
+			}
+		}
+		
 		public void SetImmortal(float duration, bool affectZones)
 		{
 			_immortalTimer.Enable(duration);

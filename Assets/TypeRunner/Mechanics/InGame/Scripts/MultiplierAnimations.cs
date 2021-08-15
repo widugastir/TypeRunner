@@ -15,6 +15,7 @@ namespace TypeRunner
 		[SerializeField] private float _numericAnimDuration = 1f;
 		[SerializeField] private float _numericAnimStep = 0.1f;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
+		[SerializeField, HideInInspector] private PlayerController _player;
 		
 		private Action _onMultiplyAnim;
 		
@@ -24,6 +25,7 @@ namespace TypeRunner
 			if(sceneObject == true)
 			{
 				_stats = FindObjectOfType<PlayerStats>(true);
+				_player = FindObjectOfType<PlayerController>(true);
 			}
 		}
 		
@@ -48,6 +50,7 @@ namespace TypeRunner
 			_multiplierText.text = "X " + startMultiplier.ToString("0.00");
 			float timePerStep = _numericAnimDuration / ((targetMultiplier - startMultiplier) / _numericAnimStep);
 			//print(timePerStep);
+			_player.MultiplyStikmans(_stats.SuccessfulMultiplier, _numericAnimDuration);
 			while(currentMultiplier < targetMultiplier)
 			{
 				yield return new WaitForSecondsRealtime(timePerStep);

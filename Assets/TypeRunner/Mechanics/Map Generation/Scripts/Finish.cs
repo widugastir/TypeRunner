@@ -46,7 +46,7 @@ namespace TypeRunner
 		private void OnMultiplyAnim()
 		{
 			_letterWriteSystem.DisableAfterFinish();
-			_player.MultiplyStikmans(_stats.SuccessfulMultiplier);
+			//_player.MultiplyStikmans(_stats.SuccessfulMultiplier);
 			_player.SetIndependentMove(true);
 			_player.MakeFormationTriangle();
 		}
