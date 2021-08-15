@@ -47,15 +47,18 @@ namespace TypeRunner
 			float startMultiplier = 1f;
 			float currentMultiplier = startMultiplier;
 			float targetMultiplier = _stats.SuccessfulMultiplier;
-			_multiplierText.text = "X " + startMultiplier.ToString("0.00");
-			float timePerStep = _numericAnimDuration / ((targetMultiplier - startMultiplier) / _numericAnimStep);
-			//print(timePerStep);
-			_player.MultiplyStikmans(_stats.SuccessfulMultiplier, _numericAnimDuration);
-			while(currentMultiplier < targetMultiplier)
+			if(targetMultiplier != startMultiplier)
 			{
-				yield return new WaitForSecondsRealtime(timePerStep);
-				currentMultiplier += _numericAnimStep;
-				_multiplierText.text = "X " + currentMultiplier.ToString("0.00");
+				_multiplierText.text = "X " + startMultiplier.ToString("0.00");
+				float timePerStep = _numericAnimDuration / ((targetMultiplier - startMultiplier) / _numericAnimStep);
+				//print(timePerStep);
+				_player.MultiplyStikmans(_stats.SuccessfulMultiplier, _numericAnimDuration);
+				while(currentMultiplier < targetMultiplier)
+				{
+					yield return new WaitForSecondsRealtime(timePerStep);
+					currentMultiplier += _numericAnimStep;
+					_multiplierText.text = "X " + currentMultiplier.ToString("0.00");
+				}
 			}
 			_multiplierText.text = "X " + targetMultiplier.ToString("0.00");
 			_animator.SetTrigger("ZoomOUT");
