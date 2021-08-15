@@ -7,6 +7,7 @@ namespace TypeRunner
 	{
 		//------FIELDS
 		private bool _isUsed = false;
+		[SerializeField, HideInInspector] private CinematicSystem _cinematic;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
@@ -17,6 +18,7 @@ namespace TypeRunner
 		{
 			if(sceneObject)
 			{
+				_cinematic = FindObjectOfType<CinematicSystem>(true);
 				_stats = FindObjectOfType<PlayerStats>(true);
 				_player = FindObjectOfType<PlayerController>(true);
 				_levelManager = FindObjectOfType<LevelManager>(true);
@@ -36,13 +38,17 @@ namespace TypeRunner
 				if(_isUsed == false)
 				{
 					_isUsed = true;
-					_letterWriteSystem.DisableAfterFinish();
-					_player.MultiplyStikmans(_stats.SuccessfulMultiplier);
-					_player.SetIndependentMove(true);
-					_player.MakeFormationTriangle();
-					//_player.MakeFormationLine();
+					_cinematic.PlayMultiplyView(OnMultiplyAnim);
 				}
 			}
+		}
+		
+		private void OnMultiplyAnim()
+		{
+			_letterWriteSystem.DisableAfterFinish();
+			_player.MultiplyStikmans(_stats.SuccessfulMultiplier);
+			_player.SetIndependentMove(true);
+			_player.MakeFormationTriangle();
 		}
 	}
 }
