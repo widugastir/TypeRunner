@@ -60,6 +60,10 @@ namespace TypeRunner
 					_multiplierText.text = "X " + currentMultiplier.ToString("0.00");
 				}
 			}
+			else
+			{
+				yield return new WaitForSecondsRealtime(_numericAnimDuration);
+			}
 			_multiplierText.text = "X " + targetMultiplier.ToString("0.00");
 			_animator.SetTrigger("ZoomOUT");
 			_onMultiplyAnim?.Invoke();
