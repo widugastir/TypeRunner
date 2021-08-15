@@ -233,7 +233,7 @@ namespace TypeRunner
 		public void Disable()
 		{
 			_lettersPanel.gameObject.SetActive(false);
-			//_uiPanel.SetActive(false);
+			_uiPanel.SetActive(false);
 			Reset(true);
 		}
 		
@@ -248,7 +248,7 @@ namespace TypeRunner
 			_lastZone = null;
 			_requiredWordHolder.SetActive(false);
 			_lettersPanel.gameObject.SetActive(true);
-			//_uiPanel.SetActive(true);
+			_uiPanel.SetActive(true);
 			_boostObject.SetActive(false);
 			_lettersPanel.Reset(true);
 			//_stats._successfulWord = 0;
