@@ -154,14 +154,19 @@ namespace TypeRunner
 		
 		private IEnumerator MultiplyCoroutine(float multiply = 2f, float duration = 1f, System.Action onMultiplyEnd = null)
 		{
+			int iterations = 10;
 			int totalStickmans = Mathf.RoundToInt((float)_manikins.Count * multiply);
 			int stickmanToSplit = totalStickmans - _manikins.Count;
-			for(int i = 0; i < _manikins.Count; i++)
+			int stickmanPerSplit = stickmanToSplit / iterations;
+			for(int iter = 0; iter < iterations; iter++)
 			{
-				if(i >= stickmanToSplit)
-					break;
-				_manikins[i].Double();
-				yield return new WaitForSecondsRealtime(duration / (float)stickmanToSplit);
+				for(int i = 0; i < stickmanPerSplit; i++)
+				{
+					if(i >= stickmanToSplit)
+						break;
+					_manikins[i].Double();
+				}
+				yield return new WaitForSecondsRealtime(duration / iterations);
 			}
 			onMultiplyEnd?.Invoke();
 		}
