@@ -935,7 +935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &277840392
 Transform:
   m_ObjectHideFlags: 0
@@ -997,7 +997,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277840391}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ca0cf2594c3d2848aaf4f0f64dbeda7, type: 3}
   m_Name: 
@@ -1274,6 +1274,7 @@ Transform:
   - {fileID: 1000060972}
   - {fileID: 1712907940}
   - {fileID: 871075336}
+  - {fileID: 1227893307}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3542,6 +3543,7 @@ MonoBehaviour:
   _dailyGenerator: {fileID: 940102889}
   _stats: {fileID: 596332918}
   _levelParent: {fileID: 0}
+  _coinManager: {fileID: 596332917}
   _player: {fileID: 1390826032}
 --- !u!114 &940102887
 MonoBehaviour:
@@ -3607,6 +3609,7 @@ MonoBehaviour:
   _dailyOneEmptyPerPlatform: 3
   _basePlatform: {fileID: 2124171219}
   _player: {fileID: 0}
+  _coinManager: {fileID: 596332917}
   _prefabs: {fileID: 940102887}
   LetterPrefab: {fileID: -428576605387169155, guid: 9c6227fbc6e10144689a00242a683a4a, type: 3}
   ManikinPrefab: {fileID: 1968516755578011790, guid: 751b24e72e248704b99a1a0bfcf48f5a, type: 3}
@@ -4681,7 +4684,7 @@ GameObject:
   - component: {fileID: 1227893306}
   - component: {fileID: 1227893305}
   m_Layer: 5
-  m_Name: LineKiller
+  m_Name: HorizontLineKiller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4744,8 +4747,8 @@ RectTransform:
   m_Children:
   - {fileID: 1684848659}
   - {fileID: 469446684}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 455652475}
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5978,6 +5981,7 @@ MonoBehaviour:
   _multiplierText: {fileID: 662211705}
   _numericAnimDuration: 1
   _numericAnimStep: 0.05
+  _movement: {fileID: 871075338}
   _stats: {fileID: 596332918}
   _player: {fileID: 1390826032}
 --- !u!1 &1348260002
@@ -10076,9 +10080,9 @@ MonoBehaviour:
   _manikinAmount: 0
   _letterAmount: 0
   _respawnPoint: {fileID: 0}
-  _letterGenerators: []
   _requiredLetters: 
   ConnectionPoint: {fileID: 329849438}
+  _coins: []
   _letterSpawnPos: []
   _manikinSpawnPos: []
   _dailyStickmanMultiplier: 0.5

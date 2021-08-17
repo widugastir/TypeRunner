@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using SoundSteppe.RefSystem;
 
 namespace TypeRunner
 {
-	public class Platform : MonoBehaviour
+	public class Platform : MonoBehaviour, INeedReference
 	{
 		//------FIELDS
 		[Header("Settings")]
@@ -12,11 +13,11 @@ namespace TypeRunner
 		[SerializeField] private int _manikinAmount;
 		[SerializeField] private int _letterAmount;
 		[SerializeField] private RespawnPoint _respawnPoint;
-		[SerializeField] private CustomLetterGenerator[] _letterGenerators;
 		[SerializeField] private List<E_LetterType> _requiredLetters;
 		
 		[Header("References")]
 		public Transform ConnectionPoint;
+		[SerializeField] private Coin[] _coins;
 		[SerializeField] private List<Transform> _letterSpawnPos;
 		[SerializeField] private List<Transform> _manikinSpawnPos;
 		private MapGenerationLevels _generator;
@@ -24,7 +25,19 @@ namespace TypeRunner
 		private float _stickmanMultiplier = 1f;
 		
 		//------METHODS
-		public void Init(MapGenerationLevels generator, Transform parent, bool daily = false)
+		public void UpdateReferences(bool sceneObject)  
+		{
+			if(sceneObject == false)
+			{
+				_coins = GetComponentsInChildren<Coin>();
+			}
+		}
+		
+		public void Init(
+			MapGenerationLevels generator, 
+			Transform parent, 
+			CoinManager coinManager,
+			bool daily = false)
 		{
 			//if(_canBeMirrored)
 			//{
@@ -44,11 +57,12 @@ namespace TypeRunner
 				_stickmanMultiplier = 1f;
 				
 			_generator = generator;
+			
 			SpawnLetters();
 			SpawnMankins();
-			for(int i = 0; i < _letterGenerators.Length; i++)
+			for(int i = 0; i < _coins.Length; i++)
 			{
-				_letterGenerators[i].Generate(_generator);
+				_coins[i].Init(coinManager);
 			}
 		}
 		

@@ -11,7 +11,8 @@ namespace TypeRunner
 		public Transform _target;
 		public Transform _groupCenter;
 		[HideInInspector] public Vector3 _startPosition;
-		private float _targetStrafe = 0f;
+		private float _lastStrafe = 0f;
+		//private float _targetStrafe = 0f;
 		//private bool _upMove = false;
 		public bool CanMove { get; set; } = true;
 		
@@ -26,15 +27,17 @@ namespace TypeRunner
 		
 		public void SetStrafePos(float strafe)
 		{
-			_targetStrafe = strafe;
+			//_prevStrafe = _targetStrafe;
+			//_targetStrafe = strafe;
 			Vector3 newPosition = _groupCenter.transform.position;
-			newPosition.x = strafe * _strafeMultiplier;
+			newPosition.x = ( strafe) * _strafeMultiplier;
 			_groupCenter.transform.position = newPosition;
 		}
 		
-		public void EndStrafe()
+		public void EndStrafe(float strafe)
 		{
-			//print(123);
+			//print(_lastStrafe);
+			_lastStrafe = strafe;
 			//_basePos = _groupCenter.transform.position;
 		}
 		

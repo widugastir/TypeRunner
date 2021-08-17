@@ -28,9 +28,13 @@ namespace TypeRunner
 		private void Start()
 		{
 			_animator = _man._animator;
-			_player = FindObjectOfType<PlayerController>(true);
 			_baseHeight = _collider.height;
 			_basePosY = _collider.center.y;
+		}
+		
+		public void Init(PlayerController controller)
+		{
+			_player = controller;
 		}
 		
 		public void DoCommand(E_Command command)

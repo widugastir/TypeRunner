@@ -55,6 +55,7 @@ namespace TypeRunner
 		public void Init(MapGenerationLevels map)
 		{
 			_map = map;
+			Commands.Init(map._player);
 		}
 		
 		private void OnEnable()
