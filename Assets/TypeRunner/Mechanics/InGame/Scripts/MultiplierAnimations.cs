@@ -14,6 +14,7 @@ namespace TypeRunner
 		[SerializeField] private TMP_Text _multiplierText;
 		[SerializeField] private float _numericAnimDuration = 1f;
 		[SerializeField] private float _numericAnimStep = 0.1f;
+		[SerializeField, HideInInspector] private MapMovement _movement;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		
@@ -24,6 +25,7 @@ namespace TypeRunner
 		{
 			if(sceneObject == true)
 			{
+				_movement = FindObjectOfType<MapMovement>(true);
 				_stats = FindObjectOfType<PlayerStats>(true);
 				_player = FindObjectOfType<PlayerController>(true);
 			}
@@ -34,6 +36,7 @@ namespace TypeRunner
 			_onMultiplyAnim = onMultiplyAnim;
 			float startMultiplier = 1f;
 			_multiplierText.text = "X " + startMultiplier.ToString("0.00");
+			_movement.CanMove = false;
 			_animator.SetTrigger("ZoomIN");
 		}
 		
@@ -80,6 +83,7 @@ namespace TypeRunner
 		
 		private void MultiplyEnd()
 		{
+			_movement.CanMove = true;
 			_onMultiplyAnim?.Invoke();
 		}
 	}

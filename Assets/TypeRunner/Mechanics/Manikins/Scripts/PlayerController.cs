@@ -24,6 +24,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
 		[SerializeField, HideInInspector] private ControlPanel _controlPanel;
 		[SerializeField, HideInInspector] private CinemachineTargetGroup _cameraTargetGroup;
+		private float _startDragPos = 0f;
 		private bool _canMove = true;
 		private bool _controllable = true;
 		private int _manikinsCollected = 0;
@@ -247,6 +248,7 @@ namespace TypeRunner
 	    
 		public void OnStartDrag(float startPos)
 		{
+			_startDragPos = startPos;
 			_canMove = true;
 		}
 		
@@ -270,9 +272,9 @@ namespace TypeRunner
 			}
 		}
 		
-		public void OnEndDrag()
+		public void OnEndDrag(float delta)
 		{
-			_groupCenter.EndStrafe();
+			_groupCenter.EndStrafe(delta);
 			foreach(var manikin in _manikins)
 			{
 				manikin.Movement.SerDirection(_forward);
