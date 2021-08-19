@@ -123,6 +123,7 @@ namespace TypeRunner
 		
 		public void SetFinished()
 		{
+			transform.Rotate(new Vector3(0f, 180f, 0f));
 			_animator.SetTrigger("Dance");
 			IsFinished = true;
 		}
