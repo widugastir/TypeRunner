@@ -16,12 +16,14 @@ namespace TypeRunner
 		[SerializeField] private bool _onlySuccessful = false;
 		[SerializeField] public bool _blockOnWrong = true;
 		[SerializeField] public bool _disableStrafe = false;
+		[SerializeField] public bool UseEvents = true;
 		[SerializeField] private ManikinCommands.E_Command _command;
 		[ShowIf("_isEnterZone"), SerializeField] private E_LetterType[] _requiredLettersWrite;
 		private bool _isUsed = false;
 		[SerializeField] private float _resetTimer = 0.8f;
 		
 		public UnityEvent _onSuccessful;
+		public UnityEvent _onFailure;
 		
 		public static event System.Action<ObstacleZone, E_LetterType[]> OnPlayerEntered;
 		public static event System.Action<ObstacleZone> EnterZone;
@@ -63,6 +65,10 @@ namespace TypeRunner
 				if(successful)
 				{
 					_onSuccessful?.Invoke();
+				}
+				else
+				{
+					_onFailure?.Invoke();
 				}
 			}
 		}

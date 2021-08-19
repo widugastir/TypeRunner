@@ -96,6 +96,7 @@ namespace TypeRunner
 			_layoutGroup.enabled = false;
 			_requiredWordHolder.gameObject.SetActive(true);
 			_boostObject.SetActive(true);
+			
 			string req_word = "";
 			foreach(var ch in word)
 			{
@@ -120,6 +121,15 @@ namespace TypeRunner
 			_stats._successfulWord += (successful ? +1 : -99999);
 			if(_stats._successfulWord < 0)
 				_stats._successfulWord = 0;
+			
+			if(zone != null && zone.UseEvents && successful == false)
+			{
+				zone._onFailure?.Invoke();
+			}
+			else if(_lastZone != null && _lastZone.UseEvents && successful == false)
+			{
+				_lastZone._onFailure?.Invoke();
+			}
 			
 			_boost.StopTimer();
 			if(successful)
