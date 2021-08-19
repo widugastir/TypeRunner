@@ -7,9 +7,9 @@ namespace TypeRunner
 		[SerializeField] private int _amount = 1;
 		private CoinManager _coinManager;
 		
-		public void Start()
+		public void Init(CoinManager coinManager)
 		{
-			_coinManager = FindObjectOfType<CoinManager>();
+			_coinManager = coinManager;
 		}
 		
 		private void OnTriggerEnter(Collider other)

@@ -16,7 +16,7 @@ namespace TypeRunner
 		[SerializeField] private float _finishDelay = 2f;
 		[SerializeField, Layer] private string _stickmanMask;
 		[SerializeField, Layer] private string _ignoreSameMask;
-		[SerializeField] private List<Mankin> _manikins;
+		[SerializeField] public List<Mankin> _manikins;
 		[SerializeField, HideInInspector] public MapMovement _mapMovement;
 		[SerializeField, HideInInspector] private GroupCenter _groupCenter;
 		[SerializeField, HideInInspector] private MapGenerationLevels _generator;
@@ -24,6 +24,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
 		[SerializeField, HideInInspector] private ControlPanel _controlPanel;
 		[SerializeField, HideInInspector] private CinemachineTargetGroup _cameraTargetGroup;
+		private float _startDragPos = 0f;
 		private bool _canMove = true;
 		private bool _controllable = true;
 		private int _manikinsCollected = 0;
@@ -123,11 +124,14 @@ namespace TypeRunner
 				pos = transform.position;
 				pos += Vector3.forward * Random.Range(-2f, 2f) + Vector3.right * Random.Range(-2f, 2f);
 				var man = _generator.SpawnManikin(pos);
-				man.SetIdle(true);
-				man.SetOwnerTo(false);
-				if(makeImmortal)
+				if(man != null)
 				{
-					man.SetImmortal(true, immortalTime, true);
+					man.SetIdle(true);
+					man.SetOwnerTo(false);
+					if(makeImmortal)
+					{
+						man.SetImmortal(true, immortalTime, true);
+					}
 				}
 			}
 		}
@@ -144,22 +148,28 @@ namespace TypeRunner
 			}
 		}
 		
-		public void MultiplyStikmans(float multiply = 2f, float duration = 1f)
+		public void MultiplyStikmans(float multiply = 2f, float duration = 1f, System.Action onMultiplyEnd = null)
 		{
-			StartCoroutine(MultiplyCoroutine(multiply, duration));
+			StartCoroutine(MultiplyCoroutine(multiply, duration, onMultiplyEnd));
 		}
 		
-		private IEnumerator MultiplyCoroutine(float multiply = 2f, float duration = 1f)
+		private IEnumerator MultiplyCoroutine(float multiply = 2f, float duration = 1f, System.Action onMultiplyEnd = null)
 		{
+			int iterations = 10;
 			int totalStickmans = Mathf.RoundToInt((float)_manikins.Count * multiply);
 			int stickmanToSplit = totalStickmans - _manikins.Count;
-			for(int i = 0; i < _manikins.Count; i++)
+			int stickmanPerSplit = stickmanToSplit / iterations;
+			for(int iter = 0; iter < iterations; iter++)
 			{
-				if(i >= stickmanToSplit)
-					break;
-				_manikins[i].Double();
-				yield return new WaitForSecondsRealtime(duration / (float)stickmanToSplit);
+				for(int i = 0; i < stickmanPerSplit; i++)
+				{
+					if(i >= stickmanToSplit)
+						break;
+					_manikins[i].Double();
+				}
+				yield return new WaitForSecondsRealtime(duration / iterations);
 			}
+			onMultiplyEnd?.Invoke();
 		}
 		
 		public void SetImmortal(float duration, bool affectZones)
@@ -238,6 +248,7 @@ namespace TypeRunner
 	    
 		public void OnStartDrag(float startPos)
 		{
+			_startDragPos = startPos;
 			_canMove = true;
 		}
 		
@@ -261,9 +272,9 @@ namespace TypeRunner
 			}
 		}
 		
-		public void OnEndDrag()
+		public void OnEndDrag(float delta)
 		{
-			_groupCenter.EndStrafe();
+			_groupCenter.EndStrafe(delta);
 			foreach(var manikin in _manikins)
 			{
 				manikin.Movement.SerDirection(_forward);
@@ -477,12 +488,13 @@ namespace TypeRunner
 			float centerZ = _groupCenter.transform.position.z;
 			float rankStepX = 0.5f;
 			float centerRankX = 0f;
+			int erasedRank = 0;
 			
 			SetStickmanPhysics(false);
 			List<Mankin> mansInRank = new List<Mankin>();
-			for(int i = rank; i >= 0; i--)
+			for(int i = rank; i > 0; i--)
 			{
-				yield return new WaitForSecondsRealtime(0.1f);
+				yield return new WaitForSecondsRealtime(0.05f);
 				mansInRank.Clear();
 				mansInRank.AddRange(_manikins.Where(m => (m.Rank == i)));
 				
@@ -493,7 +505,8 @@ namespace TypeRunner
 					{
 						man.Kill(true);
 					}
-					rank--;
+					//rank--;
+					erasedRank++;
 					continue;
 				}
 				
@@ -505,7 +518,7 @@ namespace TypeRunner
 					Vector3 newPos = man.transform.position;
 					newPos.x = x;
 					newPos.z = centerZ;
-					newPos.y += ((rank - i) * 2f);
+					newPos.y += ((rank - i - erasedRank) * 2f);
 					man.transform.position = newPos;
 				}
 			}
@@ -513,7 +526,7 @@ namespace TypeRunner
 			// Invert ranks
 			for(int i = 0; i < _manikins.Count; i++)
 			{
-				_manikins[i].Rank = rank - _manikins[i].Rank + 1;
+				_manikins[i].Rank = rank - _manikins[i].Rank + 1 - erasedRank;
 			}
 		}
 		

@@ -11,6 +11,7 @@ namespace TypeRunner
 		[SerializeField] private int _dailyOneEmptyPerPlatform = 3;
 		[SerializeField] private Platform _basePlatform;
 		[SerializeField, HideInInspector] private PlayerController _player;
+		[SerializeField] private CoinManager _coinManager;
 		[SerializeField] private PlatformsHolder _prefabs;
 		[SerializeField] private LetterPickup LetterPrefab;
 		[SerializeField] private Mankin ManikinPrefab;
@@ -55,7 +56,7 @@ namespace TypeRunner
 				return;
 			
 			Platform newPlatform = Instantiate(prefab, _lastPlatform.ConnectionPoint.position, Quaternion.identity, _baseGenerator._levelParent);
-			newPlatform.Init(_baseGenerator, _baseGenerator._levelParent);
+			newPlatform.Init(_baseGenerator, _baseGenerator._levelParent, _coinManager);
 			_lastPlatform = newPlatform;
 			_mapPlatforms.Add(newPlatform);
 		}
@@ -76,7 +77,7 @@ namespace TypeRunner
 				prefab = _prefabs.GetObstaclePlatform();
 			
 			Platform newPlatform = Instantiate(prefab, _lastPlatform.ConnectionPoint.position, Quaternion.identity);
-			newPlatform.Init(_baseGenerator, _baseGenerator._levelParent, daily);
+			newPlatform.Init(_baseGenerator, _baseGenerator._levelParent, _coinManager, daily);
 			_lastPlatform = newPlatform;
 			_mapPlatforms.Add(newPlatform);
 			newPlatform.transform.SetParent(_baseGenerator._levelParent);

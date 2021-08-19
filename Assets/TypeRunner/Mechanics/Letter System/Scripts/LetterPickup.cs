@@ -5,6 +5,7 @@ namespace TypeRunner
 	public class LetterPickup : MonoBehaviour
 	{
 		//------FIELDS
+		public E_LetterType letterType;
 		[HideInInspector] public E_LetterType LetterType { get; private set; }
 		[SerializeField] private Sprite[] _sprites;
 		[SerializeField] private float _resetTimer = 0.5f;
@@ -16,11 +17,13 @@ namespace TypeRunner
 			int length = System.Enum.GetValues(typeof(E_LetterType)).Length;
 			int rand = Random.Range(0, length);
 			LetterType = (E_LetterType)rand;
+			letterType = LetterType;
 		}
 		
 		public void Init(E_LetterType type)
 		{
 			LetterType = type;
+			letterType = LetterType;
 		}
 		
 		private void OnTriggerEnter(Collider other)

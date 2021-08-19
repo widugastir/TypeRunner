@@ -74,6 +74,7 @@ namespace TypeRunner
 		{
 			transform.position = _basePosition;
 			_lastSavePoint = _basePosition;
+			CanMove = true;
 			ResetSpeed();
 		}
 	}

@@ -7,17 +7,17 @@ namespace TypeRunner
 		private MapGenerationLevels _generator;
 		[SerializeField] private Platform[] _platforms;
 		
-		public void Init(MapGenerationLevels generator)
+		public void Init(MapGenerationLevels generator, CoinManager coinManager)
 		{
 			_generator = generator;
-			InitPlatforms();
+			InitPlatforms(coinManager);
 		}
 		
-		private void InitPlatforms()
+		private void InitPlatforms(CoinManager coinManager)
 		{
 			foreach(var p in _platforms)
 			{
-				p.Init(_generator, transform, false);
+				p.Init(_generator, transform, coinManager, false);
 			}
 		}
 	}

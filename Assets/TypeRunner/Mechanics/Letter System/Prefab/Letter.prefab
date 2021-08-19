@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf3b614ebde56b46aec7990790a260b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  letterType: 0
   _sprites:
   - {fileID: -425995913362149430, guid: addab0a648dcd7641b58ffe4adbb2389, type: 3}
   - {fileID: 2304412477376101311, guid: addab0a648dcd7641b58ffe4adbb2389, type: 3}
@@ -59,7 +60,7 @@ MonoBehaviour:
   - {fileID: 1108870331674003538, guid: addab0a648dcd7641b58ffe4adbb2389, type: 3}
   - {fileID: 5059402756318148790, guid: addab0a648dcd7641b58ffe4adbb2389, type: 3}
   - {fileID: -2704611688130657760, guid: addab0a648dcd7641b58ffe4adbb2389, type: 3}
-  _renderer: {fileID: 0}
+  _resetTimer: 1.5
 --- !u!65 &8238493151157192714
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ namespace TypeRunner
 		[SerializeField] private TMP_Text _multiplierText;
 		[SerializeField] private float _numericAnimDuration = 1f;
 		[SerializeField] private float _numericAnimStep = 0.1f;
+		[SerializeField, HideInInspector] private MapMovement _movement;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private PlayerController _player;
 		
@@ -24,6 +25,7 @@ namespace TypeRunner
 		{
 			if(sceneObject == true)
 			{
+				_movement = FindObjectOfType<MapMovement>(true);
 				_stats = FindObjectOfType<PlayerStats>(true);
 				_player = FindObjectOfType<PlayerController>(true);
 			}
@@ -34,6 +36,7 @@ namespace TypeRunner
 			_onMultiplyAnim = onMultiplyAnim;
 			float startMultiplier = 1f;
 			_multiplierText.text = "X " + startMultiplier.ToString("0.00");
+			_movement.CanMove = false;
 			_animator.SetTrigger("ZoomIN");
 		}
 		
@@ -50,18 +53,37 @@ namespace TypeRunner
 			if(targetMultiplier != startMultiplier)
 			{
 				_multiplierText.text = "X " + startMultiplier.ToString("0.00");
-				float timePerStep = _numericAnimDuration / ((targetMultiplier - startMultiplier) / _numericAnimStep);
-				//print(timePerStep);
-				_player.MultiplyStikmans(_stats.SuccessfulMultiplier, _numericAnimDuration);
+				float different = targetMultiplier - startMultiplier;
+				//float timePerStep = _numericAnimDuration * _numericAnimStep / different;
+				
+				float stepsAmount = 15f;
+				float _animDelay = _numericAnimDuration / stepsAmount;
+				float _multiplStep = different / stepsAmount;
+				
+				//print(timePerStep + "   " );
+				
+				
+				_player.MultiplyStikmans(_stats.SuccessfulMultiplier, _numericAnimDuration, MultiplyEnd);
 				while(currentMultiplier < targetMultiplier)
 				{
-					yield return new WaitForSecondsRealtime(timePerStep);
-					currentMultiplier += _numericAnimStep;
+					yield return new WaitForSecondsRealtime(_animDelay);
+					currentMultiplier += _multiplStep;
 					_multiplierText.text = "X " + currentMultiplier.ToString("0.00");
 				}
 			}
+			else
+			{
+				yield return new WaitForSecondsRealtime(_numericAnimDuration);
+				MultiplyEnd();
+			}
+			
 			_multiplierText.text = "X " + targetMultiplier.ToString("0.00");
 			_animator.SetTrigger("ZoomOUT");
+		}
+		
+		private void MultiplyEnd()
+		{
+			_movement.CanMove = true;
 			_onMultiplyAnim?.Invoke();
 		}
 	}
