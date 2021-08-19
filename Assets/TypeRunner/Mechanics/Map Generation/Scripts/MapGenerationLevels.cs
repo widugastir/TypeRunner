@@ -10,7 +10,7 @@ namespace TypeRunner
 		//------FIELDS
 		[SerializeField] private Transform _map;
 		[SerializeField] private Platform _firstPlatform;
-		[SerializeField] private GameObject _ragdollPrefab;
+		[SerializeField] private Ragdoll _ragdollPrefab;
 		[SerializeField] private LetterPickup LetterPrefab;
 		[SerializeField] private Mankin ManikinPrefab;
 		[SerializeField] private Level[] _levels;
@@ -96,12 +96,16 @@ namespace TypeRunner
 			return letter;
 		}
 		
-		public void SpawnRagdoll(Vector3 position)
+		public void SpawnRagdoll(Vector3 position, Vector3 force)
 		{
 			var ragdoll = Instantiate(_ragdollPrefab, position, Quaternion.identity);
 			ragdoll.transform.SetParent(_levelParent);
+			//if(force.magnitude > 0f)
+			//{
+			//	ragdoll.AddForce(force, ForceMode.VelocityChange);
+			//}
 			Destroy(ragdoll, 7f);
-			_ragdolls.Add(ragdoll);
+			_ragdolls.Add(ragdoll.gameObject);
 		}
 		
 		public void DestroyRagdolls()

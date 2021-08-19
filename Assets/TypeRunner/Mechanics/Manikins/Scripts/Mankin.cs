@@ -196,7 +196,7 @@ namespace TypeRunner
 					p.transform.SetParent(null);
 					p.Play();
 				}
-				_map.SpawnRagdoll(transform.position);
+				_map.SpawnRagdoll(transform.position, new Vector3(0f, 5000f, 0f));
 			}
 			Destroy(gameObject);
 		}
