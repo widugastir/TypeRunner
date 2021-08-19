@@ -96,10 +96,14 @@ MonoBehaviour:
   _onlySuccessful: 0
   _blockOnWrong: 1
   _disableStrafe: 0
+  UseEvents: 1
   _command: 3
   _requiredLettersWrite: 
   _resetTimer: 0.8
   _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
+  _onFailure:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &539198288190885193
@@ -818,10 +822,14 @@ MonoBehaviour:
   _onlySuccessful: 0
   _blockOnWrong: 1
   _disableStrafe: 0
+  UseEvents: 1
   _command: 1
   _requiredLettersWrite: 
   _resetTimer: 0.8
   _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
+  _onFailure:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6453304909844094930
@@ -1305,10 +1313,14 @@ MonoBehaviour:
   _onlySuccessful: 0
   _blockOnWrong: 1
   _disableStrafe: 0
+  UseEvents: 1
   _command: 0
   _requiredLettersWrite: 090000000a0000000b0000000c0000000d000000
   _resetTimer: 0.8
   _onSuccessful:
+    m_PersistentCalls:
+      m_Calls: []
+  _onFailure:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &8996952379110194797

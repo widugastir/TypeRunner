@@ -154,6 +154,11 @@ namespace TypeRunner
 			_lettersPanel.DisableSelected();
 		}
 		
+		public void StopBoostTimer()
+		{
+			_boost.Disable();
+		}
+		
 		public void EnableOutline()
 		{
 			_lettersPanel.EnableOutline();

@@ -55,11 +55,13 @@ namespace TypeRunner
 		{
 			if(_coins.TrySpend(_stats.ReviveCost))
 			{
+				Time.timeScale = 1f;
 				_stats.ReviveCount++;
 				_groupCenter.Reset();
 				_player.ResetMansParent();
 				_startet.BeginPlay();
 				_map.MoveToRespawnPoint();
+				_map.CanMove = true;
 				_generator.DestroyRagdolls();
 			}
 		}

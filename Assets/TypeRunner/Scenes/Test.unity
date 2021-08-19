@@ -1218,8 +1218,10 @@ MonoBehaviour:
   _disableOnFinish:
   - {fileID: 1382852168}
   _gameCanvas: {fileID: 1382852168}
+  _endPanelDelay: 1
   _baseCoinsPerVictory: 20
   _bonusSkinPerLevel: 5
+  _mapMovement: {fileID: 871075338}
   _map: {fileID: 940102886}
   _stats: {fileID: 596332918}
   _coins: {fileID: 596332917}
@@ -2728,6 +2730,10 @@ PrefabInstance:
       propertyPath: _stats
       value: 
       objectReference: {fileID: 596332918}
+    - target: {fileID: 6122448087928085126, guid: f372f61d75471a64bb3f939f3c2ea76e, type: 3}
+      propertyPath: m_Color.a
+      value: 0.6392157
+      objectReference: {fileID: 0}
     - target: {fileID: 6122448087928085126, guid: f372f61d75471a64bb3f939f3c2ea76e, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -10285,7 +10291,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: +3600
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -10446,7 +10452,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'EARNED:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -10953,7 +10959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3725525, g: 0.52601033, b: 0.8679245, a: 1}
+  m_Color: {r: 0.3725525, g: 0.52601033, b: 0.8679245, a: 0.6313726}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11011,7 +11017,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lose!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -11145,7 +11151,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: RESTART
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

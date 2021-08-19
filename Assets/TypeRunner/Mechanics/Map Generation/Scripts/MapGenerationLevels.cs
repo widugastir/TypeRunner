@@ -100,7 +100,7 @@ namespace TypeRunner
 		{
 			var ragdoll = Instantiate(_ragdollPrefab, position, Quaternion.identity);
 			ragdoll.transform.SetParent(_levelParent);
-			Destroy(ragdoll, 2f);
+			Destroy(ragdoll, 7f);
 			_ragdolls.Add(ragdoll);
 		}
 		

@@ -1,4 +1,5 @@
 ﻿using SoundSteppe.RefSystem;
+using System.Collections;
 using UnityEngine;
 
 namespace TypeRunner
@@ -35,8 +36,14 @@ namespace TypeRunner
 			}
 		}
 		
-		public void Enable(bool victory, bool enableSkinProgress)
+		public void Enable(bool victory, bool enableSkinProgress, float delay = 0f)
 		{
+			StartCoroutine(LateEnable(victory, enableSkinProgress, delay));
+		}
+		
+		private IEnumerator LateEnable(bool victory, bool enableSkinProgress, float delay = 0f)
+		{
+			yield return new WaitForSecondsRealtime(delay);
 			if(victory)
 			{
 				_buttonContinue.SetActive(true);

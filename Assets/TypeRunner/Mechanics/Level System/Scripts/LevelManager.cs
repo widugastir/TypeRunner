@@ -10,8 +10,10 @@ namespace TypeRunner
 		//------FIELDS
 		[SerializeField] private GameObject[] _disableOnFinish;
 		[SerializeField] private GameObject _gameCanvas;
+		[SerializeField] private float _endPanelDelay = 1f;
 		[SerializeField] private int _baseCoinsPerVictory = 10;
 		[SerializeField] private int _bonusSkinPerLevel = 5;
+		[SerializeField, HideInInspector] private MapMovement _mapMovement;
 		[SerializeField, HideInInspector] private MapGenerationLevels _map;
 		[SerializeField, HideInInspector] private PlayerStats _stats;
 		[SerializeField, HideInInspector] private CoinManager _coins;
@@ -33,6 +35,7 @@ namespace TypeRunner
 		{
 			if(sceneObject == true)
 			{
+				_mapMovement = FindObjectOfType<MapMovement>(true);
 				_endPanel = FindObjectOfType<GameEndPanel>(true);
 				_shop = FindObjectOfType<Shop>(true);
 				_stats = FindObjectOfType<PlayerStats>(true);
@@ -88,8 +91,9 @@ namespace TypeRunner
 		
 		public void PreFinishLevel(bool victory, int manikinsCollected, float coinsMultiplier = 1f)
 		{
-			
-			Time.timeScale = 0f;
+			Time.timeScale = 0.5f;
+			_letterSystem.StopBoostTimer();
+			_mapMovement.CanMove = false;
 			
 			_isVictory = victory;
 			if(victory)
@@ -119,14 +123,14 @@ namespace TypeRunner
 				
 				
 				if(_isDailyLevel)
-					_endPanel.Enable(victory, false);
+					_endPanel.Enable(victory, false, _endPanelDelay);
 				else
-					_endPanel.Enable(victory, true);
+					_endPanel.Enable(victory, true, _endPanelDelay);
 					
 			}
 			else
 			{
-				_endPanel.Enable(victory, false);
+				_endPanel.Enable(victory, false, _endPanelDelay);
 			}
 			_gameCanvas.SetActive(false);
 			

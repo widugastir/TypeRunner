@@ -161,6 +161,11 @@ namespace TypeRunner
 			}
 		}
 		
+		public void Disable()
+		{
+			_timer = 0f;
+		}
+		
 		public void StopTimer()
 		{
 			if(_timer <= 0f)
