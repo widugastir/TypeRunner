@@ -64,7 +64,6 @@ namespace TypeRunner
 			if(lastUpdate == default)
 			{
 				_stats.LastDailyPlayersUpdate = DateTime.Now;
-				print(_stats.LastDailyPlayersUpdate);
 			}
 		}
 		

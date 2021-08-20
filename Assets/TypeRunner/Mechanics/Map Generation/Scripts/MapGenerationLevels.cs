@@ -58,19 +58,20 @@ namespace TypeRunner
 			ClearMap();
 			if(_stats._currentLevelIndex >= _levels.Length)
 				_stats._currentLevelIndex = 0;
-			if(_stats._currentLevelIndex < _tutorialLevels.Length)
+			if(_stats._currentLevel < _tutorialLevels.Length + 1)
 			{
-				_level = Instantiate(_tutorialLevels[_stats._currentLevelIndex], _firstPlatform.ConnectionPoint.position, Quaternion.identity);
+				print(_stats._currentLevel - 1);
+				_level = Instantiate(_tutorialLevels[_stats._currentLevel - 1], _firstPlatform.ConnectionPoint.position, Quaternion.identity);
 			}
 			else
 			{
-				int index = _stats._currentLevelIndex - _tutorialLevels.Length;
+				int index = _stats._currentLevelIndex;
 				_level = Instantiate(_levels[index], _firstPlatform.ConnectionPoint.position, Quaternion.identity);
+				_stats._currentLevelIndex++;
 			}
 			_level.Init(this, _coinManager);
 			_level.transform.SetParent(_levelParent);
 			
-			_stats._currentLevelIndex++;
 		}
 		
 		public void ClearMap()
