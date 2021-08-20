@@ -139,6 +139,15 @@ namespace TypeRunner
 			}
 		}
 		
+		public bool NeedMultiply(float multiply)
+		{
+			int totalStickmans = Mathf.RoundToInt((float)_manikins.Count * multiply);
+			int stickmanToSplit = totalStickmans - _manikins.Count;
+			if(stickmanToSplit > 0)
+				return true;
+			return false;
+		}
+		
 		public void MultiplyStikmans(float multiply = 2f, float duration = 1f, System.Action onMultiplyEnd = null)
 		{
 			StartCoroutine(MultiplyCoroutine(multiply, duration, onMultiplyEnd));

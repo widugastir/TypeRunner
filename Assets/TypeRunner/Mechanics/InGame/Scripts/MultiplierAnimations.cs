@@ -50,30 +50,37 @@ namespace TypeRunner
 			float startMultiplier = 1f;
 			float currentMultiplier = startMultiplier;
 			float targetMultiplier = _stats.SuccessfulMultiplier;
-			if(targetMultiplier != startMultiplier)
+			if(_player.NeedMultiply(_stats.SuccessfulMultiplier))
 			{
-				_multiplierText.text = "X " + startMultiplier.ToString("0.00");
-				float different = targetMultiplier - startMultiplier;
-				//float timePerStep = _numericAnimDuration * _numericAnimStep / different;
-				
-				float stepsAmount = 15f;
-				float _animDelay = _numericAnimDuration / stepsAmount;
-				float _multiplStep = different / stepsAmount;
-				
-				//print(timePerStep + "   " );
-				
-				
-				_player.MultiplyStikmans(_stats.SuccessfulMultiplier, _numericAnimDuration, MultiplyEnd);
-				while(currentMultiplier < targetMultiplier)
+				if(targetMultiplier != startMultiplier)
 				{
-					yield return new WaitForSecondsRealtime(_animDelay);
-					currentMultiplier += _multiplStep;
-					_multiplierText.text = "X " + currentMultiplier.ToString("0.00");
+					_multiplierText.text = "X " + startMultiplier.ToString("0.00");
+					float different = targetMultiplier - startMultiplier;
+					//float timePerStep = _numericAnimDuration * _numericAnimStep / different;
+					
+					float stepsAmount = 15f;
+					float _animDelay = _numericAnimDuration / stepsAmount;
+					float _multiplStep = different / stepsAmount;
+					
+					//print(timePerStep + "   " );
+					
+					
+					_player.MultiplyStikmans(_stats.SuccessfulMultiplier, _numericAnimDuration, MultiplyEnd);
+					while(currentMultiplier < targetMultiplier)
+					{
+						yield return new WaitForSecondsRealtime(_animDelay);
+						currentMultiplier += _multiplStep;
+						_multiplierText.text = "X " + currentMultiplier.ToString("0.00");
+					}
+				}
+				else
+				{
+					yield return new WaitForSecondsRealtime(_numericAnimDuration);
+					MultiplyEnd();
 				}
 			}
 			else
 			{
-				yield return new WaitForSecondsRealtime(_numericAnimDuration);
 				MultiplyEnd();
 			}
 			
