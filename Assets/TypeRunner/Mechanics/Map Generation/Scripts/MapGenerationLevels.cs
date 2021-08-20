@@ -58,9 +58,9 @@ namespace TypeRunner
 			ClearMap();
 			if(_stats._currentLevelIndex >= _levels.Length)
 				_stats._currentLevelIndex = 0;
+			
 			if(_stats._currentLevel < _tutorialLevels.Length + 1)
 			{
-				print(_stats._currentLevel - 1);
 				_level = Instantiate(_tutorialLevels[_stats._currentLevel - 1], _firstPlatform.ConnectionPoint.position, Quaternion.identity);
 			}
 			else
