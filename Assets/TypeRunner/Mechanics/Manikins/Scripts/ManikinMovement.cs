@@ -128,8 +128,8 @@ namespace TypeRunner
 		
 		public void Jump(float height, float time)
 		{
-			_rigi.useGravity = false;
-			transform.DOLocalJump(transform.position, height, 1, time)
+			_rigi.useGravity = false; 
+			transform.DOLocalJump(transform.localPosition, height, 1, time)
 				.SetEase(Ease.Linear)
 				.OnComplete(OnJumpEnd);
 		}

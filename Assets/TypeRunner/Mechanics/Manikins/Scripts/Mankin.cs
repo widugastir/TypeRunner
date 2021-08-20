@@ -147,7 +147,7 @@ namespace TypeRunner
 			gameObject.layer = LayerMask.NameToLayer(layer);
 			Movement.MoveToGroupCenter = false;
 			transform.SetParent(_map._levelParent);
-			
+			_immortal = false;
 			if(moveForward)
 			{
 				Movement.SetCanMove2(true);
