@@ -87,6 +87,7 @@ namespace TypeRunner
 		[Saveable] public float _dailyProcentage = 0f;
 		[Saveable] public float _skinBonusProgress = 0f;
 		[Saveable] public bool _freeColorRoulette = true;
+		[Saveable] public bool _tutorialAvailable = true;
 		[Saveable] public int _bonusSkinGained = 0;
 		[Saveable] public int _currentLevelIndex = 0;
 
@@ -96,7 +97,7 @@ namespace TypeRunner
 			get 
 			{
 				//return (float)System.Math.Round(1f + 0.3f * (float)(_successfulWord - 1), 1);
-				return (float)System.Math.Round((double)Mathf.Pow(1.2f, _successfulWord), 1);
+				return (float)System.Math.Round((double)Mathf.Pow(1.4f, _successfulWord), 1);
 				//return (float)System.Math.Round((double)_successfulWord * 0.5D, 2);
 			}
 		}

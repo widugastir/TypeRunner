@@ -62,7 +62,7 @@ namespace TypeRunner
 			SpawnMankins();
 			for(int i = 0; i < _coins.Length; i++)
 			{
-				_coins[i].Init(coinManager);
+				_coins[i].Init(coinManager, generator);
 			}
 		}
 		

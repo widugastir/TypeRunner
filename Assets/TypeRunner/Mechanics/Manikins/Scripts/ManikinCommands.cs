@@ -163,7 +163,7 @@ namespace TypeRunner
 		
 		private void Throw()
 		{
-			_player.IsMovementEnabled = false;
+			//_player.IsMovementEnabled = false;
 			_animator.SetTrigger("Throw");
 			_man._skinChanger._current._events.OnThrow += OnThrow;
 			_man._skinChanger._current._events.OnThrow += OnAnimationEnd;

@@ -93,8 +93,11 @@ namespace TypeRunner
 		{
 			if(CanMoveForward == false)
 				return;
-			_rigi.AddForce(Vector3.forward * _forwardSpeed, ForceMode.Acceleration);
+			_rigi.AddForce(Vector3.forward * _forwardSpeed, ForceMode.VelocityChange);
+		}
 		
+		private void Update()
+		{
 		}
 		
 		private void LateUpdate()

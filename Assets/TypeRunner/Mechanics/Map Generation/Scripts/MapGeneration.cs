@@ -11,7 +11,7 @@ namespace TypeRunner
 		//[SerializeField] private int _platformAmount = 10;
 		//[SerializeField] private int _dailyPlatformAmount = 30;
 		//[SerializeField] private int _dailyOneEmptyPerPlatform = 3;
-		[SerializeField] private Transform _mapParent;
+		[SerializeField] public Transform _mapParent;
 		[SerializeField] private Platform _basePlatform;
 		[SerializeField] private GameObject _ragdollPrefab;
 		[SerializeField, HideInInspector] private Platform _lastPlatform;

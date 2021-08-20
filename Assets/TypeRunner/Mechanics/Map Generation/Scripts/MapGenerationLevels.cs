@@ -14,6 +14,7 @@ namespace TypeRunner
 		[SerializeField] private LetterPickup LetterPrefab;
 		[SerializeField] private Mankin ManikinPrefab;
 		[SerializeField] private Level[] _levels;
+		[SerializeField] private Level[] _tutorialLevels;
 		[SerializeField] private DailyGenerator _dailyGenerator;
 		[SerializeField] private PlayerStats _stats;
 		[HideInInspector] public Transform _levelParent;
@@ -57,7 +58,15 @@ namespace TypeRunner
 			ClearMap();
 			if(_stats._currentLevelIndex >= _levels.Length)
 				_stats._currentLevelIndex = 0;
-			_level = Instantiate(_levels[_stats._currentLevelIndex], _firstPlatform.ConnectionPoint.position, Quaternion.identity);
+			if(_stats._currentLevelIndex < _tutorialLevels.Length)
+			{
+				_level = Instantiate(_tutorialLevels[_stats._currentLevelIndex], _firstPlatform.ConnectionPoint.position, Quaternion.identity);
+			}
+			else
+			{
+				int index = _stats._currentLevelIndex - _tutorialLevels.Length;
+				_level = Instantiate(_levels[index], _firstPlatform.ConnectionPoint.position, Quaternion.identity);
+			}
 			_level.Init(this, _coinManager);
 			_level.transform.SetParent(_levelParent);
 			
