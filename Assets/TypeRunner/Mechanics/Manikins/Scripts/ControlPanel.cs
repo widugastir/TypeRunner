@@ -35,7 +35,9 @@ namespace TypeRunner
 		public void OnDrag(PointerEventData eventData)
 		{
 			_prevPos = _deltaMove;
-			_deltaMove = eventData.position.x / Screen.width - 0.5f;
+			_deltaMove = (eventData.position.x / Screen.width - 0.5f) - _beginPos;
+			
+			
 			_player.OnProcessDrag(_prevPos, _deltaMove);
 			OnProcessDrag?.Invoke(_deltaMove);
 		}

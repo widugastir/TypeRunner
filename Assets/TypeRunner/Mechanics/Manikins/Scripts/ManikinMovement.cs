@@ -16,7 +16,6 @@ namespace TypeRunner
 		[SerializeField] private float _flyHeight = 3f;
 		[SerializeField] private float _flyDuration = 3f;
 		[SerializeField] private float _climbHeight = 3f;
-		//private bool _isJumped = false;
 		private bool _canMove = true;
 		public bool IsIndependetMovement { get; set; } = false;
 		public bool MoveToGroupCenter { get; set; } = true;
@@ -26,8 +25,6 @@ namespace TypeRunner
 		private TweenCallback _hoverEndCallback;
 		private Vector3 _targetDirection;
 		private readonly Vector3 _empty = Vector3.zero;
-		
-		//public static event System.Action<Vector3> OnBorderCollide;
 		
 		//------METHODS
 		public void UpdateReferences(bool sceneObject)
@@ -69,16 +66,7 @@ namespace TypeRunner
 		
 		private void StrafeToCenter()
 		{
-			//if(IsIndependetMovement || _groupCenter == null || MoveToGroupCenter == false)
-			//	return;
-				
-			//Vector3 targetPos = _groupCenter.position;
-			//targetPos.y = transform.position.y;
-			//targetPos.z = transform.position.z;
 			
-			//Vector3 direction = (targetPos - transform.position) 
-			//	* 4f * Time.deltaTime;
-			//transform.position += direction;
 		}
 		
 		private void MoveToPoint()
@@ -96,21 +84,16 @@ namespace TypeRunner
 			_rigi.AddForce(Vector3.forward * _forwardSpeed, ForceMode.VelocityChange);
 		}
 		
-		private void Update()
-		{
-		}
-		
-		private void LateUpdate()
-		{
-			//StrafeToCenter();
-		}
-		
 		private void FixedUpdate()
 		{
 			MoveToPoint();
 			MoveForward();
 			UpdateDirection();
-			
+			ClampInsideBorders();
+		}
+		
+		private void ClampInsideBorders()
+		{
 			Vector3 newPos = transform.position;
 			if(transform.position.x < _leftRightBorders.x)
 			{
@@ -141,13 +124,11 @@ namespace TypeRunner
 		private void OnJumpEnd() 
 		{ 
 			_rigi.useGravity = true;
-			//_isJumped = false; 
 		}
 		
 		public void Jump(float height, float time)
 		{
 			_rigi.useGravity = false;
-			//_isJumped = true;
 			transform.DOLocalJump(transform.position, height, 1, time)
 				.SetEase(Ease.Linear)
 				.OnComplete(OnJumpEnd);

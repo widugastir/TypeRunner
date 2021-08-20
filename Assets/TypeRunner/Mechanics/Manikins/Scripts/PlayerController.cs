@@ -24,6 +24,7 @@ namespace TypeRunner
 		[SerializeField, HideInInspector] private LevelManager _levelManager;
 		[SerializeField, HideInInspector] private ControlPanel _controlPanel;
 		[SerializeField, HideInInspector] private CinemachineTargetGroup _cameraTargetGroup;
+		[SerializeField] private Vector2 _leftRightBorders;
 		private float _startDragPos = 0f;
 		private bool _canMove = true;
 		private bool _controllable = true;
@@ -51,7 +52,6 @@ namespace TypeRunner
 		
 		private void OnEnable()
 		{
-			//ManikinMovement.OnBorderCollide += OnBorderCollide;
 			Mankin.OnChangeOwner += OnChangeOwner;
 			PlayerStats.OnStartUnitChange += OnStartUnitChange;
 			ObstacleZone.EnterZone += PlayerEnterZone;
@@ -59,7 +59,6 @@ namespace TypeRunner
 		
 		private void OnDisable()
 		{
-			//ManikinMovement.OnBorderCollide -= OnBorderCollide;
 			Mankin.OnChangeOwner -= OnChangeOwner;
 			PlayerStats.OnStartUnitChange -= OnStartUnitChange;
 			ObstacleZone.EnterZone -= PlayerEnterZone;
@@ -68,15 +67,7 @@ namespace TypeRunner
 		protected void LateUpdate()
 		{
 			MoveGroupCenter();
-		}
-		
-		protected void Update()
-		{
-			//if(Input.GetKeyDown(KeyCode.K))
-			//	_levelManager.FinishLevel();
-				
-			//if(Input.GetKeyDown(KeyCode.L))
-			//	_levelManager.FinishLevel();
+			ClampInsideBorders();
 		}
 		
 		private void PlayerEnterZone(ObstacleZone zone)
@@ -216,14 +207,30 @@ namespace TypeRunner
 			}
 		}
 		
+		private void ClampInsideBorders()
+		{
+			Vector3 newPos = _manikinsParent.position;
+			if(_manikinsParent.position.x < _leftRightBorders.x)
+			{
+				newPos.x = _leftRightBorders.x;
+				_manikinsParent.position = newPos;
+			}
+			newPos = _manikinsParent.position;
+			if(_manikinsParent.position.x > _leftRightBorders.y)
+			{
+				newPos.x = _leftRightBorders.y;
+				_manikinsParent.position = newPos;
+			}
+		}
+		
 		private void MoveGroupCenter()
 		{
 			if(IsMovementEnabled == false)
 				return;
-			//_groupCenter.Move();
 			
 			if(_controllable == false)
 				return;
+				
 			Vector3 newPos = _manikinsParent.position;
 			newPos.x = _groupCenter._groupCenter.position.x;
 			_manikinsParent.position 
@@ -238,16 +245,14 @@ namespace TypeRunner
 		{
 			if(_controllable == false)
 				return;
-				
 			_groupCenter.SetStrafePos(strafe);
-			
-			//Vector3 newPos = _manikinsParent.position;
-			//newPos.x = _groupCenter._groupCenter.position.x;
-			//_manikinsParent.position = newPos;
 		}
 	    
 		public void OnStartDrag(float startPos)
 		{
+			if(_controllable == false)
+				return;
+			_groupCenter.BeginStrafe();
 			_startDragPos = startPos;
 			_canMove = true;
 		}
@@ -412,7 +417,6 @@ namespace TypeRunner
 				Vector3 newPos = _manikins[i].transform.position;
 				newPos.z = z;
 				newPos.x = x;
-				//_manikins[i].transform.position = newPos;
 				_manikins[i].Movement.GoTo(newPos, 0.7f);
 				if(i == 0)
 				{
@@ -425,44 +429,6 @@ namespace TypeRunner
 		{
 			SetControllable(false);
 			StartCoroutine(FormationTriangle());
-			
-			//int rank = 1;
-			//int mans = 0;
-			
-			//for(int i = 0; i < _manikins.Count; i++)
-			//{
-			//	mans++;
-			//	_manikins[i].Rank = rank;
-			//	_manikins[i].RankPosition = mans;
-			//	if(mans == rank && i != _manikins.Count - 1)
-			//	{
-			//		rank++;
-			//		mans = 0;
-			//	}
-			//}
-			
-			//int centerRank = rank / 2;
-			//float centerZ = _groupCenter.transform.position.z;
-			//float centerX = _groupCenter.transform.position.x;
-			//float rankStepY = 3f;
-			//float rankStepX = 1f;
-			//float centerRankX = 0f;
-			
-			//for(int i = 0; i < _manikins.Count; i++)
-			//{
-			//	_manikins[i].gameObject.layer = LayerMask.NameToLayer(_ignoreSameMask);
-			//	centerRankX = (float)_manikins[i].Rank / 2f;
-				
-			//	float z = centerZ + ((float)_manikins[i].Rank - (float)centerRank) * rankStepY;
-			//	float x = centerX + ((float)_manikins[i].RankPosition - (float)centerRankX) * rankStepX;
-			//	Vector3 newPos = _manikins[i].transform.position;
-			//	newPos.z = z;
-			//	newPos.x = x;
-			//	_manikins[i].transform.position = newPos;
-				
-			//	// Sort by ranks
-			//	_manikins[i].Rank = rank - _manikins[i].Rank + 1;
-			//}
 		}
 		
 		private IEnumerator FormationTriangle()
@@ -500,12 +466,10 @@ namespace TypeRunner
 				
 				if(mansInRank.Count != i)
 				{
-					//print(i + "  ЛИШНИЙ РЯД " + mansInRank.Count);
 					foreach(var man in mansInRank)
 					{
 						man.Kill(true);
 					}
-					//rank--;
 					erasedRank++;
 					continue;
 				}

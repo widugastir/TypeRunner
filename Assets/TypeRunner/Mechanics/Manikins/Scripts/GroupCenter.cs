@@ -5,18 +5,16 @@ namespace TypeRunner
 {
 	public class GroupCenter : MonoBehaviour
 	{
-		//[SerializeField] private float _speed = 1f;
 		[SerializeField] private float _strafeMultiplier = 1f;
+		[HideInInspector] public Vector3 _startPosition;
+		[HideInInspector] public float _beginStrafeX;
+		public Transform _manikinsParent;
 		public Transform _gameplayCamera;
 		public Transform _target;
 		public Transform _groupCenter;
-		[HideInInspector] public Vector3 _startPosition;
 		private float _lastStrafe = 0f;
-		//private float _targetStrafe = 0f;
-		//private bool _upMove = false;
 		public bool CanMove { get; set; } = true;
 		
-		//private float _currentStrafe = 0f;
 		private Vector3 _basePos;
 		
 		private void Start()
@@ -25,37 +23,30 @@ namespace TypeRunner
 			_basePos = _groupCenter.transform.localPosition;
 		}
 		
+		public void BeginStrafe()
+		{
+			_beginStrafeX = _groupCenter.transform.position.x;
+		}
+		
 		public void SetStrafePos(float strafe)
 		{
-			//_prevStrafe = _targetStrafe;
-			//_targetStrafe = strafe;
 			Vector3 newPosition = _groupCenter.transform.position;
-			newPosition.x = ( strafe) * _strafeMultiplier;
+			newPosition.x = _beginStrafeX + (strafe * _strafeMultiplier);
 			_groupCenter.transform.position = newPosition;
 		}
 		
 		public void EndStrafe(float strafe)
 		{
-			//print(_lastStrafe);
+			Vector3 newPosition = _groupCenter.transform.position;
+			newPosition.x = _manikinsParent.position.x;
+			_groupCenter.transform.position = newPosition;
+			
+			_beginStrafeX = 0f;
 			_lastStrafe = strafe;
-			//_basePos = _groupCenter.transform.position;
-		}
-		
-		private void Update()
-		{
-			//SmoothStrafe();
 		}
 		
 		private void SmoothStrafe()
 		{
-			//float _lerpSpeed = 1f;
-			//float _strafe = Mathf.Lerp(_currentStrafe, _targetStrafe, Time.deltaTime * _lerpSpeed);
-			
-			//Vector3 newPosition = _groupCenter.transform.position;
-			//newPosition.x = _strafe * _strafeMultiplier;
-			//_groupCenter.transform.position = newPosition;
-			
-			//_currentStrafe = _strafe;
 		}
 		
 		public void Move()
@@ -72,7 +63,6 @@ namespace TypeRunner
 		
 		public void SetUpMovement()
 		{
-			//_upMove = true;
 		}
 		
 		public void Reset()
