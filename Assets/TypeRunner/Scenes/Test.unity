@@ -1681,7 +1681,7 @@ MonoBehaviour:
   _playerColor: {r: 0, g: 0, b: 0, a: 0}
   _reviveCost: 50
   ReviveCount: 0
-  MaxStickmans: 136
+  MaxStickmans: 105
   _coinsMultiplier: 1
   _coins: 0
   LevelPlayCount: 0
@@ -3230,7 +3230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731c8427b903f5746b5b1d37e62b4924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dailyPlatformAmount: 15
+  _dailyPlatformAmount: 11
   _dailyOneEmptyPerPlatform: 3
   _basePlatform: {fileID: 2124171219}
   _player: {fileID: 0}
@@ -3784,6 +3784,26 @@ PrefabInstance:
       propertyPath: _colorChanger
       value: 
       objectReference: {fileID: 1390826031}
+    - target: {fileID: 690460581060855923, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7110872
+      objectReference: {fileID: 0}
+    - target: {fileID: 690460581060855923, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 690460581060855923, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 690460581060855923, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.70310384
+      objectReference: {fileID: 0}
+    - target: {fileID: 690460581060855923, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 89.353
+      objectReference: {fileID: 0}
     - target: {fileID: 690460581469416353, guid: d14c7f820b87b994a839c40151dd665e, type: 3}
       propertyPath: m_Name
       value: '[UI] Main Menu'
@@ -6172,7 +6192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7555899d88a1dd840945fb60b7e9e514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseColor: {r: 1, g: 0.9411765, b: 0, a: 1}
+  _baseColor: {r: 0, g: 0.8745098, b: 1, a: 1}
   _stats: {fileID: 596332918}
 --- !u!114 &1390826032
 MonoBehaviour:

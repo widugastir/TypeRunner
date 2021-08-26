@@ -97,7 +97,7 @@ namespace TypeRunner
 			get 
 			{
 				//return (float)System.Math.Round(1f + 0.3f * (float)(_successfulWord - 1), 1);
-				return (float)System.Math.Round((double)Mathf.Pow(1.4f, _successfulWord), 1);
+				return (float)System.Math.Round((double)Mathf.Pow(1.3f, _successfulWord), 1);
 				//return (float)System.Math.Round((double)_successfulWord * 0.5D, 2);
 			}
 		}
